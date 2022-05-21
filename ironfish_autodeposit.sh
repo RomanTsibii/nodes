@@ -18,7 +18,7 @@ do
       echo "balance is 0"
       sleep 10s
    else 
-      echo "Робимо транзакцiю"
+      echo "Виконуємо транзакцiю"
       docker exec ironfish ./bin/run deposit --confirm
       date +"%T"
       sleep 10s
