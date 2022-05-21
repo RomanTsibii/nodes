@@ -15,9 +15,10 @@ do
 
    BALANCE=`docker exec ironfish ./bin/run  accounts:balance`
    if [[ "$BALANCE" == *"IRON 0.0000"* ]]; then 
-      sleep 10s
       echo "balance is 0"
+      sleep 10s
    else 
+      echo "Робимо транзакцiю"
       docker exec ironfish ./bin/run deposit --confirm
       date +"%T"
       sleep 10s
