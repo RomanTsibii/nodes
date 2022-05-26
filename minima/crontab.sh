@@ -1,3 +1,4 @@
+sleep 1
 history | grep "curl 127.0.0.1"
 sleep 1
 echo "Set comand for running every day at 9:00 am"
