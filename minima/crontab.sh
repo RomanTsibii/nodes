@@ -7,3 +7,4 @@ echo "$COMMAND" >> minima_autochecking.sh
 chmod u+x minima_autochecking.sh
 (crontab -l 2>/dev/null || true; echo "* 9 * * * /root/minima_autochecking.sh" | crontab -
 ./minima_autochecking.sh
+sleep 1
