@@ -1,4 +1,5 @@
 history | grep "curl 127.0.0.1"
+sleep 1
 echo "Set comand for running every day at 9:00 am"
 echo "Example: 7ef****d7-8141-4134-936d-2a0"
 read COMMAND
