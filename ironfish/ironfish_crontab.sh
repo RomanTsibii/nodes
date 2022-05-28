@@ -10,5 +10,5 @@ if [[ "\$STATUS" == *"SYNCING"* ]]; then
 fi
 EOF'
 
-chmod +x ironfish_restart_every_hour.s
+chmod +x ironfish_restart_every_hour.sh
 (crontab -l 2>/dev/null || true; echo "5 * * * * /root/ironfish_restart_every_hour.sh") | crontab -
