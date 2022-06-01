@@ -7,7 +7,6 @@ sudo bash -c 'cat << EOF > /root/ironfish_restart_every_hour.sh
 
 STATUS=\`docker exec ironfish ./bin/run status\`
 if [[ "\$STATUS" == *"SYNCING"* ]]; then 
-  cd ~/
   docker-compose restart
 fi
 EOF'
