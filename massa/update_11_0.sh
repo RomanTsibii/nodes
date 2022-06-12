@@ -48,6 +48,7 @@ sudo systemctl restart massa
 sleep 10
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/massa/bootstrap-fix.sh | bash
 echo DONE
+cd /root/massa/massa-node
 massa_wallet_address=$(cargo run --release wallet_info | grep Address  |awk '{print $2}')
 cargo run --release -- buy_rolls $massa_wallet_address 1 0
 cargo run --release -- register_staking_keys $(cargo run --release wallet_info | grep Private | awk '{print $3}')
