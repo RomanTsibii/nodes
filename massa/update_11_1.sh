@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/massa/update_11_0.sh)
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/massa/update_11_1.sh)
 
 source $HOME/.profile
 source $HOME/.cargo/env
