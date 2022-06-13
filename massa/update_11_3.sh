@@ -48,9 +48,9 @@ sudo systemctl restart massa
 sleep 10
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/massa/bootstrap-fix.sh | bash
 echo DONE
-source $HOME/.profile
-clientw
-wallet_info
+
+#clientw
+#wallet_info
 #cd /root/massa/massa-node
 #massa_wallet_address=$(cargo run --release wallet_info | grep Address  |awk '{print $2}')
 #cargo run --release -- buy_rolls $massa_wallet_address 1 0
