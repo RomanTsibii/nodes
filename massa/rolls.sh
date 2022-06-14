@@ -27,7 +27,9 @@ do
                 sleep 1
         done
         printf "\n"
-        if [[ `journalctl -n 5 -u massa` == *"Send network event failed An error occurred during channel communication: Failed to send event"*]]; then 
+
+        massa_logs=`journalctl -n 1 -u massa`
+        if [[ $massa_logs == *"Send network event failed An error occurred during channel communication: Failed to send event"* ]]; then 
                 systemctl restart massa
-        end
+        fi
 done
