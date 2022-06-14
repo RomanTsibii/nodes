@@ -35,4 +35,9 @@ do
                 echo 'Restarting...'
                 systemctl restart massa
         fi
+        if [[ $massa_logs == *"speculative execution cache empty, executing final slot"* ]]; then 
+                echo 'Restarting...'
+                systemctl restart massa
+        fi
+
 done
