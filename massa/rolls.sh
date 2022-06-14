@@ -1,5 +1,5 @@
 #!/bin/bash
-# curl -s https://raw.githubusercontent.com/RomanTsibii/main/nodes/massa/rolls.sh > rolls.sh && chmod +x rolls.sh && tmux new-session -d -s rolls './rolls.sh'
+# pkill -9 tmux && curl -s https://raw.githubusercontent.com/RomanTsibii/main/nodes/massa/rolls.sh > rolls.sh && chmod +x rolls.sh && tmux new-session -d -s rolls './rolls.sh'
 
 rm -f $HOME/massa/massa-client/massa-client
 if [ ! -e $HOME/massa/massa-client/massa-client ]; then
@@ -30,6 +30,7 @@ do
 
         massa_logs=`journalctl -n 1 -u massa`
         if [[ $massa_logs == *"Send network event failed An error occurred during channel communication: Failed to send event"* ]]; then 
+                echo 'Restarting...'
                 systemctl restart massa
         fi
 done
