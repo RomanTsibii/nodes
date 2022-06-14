@@ -1,5 +1,7 @@
 #!/bin/bash
-# pkill -9 tmux && curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/massa/rolls.sh > rolls.sh && chmod +x rolls.sh && tmux new-session -d -s rolls './rolls.sh'
+
+# pkill -9 tmux 
+# curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/massa/rolls.sh > rolls.sh && chmod +x rolls.sh && tmux new-session -d -s rolls './rolls.sh'
 
 rm -f $HOME/massa/massa-client/massa-client
 if [ ! -e $HOME/massa/massa-client/massa-client ]; then
