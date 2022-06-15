@@ -121,9 +121,9 @@ function check_verif {
 }
 
 function update_subspace {
-  cd $HOME/subspace_docker/
-  docker-compose down
-  docker volume rm subspace_docker_farmer-data
+  # cd $HOME/subspace_docker/
+  # docker-compose down
+  # docker volume rm subspace_docker_farmer-data
   eof_docker_compose
   docker-compose pull
   docker-compose up -d
@@ -138,8 +138,7 @@ function remove_subspace {
 
 function check_memory_size {
   echo "Проверяем свободное место"
-  memory_size=`df -h`
-  echo $memory_size
+  df -h
 }
 
 colors
