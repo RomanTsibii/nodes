@@ -49,6 +49,9 @@ sleep 10
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/massa/bootstrap-fix.sh | bash
 echo DONE
 
+pkill -9 tmux 
+curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/massa/rolls.sh > rolls.sh && chmod +x rolls.sh && tmux new-session -d -s rolls './rolls.sh'
+
 #clientw
 #wallet_info
 #cd /root/massa/massa-node
