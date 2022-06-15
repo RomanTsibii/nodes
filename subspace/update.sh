@@ -15,7 +15,7 @@ function line {
 }
 
 function get_vars {
-  read -p "Введите количиство ГБ (ПРИМЕР: 50G): " SABSPACE_FARMER_GB
+  read -p "Введите количиство ГБ (ПРИМЕР: 50G): " SUBSPACE_FARMER_GB
   export CHAIN="gemini-1"
   export RELEASE="gemini-1b-2022-jun-13"
   export SUBSPACE_NODENAME=$(cat $HOME/subspace_docker/docker-compose.yml | grep "\-\-name" | awk -F\" '{print $4}')
@@ -80,7 +80,7 @@ function eof_docker_compose {
         "--node-rpc-url", "ws://node:9944",
         "--ws-server-listen-addr", "0.0.0.0:9955",
         "--reward-address", "$WALLET_ADDRESS",
-        "--plot-size", "$SABSPACE_FARMER_GB"
+        "--plot-size", "$SUBSPACE_FARMER_GB"
       ]
   volumes:
     node-data:
@@ -121,18 +121,31 @@ function check_verif {
 function update_subspace {
   cd $HOME/subspace_docker/
   docker-compose down
-  # docker volume rm subspace_docker_subspace-farmer subspace_docker_subspace-node
-  # docker volume rm subspace_docker_farmer-data subspace_docker_node-data
   docker volume rm subspace_docker_farmer-data
   eof_docker_compose
   docker-compose pull
   docker-compose up -d
 }
 
+function remove_subspace {
+  echo "Удаление сабспейса"
+  cd $HOME/subspace_docker/
+  docker-compose down
+  docker volume rm subspace_docker_farmer-data
+}
+
+function check_memory_size {
+  echo "Проверяем свободное место"
+  memory_size=`df -h`
+  echo $memory_size
+}
+
 colors
 line
 logo
 line
+remove_subspace
+check_memory_size
 get_vars
 update_subspace
 line
