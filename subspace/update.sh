@@ -134,11 +134,14 @@ function remove_subspace {
   cd $HOME/subspace_docker/
   docker-compose down
   docker volume rm subspace_docker_farmer-data
+  # rm -rf /var/lib/docker/volumes/subspace_docker_node-data/_data
 }
 
 function check_memory_size {
   echo "Проверяем свободное место"
-  df -h
+  size=`df -h`
+  echo "$size" | head -1
+  echo "$size" | head -2
 }
 
 colors
