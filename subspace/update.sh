@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/subspace/update.sh)
-
 function colors {
   GREEN="\e[32m"
   RED="\e[39m"
@@ -17,12 +15,11 @@ function line {
 }
 
 function get_vars {
-  read -p "Введите количиство ГБ (ПРИМЕР: 50): " SABSPACE_FARMER_GB
+  read -p "Введите количиство ГБ (ПРИМЕР: 50G): " SABSPACE_FARMER_GB
   export CHAIN="gemini-1"
-  export RELEASE="gemini-1b-2022-jun-10"
+  export RELEASE="gemini-1b-2022-jun-13"
   export SUBSPACE_NODENAME=$(cat $HOME/subspace_docker/docker-compose.yml | grep "\-\-name" | awk -F\" '{print $4}')
   export WALLET_ADDRESS=$(cat $HOME/subspace_docker/docker-compose.yml | grep "\-\-reward-address" | awk -F\" '{print $4}')
-  
 }
 
 function eof_docker_compose {
@@ -83,7 +80,7 @@ function eof_docker_compose {
         "--node-rpc-url", "ws://node:9944",
         "--ws-server-listen-addr", "0.0.0.0:9955",
         "--reward-address", "$WALLET_ADDRESS",
-        "--plot-size", "$SABSPACE_FARMER_GBG"
+        "--plot-size", "$SABSPACE_FARMER_GB"
       ]
   volumes:
     node-data:
@@ -91,11 +88,42 @@ function eof_docker_compose {
 EOF
 }
 
+function check_fork {
+  sleep 30
+  check_fork=`docker logs --tail 100  subspace_docker_node_1 2>&1 | grep "Node is running on non-canonical fork"`
+  if [ -z "$check_fork" ]
+  then
+    echo -e "${GREEN}Нода не в форке - все ок${NORMAL}"
+  else
+    echo -e "${RED}Нода была в форке, выполняем сброс и перезапускаем${NORMAL}"
+    cd $HOME/subspace_docker/
+    docker-compose down
+    docker volume rm subspace_docker_farmer-data subspace_docker_node-data subspace_docker_subspace-farmer subspace_docker_subspace-node
+    docker-compose up -d
+  fi
+}
+
+function check_verif {
+  sleep 30
+  check_verif=`docker logs --tail 100  subspace_docker_node_1 2>&1 | grep "Verification failed for block"`
+  if [ -z "$check_verif" ]
+  then
+    echo -e "${GREEN}Ошибок верификации нет - все ок${NORMAL}"
+  else
+    echo -e "${RED}Есть ошибки верификации блоков, выполняем сброс и перезапускаем${NORMAL}"
+    cd $HOME/subspace_docker/
+    docker-compose down
+    docker volume rm subspace_docker_farmer-data subspace_docker_node-data subspace_docker_subspace-farmer subspace_docker_subspace-node
+    docker-compose up -d
+  fi
+}
+
 function update_subspace {
   cd $HOME/subspace_docker/
   docker-compose down
-  docker volume rm subspace_docker_subspace-farmer subspace_docker_subspace-node
-  docker volume rm subspace_docker_farmer-data subspace_docker_node-data
+  # docker volume rm subspace_docker_subspace-farmer subspace_docker_subspace-node
+  # docker volume rm subspace_docker_farmer-data subspace_docker_node-data
+  docker volume rm subspace_docker_farmer-data
   eof_docker_compose
   docker-compose pull
   docker-compose up -d
@@ -107,4 +135,9 @@ logo
 line
 get_vars
 update_subspace
-echo -e "${GREEN}=== DONE ===${NORMAL}"
+line
+check_fork
+line
+# check_verif
+# line
+echo -e "${GREEN}=== Обновление завершено ===${NORMAL}"
