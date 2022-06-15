@@ -134,6 +134,7 @@ function remove_subspace {
   cd $HOME/subspace_docker/
   docker-compose down
   docker volume rm subspace_docker_farmer-data
+  # mkdir -p /var/lib/docker/volumes/subspace_node-data/_data
 }
 
 function check_memory_size {
@@ -162,13 +163,15 @@ line
 logo
 line
 remove_subspace
+line
 check_memory_size
+line
 get_vars
 update_subspace
 line
 check_fork
 line
-# check_verif
-# line
+check_verif
+line
 echo -e "${GREEN}=== Обновление завершено ===${NORMAL}"
 echo_info
