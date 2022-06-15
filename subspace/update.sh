@@ -17,7 +17,7 @@ function line {
 }
 
 function get_vars {
-  read -p "${GREEN}Введите количиство ГБ (ПРИМЕР: 50G): ${NORMAL}" SUBSPACE_FARMER_GB
+  read -p "Введите количиство ГБ (ПРИМЕР: 50G): " SUBSPACE_FARMER_GB
   export CHAIN="gemini-1"
   export RELEASE="gemini-1b-2022-jun-13"
   export SUBSPACE_NODENAME=$(cat $HOME/subspace_docker/docker-compose.yml | grep "\-\-name" | awk -F\" '{print $4}')
@@ -130,11 +130,10 @@ function update_subspace {
 }
 
 function remove_subspace {
-  echo -e "Удаление сабспейса"
+  echo -e "${GREEN}Удаление сабспейса${NORMAL}"
   cd $HOME/subspace_docker/
   docker-compose down
   docker volume rm subspace_docker_farmer-data
-  # rm -rf /var/lib/docker/volumes/subspace_docker_node-data/_data
 }
 
 function check_memory_size {
