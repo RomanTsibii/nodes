@@ -133,8 +133,7 @@ function remove_subspace {
   echo -e "${GREEN}Удаление сабспейса${NORMAL}"
   cd $HOME/subspace_docker/
   docker-compose down
-  docker volume rm subspace_docker_farmer-data
-  # mkdir -p /var/lib/docker/volumes/subspace_node-data/_data
+  docker volume rm subspace_docker_farmer-data subspace_docker_node-data
 }
 
 function check_memory_size {
