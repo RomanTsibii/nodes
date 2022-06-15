@@ -130,7 +130,7 @@ function update_subspace {
 }
 
 function remove_subspace {
-  echo "Удаление сабспейса"
+  echo -e "Удаление сабспейса"
   cd $HOME/subspace_docker/
   docker-compose down
   docker volume rm subspace_docker_farmer-data
@@ -138,7 +138,7 @@ function remove_subspace {
 }
 
 function check_memory_size {
-  echo "${GREEN}Проверяем свободное место${NORMAL}"
+  echo -e "${GREEN}Проверяем свободное место${NORMAL}"
   size=`df -h /`
   echo "$size" | head -3
 }
