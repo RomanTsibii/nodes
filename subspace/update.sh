@@ -142,6 +142,21 @@ function check_memory_size {
   echo "$size" | head -3
 }
 
+function echo_info {
+  echo -e "${GREEN}Для остановки ноды и фармера subspace: ${NORMAL}"
+  echo -e "${RED}   docker-compose -f $HOME/subspace_docker/docker-compose.yml down \n ${NORMAL}"
+  echo -e "${GREEN}Для запуска ноды и фармера subspace: ${NORMAL}"
+  echo -e "${RED}   docker-compose -f $HOME/subspace_docker/docker-compose.yml up -d \n ${NORMAL}"
+  echo -e "${GREEN}Для перезагрузки ноды subspace: ${NORMAL}"
+  echo -e "${RED}   docker-compose -f $HOME/subspace_docker/docker-compose.yml restart node \n ${NORMAL}"
+  echo -e "${GREEN}Для перезагрузки фармера subspace: ${NORMAL}"
+  echo -e "${RED}   docker-compose -f $HOME/subspace_docker/docker-compose.yml restart farmer \n ${NORMAL}"
+  echo -e "${GREEN}Для проверки логов ноды выполняем команду: ${NORMAL}"
+  echo -e "${RED}   docker-compose -f $HOME/subspace_docker/docker-compose.yml logs -f --tail=100 node \n ${NORMAL}"
+  echo -e "${GREEN}Для проверки логов фармера выполняем команду: ${NORMAL}"
+  echo -e "${RED}   docker-compose -f $HOME/subspace_docker/docker-compose.yml logs -f --tail=100 farmer \n ${NORMAL}"
+}
+
 colors
 line
 logo
@@ -156,3 +171,4 @@ line
 # check_verif
 # line
 echo -e "${GREEN}=== Обновление завершено ===${NORMAL}"
+echo_info
