@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# bash <(curl -s https://raw.githubusercontent.com/razumv/helpers/main/subspace/update_subspace.sh)
+
 function colors {
   GREEN="\e[32m"
   RED="\e[39m"
