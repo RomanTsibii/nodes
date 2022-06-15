@@ -139,9 +139,10 @@ function remove_subspace {
 
 function check_memory_size {
   echo "Проверяем свободное место"
-  size=`df -h`
+  size=`df -h /`
   echo "$size" | head -1
   echo "$size" | head -2
+  echo "$size" | head -3
 }
 
 colors
