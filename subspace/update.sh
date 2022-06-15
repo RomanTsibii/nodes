@@ -17,10 +17,12 @@ function line {
 }
 
 function get_vars {
+  read -p "Введите количиство ГБ (ПРИМЕР: 50): " SABSPACE_FARMER_GB
   export CHAIN="gemini-1"
   export RELEASE="gemini-1b-2022-jun-10"
   export SUBSPACE_NODENAME=$(cat $HOME/subspace_docker/docker-compose.yml | grep "\-\-name" | awk -F\" '{print $4}')
   export WALLET_ADDRESS=$(cat $HOME/subspace_docker/docker-compose.yml | grep "\-\-reward-address" | awk -F\" '{print $4}')
+  
 }
 
 function eof_docker_compose {
@@ -81,7 +83,7 @@ function eof_docker_compose {
         "--node-rpc-url", "ws://node:9944",
         "--ws-server-listen-addr", "0.0.0.0:9955",
         "--reward-address", "$WALLET_ADDRESS",
-        "--plot-size", "30G"
+        "--plot-size", "$SABSPACE_FARMER_GBG"
       ]
   volumes:
     node-data:
