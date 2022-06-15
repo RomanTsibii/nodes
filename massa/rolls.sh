@@ -22,13 +22,6 @@ do
         elif [[ $int_balance -lt "100" ]]; then
                 echo "Less than 100"
         fi
-        printf "sleep"
-        for((sec=0; sec<60; sec++))
-        do
-                printf "."
-                sleep 1
-        done
-        printf "\n"
 
         massa_logs=`journalctl -n 1 -u massa`
         if [[ $massa_logs == *"Send network event failed An error occurred during channel communication: Failed to send event"* ]]; then 
@@ -39,5 +32,22 @@ do
                 echo 'Restarting...'
                 systemctl restart massa
         fi
-
+        
+        staking_registered_address=$(./massa-client node_get_staking_addresses)
+        staking_address=$(./massa-client wallet_info | grep 'Address' | cut -d\   -f2)
+        
+        if [ "$staking_registered_address" = "$staking_address" ]; then
+               echo "Node was registered"
+        else
+               echo "Node wasn't registered"
+               ./massa-client node_add_staking_private_keys $(./massa-client wallet_info | grep 'Private key' | cut -d\    -f3)
+        fi
+        
+        printf "sleep"
+        for((sec=0; sec<60; sec++))
+        do
+                printf "."
+                sleep 1
+        done
+        printf "\n"
 done
