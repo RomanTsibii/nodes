@@ -28,6 +28,7 @@ cd $HOME/massa
 git checkout -- massa-node/config/config.toml
 git checkout -- massa-node/config/peers.json
 git fetch
+sleep 2
 git checkout TEST.11.3
 
 cd $HOME/massa/massa-node/
