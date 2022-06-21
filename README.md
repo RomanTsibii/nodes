@@ -16,4 +16,6 @@ curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/massa/rolls.sh 
 
 в скрипті потрібно вписати свій ід з сайту
 
+history | grep "curl 127.0.0.1"
+
 cd ~ && curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/minima/crontab.sh > minima_crontab.sh && chmod +x minima_crontab.sh && ./minima_crontab.sh && ./minima_autorun_every_day.sh
