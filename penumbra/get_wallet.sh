@@ -1,4 +1,5 @@
 #!/bin/bash
 
 cd penumbra/
-echo `cargo run --quiet --release --bin pcli addr show` | grep 'penumbra' | awk '{print $2}'
+wallet_info=`cargo run --quiet --release --bin pcli addr show`
+echo $"wallet_info" | grep 'penumbra' | awk '{print $2}'
