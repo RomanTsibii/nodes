@@ -70,6 +70,8 @@ sudo journalctl -u kyve-kysama -f -o cat
 sudo journalctl -u kyved -f -o cat
 
   
-### penumbra 
+### PENUMBRA
+  
   get wallet address
+  
   `bash <( curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/penumbra/wallet.sh)`
