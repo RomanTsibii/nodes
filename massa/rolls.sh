@@ -33,6 +33,13 @@ do
                 systemctl restart massa
         fi
         
+        massa_logs=`journalctl -n 30 -u massa`
+        if [[ $massa_logs == *"RUST_BACKTRACE=1"* ]]; then 
+                echo 'Updating massa'
+                RUST_BACKTRACE=1
+                bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/massa/update_11_3.sh)
+        fi
+        
         staking_registered_address=$(./massa-client node_get_staking_addresses)
         staking_address=$(./massa-client wallet_info | grep 'Address' | cut -d\   -f2)
         
