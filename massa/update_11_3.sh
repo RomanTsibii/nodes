@@ -48,11 +48,12 @@ cp $HOME/massa_backup/wallet.dat $HOME/massa/massa-client/wallet.dat
 sudo systemctl restart massa
 sleep 10
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/massa/bootstrap-fix.sh | bash
-echo DONE
 
+echo "run autobuy"
 cd $HOME
 pkill -9 tmux 
 curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/massa/rolls.sh > rolls.sh && chmod +x rolls.sh && tmux new-session -d -s rolls './rolls.sh'
+echo DONE
 
 #clientw
 #wallet_info
