@@ -69,6 +69,7 @@ sudo journalctl -u kyve-kysama -f -o cat
 або 
 sudo journalctl -u kyved -f -o cat
 
+  /etc/systemd/system/kyve-injective.service
   
 ### PENUMBRA
   
