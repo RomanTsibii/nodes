@@ -23,14 +23,35 @@ cd ~ && curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/minima/
 
 # KYVE
 
-cd kyve 
-wget https://github.com/kyve-org/substrate/releases/download/v0.0.3/kyve-linux.zip
+update Kysama-substrate
+
+bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/kyve/update_kysama.sh)
+
+update cosmos(umee, injective)
+
+cd $HOME/kyve 
+wget https://github.com/kyve-org/cosmos/releases/download/v0.2.2/kyve-linux.zip
 unzip kyve-linux.zip 
 source $HOME/.profile
 rm -rf __MACOSX/ kyve-linux.zip 
 chmod u+x kyve-linux 
-mv kyve-linux kyve-substrate
-cp kyve-substrate /usr/bin/kyve-Kusama
+mv kyve-linux /usr/bin/kyve-??
+
+
+sudo systemctl daemon-reload && \
+sudo systemctl enable kyved && \
+sudo systemctl enable kyve-injective && \
+sudo systemctl restart kyved && \
+sudo systemctl restart kyve-injective
+
+cd $HOME/kyve
+wget https://github.com/kyve-org/substrate/releases/download/v0.1.2/kyve-linux.zip
+unzip kyve-linux.zip 
+source $HOME/.profile
+rm -rf __MACOSX/ kyve-linux.zip 
+chmod u+x kyve-linux 
+mv kyve-linux /usr/bin/kyve-Kusama
+
 POOL=18
 BIN="kyve-Kusama"
 MNEMONIC=""
@@ -68,6 +89,8 @@ sudo systemctl restart kyve-kysama
 sudo journalctl -u kyve-kysama -f -o cat
 або 
 sudo journalctl -u kyved -f -o cat
+або 
+sudo journalctl -u kyve-injective -f -o cat
 
   /etc/systemd/system/kyve-injective.service
   
