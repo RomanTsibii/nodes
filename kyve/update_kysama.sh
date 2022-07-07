@@ -11,6 +11,8 @@ mv kyve-linux /usr/bin/kyve-Kusama
 sudo systemctl daemon-reload && \
 sudo systemctl enable kyve-kysama && \
 sudo systemctl restart kyve-kysama
+
+sleep 10
   
 # проверяем логи
 sudo journalctl -u kyve-kysama -f -o cat
