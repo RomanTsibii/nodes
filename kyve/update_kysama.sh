@@ -1,6 +1,6 @@
 #!/bin/bash
 
-wget https://github.com/kyve-org/substrate/releases/download/v0.1.2/kyve-linux.zip
+wget https://github.com/kyve-org/substrate/releases/download/v0.1.3/kyve-linux.zip
 unzip kyve-linux.zip 
 source $HOME/.profile
 rm -rf __MACOSX/ kyve-linux.zip 
