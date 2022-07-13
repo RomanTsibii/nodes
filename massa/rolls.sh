@@ -9,6 +9,7 @@
 #   chmod +x $HOME/massa/massa-client/massa-client
 # fi
 #
+source .profile
 cd $HOME/massa/massa-client
 massa_wallet_address=$(./massa-client -p $massa_pass wallet_info | grep Address | awk '{ print $2 }')
 while true
@@ -47,7 +48,7 @@ do
                echo "Node was registered"
         else
                echo "Node wasn't registered"
-               ./massa-client  -p $massa_pass node_add_staking_private_keys $(./massa-client  -p $massa_pass wallet_info | grep 'Private key' | cut -d\    -f3)
+               ./massa-client -p $massa_pass node_add_staking_secret_keys $(./massa-client  -p $massa_pass wallet_info | grep 'Secret key' | cut -d\    -f3)
         fi
         
         printf "sleep"
