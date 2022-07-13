@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # pkill -9 tmux 
-# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/massa/add_discord_id.sh
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/massa/add_discord_id.sh)
 
 source .profile
 
