@@ -1,7 +1,7 @@
 #/bin/bash
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/massa/show_wallet.sh)
  
-source .profile
+source $HOME/.profile
 rm -f $HOME/massa/massa-client/massa-client &>/dev/null
 if [ ! -e $HOME/massa/massa-client/massa-client ]; then
   wget https://raw.githubusercontent.com/razumv/helpers/main/massa/massa-client -O $HOME/massa/massa-client/massa-client &>/dev/null
