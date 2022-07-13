@@ -9,9 +9,19 @@
 #   chmod +x $HOME/massa/massa-client/massa-client
 # fi
 #
-source .profile
+
+if [ ! $massa_discord_id ]; then
+  echo -e "Enter your discord id"
+  echo ' '
+  read massa_discord_id
+fi
+
 cd $HOME/massa/massa-client
+
 massa_wallet_address=$(./massa-client -p $massa_pass wallet_info | grep Address | awk '{ print $2 }')
+./massa-client -p $massa_pass node_testnet_rewards_program_ownership_proof $massa_wallet_address $massa_discord_id
+
+
 while true
 do
         balance=$(./massa-client -p $massa_pass wallet_info | grep "Final balance" | awk '{ print $3 }')
