@@ -9,4 +9,4 @@ if [ ! -e $HOME/massa/massa-client/massa-client ]; then
 fi
 
 cd $HOME/massa/massa-client
-./massa-client wallet_info -p nodesup | grep Address | awk '{ print $2 }'
+./massa-client wallet_info -p $massa_pass | grep Address | awk '{ print $2 }'
