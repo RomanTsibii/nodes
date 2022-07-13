@@ -3,12 +3,12 @@
 # pkill -9 tmux 
 # curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/massa/rolls.sh > rolls.sh && chmod +x rolls.sh && tmux new-session -d -s rolls './rolls.sh'
 
-# rm -f $HOME/massa/massa-client/massa-client
-# if [ ! -e $HOME/massa/massa-client/massa-client ]; then
-#   wget https://raw.githubusercontent.com/razumv/helpers/main/massa/massa-client -O $HOME/massa/massa-client/massa-client
-#   chmod +x $HOME/massa/massa-client/massa-client
-# fi
-#
+rm -f $HOME/massa/massa-client/massa-client
+if [ ! -e $HOME/massa/massa-client/massa-client ]; then
+  wget https://raw.githubusercontent.com/razumv/helpers/main/massa/massa-client -O $HOME/massa/massa-client/massa-client
+  chmod +x $HOME/massa/massa-client/massa-client
+fi
+
 
 source .profile
 cd $HOME/massa/massa-client
