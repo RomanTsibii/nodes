@@ -26,11 +26,11 @@ do
                 echo "Less than 100"
         fi
 
-#         massa_logs=`journalctl -n 1 -u massa`
-#         if [[ $massa_logs == *"Send network event failed An error occurred during channel communication: Failed to send event"* ]]; then 
-#                 echo 'Restarting...'
-#                 systemctl restart massa
-#         fi
+         massa_logs=`journalctl -n 1 -u massa`
+         if [[ $massa_logs == *"Send network event failed An error occurred during channel communication: Failed to send event"* ]]; then 
+                 echo 'Restarting...'
+                 systemctl restart massa
+         fi
 #         if [[ $massa_logs == *"speculative execution cache empty, executing final slot"* ]]; then 
 #                 echo 'Restarting...'
 #                 systemctl restart massa
