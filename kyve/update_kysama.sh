@@ -10,6 +10,7 @@ source $HOME/.profile
 rm -rf __MACOSX/ kyve-linux.zip 
 chmod u+x kyve-linux 
 mv kyve-linux /usr/bin/kyve-Kusama
+kyve-Kusama --version
 
 # запускаем ноду
 sudo systemctl daemon-reload && \
