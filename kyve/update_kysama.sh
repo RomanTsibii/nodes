@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/kyve/update_kysama.sh)
+
 wget https://github.com/kyve-org/substrate/releases/download/v0.3.1/kyve-linux.zip
 unzip kyve-linux.zip 
 source $HOME/.profile
