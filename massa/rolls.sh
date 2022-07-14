@@ -10,7 +10,7 @@ if [ ! -e $HOME/massa/massa-client/massa-client ]; then
 fi
 
 
-source .profile
+source $HOME/.profile
 cd $HOME/massa/massa-client
 massa_wallet_address=$(./massa-client -p $massa_pass wallet_info | grep Address | awk '{ print $2 }')
 
