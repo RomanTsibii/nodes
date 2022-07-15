@@ -6,6 +6,7 @@ function colors {
   GREEN="\e[32m"
   RED="\e[39m"
   NORMAL="\e[0m"
+  
 }
 
 function logo {
