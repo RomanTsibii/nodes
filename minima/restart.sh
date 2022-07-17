@@ -1,4 +1,6 @@
 #!/bin/bash
+# bash <(curl -s  https://raw.githubusercontent.com/RomanTsibii/nodes/main/minima/restart.sh)
+
 echo 'restart minima_9001'
 systemctl restart minima_9001
 
