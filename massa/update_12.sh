@@ -21,8 +21,8 @@ function create_backup {
   cd $HOME
   if [ ! -d $HOME/massa_backup_12/ ]; then
 	mkdir -p $HOME/massa_backup_12
-	cp $HOME/massa/massa-node/config/node_privkey.key $HOME/massa_backup/
-	cp $HOME/massa/massa-client/wallet.dat $HOME/massa_backup/
+	cp $HOME/massa/massa-node/config/node_privkey.key $HOME/massa_backup_12/
+	cp $HOME/massa/massa-client/wallet.dat $HOME/massa_backup_12/
   fi
   if [ ! -e $HOME/massa_backup_12.tar.gz ]; then
 	tar cvzf massa_backup_12.tar.gz massa_backup_12
