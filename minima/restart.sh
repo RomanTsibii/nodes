@@ -33,4 +33,10 @@ systemctl restart minima_9017
 
 echo 'restart minima_9019'
 systemctl restart minima_9019
+
+echo 'restart minima_9021'
+systemctl restart minima_9021
+
+echo 'restart minima_9023'
+systemctl restart minima_9023
 echo DONE
