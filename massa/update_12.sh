@@ -66,13 +66,13 @@ function replace_bootstraps {
 }
 
 function massa_pass {
+  source $HOME/.profile
   if [ ! ${massa_pass} ]; then
   echo "Введите свой пароль для клиента(придумайте)"
   line
   read massa_pass
   fi
   echo "export massa_pass=$massa_pass" >> $HOME/.profile
-  source $HOME/.profile
 }
 
 function systemd {
