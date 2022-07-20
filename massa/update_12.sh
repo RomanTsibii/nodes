@@ -108,6 +108,7 @@ function auto_buy {
   echo "run autobuy"
   sleep 15
   cd $HOME
+  
   pkill -9 tmux 
   curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/massa/rolls.sh > rolls.sh && chmod +x rolls.sh && tmux new-session -d -s rolls './rolls.sh'
   echo DONE
