@@ -32,7 +32,7 @@ bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/kyve/upd
 update cosmos(umee, injective)
 
 cd $HOME/kyve 
-wget https://github.com/kyve-org/cosmos/releases/download/v0.2.3/kyve-linux.zip
+wget https://github.com/kyve-org/cosmos/releases/download/v0.3.5/kyve-linux.zip
 unzip kyve-linux.zip 
 source $HOME/.profile
 rm -rf __MACOSX/ kyve-linux.zip 
