@@ -39,4 +39,13 @@ systemctl stop minima_9021
 
 echo 'stop minima_9023'
 systemctl stop minima_9023
+
+echo 'stop minima_9025'
+systemctl stop minima_9025
+
+echo 'stop minima_9027'
+systemctl stop minima_9027
+
+echo 'stop minima_9029'
+systemctl stop minima_9029
 echo DONE
