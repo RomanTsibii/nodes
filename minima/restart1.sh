@@ -24,14 +24,9 @@ function restart {
 
 }
 
-function wait {
-  echo 'sleep'
-  for((sec=0; sec<60; sec++))
-  do
-          printf "."
-          sleep 1
-  done
-}
+
+
+
 
 function ping {
   /$HOME/minima_autorun_every_day.sh
@@ -52,7 +47,14 @@ systemctl stop minima_9009
 }
 
 restart
-wait
+
+echo 'sleep'
+for((sec=0; sec<60; sec++))
+do
+        printf "."
+        sleep 1
+done
+
 ping
 stop
 
