@@ -24,7 +24,7 @@ function restart {
 
 }
 
-function sleep {
+function wait {
   echo 'sleep'
   for((sec=0; sec<60; sec++))
   do
@@ -52,7 +52,7 @@ systemctl stop minima_9009
 }
 
 restart
-sleep
+wait
 ping
 stop
 
