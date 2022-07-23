@@ -1,5 +1,5 @@
 #!/bin/bash
-# bash <(curl -s  https://raw.githubusercontent.com/RomanTsibii/nodes/main/minima/restart.sh)
+# bash <(curl -s  https://raw.githubusercontent.com/RomanTsibii/nodes/main/minima/restart2.sh)
 
 pkill -9 /usr/bin/java
 echo 'kill /usr/bin/java'
