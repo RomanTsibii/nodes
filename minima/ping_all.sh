@@ -4,9 +4,30 @@
 source $HOME/.profile
 pkill -9 /usr/bin/java
 
-function ping {
-  /$HOME/minima_autorun_every_day.sh
+function ping1 {
+  $(`cat minima_autorun_every_day.sh | grep "9002"`)
+  $(`cat minima_autorun_every_day.sh | grep "9004"`)
+  $(`cat minima_autorun_every_day.sh | grep "9006"`)
+  $(`cat minima_autorun_every_day.sh | grep "9008"`)
+  $(`cat minima_autorun_every_day.sh | grep "9010"`)
 }
+
+function ping2 {
+  $(`cat minima_autorun_every_day.sh | grep "9012"`)
+  $(`cat minima_autorun_every_day.sh | grep "9014"`)
+  $(`cat minima_autorun_every_day.sh | grep "9016"`)
+  $(`cat minima_autorun_every_day.sh | grep "9018"`)
+  $(`cat minima_autorun_every_day.sh | grep "9020"`)
+}
+
+function ping3 {
+  $(`cat minima_autorun_every_day.sh | grep "9022"`)
+  $(`cat minima_autorun_every_day.sh | grep "9024"`)
+  $(`cat minima_autorun_every_day.sh | grep "9026"`)
+  $(`cat minima_autorun_every_day.sh | grep "9028"`)
+  $(`cat minima_autorun_every_day.sh | grep "9030"`)
+}
+
 
 function restart1 {
   echo 'kill /usr/bin/java'
@@ -121,17 +142,17 @@ function some_speeping {
 
 restart1
 some_speeping
-ping
+ping1
 stop1
 
 restart2
 some_speeping
-ping
+ping1
 stop2
 
 restart3
 some_speeping
-ping
+ping1
 stop3
 
 echo DONE
