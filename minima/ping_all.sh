@@ -147,12 +147,12 @@ stop1
 
 restart2
 some_speeping
-ping1
+ping2
 stop2
 
 restart3
 some_speeping
-ping1
+ping3
 stop3
 
 echo DONE
