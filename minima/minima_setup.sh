@@ -62,4 +62,6 @@ CMD="$HOME/minima_service.sh $@"
 
 echo "Install complete - showing logs now -  Ctrl-C to exit logs, minima will keep running"
 
+echo "journalctl -fn 10 -u minima_$PORT"
 sleep 10
+echo "installed minima_$PORT"
