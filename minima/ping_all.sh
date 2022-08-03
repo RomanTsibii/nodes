@@ -28,6 +28,14 @@ function ping3 {
   $(`cat minima_autorun_every_day.sh | grep "9030"`)
 }
 
+function ping4 {
+  $(`cat minima_autorun_every_day.sh | grep "9032"`)
+  $(`cat minima_autorun_every_day.sh | grep "9034"`)
+  $(`cat minima_autorun_every_day.sh | grep "9036"`)
+  $(`cat minima_autorun_every_day.sh | grep "9038"`)
+  $(`cat minima_autorun_every_day.sh | grep "9040"`)
+}
+
 
 function restart1 {
   echo 'kill /usr/bin/java'
@@ -82,6 +90,23 @@ function restart3 {
   systemctl restart minima_9029
 }
 
+function restart4 {
+  echo 'restart minima_9031'
+  systemctl restart minima_9031
+
+  echo 'restart minima_9033'
+  systemctl restart minima_9033
+
+  echo 'restart minima_9035'
+  systemctl restart minima_9035
+
+  echo 'restart minima_9037'
+  systemctl restart minima_9037
+
+  echo 'restart minima_9039'
+  systemctl restart minima_9039
+}
+
 function stop1 {
   echo 'stop minima_9003'
   systemctl stop minima_9003
@@ -130,6 +155,41 @@ function stop3 {
   systemctl stop minima_9029
 }
 
+
+function stop3 {
+  echo 'stop minima_9021'
+  systemctl stop minima_9021
+
+  echo 'stop minima_9023'
+  systemctl stop minima_9023
+
+  echo 'stop minima_9025'
+  systemctl stop minima_9025
+
+  echo 'stop minima_9027'
+  systemctl stop minima_9027
+
+  echo 'stop minima_9029'
+  systemctl stop minima_9029
+}
+
+function stop4 {
+  echo 'stop minima_9031'
+  systemctl stop minima_9031
+
+  echo 'stop minima_9033'
+  systemctl stop minima_9033
+
+  echo 'stop minima_9035'
+  systemctl stop minima_9035
+
+  echo 'stop minima_9037'
+  systemctl stop minima_9037
+
+  echo 'stop minima_9039'
+  systemctl stop minima_9039
+}
+
 function some_speeping {
   echo 'sleep'
   for((sec=0; sec<100; sec++))
@@ -154,5 +214,10 @@ restart3
 some_speeping
 ping3
 stop3
+
+restart4
+some_speeping
+ping4
+stop4
 
 echo DONE
