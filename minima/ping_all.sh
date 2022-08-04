@@ -107,88 +107,7 @@ function restart4 {
   systemctl restart minima_9039
 }
 
-function stop1 {
-  echo 'stop minima_9003'
-  systemctl stop minima_9003
 
-  echo 'stop minima_9005'
-  systemctl stop minima_9005
-
-  echo 'stop minima_9007'
-  systemctl stop minima_9007
-
-  echo 'stop minima_9009'
-  systemctl stop minima_9009
-}
-
-function stop2 {
-  echo 'stop minima_9011'
-  systemctl stop minima_9011
-
-  echo 'stop minima_9013'
-  systemctl stop minima_9013
-
-  echo 'stop minima_9015'
-  systemctl stop minima_9015
-
-  echo 'stop minima_9017'
-  systemctl stop minima_9017
-
-  echo 'stop minima_9019'
-  systemctl stop minima_9019
-}
-
-function stop3 {
-  echo 'stop minima_9021'
-  systemctl stop minima_9021
-
-  echo 'stop minima_9023'
-  systemctl stop minima_9023
-
-  echo 'stop minima_9025'
-  systemctl stop minima_9025
-
-  echo 'stop minima_9027'
-  systemctl stop minima_9027
-
-  echo 'stop minima_9029'
-  systemctl stop minima_9029
-}
-
-
-function stop3 {
-  echo 'stop minima_9021'
-  systemctl stop minima_9021
-
-  echo 'stop minima_9023'
-  systemctl stop minima_9023
-
-  echo 'stop minima_9025'
-  systemctl stop minima_9025
-
-  echo 'stop minima_9027'
-  systemctl stop minima_9027
-
-  echo 'stop minima_9029'
-  systemctl stop minima_9029
-}
-
-function stop4 {
-  echo 'stop minima_9031'
-  systemctl stop minima_9031
-
-  echo 'stop minima_9033'
-  systemctl stop minima_9033
-
-  echo 'stop minima_9035'
-  systemctl stop minima_9035
-
-  echo 'stop minima_9037'
-  systemctl stop minima_9037
-
-  echo 'stop minima_9039'
-  systemctl stop minima_9039
-}
 
 function some_speeping {
   echo 'sleep'
@@ -203,21 +122,21 @@ function some_speeping {
 restart1
 some_speeping
 ping1
-stop1
+systemctl stop minima_90*
 
 restart2
 some_speeping
 ping2
-stop2
+systemctl stop minima_90*
 
 restart3
 some_speeping
 ping3
-stop3
+systemctl stop minima_90*
 
 restart4
 some_speeping
 ping4
-stop4
+systemctl stop minima_90*
 
 echo DONE
