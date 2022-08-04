@@ -114,6 +114,31 @@ function ping8 {
   stop
 }
 
+function ping9 {
+  PORTS="3501 3503 3505 3507 3509"
+  restart
+  some_speeping
+  ping
+  stop
+}
+
+function ping10 {
+  PORTS="3511 3513 3515 3517 3519"
+  restart
+  some_speeping
+  ping
+  stop
+}
+
+function ping11 {
+  PORTS="3521 3523 3525 3527 3529"
+  restart
+  some_speeping
+  ping
+  stop
+}
+
+
 ping0
 ping1
 ping2
@@ -123,5 +148,8 @@ ping5
 ping6
 ping7
 ping8
+ping9
+ping10
+ping11
 
 echo DONE
