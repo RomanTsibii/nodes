@@ -8,3 +8,4 @@ systemctl disable minima_9010
 
 rm -rf /home/minima/.minima*
 
+bash <(curl -s  https://raw.githubusercontent.com/RomanTsibii/nodes/main/minima/ping_all.sh)
