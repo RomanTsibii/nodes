@@ -6,7 +6,7 @@ pkill -9 /usr/bin/java
 
 function some_speeping {
   echo 'sleep'
-  for((sec=0; sec<50; sec++))
+  for((sec=0; sec<100; sec++))
   do
           printf "."
           sleep 1
