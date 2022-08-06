@@ -6,6 +6,9 @@ pkill -9 /usr/bin/java
 
 function some_speeping {
   echo 'sleep'
+  
+  min1=journalctl -u minima_${PORT} -n 5
+  
   for((sec=0; sec<100; sec++))
   do
           printf "."
@@ -20,6 +23,22 @@ function restart {
   done
 }
 
+# function ping {
+#   for PORT in ${PORTS} ; do
+#     echo "ping minima_${PORT}"
+#     # sleep 20
+#     status=$(`cat minima_autorun_every_day.sh | grep $((PORT+1))`)
+#     echo $status
+#     while [ echo $status == *"curl: (7) Failed to connect to 127.0.0.1 port"* ]
+#     do
+#       echo "Wait minima_${PORT}"
+#       sleep 5
+#       $status
+#     done
+#     printf "\nSuccess minima_${PORT}\n"
+#   done
+# }
+
 function ping {
   for PORT in ${PORTS} ; do
     echo "ping minima_${PORT}"
@@ -28,7 +47,7 @@ function ping {
 }
 
 function stop {
-  echo "stop minima_${PORT}"
+  echo "stop minima_${PORTS}"
   systemctl stop minima_90*
   systemctl stop minima_35*
 }
