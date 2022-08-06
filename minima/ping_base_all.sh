@@ -4,139 +4,71 @@
 source $HOME/.profile
 pkill -9 /usr/bin/java
 
-function ping1 {
-  $(`cat minima_autorun_every_day.sh | grep "9002"`)
-  $(`cat minima_autorun_every_day.sh | grep "9004"`)
-  $(`cat minima_autorun_every_day.sh | grep "9006"`)
-  $(`cat minima_autorun_every_day.sh | grep "9008"`)
-  $(`cat minima_autorun_every_day.sh | grep "9010"`)
-}
-
-function ping2 {
-  $(`cat minima_autorun_every_day.sh | grep "9012"`)
-  $(`cat minima_autorun_every_day.sh | grep "9014"`)
-  $(`cat minima_autorun_every_day.sh | grep "9016"`)
-  $(`cat minima_autorun_every_day.sh | grep "9018"`)
-  $(`cat minima_autorun_every_day.sh | grep "9020"`)
-}
-
-function ping3 {
-  $(`cat minima_autorun_every_day.sh | grep "9022"`)
-  $(`cat minima_autorun_every_day.sh | grep "9024"`)
-  $(`cat minima_autorun_every_day.sh | grep "9026"`)
-  $(`cat minima_autorun_every_day.sh | grep "9028"`)
-  $(`cat minima_autorun_every_day.sh | grep "9030"`)
-}
-
-function ping4 {
-  $(`cat minima_autorun_every_day.sh | grep "9032"`)
-  $(`cat minima_autorun_every_day.sh | grep "9034"`)
-  $(`cat minima_autorun_every_day.sh | grep "9036"`)
-  $(`cat minima_autorun_every_day.sh | grep "9038"`)
-  $(`cat minima_autorun_every_day.sh | grep "9040"`)
-}
-
-
-function restart1 {
-  echo 'kill /usr/bin/java'
-
-  echo 'restart minima_9001'
-  systemctl restart minima_9001
-
-  echo 'restart minima_9003'
-  systemctl restart minima_9003
-
-  echo 'restart minima_9005'
-  systemctl restart minima_9005
-
-  echo 'restart minima_9007'
-  systemctl restart minima_9007
-
-  echo 'restart minima_9009'
-  systemctl restart minima_9009
-}
-
-function restart2 {
-  echo 'restart minima_9011'
-  systemctl restart minima_9011
-
-  echo 'restart minima_9013'
-  systemctl restart minima_9013
-
-  echo 'restart minima_9015'
-  systemctl restart minima_9015
-
-  echo 'restart minima_9017'
-  systemctl restart minima_9017
-
-  echo 'restart minima_9019'
-  systemctl restart minima_9019
-}
-
-function restart3 {
-  echo 'restart minima_9021'
-  systemctl restart minima_9021
-
-  echo 'restart minima_9023'
-  systemctl restart minima_9023
-
-  echo 'restart minima_9025'
-  systemctl restart minima_9025
-
-  echo 'restart minima_9027'
-  systemctl restart minima_9027
-
-  echo 'restart minima_9029'
-  systemctl restart minima_9029
-}
-
-function restart4 {
-  echo 'restart minima_9031'
-  systemctl restart minima_9031
-
-  echo 'restart minima_9033'
-  systemctl restart minima_9033
-
-  echo 'restart minima_9035'
-  systemctl restart minima_9035
-
-  echo 'restart minima_9037'
-  systemctl restart minima_9037
-
-  echo 'restart minima_9039'
-  systemctl restart minima_9039
-}
-
-
-
 function some_speeping {
   echo 'sleep'
-  for((sec=0; sec<100; sec++))
+  for((sec=0; sec<50; sec++))
   do
           printf "."
           sleep 1
   done
 }
 
+function restart {
+  for PORT in ${PORTS} ; do
+    echo "restart minima_${PORT}"
+    systemctl restart minima_${PORT}
+  done
+}
 
-restart1
-some_speeping
+function ping {
+  for PORT in ${PORTS} ; do
+    echo "ping minima_${PORT}"
+    $(`cat minima_autorun_every_day.sh | grep $((PORT+1))`)
+  done
+}
+
+function stop {
+  echo "stop minima_${PORT}"
+  systemctl stop minima_90*
+  systemctl stop minima_35*
+}
+
+
+function ping0 {
+  PORTS="9001 9003 9005 9007"
+  restart
+  some_speeping
+  ping
+  stop
+}
+
+function ping1 {
+  PORTS="9009 9011 9013 9015"
+  restart
+  some_speeping
+  ping
+  stop
+}
+
+function ping2 {
+  PORTS="9017 9019 9021 9023"
+  restart
+  some_speeping
+  ping
+  stop
+}
+
+function ping3 {
+  PORTS="9025 9027 9029 9031"
+  restart
+  some_speeping
+  ping
+  stop
+}
+
+ping0
 ping1
-systemctl stop minima_90*
-
-restart2
-some_speeping
 ping2
-systemctl stop minima_90*
-
-restart3
-some_speeping
 ping3
-systemctl stop minima_90*
-
-restart4
-some_speeping
-ping4
-systemctl stop minima_90*
 
 echo DONE
