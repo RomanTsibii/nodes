@@ -7,7 +7,7 @@ pkill -9 /usr/bin/java
 function some_speeping {
   echo 'sleep'
   
-  min1=journalctl -u minima_${PORT} -n 5
+  # min1=journalctl -u minima_${PORT} -n 5
   
   for((sec=0; sec<100; sec++))
   do
