@@ -1,5 +1,5 @@
 #!/bin/bash
-# bash <(curl -s  https://raw.githubusercontent.com/RomanTsibii/nodes/main/minima/ping_all.sh)
+# bash <(curl -s  https://raw.githubusercontent.com/RomanTsibii/nodes/main/minima/ping_base_all.sh)
 
 source $HOME/.profile
 pkill -9 /usr/bin/java
