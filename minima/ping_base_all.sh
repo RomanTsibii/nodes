@@ -28,7 +28,7 @@ function ping {
 }
 
 function stop {
-  echo "stop minima_${PORT}"
+  echo "stop minima_${PORTS}"
   systemctl stop minima_90*
   systemctl stop minima_35*
 }
