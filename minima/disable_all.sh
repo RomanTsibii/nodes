@@ -6,7 +6,7 @@ PORTS="9001 9003 9005 9007 9009 9010 9011 9013 9015 9017 9019 9021 9023 9025 902
 function disable_all {
   for PORT in ${PORTS} ; do
     systemctl disable minima_${PORT} &>/dev/null
-    systemctl stop minima_${PORT}
+    systemctl stop minima_${PORT} &>/dev/null
   done
 }
 
