@@ -7,6 +7,8 @@ function disable_all {
   for PORT in ${PORTS} ; do
     echo "disable minima_${PORT}"
     systemctl disable minima_${PORT}
+    systemctl stop minima_${PORT}
+
   done
 }
 
