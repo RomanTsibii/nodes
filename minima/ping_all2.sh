@@ -170,5 +170,6 @@ ping8
 ping9
 ping10
 ping11
+ping0
 
 echo DONE
