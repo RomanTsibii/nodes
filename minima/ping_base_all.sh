@@ -70,5 +70,6 @@ ping0
 ping1
 ping2
 ping3
+ping0
 
 echo DONE
