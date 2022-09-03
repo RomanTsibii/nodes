@@ -158,6 +158,7 @@ function ping11 {
 }
 
 function remove_all_database {
+  echo 'remove minima database'
   rm -rf /home/minima/.minima_*
 }
 
