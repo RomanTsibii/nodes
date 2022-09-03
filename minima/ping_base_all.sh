@@ -66,6 +66,12 @@ function ping3 {
   stop
 }
 
+function remove_all_database {
+  rm -rf /home/minima/.minima_*
+}
+
+remove_all_database
+
 ping0
 ping1
 ping2
