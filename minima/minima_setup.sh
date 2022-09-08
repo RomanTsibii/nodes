@@ -1,6 +1,7 @@
 #!/bin/sh
 # wget -O minima_setup.sh https://raw.githubusercontent.com/RomanTsibii/nodes/main/minima/minima_setup.sh && chmod +x minima_setup.sh && sudo ./minima_setup.sh -r 9002 -p 9001
 
+#!/bin/sh
 set -e
 
 CLEAN_FLAG=''
@@ -54,8 +55,8 @@ CMD="$HOME/minima_service.sh -s $@"
 CRONSTRING="#!/bin/sh
 $CMD"
 
-echo "$CRONSTRING" > /etc/cron.weekly/minima_$PORT
-chmod a+x /etc/cron.weekly/minima_$PORT
+echo "$CRONSTRING" > /etc/cron.daily/minima_$PORT
+chmod a+x /etc/cron.daily/minima_$PORT
 
 CMD="$HOME/minima_service.sh $@"
 /bin/sh -c "$CMD"
