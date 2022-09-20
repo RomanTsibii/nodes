@@ -100,4 +100,10 @@ sudo journalctl -u kyve-injective -f -o cat
   
   get wallet address
   
-  `bash <( curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/penumbra/wallet.sh)`           
+  `bash <( curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/penumbra/wallet.sh)` 
+  
+docker
+
+Stop all running containers: docker stop $(docker ps -a -q)
+
+Delete all stopped containers: docker rm $(docker ps -a -q)
