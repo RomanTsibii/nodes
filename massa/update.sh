@@ -35,7 +35,7 @@ function delete {
 }
 
 function install {
-  wget https://github.com/massalabs/massa/releases/download/TEST.14.1/massa_TEST.14.7_release_linux.tar.gz
+  wget https://github.com/massalabs/massa/releases/download/TEST.14.7/massa_TEST.14.7_release_linux.tar.gz
   tar zxvf massa_TEST.14.7_release_linux.tar.gz -C $HOME/
   echo "restore wallet from backup"
   cp $HOME/massa_backup_12/node_privkey.key $HOME/massa/massa-node/config/node_privkey.key
