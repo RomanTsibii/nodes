@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/massa/update_13.sh)
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/massa/update.sh)
 
 function colors {
   GREEN="\e[32m"
@@ -35,8 +35,8 @@ function delete {
 }
 
 function install {
-  wget https://github.com/massalabs/massa/releases/download/TEST.13.0/massa_TEST.13.0_release_linux.tar.gz
-  tar zxvf massa_TEST.13.0_release_linux.tar.gz -C $HOME/
+  wget https://github.com/massalabs/massa/releases/download/TEST.14.1/massa_TEST.14.7_release_linux.tar.gz
+  tar zxvf massa_TEST.14.7_release_linux.tar.gz -C $HOME/
   echo "restore wallet from backup"
   cp $HOME/massa_backup_12/node_privkey.key $HOME/massa/massa-node/config/node_privkey.key
   cp $HOME/massa_backup_12/wallet.dat $HOME/massa/massa-client/wallet.dat
