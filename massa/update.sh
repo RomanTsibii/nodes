@@ -40,6 +40,7 @@ function install {
   echo "restore wallet from backup"
   cp $HOME/massa_backup_12/node_privkey.key $HOME/massa/massa-node/config/node_privkey.key
   cp $HOME/massa_backup_12/wallet.dat $HOME/massa/massa-client/wallet.dat
+  RUST_BACKTRACE=1
 }
 
 function routable_ip {
