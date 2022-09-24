@@ -96,7 +96,7 @@ sudo journalctl -u kyve-injective -f -o cat
 
   /etc/systemd/system/kyve-injective.service
   
-### PENUMBRA
+# PENUMBRA
   
   get wallet address
   
@@ -107,3 +107,9 @@ docker
 Stop all running containers: docker stop $(docker ps -a -q)
 
 Delete all stopped containers: docker rm $(docker ps -a -q)
+
+# ssh connect without pass
+
+ssh-keygen # генеримо ключі(декілька разів просто ентр)
+
+ssh-copy-id root@[IP] # копіюємо ключі на сервер на який у майбутньому будемо конектитись без паролю(треба ввести пароль) (треба на всі ІР підкидати свій ключ)
