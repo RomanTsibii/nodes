@@ -113,3 +113,5 @@ Delete all stopped containers: docker rm $(docker ps -a -q)
 ssh-keygen # генеримо ключі(декілька разів просто ентр)
 
 ssh-copy-id root@[IP] # копіюємо ключі на сервер на який у майбутньому будемо конектитись без паролю(треба ввести пароль) (треба на всі ІР підкидати свій ключ)
+           
+sshpass -p 'YOUR_PASS' ssh-copy-id root@YOUR_IP
