@@ -116,7 +116,7 @@ ssh-copy-id root@[IP] # копіюємо ключі на сервер на як�
            
 sshpass -p 'YOUR_PASS' ssh-copy-id root@YOUR_IP
            
-# remove all docker with tag "<none >"
+# remove all docker with tag "<none"
 
 docker images -q -a | xargs docker inspect --format='{{.Id}}{{range $rt := .RepoTags}} {{$rt}} {{end}}'|grep -v ':'
 
