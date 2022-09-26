@@ -115,3 +115,9 @@ ssh-keygen # генеримо ключі(декілька разів прост�
 ssh-copy-id root@[IP] # копіюємо ключі на сервер на який у майбутньому будемо конектитись без паролю(треба ввести пароль) (треба на всі ІР підкидати свій ключ)
            
 sshpass -p 'YOUR_PASS' ssh-copy-id root@YOUR_IP
+           
+# remove all docker with tag <none>
+
+docker images -q -a | xargs docker inspect --format='{{.Id}}{{range $rt := .RepoTags}} {{$rt}} {{end}}'|grep -v ':'
+
+docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
