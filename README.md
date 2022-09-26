@@ -120,4 +120,17 @@ sshpass -p 'YOUR_PASS' ssh-copy-id root@YOUR_IP
 
 docker images -q -a | xargs docker inspect --format='{{.Id}}{{range $rt := .RepoTags}} {{$rt}} {{end}}'|grep -v ':'
 
-docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
+docker rmi $(docker images --filter "dangling=true" -q --no-trunc
+           
+# upgrade contabo memory ssh || nvme
+           
+![image](https://user-images.githubusercontent.com/43521642/192228958-dd17e4c5-8db5-4547-b180-683685be5aee.png)
+           
+rm -rf /var/log/*
+
+apt install cloud-guest-utils
+
+growpart /dev/sda 3
+           
+resize2fs /dev/sda3
+
