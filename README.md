@@ -120,7 +120,7 @@ sshpass -p 'YOUR_PASS' ssh-copy-id root@YOUR_IP
 
 docker images -q -a | xargs docker inspect --format='{{.Id}}{{range $rt := .RepoTags}} {{$rt}} {{end}}'|grep -v ':'
 
-docker rmi $(docker images --filter "dangling=true" -q --no-trunc
+docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
            
 # upgrade contabo memory ssh || nvme
            
