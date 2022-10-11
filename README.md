@@ -134,3 +134,7 @@ growpart /dev/sda 3
            
 resize2fs /dev/sda3
 
+
+# Get FREE SPACE  
+bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/freeing_memory.sh)
+
