@@ -9,7 +9,7 @@ function some_speeping {
   
   # min1=journalctl -u minima_${PORT} -n 5
   
-  for((sec=0; sec<100; sec++))
+  for((sec=0; sec<80; sec++))
   do
           printf "."
           sleep 1
@@ -54,7 +54,7 @@ function stop {
 
 
 function ping0 {
-  PORTS="9001 9003 9005 9007 9009"
+  PORTS="9001 9003"
   restart
   some_speeping
   ping
@@ -62,7 +62,7 @@ function ping0 {
 }
 
 function ping1 {
-  PORTS="9011 9013 9015 9017 9019"
+  PORTS="9005 9007"
   restart
   some_speeping
   ping
@@ -70,7 +70,7 @@ function ping1 {
 }
 
 function ping2 {
-  PORTS="9021 9023 9025 9027 9029"
+  PORTS="9009 9011"
   restart
   some_speeping
   ping
@@ -78,7 +78,7 @@ function ping2 {
 }
 
 function ping3 {
-  PORTS="9031 9033 9035 9037 9039"
+  PORTS="9013 9015"
   restart
   some_speeping
   ping
@@ -86,15 +86,7 @@ function ping3 {
 }
 
 function ping4 {
-  PORTS="9041 9043 9045 9047 9049"
-  restart
-  some_speeping
-  ping
-  stop
-}
-
-function ping4 {
-  PORTS="9041 9043 9045 9047 9049"
+  PORTS="9017 9019"
   restart
   some_speeping
   ping
@@ -102,7 +94,7 @@ function ping4 {
 }
 
 function ping5 {
-  PORTS="9051 9053 9055 9057 9059"
+  PORTS="9021 9023"
   restart
   some_speeping
   ping
@@ -110,7 +102,7 @@ function ping5 {
 }
 
 function ping6 {
-  PORTS="9061 9063 9065 9067 9069"
+  PORTS="9025 9027"
   restart
   some_speeping
   ping
@@ -118,15 +110,16 @@ function ping6 {
 }
 
 function ping7 {
-  PORTS="9071 9073 9075 9077 9079"
+  PORTS="9029 9031"
   restart
   some_speeping
   ping
   stop
 }
 
+
 function ping8 {
-  PORTS="9081 9083 9085 9087"
+  PORTS="9033 9035"
   restart
   some_speeping
   ping
@@ -134,7 +127,7 @@ function ping8 {
 }
 
 function ping9 {
-  PORTS="3501 3503 3505 3507 3509"
+  PORTS="9037 9039"
   restart
   some_speeping
   ping
@@ -142,7 +135,7 @@ function ping9 {
 }
 
 function ping10 {
-  PORTS="3511 3513 3515 3517 3519"
+  PORTS="9041 9043"
   restart
   some_speeping
   ping
@@ -150,7 +143,152 @@ function ping10 {
 }
 
 function ping11 {
-  PORTS="3521 3523 3525 3527 3529"
+  PORTS="9045 9047"
+  restart
+  some_speeping
+  ping
+  stop
+}
+
+function ping12 {
+  PORTS="9049 9051"
+  restart
+  some_speeping
+  ping
+  stop
+}
+
+function ping13 {
+  PORTS=" 9053 9055"
+  restart
+  some_speeping
+  ping
+  stop
+}
+
+function ping14 {
+  PORTS="9057 9059"
+  restart
+  some_speeping
+  ping
+  stop
+}
+
+function ping15 {
+  PORTS="9061 9063"
+  restart
+  some_speeping
+  ping
+  stop
+}
+
+function ping16 {
+  PORTS="9065 9067"
+  restart
+  some_speeping
+  ping
+  stop
+}
+
+function ping17 {
+  PORTS="9069 9071 "
+  restart
+  some_speeping
+  ping
+  stop
+}
+
+function ping18 {
+  PORTS="9073 9075"
+  restart
+  some_speeping
+  ping
+  stop
+}
+
+function ping19 {
+  PORTS="9077 9079"
+  restart
+  some_speeping
+  ping
+  stop
+}
+
+function ping20 {
+  PORTS="9081 9083"
+  restart
+  some_speeping
+  ping
+  stop
+}
+
+function ping21 {
+  PORTS="9085 9087"
+  restart
+  some_speeping
+  ping
+  stop
+}
+
+function ping22 {
+  PORTS="3501 3503"
+  restart
+  some_speeping
+  ping
+  stop
+}
+
+function ping23 {
+  PORTS="3505 3507"
+  restart
+  some_speeping
+  ping
+  stop
+}
+
+function ping24 {
+  PORTS="3509 3511"
+  restart
+  some_speeping
+  ping
+  stop
+}
+
+function ping25 {
+  PORTS="3513 3515"
+  restart
+  some_speeping
+  ping
+  stop
+}
+
+ 
+function ping26 {
+  PORTS="3517 3519"
+  restart
+  some_speeping
+  ping
+  stop
+}
+
+function ping27 {
+  PORTS="3521 3523"
+  restart
+  some_speeping
+  ping
+  stop
+}
+
+function ping28 {
+  PORTS="3525 3527"
+  restart
+  some_speeping
+  ping
+  stop
+}
+
+function ping29 {
+  PORTS="3529"
   restart
   some_speeping
   ping
@@ -162,8 +300,7 @@ function remove_all_database {
   rm -rf /home/minima/.minima_*
 }
 
-remove_all_database
-ping0
+# remove_all_database
 ping1
 ping2
 ping3
@@ -175,6 +312,24 @@ ping8
 ping9
 ping10
 ping11
-ping0
+ping12
+ping13
+ping14
+ping15
+ping16
+ping17
+ping18
+ping19
+ping20
+ping21
+ping22
+ping23
+ping24
+ping25
+ping26
+ping27
+ping28
+ping29
+ping30
 
 echo DONE
