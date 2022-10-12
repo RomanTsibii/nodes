@@ -35,7 +35,15 @@ function stop {
 
 
 function ping0 {
-  PORTS="9001 9003 9005 9007"
+  PORTS="9001 9003"
+  restart
+  some_speeping
+  ping
+  stop
+}
+
+function ping0_1 {
+  PORTS="9005 9007"
   restart
   some_speeping
   ping
@@ -43,7 +51,15 @@ function ping0 {
 }
 
 function ping1 {
-  PORTS="9009 9011 9013 9015"
+  PORTS="9009 9011"
+  restart
+  some_speeping
+  ping
+  stop
+}
+
+function ping1_1 {
+  PORTS="9013 9015"
   restart
   some_speeping
   ping
@@ -51,7 +67,15 @@ function ping1 {
 }
 
 function ping2 {
-  PORTS="9017 9019 9021 9023"
+  PORTS="9017 9019"
+  restart
+  some_speeping
+  ping
+  stop
+}
+
+function ping2_1 {
+  PORTS="9021 9023"
   restart
   some_speeping
   ping
@@ -59,7 +83,15 @@ function ping2 {
 }
 
 function ping3 {
-  PORTS="9025 9027 9029 9031"
+  PORTS="9025 9027"
+  restart
+  some_speeping
+  ping
+  stop
+}
+
+function ping3_1 {
+  PORTS="9029 9031"
   restart
   some_speeping
   ping
@@ -74,9 +106,13 @@ function remove_all_database {
 # remove_all_database
 
 ping0
+ping0_1
 ping1
+ping1_1
 ping2
+ping2_1
 ping3
+ping3_1
 ping0
 
 echo DONE
