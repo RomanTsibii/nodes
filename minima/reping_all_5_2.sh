@@ -301,6 +301,7 @@ function remove_all_database {
 }
 
 # remove_all_database
+ping0
 ping1
 ping2
 ping3
