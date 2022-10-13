@@ -1,5 +1,5 @@
 #!/bin/sh
-# wget -O minima_setup.sh https://raw.githubusercontent.com/RomanTsibii/nodes/main/minima/minima_setup.sh && chmod +x minima_setup.sh && sudo ./minima_setup.sh -r 9002 -p 9001
+# bash <(curl -s https://raw.githubusercontent.com/minima-global/Minima/master/scripts/minima_setup.sh) -p 9002
 
 #!/bin/sh
 set -e
@@ -35,6 +35,7 @@ done
 apt update
 apt install openjdk-11-jre-headless curl jq -y
 
+
 if [ ! $(getent group minima) ]; then
   echo "[+] Adding minima group"
   groupadd -g 9001 minima
@@ -47,7 +48,7 @@ if ! id -u 9001 > /dev/null 2>&1; then
     chown minima:minima $HOME
 fi
 
-wget -q -O $HOME"/minima_service.sh" "https://github.com/minima-global/Minima/raw/master/scripts/minima_service.sh"
+wget -q -O $HOME"/minima_service.sh" "https://raw.githubusercontent.com/minima-global/Minima/test-mdsenable-scripts/scripts/minima_service.sh"
 chown minima:minima $HOME"/minima_service.sh"
 chmod +x $HOME"/minima_service.sh"
 
@@ -62,7 +63,3 @@ CMD="$HOME/minima_service.sh $@"
 /bin/sh -c "$CMD"
 
 echo "Install complete - showing logs now -  Ctrl-C to exit logs, minima will keep running"
-
-echo "journalctl -fn 10 -u minima_$PORT"
-sleep 10
-echo "installed minima_$PORT"
