@@ -27,10 +27,11 @@ done
 
 
 echo "Stopping minima service"
-systemctl stop minima_$PORT
+systemctl stop minima_9*
+systemctl stop minima_3*
 echo "Disabling minima service"
-systemctl disable minima_$PORT
-
+systemctl disable minima_9*
+systemctl disable minima_3*
 
 
 
