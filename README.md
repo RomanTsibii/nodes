@@ -12,6 +12,7 @@ bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/massa/up
 
 tmux attach -t rolls
 
+tmux kill-session -t rolls
 
 cd $HOME
 
