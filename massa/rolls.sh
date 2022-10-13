@@ -3,6 +3,7 @@
 # pkill -9 tmux 
 # curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/massa/rolls.sh > rolls.sh && chmod +x rolls.sh && tmux new-session -d -s rolls './rolls.sh'
 
+source $HOME/.profile
 cd $HOME/massa/massa-client
 massa_wallet_address=$(./massa-client --pwd $massa_pass wallet_info | grep Address | awk '{ print $2 }')
 ./massa-client -p $massa_pass node_add_staking_secret_keys $(./massa-client  -p $massa_pass wallet_info | grep 'Secret key' | cut -d\    -f3)
