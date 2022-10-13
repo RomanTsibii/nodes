@@ -27,11 +27,11 @@ done
 
 
 echo "Stopping minima service"
-systemctl stop minima_9*
-systemctl stop minima_3*
+sudo systemctl stop minima_9*
+sudo systemctl stop minima_3*
 echo "Disabling minima service"
-systemctl disable minima_9*
-systemctl disable minima_3*
+sudo systemctl disable minima_9*
+sudo systemctl disable minima_3*
 
 
 
@@ -45,8 +45,8 @@ rm -f /etc/cron.weekly/minima_$PORT
 
 
 rm /etc/systemd/system/minima_$PORT.service
-systemctl daemon-reload
-systemctl reset-failed
+sudo systemctl daemon-reload
+sudo systemctl reset-failed
 
 echo "Removing $HOME/minima_service.sh"
 rm -f $HOME"/minima_service.sh"
