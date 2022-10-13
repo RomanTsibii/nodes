@@ -103,7 +103,7 @@ function remove_all_database {
   rm -rf /home/minima/.minima_*
 }
 
-# remove_all_database
+remove_all_database
 
 ping0
 ping0_1
