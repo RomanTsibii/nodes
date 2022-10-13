@@ -3,23 +3,27 @@
 # pkill -9 tmux 
 # curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/massa/rolls.sh > rolls.sh && chmod +x rolls.sh && tmux new-session -d -s rolls './rolls.sh'
 
-source $HOME/.profile
 cd $HOME/massa/massa-client
-
-massa_wallet_address=$(./massa-client -p $massa_pass wallet_info | grep Address | awk '{ print $2 }')
-./massa-client -p $massa_pass node_add_staking_secret_keys $(./massa-client -p $massa_pass wallet_info | grep Secret | awk '{ print $3 }')
+massa_wallet_address=$(./massa-client --pwd $massa_pass wallet_info | grep Address | awk '{ print $2 }')
 while true
 do
-        balance1=$(./massa-client -p $massa_pass wallet_info | grep Sequential | awk '{ print $4 }')
-        balance=${balance1:10}
+        balance=$(./massa-client --pwd $massa_pass wallet_info | grep "Balance" | awk '{ print $3 }' | sed 's/candidate=//;s/,//')
         int_balance=${balance%%.*}
-        if [[ $int_balance -gt "99" ]]; then
+        if [ $int_balance -gt "99" ]; then
                 echo "More than 99"
-                resp=$(./massa-client  -p $massa_pass buy_rolls $massa_wallet_address $(($int_balance/100)) 0)
+                resp=$(./massa-client --pwd $massa_pass buy_rolls $massa_wallet_address $(($int_balance/100)) 0)
                 echo $resp
-        elif [[ $int_balance -lt "100" ]]; then
+        elif [ $int_balance -lt "100" ]; then
                 echo "Less than 100"
         fi
+        printf "sleep"
+        for((sec=0; sec<60; sec++))
+        do
+                printf "."
+                sleep 1
+        done
+        printf "\n"
+done
 
 #          massa_logs=`journalctl -n 1 -u massa`
 #          if [[ $massa_logs == *"Send network event failed An error occurred during channel communication: Failed to send event"* ]]; then 
@@ -47,12 +51,3 @@ do
 #                echo "Node wasn't registered"
 #                ./massa-client -p $massa_pass node_add_staking_secret_keys $(./massa-client  -p $massa_pass wallet_info | grep 'Secret key' | cut -d\    -f3)
 #         fi
-        
-        printf "sleep"
-        for((sec=0; sec<60; sec++))
-        do
-                printf "."
-                sleep 1
-        done
-        printf "\n"
-done
