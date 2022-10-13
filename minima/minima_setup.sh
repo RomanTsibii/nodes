@@ -1,5 +1,5 @@
 #!/bin/sh
-# bash <(curl -s https://raw.githubusercontent.com/minima-global/Minima/master/scripts/minima_setup.sh) -p 9002
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/minima/minima_setup.sh) -p 9002
 
 #!/bin/sh
 set -e
