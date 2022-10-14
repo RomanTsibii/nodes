@@ -1,3 +1,7 @@
+## ruby
+
+all.gsub("\n", ' root@').gsub("root@ ", '').prepend("clusterssh root@")
+
 ### nodes
 
 # subspace 
