@@ -33,7 +33,9 @@ history | grep "curl 127.0.0.1"
 
 cd ~ && curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/minima/crontab.sh > minima_crontab.sh && chmod +x minima_crontab.sh && ./minima_crontab.sh && ./minima_autorun_every_day.sh
 
+## коли помилки
 
+https://github.com/RomanTsibii/nodes/blob/main/minima/many_remove_and_install.sh
 
 tmux new-session -d -s minima './run_every_day_at_17.sh'
 # KYVE
