@@ -288,7 +288,7 @@ function ping28 {
 }
 
 function ping29 {
-  PORTS="3529"
+  PORTS="3529 3531"
   restart
   some_speeping
   ping
