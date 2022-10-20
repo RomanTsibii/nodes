@@ -1,7 +1,7 @@
 #!/bin/bash
 ########### bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/minima/many_remove_and_install.sh) -p 9002
 
-PORTS="90"
+# PORTS="90"
 for PORT in ${PORTS}
   do   
   systemctl stop minima_90*
