@@ -8,5 +8,4 @@ sudo timedatectl set-timezone Europe/Kiev
 
 # встановити tmux
 # встановити ncdu
-sudo apt install ncdu tmux -y
-sudo apt install htop -y
+sudo apt install ncdu tmux htop curl -y
