@@ -11,7 +11,7 @@ cargo install --path .
 
 
 rm -rf ~/.bazuka ~/.bazuka-chaos
-
+cd 
 bazuka init --seed '"$BAZUKA_KEY"' --network chaos --node 127.0.0.1:8765
 
 
