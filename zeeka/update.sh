@@ -15,6 +15,7 @@ sudo systemctl daemon-reload
 sudo systemctl enable bazuka
 sudo systemctl restart bazuka
 
+sleep 10
 $(`bazuka status`)
 $(`bazuka wallet`)
 echo "sudo journalctl -f -u bazuka"
