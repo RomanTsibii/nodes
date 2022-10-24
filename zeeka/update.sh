@@ -11,11 +11,10 @@ rm -rf ~/.bazuka ~/.bazuka-chaos
 cd 
 bazuka init --seed '"$BAZUKA_KEY"' --network chaos --node 127.0.0.1:8765
 
-
 sudo systemctl daemon-reload
 sudo systemctl enable bazuka
 sudo systemctl restart bazuka
 
+$(`bazuka status`)
+$(`bazuka wallet`)
 echo "sudo journalctl -f -u bazuka"
-echo "bazuka status"
-echo "bazuka wallet"
