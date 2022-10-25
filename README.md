@@ -160,3 +160,7 @@ bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/f
 ### Update
 
 bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/zeeka/update.sh)
+
+# Setup new server
+
+bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/setup_new_server.sh)
