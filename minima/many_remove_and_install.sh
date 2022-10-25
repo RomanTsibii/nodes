@@ -5,7 +5,7 @@ PORTS="9001 9003 9005 9007 9009 9011 9013 9015 9017 9019 9021 9023 9025 9027 902
 for PORT in ${PORTS}
   do   
   systemctl stop minima_90*
-  bash <(curl -s https://raw.githubusercontent.com/minima-global/Minima/master/scripts/minima_remove.sh) -p $PORT -x
+  # bash <(curl -s https://raw.githubusercontent.com/minima-global/Minima/master/scripts/minima_remove.sh) -p $PORT -x
   bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/minima/minima_setup.sh) -p $PORT
   
   echo '---------------------------------------------------------------------------------------------------------------------------------------------'
