@@ -25,19 +25,32 @@ pkill -9 tmux
 curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/massa/rolls.sh > rolls.sh && chmod +x rolls.sh && tmux new-session -d -s rolls './rolls.sh'
 
 # minima
-авто запит кожного дня в 10am
 
-в скрипті потрібно вписати свій ід з сайту
+автопропінговка в 01, 03, 05, 07 (кожного дня) 
 
-history | grep "curl 127.0.0.1"
+в скрипті потрібно вписати свій ід з сайту разом з curl
 
-cd ~ && curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/minima/crontab.sh > minima_crontab.sh && chmod +x minima_crontab.sh && ./minima_crontab.sh && ./minima_autorun_every_day.sh
+Приклад
 
-## коли помилки
+curl 127.0.0.1:9005/incentivecash%20uid:86d1c407-6e15-4962-88af-586719debee3
 
-https://github.com/RomanTsibii/nodes/blob/main/minima/many_remove_and_install.sh
+
+### Перший запуск на сервері для створення всіх портібних файлів
+
+cd ~ && curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/minima/crontab9001-9032.sh > crontab9001-9032.sh && chmod +x crontab9001-9032.sh && ./crontab9001-9032.sh
+
+### коли помилки
+
+зайти на сервер і запустити (воно запустить переустановку на всіх портах на яких стоїть мініма)
+
+./minima_reping_base.sh
+
+### для запуску бота з телеграму треба зайти на сервер (ІР сервера в таблиці мініми на В1(голубим позначений))
+### і запустити код нижче (він запуститься можна перевірити чи працює запустивши tmux ls(буде процес мініма))
+### після запуску бота можна з сервера виходити і чекати сповіщення в телегамі
 
 tmux new-session -d -s minima './run_every_day_at_17.sh'
+
 # KYVE
 
 update Kysama-substrate
