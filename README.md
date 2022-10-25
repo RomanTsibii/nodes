@@ -142,6 +142,8 @@ docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
 ![image](https://user-images.githubusercontent.com/43521642/192228958-dd17e4c5-8db5-4547-b180-683685be5aee.png)
            
 rm -rf /var/log/*
+           
+df -h
 
 apt install cloud-guest-utils
 
