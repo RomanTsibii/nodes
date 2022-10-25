@@ -24,7 +24,11 @@ pkill -9 tmux
 
 curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/massa/rolls.sh > rolls.sh && chmod +x rolls.sh && tmux new-session -d -s rolls './rolls.sh'
 
-# minima
+# Minima
+
+### Перший запуск на сервері для створення всіх портібних файлів
+
+cd ~ && curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/minima/crontab9001-9032.sh > crontab9001-9032.sh && chmod +x crontab9001-9032.sh && ./crontab9001-9032.sh
 
 автопропінговка в 01, 03, 05, 07 (кожного дня) 
 
@@ -34,14 +38,15 @@ curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/massa/rolls.sh 
 
 curl 127.0.0.1:9005/incentivecash%20uid:86d1c407-6e15-4962-88af-586719debee3
 
+### добавляємо всі UID з акаунта мініми в файл minima_autorun_every_day.sh
 
-### Перший запуск на сервері для створення всіх портібних файлів
+nano minima_autorun_every_day.sh
 
-cd ~ && curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/minima/crontab9001-9032.sh > crontab9001-9032.sh && chmod +x crontab9001-9032.sh && ./crontab9001-9032.sh
-
-### коли помилки
+### коли помилки 
 
 зайти на сервер і запустити (воно запустить переустановку на всіх портах на яких стоїть мініма)
+
+перевірити чи є на сервері місце
 
 ./minima_reping_base.sh
 
