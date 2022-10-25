@@ -33,7 +33,7 @@ while getopts ':xsc::p:r:d:h:' flag; do
 done
 
 apt update
-apt install openjdk-11-jre-headless curl jq -y
+# apt install openjdk-11-jre-headless curl jq -y
 
 
 if [ ! $(getent group minima) ]; then
