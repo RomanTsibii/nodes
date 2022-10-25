@@ -9,3 +9,6 @@ sudo timedatectl set-timezone Europe/Kiev
 # встановити tmux
 # встановити ncdu
 sudo apt install ncdu tmux htop -y
+
+# for minima
+apt install openjdk-11-jre-headless curl jq -y
