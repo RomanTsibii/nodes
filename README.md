@@ -192,14 +192,14 @@ bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/setup_ne
   
   витягуємо перші 100 чи більше рядків з файлу
   
-head -100 .profile 
+`head -100 .profile`
   
   видаляємо з файлу всі дані 
   
-cp /dev/null .profile
+`cp /dev/null .profile`
   
   вставляємо в файлі перші 100 рядків 
   
-nano .profile
+`nano .profile`
 
 
