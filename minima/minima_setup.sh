@@ -32,7 +32,7 @@ while getopts ':xsc::p:r:d:h:' flag; do
   esac
 done
 
-apt update
+# apt update
 # apt install openjdk-11-jre-headless curl jq -y
 
 
