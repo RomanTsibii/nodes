@@ -190,7 +190,7 @@ bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/setup_ne
 
 # Якщо довго грузить source $HOME/.profile
   
-  витягуємо перші 100 чи більше рядків з файлу
+  витягуємо перші 100 чи більше рядків з файлу і через Ctrl+C копіюємо
   
 `head -100 .profile`
   
@@ -198,7 +198,7 @@ bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/setup_ne
   
 `cp /dev/null .profile`
   
-  вставляємо в файлі перші 100 рядків 
+  вставляємо в файлі перші 100 рядків і через Ctrl+V вставляємо
   
 `nano .profile`
 
