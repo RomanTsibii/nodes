@@ -1,7 +1,12 @@
 #!/bin/bash
 ########### bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/minima/many_remove_and_install.sh)
 
+# apt update
+# apt install openjdk-11-jre-headless curl jq -y
+
+
 PORTS="9001 9003 9005 9007 9009 9011 9013 9015 9017 9019 9021 9023 9025 9027 9029 9031"
+apt update
 for PORT in ${PORTS}
   do   
   systemctl stop minima_90*
