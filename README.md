@@ -187,3 +187,13 @@ bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/zeeka/up
 # Setup new server
 
 bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/setup_new_server.sh)
+
+# Якщо довго грузить source $HOME/.profile
+  витягуємо перші 100 чи більше рядків з файлу
+head -100 .profile 
+  видаляємо з файлу всі дані 
+cp /dev/null .profile
+  вставляємо в файлі перші 100 рядків 
+nano .profile
+
+
