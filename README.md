@@ -202,4 +202,7 @@ bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/setup_ne
   
 `nano .profile`
 
+### Set varieble to bash script
+
+![image](https://user-images.githubusercontent.com/43521642/198118223-96e2e9d1-ba22-4f8a-8f96-8fbdc9fbc1c8.png)
 
