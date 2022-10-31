@@ -2,6 +2,12 @@
 
 all.gsub("\n", ' root@').gsub("root@ ", '').prepend("clusterssh root@")
 
+emails.split("\n").each { |email|  puts email.split(':')[2] }
+ 
+operator=["50", "66", "63", "95", "97", "99", "98"]
+ 
+(1...120).each { puts "#{operator.sample} #{rand(100...999)} #{rand(1000...9999)}" }
+
 ### nodes
 
 # subspace 
