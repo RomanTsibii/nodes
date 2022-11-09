@@ -9,3 +9,9 @@ docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
 
 # removing all logs
 rm -rf /var/log/*
+
+# massa tar files
+rm -rf $HOME/massa_TEST.1*
+
+# sui old logs
+rm -rf $HOME/sui.log*
