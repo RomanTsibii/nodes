@@ -195,20 +195,12 @@ bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/zeeka/up
 bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/setup_new_server.sh)
 
 # Якщо довго грузить source $HOME/.profile
-  
-###  1 витягує перші 100 чи більше рядків з файлу і записуємо в змінну
  
-###  2 видаляє всі дані з файлу 
- 
-###  3 записує з змінної дані в файл
- 
-## для запуску просто копіюємо і вставляємо 3 команди
+## для запуску просто копіюємо і вставляємо 4 команди
  
 PROFILE=\`head -100 $HOME/.profile\`
  
 TAIL=\`tail -10 $HOME/.profile\`
-  
-`cp /dev/null $HOME/.profile`
   
 `echo "$PROFILE" > $HOME/.profile`
  
