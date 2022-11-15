@@ -205,11 +205,15 @@ bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/setup_ne
 ## для запуску просто копіюємо і вставляємо 3 команди
  
 PROFILE=\`head -100 $HOME/.profile\`
+ 
+TAIL=\`tail -10 $HOME/.profile\`
   
 `cp /dev/null $HOME/.profile`
   
 `echo "$PROFILE" > $HOME/.profile`
-
+ 
+`echo "$TAIL" >> $HOME/.profile`
+ 
 # Set varieble to bash script
 
 ![image](https://user-images.githubusercontent.com/43521642/198118223-96e2e9d1-ba22-4f8a-8f96-8fbdc9fbc1c8.png)
