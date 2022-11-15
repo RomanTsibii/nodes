@@ -196,7 +196,7 @@ bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/setup_ne
 
 # Якщо довго грузить source $HOME/.profile
  
-## для запуску просто копіюємо і вставляємо 4 команди
+## для запуску просто копіюємо і вставляємо команди нижче
  
 cp  $HOME/.profile $HOME/.profile2
  
