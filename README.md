@@ -202,11 +202,11 @@ bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/setup_ne
  
   3 записує з змінної дані в файл
   
-PROFILE=\`head -100 .profile\`
+PROFILE=\`head -100 $HOME/.profile\`
   
-`cp /dev/null .profile`
+`cp /dev/null $HOME/.profile`
   
-`echo "$PROFILE" > .profile`
+`echo "$PROFILE" > $HOME/.profile`
 
 ### Set varieble to bash script
 
