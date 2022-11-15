@@ -206,6 +206,8 @@ TAIL=\`tail -10 $HOME/.profile\`
  
 `echo "$TAIL" >> $HOME/.profile`
  
+`source $HOME/.profile`
+ 
 # Set varieble to bash script
 
 ![image](https://user-images.githubusercontent.com/43521642/198118223-96e2e9d1-ba22-4f8a-8f96-8fbdc9fbc1c8.png)
