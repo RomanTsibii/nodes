@@ -198,6 +198,8 @@ bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/setup_ne
  
 ## для запуску просто копіюємо і вставляємо 4 команди
  
+cp  $HOME/.profile $HOME/.profile2
+ 
 PROFILE=\`head -100 $HOME/.profile\`
  
 TAIL=\`tail -10 $HOME/.profile\`
