@@ -197,15 +197,16 @@ bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/setup_ne
 # Якщо довго грузить source $HOME/.profile
   
   1 витягує перші 100 чи більше рядків з файлу і записуємо в змінну
+ 
   2 видаляє всі дані з файлу 
+ 
   3 записує з змінної дані в файл
   
-  
-PROFILE=`head -100 .profile`
+PROFILE=\`head -100 .profile\`
   
 `cp /dev/null .profile`
   
-echo "$PROFILE" > .profile
+`echo "$PROFILE" > .profile`
 
 ### Set varieble to bash script
 
