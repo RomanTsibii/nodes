@@ -2,31 +2,37 @@
 
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/massa/update.sh)
 
+#!/bin/bash
+
 function colors {
   GREEN="\e[32m"
   RED="\e[39m"
   NORMAL="\e[0m"
-  
 }
 
 function logo {
-  curl -s https://raw.githubusercontent.com/razumv/helpers/main/doubletop.sh | bash
+  curl -s https://raw.githubusercontent.com/DOUBLE-TOP/tools/main/doubletop.sh | bash
 }
 
 function line {
   echo -e "${GREEN}-----------------------------------------------------------------------------${NORMAL}"
 }
 
-function create_backup {
-  cd $HOME
-  if [ ! -d $HOME/massa_backup_12/ ]; then
-	mkdir -p $HOME/massa_backup_12
-	cp $HOME/massa/massa-node/config/node_privkey.key $HOME/massa_backup_12/
-	cp $HOME/massa/massa-client/wallet.dat $HOME/massa_backup_12/
-  fi
-  if [ ! -e $HOME/massa_backup_12.tar.gz ]; then
-	tar cvzf massa_backup_12.tar.gz massa_backup_12
-  fi
+function get_env {
+	source $HOME/.profile
+	source $HOME/.cargo/env
+}
+
+function massa_backup {
+	cd $HOME
+	if [ ! -d $HOME/massa_backup_16/ ]; then
+		mkdir -p $HOME/massa_backup_16
+		cp $HOME/massa/massa-node/config/node_privkey.key $HOME/massa_backup_16/
+		cp $HOME/massa/massa-client/wallet.dat $HOME/massa_backup_16/
+	fi
+	if [ ! -e $HOME/massa_backup_16.tar.gz ]; then
+		tar cvzf massa_backup_16.tar.gz massa_backup_16
+	fi
 }
 
 function delete {
@@ -35,12 +41,8 @@ function delete {
 }
 
 function install {
-  wget https://github.com/massalabs/massa/releases/download/TEST.15.1/massa_TEST.15.1_release_linux.tar.gz
-  tar zxvf massa_TEST.15.1_release_linux.tar.gz -C $HOME/
-  echo "restore wallet from backup"
-  cp $HOME/massa_backup_12/node_privkey.key $HOME/massa/massa-node/config/node_privkey.key
-  cp $HOME/massa_backup_12/wallet.dat $HOME/massa/massa-client/wallet.dat
-  RUST_BACKTRACE=1
+  wget https://github.com/massalabs/massa/releases/download/TEST.16.0/massa_TEST.16.1_release_linux.tar.gz
+  tar zxvf massa_TEST.16.1_release_linux.tar.gz -C $HOME/
 }
 
 function routable_ip {
@@ -66,37 +68,9 @@ function replace_bootstraps {
   	sed -i -e "s%retry_delay *=.*%retry_delay = 10000%; " "$config_path"
 }
 
-function massa_pass {
-  source $HOME/.profile
-  if [ ! ${massa_pass} ]; then
-  echo "Введите свой пароль для клиента(придумайте)"
-  line
-  read massa_pass
-  fi
-  echo "export massa_pass=$massa_pass" >> $HOME/.profile
-}
-
-function systemd {
-  sudo tee <<EOF >/dev/null /etc/systemd/system/massa.service
-[Unit]
-Description=Massa Node
-After=network-online.target
-
-[Service]
-User=$USER
-WorkingDirectory=$HOME/massa/massa-node
-ExecStart=$HOME/massa/massa-node/massa-node -p "$massa_pass"
-Restart=on-failure
-RestartSec=3
-LimitNOFILE=65535
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
-sudo systemctl daemon-reload
-sudo systemctl enable massa
-sudo systemctl restart massa
+function keys_from_backup {
+	cp $HOME/massa_backup_16/wallet.dat $HOME/massa/massa-client/wallet.dat
+	cp $HOME/massa_backup_16/node_privkey.key $HOME/massa/massa-node/config/node_privkey.key
 }
 
 function alias {
@@ -104,31 +78,23 @@ function alias {
   echo "alias clientw='cd $HOME/massa/massa-client/ && $HOME/massa/massa-client/massa-client --pwd $massa_pass && cd'" >> ~/.profile
 }
 
-
-function auto_buy {
-  echo "run autobuy"
-  sleep 15
-  cd $HOME
-  
-  pkill -9 tmux 
-  curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/massa/rolls.sh > rolls.sh && chmod +x rolls.sh && tmux new-session -d -s rolls './rolls.sh'
-  echo DONE
-}
-
 colors
 line
-logo
+echo "Читаем переменные, делаем бекап"
 line
-massa_pass
-create_backup
+get_env
+massa_backup
+echo "Удаляем старые файлы"
 delete
+line
+echo "Скачиваем новую версию и переписываем конфиг"
 install
 routable_ip
-line
-replace_bootstraps
-line
-systemd
-line
+#replace_bootstraps
 alias
-# auto_buy
-echo "Готово, ваш пароль от клиента - $massa_pass"
+line
+echo "Восстанавливаемся из бекапа"
+keys_from_backup
+line
+sudo systemctl start massa
+echo "Обновление завершено"
