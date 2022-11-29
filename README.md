@@ -214,3 +214,22 @@ TAIL=\`tail -10 $HOME/.profile\`
 
 ![image](https://user-images.githubusercontent.com/43521642/198118223-96e2e9d1-ba22-4f8a-8f96-8fbdc9fbc1c8.png)
 
+# AdsPower
+
+Как использовать свой сервер в качестве прокси для антидетект-браузера?
+
+⚠️Пользовался только для работы с твиттерами, дискордами, площадками проектов ⚠️ 
+
+На сервере запускаем скрипт.
+
+bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/tools/main/3proxy.sh)
+
+После установки можете подключать свой браузер к проксе
+
+ip=айпи сервера
+
+port=53129
+
+user=user
+
+pass=P@ssv0rd
