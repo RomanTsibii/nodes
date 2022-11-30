@@ -1,4 +1,6 @@
 #!/bin/bash
+
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/proxy_for_antick.sh)
 apt update
 apt-get install build-essential -y
 wget https://github.com/z3APA3A/3proxy/archive/0.9.3.tar.gz
