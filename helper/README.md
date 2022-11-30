@@ -17,3 +17,9 @@ port=53129
 user=user
 
 pass=P@ssv0rd
+
+bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/proxy_for_antick.sh)
+
+28386
+BnBuser
+RomBod@999
