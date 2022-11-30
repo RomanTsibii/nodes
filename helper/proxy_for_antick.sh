@@ -1,6 +1,10 @@
 #!/bin/bash
 
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/proxy_for_antick.sh)
+
+sudo systemctl stop 3proxy.service
+systemctl disable 3proxy.service
+
 apt update
 apt-get install build-essential -y
 wget https://github.com/z3APA3A/3proxy/archive/0.9.3.tar.gz
