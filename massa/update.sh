@@ -2,8 +2,6 @@
 
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/massa/update.sh)
 
-#!/bin/bash
-
 function colors {
   GREEN="\e[32m"
   RED="\e[39m"
@@ -25,13 +23,13 @@ function get_env {
 
 function massa_backup {
 	cd $HOME
-	if [ ! -d $HOME/massa_backup_16/ ]; then
-		mkdir -p $HOME/massa_backup_16
-		cp $HOME/massa/massa-node/config/node_privkey.key $HOME/massa_backup_16/
-		cp $HOME/massa/massa-client/wallet.dat $HOME/massa_backup_16/
+	if [ ! -d $HOME/massa_backup17/ ]; then
+		mkdir -p $HOME/massa_backup17
+		cp $HOME/massa/massa-node/config/node_privkey.key $HOME/massa_backup17/
+		cp $HOME/massa/massa-client/wallet.dat $HOME/massa_backup17/
 	fi
-	if [ ! -e $HOME/massa_backup_16.tar.gz ]; then
-		tar cvzf massa_backup_16.tar.gz massa_backup_16
+	if [ ! -e $HOME/massa_backup17.tar.gz ]; then
+		tar cvzf massa_backup.tar17.gz massa_backup17
 	fi
 }
 
@@ -41,8 +39,8 @@ function delete {
 }
 
 function install {
-  wget https://github.com/massalabs/massa/releases/download/TEST.16.1/massa_TEST.16.1_release_linux.tar.gz
-  tar zxvf massa_TEST.16.1_release_linux.tar.gz -C $HOME/
+  wget https://github.com/massalabs/massa/releases/download/TEST.17.1/massa_TEST.17.1_release_linux.tar.gz
+  tar zxvf massa_TEST.17.0_release_linux.tar.gz -C $HOME/
 }
 
 function routable_ip {
@@ -69,8 +67,8 @@ function replace_bootstraps {
 }
 
 function keys_from_backup {
-	cp $HOME/massa_backup_16/wallet.dat $HOME/massa/massa-client/wallet.dat
-	cp $HOME/massa_backup_16/node_privkey.key $HOME/massa/massa-node/config/node_privkey.key
+	cp $HOME/massa_backup17/wallet.dat $HOME/massa/massa-client/wallet.dat
+	cp $HOME/massa_backup17/node_privkey.key $HOME/massa/massa-node/config/node_privkey.key
 }
 
 function alias {
@@ -79,6 +77,8 @@ function alias {
 }
 
 colors
+line
+logo
 line
 echo "Читаем переменные, делаем бекап"
 line
@@ -91,7 +91,7 @@ echo "Скачиваем новую версию и переписываем к�
 install
 routable_ip
 #replace_bootstraps
-alias
+# alias
 line
 echo "Восстанавливаемся из бекапа"
 keys_from_backup
