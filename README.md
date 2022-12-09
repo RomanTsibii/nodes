@@ -204,16 +204,8 @@ bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/setup_ne
  
 ## для запуску просто копіюємо і вставляємо команди нижче
  
-cp  $HOME/.profile $HOME/.profile2
- 
-PROFILE=\`head -100 $HOME/.profile\`
- 
-TAIL=\`tail -10 $HOME/.profile\`
-  
-`echo "$PROFILE" > $HOME/.profile`
- 
-`echo "$TAIL" >> $HOME/.profile`
- 
+`bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/remove_copy_clientw.sh)`
+
 `source $HOME/.profile`
  
 # Set varieble to bash script
