@@ -26,6 +26,6 @@ for PORT in ${PORTS}
   $(`cat minima_autorun_every_day.sh | grep $((PORT+4))`)
   echo '----------------------------------------------------------------------------------------------------------------------------------------------'
   systemctl stop minima_$PORT
-  bash <(curl -s https://raw.githubusercontent.com/minima-global/Minima/master/scripts/minima_remove.sh) -p $PORT -x
+  bash <(curl -s https://raw.githubusercontent.com/minima-global/Minima/master/scripts/minima_remove.sh) -p $PORT
 done
 
