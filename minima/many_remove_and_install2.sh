@@ -21,5 +21,5 @@ for PORT in ${PORTS}
   echo '----------------------------------------------------------------------------'
   $(`cat minima_autorun_every_day.sh | grep $((PORT+4))`)
   echo '----------------------------------------------------------------------------'
-  bash <(curl -s https://raw.githubusercontent.com/minima-global/Minima/master/scripts/minima_remove.sh) -p $PORT -x
+  bash <(curl -s https://raw.githubusercontent.com/minima-global/Minima/master/scripts/minima_remove.sh) -p $PORT
 done
