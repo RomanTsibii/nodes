@@ -97,3 +97,9 @@ https://discord.com/channels/916379725201563759/971488439931392130
 `rm -rf ~/sui /var/sui/ /usr/local/bin/sui*`
 
 `rm /etc/systemd/system/suid.service`
+
+# джерела 
+
+https://learning.1package.io/Sui_RU
+
+https://nodes.guru/sui/setup-guide/ru
