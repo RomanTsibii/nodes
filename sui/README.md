@@ -77,7 +77,9 @@ https://discord.com/channels/916379725201563759/971488439931392130
 ## Создать NFT
 ### NFT-образец создаётся командой
 
-sui client create-example-nft
+`sui client create-example-nft`
+
+# Готово
 
 ## Рестарт ноды:
 
