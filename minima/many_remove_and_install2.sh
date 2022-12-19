@@ -28,4 +28,4 @@ done
 systemctl restart minima_9001
 bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/minima/minima_setup.sh) -p 9001
 sleep 80
-$(`cat minima_autorun_every_day.sh | grep 9005
+$(`cat minima_autorun_every_day.sh | grep 9005`)
