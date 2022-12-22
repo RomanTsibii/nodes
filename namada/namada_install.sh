@@ -15,6 +15,7 @@ echo "export VALIDATOR_ALIAS=$NAMADA_NODENAME" >> ~/.bash_profile
 source ~/.bash_profile
 
 echo "Your nodename - $NAMADA_NODENAME"
+echo "Your nodename alias - $VALIDATOR_ALIAS"
 
 cd $HOME
 sudo apt update && sudo apt upgrade -y
