@@ -8,6 +8,14 @@ if [ ! $NAMADA_NODENAME ]; then
     echo 'export NAMADA_NODENAME='$NAMADA_NODENAME >> $HOME/.profile
 fi
 
+echo "export NAMADA_TAG=v0.12.1" >> ~/.bash_profile
+echo "export TM_HASH=v0.1.4-abciplus" >> ~/.bash_profile
+echo "export CHAIN_ID=public-testnet-1.0.05ab4adb9db" >> ~/.bash_profile
+echo "export VALIDATOR_ALIAS=$NAMADA_NODENAME" >> ~/.bash_profile
+source ~/.bash_profile
+
+echo "Your nodename - $NAMADA_NODENAME"
+
 cd $HOME
 sudo apt update && sudo apt upgrade -y
 sudo apt install curl tar wget clang pkg-config libssl-dev libclang-dev jq build-essential bsdmainutils git make ncdu gcc git jq chrony liblz4-tool -y
@@ -32,11 +40,7 @@ if ! [ -x "$(command -v go)" ]; then
   source ~/.bash_profile
 fi
 #Setting up vars
-echo "export NAMADA_TAG=v0.12.1" >> ~/.bash_profile
-echo "export TM_HASH=v0.1.4-abciplus" >> ~/.bash_profile
-echo "export CHAIN_ID=public-testnet-1.0.05ab4adb9db" >> ~/.bash_profile
-echo "export VALIDATOR_ALIAS=$NAMADA_NODENAME" >> ~/.bash_profile
-source ~/.bash_profile
+
 
 cd $HOME && git clone https://github.com/anoma/namada && cd namada && git checkout $NAMADA_TAG
 make build-release
