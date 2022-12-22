@@ -1,7 +1,12 @@
 #!/bin/bash
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/namada/namada_install.sh)
 
+source $HOME/.profile
 
+if [ ! $NAMADA_NODENAME ]; then
+	read -p "Введите ваше имя ноды(придумайте, без спецсимволов - только буквы и цифры): " NAMADA_NODENAME
+    echo 'export NAMADA_NODENAME='$NAMADA_NODENAME >> $HOME/.profile
+fi
 
 cd $HOME
 sudo apt update && sudo apt upgrade -y
@@ -30,7 +35,7 @@ fi
 echo "export NAMADA_TAG=v0.12.1" >> ~/.bash_profile
 echo "export TM_HASH=v0.1.4-abciplus" >> ~/.bash_profile
 echo "export CHAIN_ID=public-testnet-1.0.05ab4adb9db" >> ~/.bash_profile
-echo "export VALIDATOR_ALIAS=change_your_validator_name" >> ~/.bash_profile
+echo "export VALIDATOR_ALIAS=$NAMADA_NODENAME" >> ~/.bash_profile
 source ~/.bash_profile
 
 cd $HOME && git clone https://github.com/anoma/namada && cd namada && git checkout $NAMADA_TAG
@@ -73,4 +78,16 @@ EOF
 
 sudo systemctl daemon-reload
 sudo systemctl enable namadad
-sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
+sudo systemctl restart namadad 
+
+echo 'tendermint versio'
+tendermint version
+echo 'namada --version'
+namada --version
+echo 'cargo --version'
+cargo --version
+
+echo 'waiting full synchronization then ctrl+c"
+echo "sudo journalctl -u namadad -f -o cat"
+
+
