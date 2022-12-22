@@ -1,5 +1,5 @@
 #!/bin/bash
-# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/namada/namada_install.sh)
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/namada/namada_gen_wallet.sh)
 
 source $HOME/.profile
 source $HOME/.bash_profile
