@@ -2,6 +2,8 @@
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/namada/namada_install.sh)
 
 source $HOME/.profile
+source $HOME/.bash_profile
+
 cd $HOME
 namada wallet address gen --alias wallet_name
 #enter pass
