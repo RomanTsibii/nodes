@@ -2,6 +2,7 @@
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/namada/namada_install.sh)
 
 source $HOME/.profile
+source ~/.bash_profile
 
 if [ ! $NAMADA_NODENAME ]; then
 	read -p "Введите ваше имя ноды(придумайте, без спецсимволов - только буквы и цифры): " NAMADA_NODENAME
