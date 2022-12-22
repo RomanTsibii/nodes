@@ -5,7 +5,9 @@
 echo "export NAMADA_TAG=v0.12.2" >> ~/.bash_profile
 source ~/.bash_profile
 
-cd namada && git checkout $NAMADA_TAG
+cd namada
+git pull 
+git checkout $NAMADA_TAG
 make build-release
 cargo --version
 
