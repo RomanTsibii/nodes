@@ -9,7 +9,7 @@ if [ ! $NAMADA_NODENAME ]; then
     echo 'export NAMADA_NODENAME='$NAMADA_NODENAME >> $HOME/.profile
 fi
 
-echo "export NAMADA_TAG=v0.12.1" >> ~/.bash_profile
+echo "export NAMADA_TAG=v0.12.2" >> ~/.bash_profile
 echo "export TM_HASH=v0.1.4-abciplus" >> ~/.bash_profile
 echo "export CHAIN_ID=public-testnet-1.0.05ab4adb9db" >> ~/.bash_profile
 echo "export VALIDATOR_ALIAS=$NAMADA_NODENAME" >> ~/.bash_profile
