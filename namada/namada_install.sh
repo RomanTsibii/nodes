@@ -61,7 +61,7 @@ cd $HOME && namada client utils join-network --chain-id $CHAIN_ID
 cd $HOME && wget https://github.com/heliaxdev/anoma-network-config/releases/download/public-testnet-1.0.05ab4adb9db/public-testnet-1.0.05ab4adb9db.tar.gz
 tar xvzf "$HOME/public-testnet-1.0.05ab4adb9db.tar.gz"
 
-sudo tee /etc/systemd/system/namadad.service > /dev/null <<EOF
+sudo tee <<EOF >/etc/systemd/system/namadad.service
 [Unit]
 Description=namada
 After=network-online.target
