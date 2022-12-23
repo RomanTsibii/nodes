@@ -23,7 +23,7 @@ function ports01 {
 
 
 
-port01
+ports01
 
 
 #  bash <(curl -s https://raw.githubusercontent.com/minima-global/Minima/master/scripts/minima_remove.sh) -p $PORT -x
