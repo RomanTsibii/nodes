@@ -4,9 +4,7 @@
 
 
 function update {
-  PRE=${PORT_MAIN:(-2)}
-  PORT="482$PRE"
-  PORT4=$((PORT+4))
+
   echo $PORT_MAIN
   echo $PORT
   echo $PORT4
@@ -15,6 +13,9 @@ function update {
 
 function ports01 {
   PORTS="9001 9011 9021"
+  PRE=${PORT_MAIN:(-2)}
+  PORT="482$PRE"
+  PORT4=$((PORT+4))
   for PORT_MAIN in ${PORTS}
   do
     update
