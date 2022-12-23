@@ -1,18 +1,30 @@
 #!/bin/bash
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/minima/migrate_to_docker.sh)
 
-#bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/tools/main/docker.sh)
 
-PORTS="9001 9011 9021"
-for PORT_MAIN in ${PORTS}
-do
+
+function update {
   PRE=${PORT_MAIN:(-2)}
   PORT="482$PRE"
   PORT4=$((PORT+4))
   echo $PORT_MAIN
   echo $PORT
   echo $PORT4
-done
+  
+}
+
+function ports01 {
+  PORTS="9001 9011 9021"
+  for PORT_MAIN in ${PORTS}
+  do
+    update
+  done
+}
+
+
+
+port01
+
 
 #  bash <(curl -s https://raw.githubusercontent.com/minima-global/Minima/master/scripts/minima_remove.sh) -p $PORT -x
 # 
@@ -24,4 +36,6 @@ done
 #  MINIMA_UID="$(cut -d':' -f3 <<<"$(``cat minima_autorun_every_day.sh | grep $PORT_MAIN``)")"
 #  docker exec -d minima$PORT sh -c "(sleep 5; echo 'incentivecash uid:$MINIMA_UID'; sleep 5; echo 'exit') | java -cp /usr/local/minima/minima.jar org.minima.utils.MinimaRPCClient"
 #done
+
+
 
