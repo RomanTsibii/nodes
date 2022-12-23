@@ -5,6 +5,7 @@
 
 PORTS="9001"
 for PORT_MAIN in ${PORTS}
+do
   PRE="${PORT_MAIN:(-2)}"
   PORT="482$PRE"
   PORT4=$((PORT+4))
