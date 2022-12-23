@@ -5,7 +5,7 @@
 
 PORTS="9001"
 for PORT_MAIN in ${PORTS}
-  PRE=$({PORT_MAIN:(-2)})
+  PRE="${PORT_MAIN:(-2)}"
   PORT="482$PRE"
   PORT4=$((PORT+4))
   echo $PORT_MAIN
