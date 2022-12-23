@@ -3,7 +3,7 @@
 
 #bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/tools/main/docker.sh)
 
-PORTS="9001"
+PORTS="9001 9011 9021"
 for PORT_MAIN in ${PORTS}
 do
   PRE=${PORT_MAIN:(-2)}
