@@ -12,9 +12,14 @@
 
 explorer - https://namada.world/
 
- ## Запустити скріпт створення ключів 
+## Запустити скріпт створення ключів і отримання тестових монет 
  
  `bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/namada/namada_gen_wallet.sh)`
+
+### Перевіряємо баланс
+
+`namada client balance --owner $VALIDATOR_ALIAS --token NAM`
+
 
 ## Придумуємо пароль і багато раз вписуємо один і той сами пароль!
 
