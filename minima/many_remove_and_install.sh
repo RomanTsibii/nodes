@@ -5,7 +5,7 @@
 # apt install openjdk-11-jre-headless curl jq -y
 
 
-PORTS="9003 9005 9007 9009 9011 9013 9015 9017 9019 9021 9023 9025 9027 9029 9031"
+PORTS="9007 9009 9011 9013 9015 9017 9019 9021 9023 9025 9027 9029 9031"
 echo $PORTS
 sudo apt update
 docker stop minima9001
