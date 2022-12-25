@@ -1,6 +1,8 @@
 #!/bin/bash
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/minima/migrate_to_docker.sh)
 
+docker rm -f minima9001
+
 function update {
   echo $PORT_MAIN
   echo $PORT
@@ -14,7 +16,7 @@ function update {
 }
 
 function ports01 {
-  PORTS="9011"
+  PORTS="9001"
   for PORT_MAIN in ${PORTS}
   do
     PRE=${PORT_MAIN:(-2)}
@@ -46,6 +48,7 @@ function ports05 {
   done
 }
 
+: '
 function ports07 {
   PORTS="9007"
   for PORT_MAIN in ${PORTS}
@@ -67,7 +70,7 @@ function ports09 {
     update
   done
 }
-
+'
 
 
 ports01
