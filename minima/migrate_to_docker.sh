@@ -4,6 +4,7 @@
 docker rm -f minima9001
 
 function update {
+  echo $PING_PORT
   echo $PORT_MAIN
   echo $PORT
   echo $PORT4
@@ -20,6 +21,7 @@ function ports01 {
   for PORT_MAIN in ${PORTS}
   do
     PRE=${PORT_MAIN:(-2)}
+    PING_PORT=$((PORT_MAIN+4))
     PORT="482$PRE"
     PORT4=$((PORT+3))
     update
@@ -31,6 +33,7 @@ function ports03 {
   for PORT_MAIN in ${PORTS}
   do
     PRE=${PORT_MAIN:(-2)}
+    PING_PORT=$((PORT_MAIN+4))
     PORT="484$PRE"
     PORT4=$((PORT+3))
     update
@@ -42,18 +45,19 @@ function ports05 {
   for PORT_MAIN in ${PORTS}
   do
     PRE=${PORT_MAIN:(-2)}
+    PING_PORT=$((PORT_MAIN+4))
     PORT="486$PRE"
     PORT4=$((PORT+3))
     update
   done
 }
-
 : '
 function ports07 {
   PORTS="9007"
   for PORT_MAIN in ${PORTS}
   do
     PRE=${PORT_MAIN:(-2)}
+    PING_PORT=$((PORT_MAIN+4))
     PORT="488$PRE"
     PORT4=$((PORT+3))
     update
@@ -65,6 +69,7 @@ function ports09 {
   for PORT_MAIN in ${PORTS}
   do
     PRE=${PORT_MAIN:(-2)}
+    PING_PORT=$((PORT_MAIN+4))
     PORT="489$PRE"
     PORT4=$((PORT+3))
     update
