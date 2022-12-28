@@ -1,8 +1,6 @@
 #!/bin/bash
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/minima/migrate_to_docker.sh)
 
-docker rm -f minima9001
-
 function update {
   echo $PING_PORT
   echo $PORT_MAIN
