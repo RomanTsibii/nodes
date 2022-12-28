@@ -15,3 +15,6 @@ apt install openjdk-11-jre-headless curl jq -y
 
 # install proxy for adspower
 bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/proxy_for_antick.sh)
+
+# adds ssh keys
+bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/add_ssh_keys.sh)
