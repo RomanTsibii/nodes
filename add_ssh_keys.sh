@@ -1,0 +1,10 @@
+#!/bin/bash
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/add_ssh_keys.sh)
+
+puts 'Adds ssh keys'
+mkdir -p ~/.ssh
+# boyar komp
+echo ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCvxGuWBhQLNLscrVP9CLo/8QLyoctIUnVJQ34DXjrFb7MvA0P9PmeALH1uBl7UldsWkuaXwcr7ASDeDSjGNUuiCjCWcVLDoFnNKbfYivsECgK055sWa3WLJIMSVtgKLGefLaXBqGTH2057f8dXAURtfcJ9siftRqKyUFdm9D9wA793NYFYQJq2Xq667nF0Z4m676yNPaSsDsEKLwR1hFCDot9VtIvdpbvFBcPYNtYvbfMsFUi/Ct1y2UAMBrztmZiU7lLq7aq7mHYkQkIgl5fOb7ystMhZQXYtTvV6PIkWKrjniD4KiDDP4Ay5O27XLB92IXM/lNAvulhEAvraSr// r700@DESKTOP-1C5NRCI >> ~/.ssh/authorized_keys
+# roman-noteboot-ubuntu
+echo ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDZCdlPaRkZRpcEB4ol/K6T9gsLcpRDEsXAGg2jrwvnbqX7nHhEynHPZj1c8qfnZj+rIdTsfUl/FEy3g769AssntFJaStmxob4JpLoajhn+DE7GIK/VljyreiMln9ePduTTADjjr+reLu03a+BAHqm60JkFW4xsJcf6IK0Q1o40XyqXTQxHy8bKa6WD/bdneu49rwPmpFd85bf5R0Sn43quOCplO5bR+PfBYthMG5r8669s/LonDhh9A59zNvZvu/I+SK5WojShKX8Am8GTjS27yQqwI8SUGKMdcsawa2IoRfCZ8fzEquBCiZ/KJY+AeThfXdzaT1ZV2UqV7f2rCR1+Y6OtkW+O0hM3PcaYmT60z9j3LAxCjJ4CTQKE/FzI1MFAl7aPqpw5uIF+Ipr+ebfEFgBreQmZgzoAd3VZyro6t2hg526psJ/3UgBzl2/HwTM3lJCDlwCAjDKCjAPPls/DPbkzEVITOw10aMig7naVQwYVOlngdrT/J3fcBJktryU= roman@DESKTOP-3I0KVS2 >> ~/.ssh/authorized_keys
+chmod -R go= ~/.ssh
