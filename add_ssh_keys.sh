@@ -1,7 +1,7 @@
 #!/bin/bash
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/add_ssh_keys.sh)
 
-puts 'Adds ssh keys'
+echo 'Adds ssh keys'
 mkdir -p ~/.ssh
 # boyar komp
 echo ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCvxGuWBhQLNLscrVP9CLo/8QLyoctIUnVJQ34DXjrFb7MvA0P9PmeALH1uBl7UldsWkuaXwcr7ASDeDSjGNUuiCjCWcVLDoFnNKbfYivsECgK055sWa3WLJIMSVtgKLGefLaXBqGTH2057f8dXAURtfcJ9siftRqKyUFdm9D9wA793NYFYQJq2Xq667nF0Z4m676yNPaSsDsEKLwR1hFCDot9VtIvdpbvFBcPYNtYvbfMsFUi/Ct1y2UAMBrztmZiU7lLq7aq7mHYkQkIgl5fOb7ystMhZQXYtTvV6PIkWKrjniD4KiDDP4Ay5O27XLB92IXM/lNAvulhEAvraSr// r700@DESKTOP-1C5NRCI >> ~/.ssh/authorized_keys
