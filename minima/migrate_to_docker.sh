@@ -50,7 +50,7 @@ function ports05 {
     update
   done
 }
-: '
+
 function ports07 {
   PORTS="9007"
   for PORT_MAIN in ${PORTS}
@@ -74,14 +74,14 @@ function ports09 {
     update
   done
 }
-'
 
 
-ports01
-ports03
-ports05
-#ports07
-#ports09
+
+#ports01
+#ports03
+#ports05
+ports07
+ports09
 
 
 docker run -d --restart unless-stopped --name watchtower -e WATCHTOWER_CLEANUP=true -e WATCHTOWER_TIMEOUT=60s -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower
