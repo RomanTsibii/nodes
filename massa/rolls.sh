@@ -16,8 +16,8 @@ do
         int_candidate_rolls=${candidate_rolls%%.*}
         if [ $int_balance -gt "99" ] && [ $int_candidate_rolls = "0" ]; then   
                 echo "More than 99"
-               # resp=$(./massa-client --pwd $massa_pass buy_rolls $massa_wallet_address $(($int_balance/100)) 0)
-               # echo $resp
+                resp=$(./massa-client --pwd $massa_pass buy_rolls $massa_wallet_address $(($int_balance/100)) 0)
+                echo $resp
         else
                 echo "Less than 100"
         fi
