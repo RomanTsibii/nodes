@@ -77,9 +77,9 @@ function ports09 {
 
 
 
-#ports01
-#ports03
-#ports05
+ports01
+ports03
+ports05
 ports07
 ports09
 
