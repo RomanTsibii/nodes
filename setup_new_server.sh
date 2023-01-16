@@ -5,6 +5,7 @@
 echo "set Ukraine timezone"
 sudo timedatectl set-timezone Europe/Kiev
 # встановити докер
+bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/tools/main/docker.sh)
 
 # встановити tmux
 # встановити ncdu
