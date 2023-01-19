@@ -25,7 +25,7 @@ EOF
 
 docker-compose pull && docker-compose up -d
 
-IRONFISH_NODENAME=`ironfish config | grep nodeName | awk '{print $2}' | sed 's/\"//g' |  tr ',' ' '`
+IRONFISH_NODENAME=`docker exec ironfish ./bin/run config | grep nodeName | awk '{print $2}' | sed 's/\"//g' |  tr ',' ' '`
 echo 'export NODENAME='$IRONFISH_NODENAME >> $HOME/.profile
 source ~/.profile
 
