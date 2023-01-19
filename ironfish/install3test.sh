@@ -39,17 +39,17 @@ fi
 
 echo $IRONFISH_NODENAME
 
-ironfish wallet:create $IRONFISH_NODENAME
+docker exec ironfish ./bin/run  wallet:create $IRONFISH_NODENAME
 
-ironfish wallet:use $IRONFISH_NODENAME
+docker exec ironfish ./bin/run  wallet:use $IRONFISH_NODENAME
 
-ironfish config:set nodeName $IRONFISH_NODENAME
+docker exec ironfish ./bin/run  config:set nodeName $IRONFISH_NODENAME
 
-ironfish config:set blockGraffiti $IRONFISH_NODENAME
+docker exec ironfish ./bin/run  config:set blockGraffiti $IRONFISH_NODENAME
 
-ironfish config:set minerBatchSize 60000
+docker exec ironfish ./bin/run  config:set minerBatchSize 60000
 
-ironfish config:set enableTelemetry true
+docker exec ironfish ./bin/run  config:set enableTelemetry true
 
 sleep 5
 
