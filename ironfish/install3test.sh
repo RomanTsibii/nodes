@@ -1,5 +1,5 @@
 #!/bin/bash
-# bash <(curl -s  https://raw.githubusercontent.com/RomanTsibii/nodes/main/minima/ping_all2.sh)
+# bash <(curl -s  https://raw.githubusercontent.com/RomanTsibii/nodes/main/ironfish/install3test.sh)
 
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_docker.sh | bash
 
