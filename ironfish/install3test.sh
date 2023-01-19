@@ -53,7 +53,7 @@ docker exec ironfish ./bin/run  config:set enableTelemetry true
 
 sleep 5
 
-ironfish status
+docker exec ironfish ./bin/run  status
 
 echo "docker-compose logs -f --tail=100"
 
