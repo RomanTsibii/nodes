@@ -29,9 +29,11 @@ IRONFISH_NODENAME=`ironfish config | grep nodeName | awk '{print $2}' | sed 's/\
 echo 'export NODENAME='$IRONFISH_NODENAME >> $HOME/.profile
 source ~/.profile
 
+echo $IRONFISH_NODENAME
+
 if [ -z $IRONFISH_NODENAME ]; then
         read -p "Введите ваше имя ноды (придумайте, без спецсимволов - только буквы и цифры): " IRONFISH_NODENAME
-        echo 'export NODENAME='$IRONFISH_NODENAME >> $HOME/.profile
+        echo 'export IRONFISH_NODENAME='$IRONFISH_NODENAME >> $HOME/.profile
         source ~/.profile
 fi
 
