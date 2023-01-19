@@ -35,6 +35,7 @@ if [ -z $IRONFISH_NODENAME ]; then
         source ~/.profile
 fi
 
+echo $IRONFISH_NODENAME
 
 ironfish wallet:create $IRONFISH_NODENAME
 
