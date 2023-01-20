@@ -48,7 +48,7 @@ function ports05 {
     update
   done
 }
-: '
+
 function ports07 {
   PORTS="9007"
   for PORT_MAIN in ${PORTS}
@@ -71,11 +71,11 @@ function ports09 {
     update
   done
 }
-'
+
 
 
 ports01
 ports03
 ports05
-#ports07
-#ports09
+ports07
+ports09
