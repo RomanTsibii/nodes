@@ -33,8 +33,8 @@ WALLETS="
   "
 
 for WALLET in ${WALLETS} ; do
-  docker exec ironfish ./bin/run  ironfish wallet:send -a 0.025 -f tsibaa -i 4d256fb609bdc07a8233eca2c6639141efaa6749d3db2ddd0ebff453742f7521 -t $WALLET -o 0.001 --conf
-irm
+  docker exec ironfish ./bin/run  ironfish wallet:send -a 0.025 -f tsibaa -i 4d256fb609bdc07a8233eca2c6639141efaa6749d3db2ddd0ebff453742f7521 -t $WALLET -o 0.001 --confirm
+    sleep 300
 done
 
 
