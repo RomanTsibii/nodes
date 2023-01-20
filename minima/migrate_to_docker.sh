@@ -16,7 +16,8 @@ function update {
 }
 
 function ports01 {
-  PORTS="9001"
+  # PORTS="9001"
+  PORTS="9011"
   for PORT_MAIN in ${PORTS}
   do
     PRE=${PORT_MAIN:(-2)}
@@ -78,8 +79,8 @@ function ports09 {
 
 
 ports01
-ports03
-ports05
+#ports03
+#ports05
 #ports07
 #ports09
 
