@@ -6,6 +6,8 @@ docker-compose down
 docker-compose pull
 docker-compose up -d
 
+sleep 20
+
 docker exec ironfish ./bin/run  status
 
 echo "docker-compose logs -f --tail=100"
