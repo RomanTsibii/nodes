@@ -9,7 +9,7 @@ bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/tools/main/docker.sh
 
 # встановити tmux
 # встановити ncdu
-sudo apt install ncdu tmux htop -y
+sudo apt install ncdu tmux htop screen -y
 
 # for minima
 apt install openjdk-11-jre-headless curl jq -y
