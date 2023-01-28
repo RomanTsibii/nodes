@@ -26,9 +26,15 @@ function update {
     sleep_seconds 15
     echo $MINIMA_UID
     docker logs --tail=5 minima$PORT
-    if ! [[ $LOGS == *"MAXIMA NEW connection"* ]]; then echo sleep_seconds 15 ; fi
-    docker exec -d minima$PORT sh -c "(sleep 5; echo 'incentivecash uid:$MINIMA_UID'; sleep 5; echo 'exit') | java -cp /usr/local/minima/minima.jar org.minima.utils.MinimaRPCClient"
-    sleep_seconds 60
+    
+    while true
+    do
+      LOGS=`docker logs --tail=10 minima$PORT`
+      if [[ $LOGS == *"MAXIMA NEW connection"* || $LOGS == *"MAXIMA HOST accepted"* ]]; then break ; fi
+      sleep_seconds 5
+    done
+    
+    sleep_seconds 15
     docker exec -d minima$PORT sh -c "(sleep 5; echo 'incentivecash uid:$MINIMA_UID'; sleep 5; echo 'exit') | java -cp /usr/local/minima/minima.jar org.minima.utils.MinimaRPCClient"
     docker logs --tail=5 minima$PORT
     docker stop minima$PORT
