@@ -32,6 +32,7 @@ function update {
     sleep_seconds 60
     docker logs --tail=5 minima$PORT
     docker stop minima$PORT
+    echo "-----------------------------------------INSTALED ON PORT $PORT-----------------------------------------"
   fi
 }
 
