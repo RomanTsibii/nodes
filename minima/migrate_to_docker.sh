@@ -19,6 +19,7 @@ function update {
   
   #  якщо є потрібний  UID в файлі і ще не встановлено на докер
   if [[ -n $MINIMA_UID && -z $DOCKER_FOLDER ]]; then
+    echo "-----------------------------------------INSTALING ON PORT $PORT-----------------------------------------"
     # bash <(curl -s https://raw.githubusercontent.com/minima-global/Minima/master/scripts/minima_remove.sh) -p $PORT_MAIN -x
     MINIMA_PASSWORD=bnbiminima
     docker run -d -e minima_mdspassword=$MINIMA_PASSWORD -e minima_server=true -v ~/minimadocker$PORT:/home/minima/data -p $PORT-$PORT4:9001-9004 --restart unless-stopped --name minima$PORT minimaglobal/minima:latest
