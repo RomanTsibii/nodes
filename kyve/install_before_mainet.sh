@@ -3,6 +3,8 @@
 
 read -p "Insert pool for runing: " POOL
 read -p "Insert pool name for runing: " POOL_NAME
+read -p "Insert servise file name: " SERVISE
+SER_POOL_NAME=POOL_NAME | awk {print$0}
 
 kysor valaccounts create \
 --name "$POOL_NAME" \
@@ -11,7 +13,7 @@ kysor valaccounts create \
 --verbose \
 --metrics
 
-tee <<EOF > /dev/null /etc/systemd/system/"$POOL_NAME".service
+tee <<EOF > /dev/null /etc/systemd/system/$SERVISE.service
 [Unit]
 Description=KYVE Protocol
 After=network-online.target
@@ -25,9 +27,9 @@ LimitNOFILE=infinity
 WantedBy=multi-user.target
 EOF
 
-echo 'cd ~/.kysor/valaccounts/'
-echo 'nano "$POOL_NAME"'
-echo 'sudo systemctl daemon-reload && sudo systemctl enable "$POOL_NAME" && sudo systemctl restart "$POOL_NAME"'
-echo 'sudo journalctl -u "$POOL_NAME" -f -o cat'
+echo cd ~/.kysor/valaccounts/
+echo nano $SERVISE
+echo "sudo systemctl daemon-reload && sudo systemctl enable $SERVISE && sudo systemctl restart $SERVISE"
+echo sudo journalctl -u $SERVISE -f -o cat
 
 
