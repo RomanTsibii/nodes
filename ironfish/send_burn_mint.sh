@@ -1,5 +1,6 @@
 #!/bin/bash
 # bash <(curl -s  https://raw.githubusercontent.com/RomanTsibii/nodes/main/ironfish/send_burn_mint.sh)
+# screen -S ironfish_send_burn_mint -dm  bash -c 'bash <(curl -s  https://raw.githubusercontent.com/RomanTsibii/nodes/main/ironfish/send_burn_mint.sh)'
 
 function sleep_seconds () {
   for((sec=0; sec<"$1"; sec++))
