@@ -2,8 +2,9 @@
 # bash <(curl -s  https://raw.githubusercontent.com/RomanTsibii/nodes/main/ironfish/send.sh)
 
 WALLETS="
-0ca441db8f93acd0fc83d97e9a59a1bfcf1feb1dd61c76175f27d2939975eeea
-dda484d1f131ef03fda4b90bc134f578fe34b0065845c8dad7861475004581b7
+7b036c6f22b9d0397c27c448cdeb07a33a5f9273a07305dac808d12f23ec0e06
+b42fc78b6fb8eeeb629d138df332c72b4fa15d5885d0dc1c0afac33b9becc2a5
+d7c86706f5817aa718cd1cfad03233bcd64a7789fd9422d3b17af6823a7e6ac6
   "
 
 for WALLET in ${WALLETS} ; do
