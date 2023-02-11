@@ -12,8 +12,8 @@ bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/tools/main/docker.sh
 sudo apt install ncdu tmux htop screen -y
 
 # for minima
-apt install openjdk-11-jre-headless curl jq -y
-
+apt install openjdk-11-jre-headless curl jq speedtest-cli -y
+ 
 # install proxy for adspower
 bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/proxy_for_antick.sh)
 
