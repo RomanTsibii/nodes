@@ -12,6 +12,8 @@ kysor valaccounts create \
 --storage-priv "$(cat ~/.kysor/arweave.json)" \
 --metrics
 
+sed -i -e 's/metricsPort = "8080"/metricsPort = "10000"/' $HOME/.kysor/valaccounts/$POOL_NAME.toml
+
 tee <<EOF > /dev/null /etc/systemd/system/$SERVISE.service
 [Unit]
 Description=KYVE Protocol
@@ -26,8 +28,9 @@ LimitNOFILE=infinity
 WantedBy=multi-user.target
 EOF
 
-echo cd ~/.kysor/valaccounts/
-echo nano $SERVISE
+sudo systemctl daemon-reload && sudo systemctl enable $SERVISE && sudo systemctl restart $SERVISE
+
+echo nano .kysor/valaccounts/$SERVISE.toml
 echo "sudo systemctl daemon-reload && sudo systemctl enable $SERVISE && sudo systemctl restart $SERVISE"
 echo sudo journalctl -u $SERVISE -f -o cat
 
