@@ -1,4 +1,5 @@
 #!/bin/bash
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/massa/show_rolls.sh)
 
 source $HOME/.profile
 cd $HOME/massa/massa-client
