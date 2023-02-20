@@ -10,6 +10,7 @@ massa_wallet_address=$(./massa-client --pwd $massa_pass wallet_info | grep Addre
 ./massa-client -p $massa_pass node_start_staking  $massa_wallet_address
 
 
+:'
 while true
 do
         balance=$(./massa-client --pwd $massa_pass wallet_info | grep "Rolls" | awk '{ print $3 }' | sed 's/final=//;s/,//')
@@ -31,6 +32,7 @@ do
         done
         printf "\n"
 done
+'
 
 
 
@@ -41,7 +43,6 @@ done
 
 
 
-:'
 source $HOME/.profile
 cd $HOME/massa/massa-client
 massa_wallet_address=$(./massa-client --pwd $massa_pass wallet_info | grep Address | awk '{ print $2 }')
@@ -69,7 +70,7 @@ do
         done
         printf "\n"
 done
-'
+
 #          massa_logs=`journalctl -n 1 -u massa`
 #          if [[ $massa_logs == *"Send network event failed An error occurred during channel communication: Failed to send event"* ]]; then 
 #                  echo 'Restarting...'
