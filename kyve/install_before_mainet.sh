@@ -10,7 +10,6 @@ kysor valaccounts create \
 --name "$POOL_NAME" \
 --pool "$POOL" \
 --storage-priv "$(cat ~/.kysor/arweave.json)" \
---verbose \
 --metrics
 
 tee <<EOF > /dev/null /etc/systemd/system/$SERVISE.service
