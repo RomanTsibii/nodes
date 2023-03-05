@@ -31,7 +31,7 @@ while true
     do
       LOGS=`journalctl -o cat -u massa -n 10`
       if [[ $LOGS == *"Connected to node"* || $LOGS == *"final_state hash at slot"* ]]; then break ; fi
-      sleep_seconds 5
+      sleep_seconds 15
     done
 
 # створюємо кошель і виводимо адрес і зберігаємо
