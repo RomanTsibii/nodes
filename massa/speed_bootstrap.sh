@@ -38,7 +38,7 @@ while true
 cd $HOME/massa/massa-client
 $(./massa-client --pwd $massa_pass wallet_generate_secret_key)
 sleep_seconds 5
-echo address=$(./massa-client --pwd $massa_pass wallet_info | grep "Address" | awk '{print $2}')
+echo $(./massa-client --pwd $massa_pass wallet_info | grep "Address" | awk '{print $2}')
 
 # кидаємо адрес в стейк + вписуємо ід з діскорду
 bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/massa/add_discord_id.sh)
