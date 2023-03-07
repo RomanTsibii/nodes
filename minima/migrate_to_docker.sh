@@ -37,7 +37,7 @@ function update {
     sleep_seconds 60
     docker exec -d minima$PORT sh -c "(sleep 5; echo 'incentivecash uid:$MINIMA_UID'; sleep 5; echo 'exit') | java -cp /usr/local/minima/minima.jar org.minima.utils.MinimaRPCClient"
     docker logs --tail=5 minima$PORT
-    docker stop minima$PORT
+    #docker stop minima$PORT
     echo "-----------------------------------------INSTALED ON PORT $PORT-----------------------------------------"
   fi
 }
