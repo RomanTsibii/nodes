@@ -43,8 +43,8 @@ function update {
 }
 
 function ports01 {
-  PORTS="9001 9011 9021 9031 9041 9051 9061 9071 9081 9091"
-  #PORTS=""
+  PORTS="9021 9031 9041 9051 9061 9071 9081 9091"
+  #PORTS="9001 9011 "
   for PORT_MAIN in ${PORTS}
   do
     PRE=${PORT_MAIN:(-2)}
@@ -57,8 +57,8 @@ function ports01 {
 }
 
 function ports03 {
-  PORTS="9003 9013 9023 9033 9043 9053 9063 9073 9083 9093"
-  #PORTS=""
+  PORTS=" 9013 9023 9033 9043 9053 9063 9073 9083 9093"
+  #PORTS="9003"
   for PORT_MAIN in ${PORTS}
   do
     PRE=${PORT_MAIN:(-2)}
@@ -70,8 +70,8 @@ function ports03 {
 }
 
 function ports05 {
-  PORTS="9005 9015 9025 9035 9045 9055 9065 9075 9085 9095"
-  #PORTS=""
+  PORTS=" 9015 9025 9035 9045 9055 9065 9075 9085 9095"
+  #PORTS="9005"
   for PORT_MAIN in ${PORTS}
   do
     PRE=${PORT_MAIN:(-2)}
@@ -83,8 +83,8 @@ function ports05 {
 }
 
 function ports07 {
-  PORTS="9007 9017 9027 9037 9047 9057 9067 9077 9087 9097"
-  #PORTS=""
+  PORTS=" 9017 9027 9037 9047 9057 9067 9077 9087 9097"
+  #PORTS="9007"
   for PORT_MAIN in ${PORTS}
   do
     PRE=${PORT_MAIN:(-2)}
@@ -96,8 +96,8 @@ function ports07 {
 }
 
 function ports09 {
-  PORTS="9009 9019 9029 9039 9049 9059 9069 9079 9089"
-  #PORTS=""
+  PORTS=" 9019 9029 9039 9049 9059 9069 9079 9089"
+  #PORTS="9009"
   for PORT_MAIN in ${PORTS}
   do
     PRE=${PORT_MAIN:(-2)}
