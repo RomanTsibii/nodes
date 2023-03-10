@@ -10,4 +10,5 @@ PORT4=$((PORT+3))
 MINIMA_PASSWORD=bnbiminima
 docker run -d -e minima_mdspassword=$MINIMA_PASSWORD -e minima_server=true -v ~/minimadocker$PORT:/home/minima/data -p $PORT-$PORT4:9001-9004 --restart unless-stopped --name minima$PORT minimaglobal/minima:latest
 
-
+docker logs --tail=5 minima$PORT
+echo "docker logs --tail=5 -f minima$PORT"
