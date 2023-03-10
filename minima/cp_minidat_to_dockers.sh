@@ -54,3 +54,5 @@ wget https://github.com/RomanTsibii/nodes/raw/main/minima/iprewards-2.15.1.mds.z
       cp iprewards-2.15.1.mds.zip $DOCKER_FOLDER
     fi
   done
+apt install tree -y 
+tree minimadocker48*
