@@ -1,5 +1,5 @@
 #!/bin/bash
-# bash <(curl -s  https://raw.githubusercontent.com/RomanTsibii/nodes/main/ironfish/install.sh)
+# bash <(curl -s  https://raw.githubusercontent.com/RomanTsibii/nodes/main/ironfish/remove_and_install_with_backups.sh)
 
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_docker.sh | bash
 
@@ -58,9 +58,9 @@ sleep 5
 
 docker exec ironfish ./bin/run  status
 
-ironfish wallet:export $IRONFISH_NODENAME
+docker exec ironfish ./bin/run  wallet:export $IRONFISH_NODENAME
 
-ironfish wallet:export $IRONFISH_NODENAME --mnemonic --language=English
+docker exec ironfish ./bin/run  wallet:export $IRONFISH_NODENAME --mnemonic --language=English
 
 echo "docker-compose logs -f --tail=100"
 
