@@ -5,7 +5,7 @@ curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_dock
 
 cd $HOME
 docker-compose down -v
-docker-compose run --rm --entrypoint "./bin/run reset --confirm" ironfish
+
 rm -rf $HOME/.ironfish
 
 
