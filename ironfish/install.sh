@@ -1,10 +1,11 @@
 #!/bin/bash
-# bash <(curl -s  https://raw.githubusercontent.com/RomanTsibii/nodes/main/ironfish/install3test.sh)
+# bash <(curl -s  https://raw.githubusercontent.com/RomanTsibii/nodes/main/ironfish/install.sh)
 
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_docker.sh | bash
 
 echo "alias ironfish='docker exec ironfish ./bin/run'" >> ~/.profile
 source ~/.profile
+
 
 sudo tee <<EOF >/dev/null $HOME/docker-compose.yaml
 version: "3.3"
@@ -56,6 +57,10 @@ docker exec ironfish ./bin/run  config:set enableTelemetry true
 sleep 5
 
 docker exec ironfish ./bin/run  status
+
+ironfish wallet:export $IRONFISH_NODENAME
+
+ironfish wallet:export $IRONFISH_NODENAME --mnemonic --language=English
 
 echo "docker-compose logs -f --tail=100"
 
