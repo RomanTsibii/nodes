@@ -28,7 +28,7 @@ config_path="$HOME/massa/massa-node/base_config/config.toml"
 sed -i -e "s%retry_delay *=.*%retry_delay = 15000%; " "$config_path"
 sudo systemctl restart massa
 
-:'
+
 # почекати на норм логи
 while true
     do
@@ -45,7 +45,7 @@ echo $(./massa-client --pwd $massa_pass wallet_info | grep "Address" | awk '{pri
 
 # кидаємо адрес в стейк + вписуємо ід з діскорду
 bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/massa/add_discord_id.sh)
-'
+
 # підключаємо автопокупку ролів
 tmux kill-session -t rolls
 curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/massa/rolls.sh > rolls.sh && chmod +x rolls.sh && tmux new-session -d -s rolls './rolls.sh'
