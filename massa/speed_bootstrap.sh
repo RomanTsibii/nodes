@@ -20,12 +20,15 @@ echo "alias clientw='cd $HOME/massa/massa-client/ && $HOME/massa/massa-client/ma
 # актуальне оновлення
 bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/guides/main/massa/update.sh)
 
+cp $HOME/massa_backup19/wallet.dat $HOME/massa/massa-client/wallet.dat
+cp $HOME/massa_backup19/node_privkey.key $HOME/massa/massa-node/config/node_privkey.key
+  
 # міняємо час для швидкого конекту до пірів
 config_path="$HOME/massa/massa-node/base_config/config.toml"
 sed -i -e "s%retry_delay *=.*%retry_delay = 15000%; " "$config_path"
 sudo systemctl restart massa
 
-
+:'
 # почекати на норм логи
 while true
     do
@@ -42,7 +45,7 @@ echo $(./massa-client --pwd $massa_pass wallet_info | grep "Address" | awk '{pri
 
 # кидаємо адрес в стейк + вписуємо ід з діскорду
 bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/massa/add_discord_id.sh)
-
+'
 # підключаємо автопокупку ролів
 tmux kill-session -t rolls
 curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/massa/rolls.sh > rolls.sh && chmod +x rolls.sh && tmux new-session -d -s rolls './rolls.sh'
