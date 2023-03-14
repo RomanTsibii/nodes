@@ -2,8 +2,11 @@
 
 # bash <(curl -s  https://raw.githubusercontent.com/RomanTsibii/nodes/main/obol/reinstall.sh)
 
+apt install tree -y
+
 mkdir $HOME/backup_obol
 cp -r $HOME/charon-distributed-validator-node/.charon/ $HOME/backup_obol
+tree $HOME/backup_obol
 docker-compose -f $HOME/charon-distributed-validator-node/docker-compose.yml down -v
 
 docker rmi -f $(docker images | grep ethereum/client | awk '{print$3}')
@@ -27,6 +30,8 @@ sed -i -e 's/9100:9100/19100:9100/' $HOME/charon-distributed-validator-node/dock
 mkdir $HOME/charon-distributed-validator-node/.charon/
 cp -r $HOME/backup_obol/.charon $HOME/charon-distributed-validator-node/chmod o+rw -R $HOME/charon-distributed-validator-node
 sudo chown -R 1000:1000 $HOME/charon-distributed-validator-node/.charon/
+
+tree $HOME/charon-distributed-validator-node/.charon
 
 docker-compose -f $HOME/charon-distributed-validator-node/docker-compose.yml up -d
 
