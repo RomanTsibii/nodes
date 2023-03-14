@@ -90,7 +90,9 @@ echo "Validator Node $KYVE_NODENAME успешно установлена"
 echo "-----------------------------------------------------------------------------"
 
 
-
+echo "kyved config node tcp://127.0.0.1:10657"
+echo "journalctl -n 100 -f -u kyved -o cat"
+echo "kyved status 2>&1 | jq"
 
 
 # source .profile
