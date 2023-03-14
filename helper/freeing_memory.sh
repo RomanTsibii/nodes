@@ -10,6 +10,7 @@ docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
 #docker rmi $(docker images | grep subspace | awk '{print$3}')
 
 docker rmi $(docker images | grep aptos | awk '{print$3}')
+docker volume rm aptos-fullnode
 
 # removing all logs
 rm -rf /var/log/*
