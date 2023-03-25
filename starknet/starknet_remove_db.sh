@@ -11,3 +11,4 @@ chown -R 1000.1000 .
 docker-compose up -d
 
 du -sh $HOME/pathfinder/pathfinder
+echo "docker-compose -f $HOME/pathfinder/docker-compose.yml logs -f --tail=10"
