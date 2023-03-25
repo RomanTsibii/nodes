@@ -2,19 +2,13 @@
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/starknet/remove_db_crontab.sh)
 
 
-cat << EOF > /root/starknet_remove_db.sh
+cat << EOF > /root/starknet_remove_db_crontab.sh
 #!/bin/bash
-bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/starknet/starknet_remove_db.sh)
+bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/starknet/for_crontab.sh)
 EOF
 
-(crontab -u $USER -l ; echo "*/5 * * * * perl /root/starknet_remove_db.sh") | crontab -u $USER -
-
-BYTES=$(du -s $HOME/pathfinder/pathfinder | awk '{print$1}')
-
-if ((YTES > 53687091 ]; then
-   echo "remove starknet DB"
-    
-fi
+chmod u+x starknet_remove_db_crontab.sh
+(crontab -u $USER -l ; echo "0 3 * * * /root/starknet_remove_db_crontab.sh") | crontab -u $USER -
 
 # remove crontab
 # crontab -u $USER -l | grep -v 'starknet_remove_db.sh' | crontab -u $USER -
