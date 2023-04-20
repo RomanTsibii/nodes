@@ -10,3 +10,17 @@ docker stop $(docker ps | grep iron | tail -1 | rev | cut -d '/' -f1 | rev | awk
 docker-compose down -v
 
 docker ps | grep ironfish
+
+docker-compose down
+rm -rf .ironfish
+docker image prune -a -f
+docker-compose pull
+docker-compose up -d 
+
+
+ #
+#docker exec -it ironfish sh
+#ironfish wallet:import
+
+#source .profile
+#ironfish wallet:use $IRONFISH_NODENAME
