@@ -1,6 +1,4 @@
-chat_id1=351645047 # - @tsibaa
-chat_id2="-1001988298131" # Nodes Subscribers ЧАТ
-apitoken=6207894668:AAHkrXdFPL7VoPFdbjqVfnmhd4rQUJW5-t8
+
 ticker=IRON
 #ticker=BTC
 #ticker=ETH
