@@ -8,7 +8,8 @@ nibid config broadcast-mode block
 nibid config keyring-backend test
 nibid keys add wallet --recover
 
-mkdir contract && cd contract
+mkdir contract 
+cd contract
 wget https://github.com/NibiruChain/cw-nibiru/raw/main/artifacts-cw-plus/cw20_base.wasm
 CONTRACT_WASM="$HOME/contract/cw20_base.wasm"
 nibid tx wasm store $CONTRACT_WASM --from wallet --gas=3000000 --fees=80000unibi -y
