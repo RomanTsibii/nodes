@@ -1,3 +1,6 @@
+#!/bin/bash
+# bash <(curl -s  https://raw.githubusercontent.com/RomanTsibii/nodes/main/nibiry/smart_contract.sh)
+
 apt update
 curl -s https://get.nibiru.fi/! | bash
 nibid version
