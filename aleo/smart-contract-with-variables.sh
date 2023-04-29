@@ -5,7 +5,7 @@ PK=$1 # PRIVATE_KEY
 VK=$2 # View Key
 ADDRESS=$3 # Address
 NAME=$4 # 
-QUOTE_LINK =$5 # 
+QUOTE_LINK=$5 # 
 
 
 
