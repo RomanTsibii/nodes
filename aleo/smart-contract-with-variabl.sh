@@ -19,5 +19,5 @@ snarkos developer deploy "$NAME.aleo" \
 --query "https://vm.aleo.org/api" \
 --path "$HOME/leo_deploy/$NAME/build/" \
 --broadcast "https://vm.aleo.org/api/testnet3/transaction/broadcast" \
---fee 3000000 \
+--fee 5000000 \
 --record "$RECORD"
