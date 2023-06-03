@@ -6,7 +6,7 @@
 
 if ! grep -q UNSTAKE_SHARDEUM $HOME/.profile; then
         read -p "Set full comand for stake " UNSTAKE_SHARDEUM
-        echo 'alias STAKE_SHARDEUM='\'$UNSTAKE_SHARDEUM\' >> $HOME/.profile
+        echo 'alias UNSTAKE_SHARDEUM='\'$UNSTAKE_SHARDEUM\' >> $HOME/.profile
         source ~/.profile
 fi
 
