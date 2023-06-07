@@ -36,6 +36,7 @@ while true
 
 # створюємо кошель і виводимо адрес і зберігаємо
 cd $HOME/massa/massa-client
+sleep_seconds 15
 $(./massa-client --pwd $massa_pass wallet_generate_secret_key)
 sleep_seconds 5
 echo $(./massa-client --pwd $massa_pass wallet_info | grep "Address" | awk '{print $2}')
