@@ -24,7 +24,7 @@ bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/guides/main/massa/up
 config_path="$HOME/massa/massa-node/base_config/config.toml"
 sed -i -e "s%retry_delay *=.*%retry_delay = 15000%; " "$config_path"
 sudo systemctl restart massa
-sleep_seconds 10
+sleep_seconds 25
 
 # почекати на норм логи
 while true
