@@ -46,7 +46,7 @@ sudo systemctl restart massa
 cp $HOME/massa_backup23/wallet.dat $HOME/massa/massa-client/wallet.dat
 cp $HOME/massa_backup23/node_privkey.key $HOME/massa/massa-node/config/node_privkey.key
 sudo systemctl restart massa
-sleep_seconds 25
+sleep_seconds 35
 # почекати на норм логи
 while true
     do
