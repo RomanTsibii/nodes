@@ -50,7 +50,7 @@ sleep_seconds 35
 # почекати на норм логи
 while true
     do
-      LOGS=`journalctl -o cat -u massa -n 10`
+      LOGS=`journalctl -o cat -u massa -n 4`
       if [[ $LOGS == *"testing peer"* || $LOGS == *"final_state hash at slot"* ]]; then break ; fi
       sleep_seconds 15
     done
