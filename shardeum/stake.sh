@@ -4,6 +4,12 @@
 # PRIV_KEY=$(dialog --inputbox "Enter your private key from your testnet Shardeum node(Metamask private key) :" 0 0 "" --stdout) && clear
 # WALLET_ADDR=$(dialog --inputbox "Enter your wallet address from your testnet Shardeum node(Metamask wallet) :" 0 0 "" --stdout) && clear
 
+if ! grep -q STAKE_SHARDEUM $HOME/.profile; then
+        read -p "Set full comand for stake " STAKE_SHARDEUM
+        echo 'alias STAKE_SHARDEUM='\'$STAKE_SHARDEUM\' >> $HOME/.profile
+        source ~/.profile
+fi
+
 PRIV_KEY=$1
 WALLET_ADDR=$2
 
