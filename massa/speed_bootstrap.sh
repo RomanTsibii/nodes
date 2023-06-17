@@ -29,8 +29,8 @@ sleep_seconds 25
 # почекати на норм логи
 while true
     do
-      LOGS=`journalctl -o cat -u massa -n 4`
-      if [[ $LOGS == *"testing peer"* || $LOGS == *"final_state hash at slot"* ]]; then break ; fi
+      LOGS=`journalctl -o cat -u massa -n 3`
+      if ! [[ $LOGS == *"Successful bootstrap"* ]]; then break ; fi
       sleep_seconds 15
     done
 
