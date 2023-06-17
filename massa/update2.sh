@@ -62,3 +62,6 @@ echo $LOGS
 # підключаємо автопокупку ролів
 tmux kill-session -t rolls
 curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/massa/rolls.sh > rolls.sh && chmod +x rolls.sh && tmux new-session -d -s rolls './rolls.sh'
+
+sleep_seconds 80
+bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/massa/show_rolls.sh)
