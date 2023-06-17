@@ -55,6 +55,7 @@ while true
       sleep_seconds 15
     done
 
+echo $LOGS
 # кидаємо адрес в стейк + вписуємо ід з діскорду
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/massa/add_discord_id.sh)
 
