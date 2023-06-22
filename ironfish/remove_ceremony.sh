@@ -14,8 +14,8 @@ docker ps | grep ironfish
 docker-compose down
 rm -rf .ironfish
 docker image prune -a -f
-docker-compose pull
-docker-compose up -d 
+#docker-compose pull
+#docker-compose up -d 
 
 
  #
