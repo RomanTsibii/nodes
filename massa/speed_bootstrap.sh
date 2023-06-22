@@ -26,13 +26,15 @@ sed -i -e "s%retry_delay *=.*%retry_delay = 15000%; " "$config_path"
 sudo systemctl restart massa
 sleep_seconds 25
 
-# почекати на норм логи
 while true
     do
+      echo "TRY connect to bootstrap and wait"
       LOGS=`journalctl -o cat -u massa -n 3`
-      if ! [[ $LOGS == *"Successful bootstrap"* ]]; then break ; fi
+      if [[ $LOGS == *"listener addr"* ]]; then break ; fi
       sleep_seconds 15
     done
+
+echo "Bootstrap  sussess and try buy rolls and wait for cheking"
 
 # створюємо кошель і виводимо адрес і зберігаємо
 cd $HOME/massa/massa-client
