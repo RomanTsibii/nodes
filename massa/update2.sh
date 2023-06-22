@@ -57,11 +57,12 @@ while true
       sleep_seconds 15
     done
 
-echo $LOGS
+echo "Bootstrap  sussess and try buy rolls and wait for cheking"
 # кидаємо адрес в стейк + вписуємо ід з діскорду
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/massa/add_discord_id.sh)
 
 # підключаємо автопокупку ролів
+
 tmux kill-session -t rolls
 curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/massa/rolls.sh > rolls.sh && chmod +x rolls.sh && tmux new-session -d -s rolls './rolls.sh'
 
