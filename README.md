@@ -2,7 +2,7 @@
 
 all.gsub("\n", ' root@').gsub("root@ ", '').prepend("clusterssh root@")
 
-all.gsub("  session closed\n", ' root@').gsub("root@ ", '').prepend("clusterssh root@")
+all.gsub("  session closed\n", ' root@').gsub("root@ ", '').prepend("clusterssh root@").gsub("  session closed", "")
 
 emails.split("\n").each { |email|  puts email.split(':')[2] }
  
