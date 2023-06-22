@@ -51,7 +51,7 @@ sleep_seconds 35
 while true
     do
       LOGS=`journalctl -o cat -u massa -n 3`
-      if ! [[ $LOGS == *"Successful bootstrap"* ]]; then break ; fi
+      if [[ $LOGS == *"listener addr"* ]]; then break ; fi
       sleep_seconds 15
     done
 
