@@ -48,8 +48,10 @@ cp $HOME/massa_backup23/node_privkey.key $HOME/massa/massa-node/config/node_priv
 sudo systemctl restart massa
 sleep_seconds 35
 # почекати на норм логи
+
 while true
     do
+      echo "TRY connect to bootstrap and wait"
       LOGS=`journalctl -o cat -u massa -n 3`
       if [[ $LOGS == *"listener addr"* ]]; then break ; fi
       sleep_seconds 15
