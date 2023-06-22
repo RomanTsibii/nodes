@@ -2,6 +2,8 @@
 
 all.gsub("\n", ' root@').gsub("root@ ", '').prepend("clusterssh root@")
 
+all.gsub("  session closed\n", ' root@').gsub("root@ ", '').prepend("clusterssh root@")
+
 emails.split("\n").each { |email|  puts email.split(':')[2] }
  
 operator=["50", "66", "63", "95", "97", "99", "98"]
