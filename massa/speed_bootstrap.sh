@@ -29,9 +29,9 @@ sleep_seconds 25
 while true
     do
       echo "TRY connect to bootstrap and wait"
-      LOGS=`journalctl -o cat -u massa -n 3`
+      LOGS=`journalctl -o cat -u massa -n 5`
       if [[ $LOGS == *"listener addr"* ]]; then break ; fi
-      sleep_seconds 15
+      sleep_seconds 5
     done
 
 echo "Bootstrap  sussess and try buy rolls and wait for cheking"
