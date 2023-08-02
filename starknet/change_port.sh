@@ -9,7 +9,7 @@ docker-compose -f $HOME/pathfinder/docker-compose.yml down
 config_file="$HOME/pathfinder/docker-compose.yml"
 
 # Заменяем URL с помощью команды sed
-sed -i 's|- 9545:9545|9547:9547|' "$config_file"
+sed -i 's|- 9545:9545|- 9547:9547|' "$config_file"
 
 # Запускаємо докер старкнету
 docker-compose -f $HOME/pathfinder/docker-compose.yml up -d
