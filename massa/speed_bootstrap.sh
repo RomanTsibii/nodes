@@ -19,6 +19,9 @@ echo "alias clientw='cd $HOME/massa/massa-client/ && $HOME/massa/massa-client/ma
 
 # актуальне оновлення
 bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/guides/main/massa/update.sh)
+
+rm $HOME/massa/massa-client/wallet.dat
+rm $HOME/massa/massa-node/config/node_privkey.key
   
 # міняємо час для швидкого конекту до пірів
 config_path="$HOME/massa/massa-node/base_config/config.toml"
