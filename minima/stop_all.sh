@@ -9,5 +9,7 @@ function stop_all {
   done
 }
 
+docker stop watchtower
+
 stop_all
 docker ps | grep minima
