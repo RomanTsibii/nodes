@@ -15,7 +15,7 @@ cd $HOME
 	if [ ! -d $HOME/massa_backup26/ ]; then
 		mkdir -p $HOME/massa_backup26
 		cp $HOME/massa/massa-node/config/node_privkey.key $HOME/massa_backup26/
-		cp $HOME/massa/massa-client/wallet.dat $HOME/massa_backup26/
+		cp -r $HOME/massa/massa-client/wallets/ $HOME/massa_backup26/wallets/
 	fi
 	if [ ! -e $HOME/massa_backup26.tar.gz ]; then
 		tar cvzf massa_backup26.tar.gz massa_backup26
@@ -42,7 +42,7 @@ sudo systemctl restart massa
 #echo $(./massa-client --pwd $massa_pass wallet_info | grep "Address" | awk '{print $2}')
 
 # піднімаємо бекап
-cp $HOME/massa_backup26/wallet.dat $HOME/massa/massa-client/wallet.dat
+cp -r $HOME/massa_backup26/wallets/ $HOME/massa/massa-client/
 cp $HOME/massa_backup26/node_privkey.key $HOME/massa/massa-node/config/node_privkey.key
 sudo systemctl restart massa
 sleep_seconds 35
