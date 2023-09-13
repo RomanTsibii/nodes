@@ -1,6 +1,5 @@
 #/bin/bash
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/massa/update2.sh)
-
 # проста функція сліпу щоб не викидало з сервера
 function sleep_seconds () {
   for((sec=0; sec<"$1"; sec++))
@@ -13,13 +12,13 @@ function sleep_seconds () {
   
 # робимо бекап 
 cd $HOME
-	if [ ! -d $HOME/massa_backup25/ ]; then
-		mkdir -p $HOME/massa_backup25
-		cp $HOME/massa/massa-node/config/node_privkey.key $HOME/massa_backup25/
-		cp $HOME/massa/massa-client/wallet.dat $HOME/massa_backup25/
+	if [ ! -d $HOME/massa_backup26/ ]; then
+		mkdir -p $HOME/massa_backup26
+		cp $HOME/massa/massa-node/config/node_privkey.key $HOME/massa_backup26/
+		cp $HOME/massa/massa-client/wallet.dat $HOME/massa_backup26/
 	fi
-	if [ ! -e $HOME/massa_backup25.tar.gz ]; then
-		tar cvzf massa_backup.tar25.gz massa_backup25
+	if [ ! -e $HOME/massa_backup26.tar.gz ]; then
+		tar cvzf massa_backup26.tar.gz massa_backup26
 	fi
   
 # чистка профайлу
@@ -43,8 +42,8 @@ sudo systemctl restart massa
 #echo $(./massa-client --pwd $massa_pass wallet_info | grep "Address" | awk '{print $2}')
 
 # піднімаємо бекап
-cp $HOME/massa_backup25/wallet.dat $HOME/massa/massa-client/wallet.dat
-cp $HOME/massa_backup25/node_privkey.key $HOME/massa/massa-node/config/node_privkey.key
+cp $HOME/massa_backup26/wallet.dat $HOME/massa/massa-client/wallet.dat
+cp $HOME/massa_backup26/node_privkey.key $HOME/massa/massa-node/config/node_privkey.key
 sudo systemctl restart massa
 sleep_seconds 35
 # почекати на норм логи
