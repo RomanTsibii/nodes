@@ -4,6 +4,13 @@
 
 echo $1
 
+cd $HOME/my-single-proc-squid && docker-compose down
+cd $HOME/my-double-proc-squid && docker-compose down
+cd $HOME/my-triple-proc-squid && docker-compose down
+cd $HOME/my-quad-proc-squid && docker-compose down
+
+
+
 if [ "$1" -eq "1" ]
 then
   FOLDER_SQUID="my-single-proc-squid"
@@ -25,11 +32,7 @@ then
 fi
 
 cd $FOLDER_SQUID
-
-sqd down
-
-docker-compose down
-
+echo "sleep"
 sleep 15
 
 sqd up
