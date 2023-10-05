@@ -3,24 +3,23 @@
 # start with params (1 or 2 or 3 or 4)
 
 echo $1
-FOLDER_SQUID=$1
 
-if $1=1
+if $1="1"
 then
   FOLDER_SQUID="my-single-proc-squid"
 fi
 
-if $1=2
+if $1="2"
 then
   FOLDER_SQUID="my-double-proc-squid"
 fi
 
-if $1=3
+if $1="3"
 then
   FOLDER_SQUID="my-triple-proc-squid"
 fi
 
-if $1=4
+if $1="4"
 then
   FOLDER_SQUID="my-quad-proc-squid"
 fi
