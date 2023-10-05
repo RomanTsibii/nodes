@@ -29,7 +29,7 @@ then
   FOLDER_SQUID="my-quad-proc-squid"
 fi
 
-cd $FOLDER_SQUID
+cd $HOME/$FOLDER_SQUID
 sqd up
 npm ci
 sqd build
