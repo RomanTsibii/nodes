@@ -4,22 +4,22 @@
 
 echo $1
 
-if $1="1"
+if [ "$1" -eq "1" ]
 then
   FOLDER_SQUID="my-single-proc-squid"
 fi
 
-if $1="2"
+if [ "$1" -eq "2" ]
 then
   FOLDER_SQUID="my-double-proc-squid"
 fi
 
-if $1="3"
+if [ "$1" -eq "3" ]
 then
   FOLDER_SQUID="my-triple-proc-squid"
 fi
 
-if $1="4"
+if [ "$1" -eq "4" ]
 then
   FOLDER_SQUID="my-quad-proc-squid"
 fi
@@ -29,6 +29,8 @@ cd $FOLDER_SQUID
 sqd down
 
 docker-compose down
+
+sleep 15
 
 sqd up
 
