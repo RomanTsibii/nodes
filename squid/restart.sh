@@ -30,7 +30,7 @@ then
 fi
 
 cd $HOME/$FOLDER_SQUID
-sqd up
+docker-compose up -d
 npm ci
 sqd build
 sqd migration:apply
