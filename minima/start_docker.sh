@@ -28,4 +28,4 @@ docker run --name watchtower_runonce -e WATCHTOWER_CLEANUP=true -e WATCHTOWER_TI
 docker rm watchtower_runonce
 echo DONE
 docker ps | grep minima
-echo "docker logs -f --tail=100 minima19001"
+echo "docker logs -f --tail=100 minima$PORT"
