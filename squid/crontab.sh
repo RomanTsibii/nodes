@@ -12,8 +12,8 @@ function sleep_min () {
 
 for i in {1..50}
 do
-  sleep 30
   tmux new-session -d -s squid_restart 'bash <(curl -s  https://raw.githubusercontent.com/RomanTsibii/nodes/main/squid/restart.sh) 5'
   sleep_min 15 
   tmux kill-session -t squid_restart
+  sleep 30
 done
