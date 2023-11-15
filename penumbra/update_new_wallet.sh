@@ -3,7 +3,7 @@
 
 bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/guides/main/penumbra/update_penumbra.sh)
 pcli --version
-rm -rf /root/.local/share/pcli/custody.json /root/.local/share/pcli/pcli-view.sqlite-shm
+rm -rf /root/.local/share/pcli/custody.json /root/.local/share/pcli/pcli-view.sqlite-shm /root/.local/share/pcli/pcli-view.sqlite-wal
 
 pcli init soft-kms generate > penymbra.txt
 
