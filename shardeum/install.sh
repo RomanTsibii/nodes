@@ -328,12 +328,14 @@ cat << EOF
 
 EOF
 
-read -p "Do you want to run the web based Dashboard? (Y/n): " RUNDASHBOARD
+#read -p "Do you want to run the web based Dashboard? (Y/n): " RUNDASHBOARD
+RUNDASHBOARD="y"
 RUNDASHBOARD=$(echo "$RUNDASHBOARD" | tr '[:upper:]' '[:lower:]')
 RUNDASHBOARD=${RUNDASHBOARD:-y}
 
 if [ "$PREVIOUS_PASSWORD" != "none" ]; then
-  read -p "Do you want to change the password for the Dashboard? (y/N): " CHANGEPASSWORD
+  #read -p "Do you want to change the password for the Dashboard? (y/N): " CHANGEPASSWORD
+  CHANGEPASSWORD="n"
   CHANGEPASSWORD=$(echo "$CHANGEPASSWORD" | tr '[:upper:]' '[:lower:]')
   CHANGEPASSWORD=${CHANGEPASSWORD:-n}
 else
@@ -390,7 +392,7 @@ echo # New line after inputs.
 # echo "Password saved as:" $DASHPASS #DEBUG: TEST PASSWORD WAS RECORDED AFTER ENTERED.
 
 while :; do
-  read -p "Enter the port (1025-65536) to access the web based Dashboard (default $DASHPORT_DEFAULT): " DASHPORT
+  #read -p "Enter the port (1025-65536) to access the web based Dashboard (default $DASHPORT_DEFAULT): " DASHPORT
   DASHPORT=${DASHPORT:-$DASHPORT_DEFAULT}
   [[ $DASHPORT =~ ^[0-9]+$ ]] || { echo "Enter a valid port"; continue; }
   if ((DASHPORT >= 1025 && DASHPORT <= 65536)); then
@@ -402,7 +404,7 @@ while :; do
 done
 
 while :; do
-  read -p "If you wish to set an explicit external IP, enter an IPv4 address (default=$EXTERNALIP_DEFAULT): " EXTERNALIP
+  #read -p "If you wish to set an explicit external IP, enter an IPv4 address (default=$EXTERNALIP_DEFAULT): " EXTERNALIP
   EXTERNALIP=${EXTERNALIP:-$EXTERNALIP_DEFAULT}
 
   if [ "$EXTERNALIP" == "auto" ]; then
@@ -463,7 +465,7 @@ done
 
 while :; do
   echo "To run a validator on the Sphinx network, you will need to open two ports in your firewall."
-  read -p "This allows p2p communication between nodes. Enter the first port (1025-65536) for p2p communication (default $SHMEXT_DEFAULT): " SHMEXT
+  #read -p "This allows p2p communication between nodes. Enter the first port (1025-65536) for p2p communication (default $SHMEXT_DEFAULT): " SHMEXT
   SHMEXT=${SHMEXT:-$SHMEXT_DEFAULT}
   [[ $SHMEXT =~ ^[0-9]+$ ]] || { echo "Enter a valid port"; continue; }
   if ((SHMEXT >= 1025 && SHMEXT <= 65536)); then
@@ -471,7 +473,7 @@ while :; do
   else
     echo "Port out of range, try again"
   fi
-  read -p "Enter the second port (1025-65536) for p2p communication (default $SHMINT_DEFAULT): " SHMINT
+  #read -p "Enter the second port (1025-65536) for p2p communication (default $SHMINT_DEFAULT): " SHMINT
   SHMINT=${SHMINT:-$SHMINT_DEFAULT}
   [[ $SHMINT =~ ^[0-9]+$ ]] || { echo "Enter a valid port"; continue; }
   if ((SHMINT >= 1025 && SHMINT <= 65536)); then
