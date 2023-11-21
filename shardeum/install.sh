@@ -436,7 +436,7 @@ while :; do
 done
 
 while :; do
-  read -p "If you wish to set an explicit internal IP, enter an IPv4 address (default=$INTERNALIP_DEFAULT): " INTERNALIP
+  #read -p "If you wish to set an explicit internal IP, enter an IPv4 address (default=$INTERNALIP_DEFAULT): " INTERNALIP
   INTERNALIP=${INTERNALIP:-$INTERNALIP_DEFAULT}
 
   if [ "$INTERNALIP" == "auto" ]; then
