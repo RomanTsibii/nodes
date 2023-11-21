@@ -589,12 +589,6 @@ if [ -f secrets.json ]; then
   docker-safe cp ./secrets.json "${CONTAINER_ID}:/home/node/app/cli/build/secrets.json"
   rm -f secrets.json
 fi
-
-docker exec -it shardeum-dashboard operator-cli start
-sleep 30
-
 tmux kill-session -t shardeum_healthcheck
 tmux new-session -d -s shardeum_healthcheck 'bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/guides/main/shardeum/health.sh)'
-sleep 10
-source $HOME/.profile
-for ((n=0;n<10;n++)); do  STAKE_SHARDEUM;  sleep 10; done
+docker exec -it shardeum-dashboard operator-cli start
