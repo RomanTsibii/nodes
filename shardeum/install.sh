@@ -293,7 +293,7 @@ if [ ! -z "${CONTAINER_ID}" ]; then
     REALLYUPGRADE=${REALLYUPGRADE:-n}
 
     if [ "$REALLYUPGRADE" == "n" ]; then
-      # exit 1
+      exit 1
     fi
   fi
 
