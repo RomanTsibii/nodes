@@ -271,28 +271,30 @@ if [ ! -z "${CONTAINER_ID}" ]; then
     # The command ran successfully
     status=$(awk '/state:/ {print $2}' <<< $status)
     if [ "$status" = "active" ] || [ "$status" = "syncing" ]; then
-      # read -p "Your node is $status and upgrading will cause the node to leave the network unexpectedly and lose the stake amount.
-      # Do you really want to upgrade now (y/N)?" REALLYUPGRADE
-      # REALLYUPGRADE=$(echo "$REALLYUPGRADE" | tr '[:upper:]' '[:lower:]')
-      # REALLYUPGRADE=${REALLYUPGRADE:-n}
+      #read -p "Your node is $status and upgrading will cause the node to leave the network unexpectedly and lose the stake amount.
+      #Do you really want to upgrade now (y/N)?" REALLYUPGRADE
+      REALLYUPGRADE="y"
+      REALLYUPGRADE=$(echo "$REALLYUPGRADE" | tr '[:upper:]' '[:lower:]')
+      REALLYUPGRADE=${REALLYUPGRADE:-n}
 
-      # if [ "$REALLYUPGRADE" == "n" ]; then
-      #   exit 1
-      # fi
+      if [ "$REALLYUPGRADE" == "n" ]; then
+        exit 1
+      fi
     else
       echo "Validator process is not online"
     fi
   else
   
-    # read -p "The installer was unable to determine if the existing node is active.
-    # An active node unexpectedly leaving the network will lose it's stake amount.
-    # Do you really want to upgrade now (y/N)?" REALLYUPGRADE
-    # REALLYUPGRADE=$(echo "$REALLYUPGRADE" | tr '[:upper:]' '[:lower:]')
-    # REALLYUPGRADE=${REALLYUPGRADE:-n}
+    #read -p "The installer was unable to determine if the existing node is active.
+    #An active node unexpectedly leaving the network will lose it's stake amount.
+    #Do you really want to upgrade now (y/N)?" REALLYUPGRADE
+    REALLYUPGRADE="y"
+    REALLYUPGRADE=$(echo "$REALLYUPGRADE" | tr '[:upper:]' '[:lower:]')
+    REALLYUPGRADE=${REALLYUPGRADE:-n}
 
-    # if [ "$REALLYUPGRADE" == "n" ]; then
-    #   # exit 1
-    # fi
+    if [ "$REALLYUPGRADE" == "n" ]; then
+      # exit 1
+    fi
   fi
 
   docker-safe stop "${CONTAINER_ID}"
