@@ -592,3 +592,4 @@ fi
 tmux kill-session -t shardeum_healthcheck
 tmux new-session -d -s shardeum_healthcheck 'bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/guides/main/shardeum/health.sh)'
 docker exec -it shardeum-dashboard operator-cli start
+curl localhost:9001/nodeinfo | jq | grep shardeumVersion
