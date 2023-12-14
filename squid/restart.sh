@@ -9,6 +9,9 @@ cd $HOME/my-double-proc-squid && docker-compose down
 cd $HOME/my-triple-proc-squid && docker-compose down
 cd $HOME/my-quad-proc-squid && docker-compose down
 cd $HOME/my-snapshot-squid && docker-compose down
+cd $HOME/my-cryptopunks-squid && docker-compose down
+cd $HOME/my-ens-squid && docker-compose down
+cd $HOME/simple-busd-subgraph && docker-compose down
 
 if [ "$1" -eq "1" ]
 then
