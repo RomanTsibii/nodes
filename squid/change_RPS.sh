@@ -54,4 +54,4 @@ then
 fi
 
 config_path="$HOME/$FOLDER_SQUID/docker-compose.yml"
-sed -i -e "s%RPC_URL: *=.*%RPC_URL: $RPS%; " "$config_path"
+sed -i "/RPC_URL:/c\      RPC_URL: $RPS" "$config_path"
