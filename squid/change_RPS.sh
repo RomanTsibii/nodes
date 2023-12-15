@@ -1,7 +1,7 @@
 #!/bin/bash
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/squid/change_RPS.sh) FOLDER RPS
 
-RPS=$2
+RPS="$2"
 
 
 cd $HOME/my-single-proc-squid && docker-compose down
