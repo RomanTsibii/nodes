@@ -48,6 +48,22 @@ then
   FOLDER_SQUID="my-ens-squid"
 fi
 
+if [ "$1" -eq "8" ]
+then
+  FOLDER_SQUID="simple-busd-subgraph"
+  cd $HOME/$FOLDER_SQUID
+  yarn install
+  docker-compose up -d
+  sleep 300
+  yarn run randomize
+  yarn run create-local
+  yarn run deploy-local #вставити 'v0.0.1'
+  echo "v0.0.1"
+  sleep 60m
+  
+  break
+fi
+
 cd $HOME/$FOLDER_SQUID
 docker-compose up -d
 npm ci
