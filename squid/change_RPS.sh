@@ -13,4 +13,4 @@ sed -i "/RPC_URL:/c\      RPC_URL: $RPS" "$HOME/my-cryptopunks-squid/docker-comp
 sed -i "/RPC_URL:/c\      RPC_URL: $RPS" "$HOME/my-ens-squid/docker-compose.yml"
 sed -i "/RPC_URL:/c\      RPC_URL: $RPS" "$HOME/simple-busd-subgraph/docker-compose.yml"
 
-cat $config_path | grep RPC_URL:
+cat $HOME/my-ens-squid/docker-compose.yml | grep RPC_URL:
