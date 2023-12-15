@@ -4,15 +4,6 @@
 RPS="$2"
 
 
-cd $HOME/my-single-proc-squid && docker-compose down
-cd $HOME/my-double-proc-squid && docker-compose down
-cd $HOME/my-triple-proc-squid && docker-compose down
-cd $HOME/my-quad-proc-squid && docker-compose down
-cd $HOME/my-snapshot-squid && docker-compose down
-cd $HOME/my-cryptopunks-squid && docker-compose down
-cd $HOME/my-ens-squid && docker-compose down
-cd $HOME/simple-busd-subgraph && docker-compose down
-
 if [ "$1" -eq "1" ]
 then
   FOLDER_SQUID="my-single-proc-squid"
@@ -55,3 +46,4 @@ fi
 
 config_path="$HOME/$FOLDER_SQUID/docker-compose.yml"
 sed -i "/RPC_URL:/c\      RPC_URL: $RPS" "$config_path"
+cat $config_path | grep RPC_URL:
