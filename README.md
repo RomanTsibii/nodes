@@ -12,6 +12,13 @@ operator=["50", "66", "63", "95", "97", "99", "98"]
 
 ### nodes
 
+# rm logs
+
+rm -rf /var/log/syslog.2
+rm -rf /var/log/syslog.1
+rm -rf /var/log/syslog
+
+
 # subspace 
 
 bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/subspace/update.sh)
