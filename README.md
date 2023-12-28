@@ -14,9 +14,7 @@ operator=["50", "66", "63", "95", "97", "99", "98"]
 
 # rm logs
 
-rm -rf /var/log/syslog.2
-rm -rf /var/log/syslog.1
-rm -rf /var/log/syslog
+rm -rf /var/log/syslog /var/log/syslog.1 /var/log/syslog.2
 
 
 # subspace 
