@@ -1,6 +1,5 @@
 #!/bin/bash
-# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/shardeum/install.sh)
-
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/shardeum/install.sh) [password]
 
 #!/usr/bin/env bash
 set -e
