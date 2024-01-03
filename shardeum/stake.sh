@@ -18,4 +18,5 @@ sleep 40
 
 # docker exec -it -e PRIV_KEY=$PRIV_KEY shardeum-dashboard operator-cli stake 10
 docker exec -d shardeum-dashboard sh -c "(sleep 15; echo '${PRIV_KEY}'; sleep 15) | operator-cli stake 10"
+sleep 20 
 docker exec -it -e WALLET_ADDR=$WALLET_ADDR shardeum-dashboard operator-cli stake_info $WALLET_ADDR
