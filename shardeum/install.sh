@@ -241,7 +241,7 @@ EXTERNALIP_DEFAULT=auto
 INTERNALIP_DEFAULT=auto
 SHMEXT_DEFAULT=9001
 SHMINT_DEFAULT=10001
-PREVIOUS_PASSWORD=none
+PREVIOUS_PASSWORD=$1
 
 #Check if container exists
 IMAGE_NAME="registry.gitlab.com/shardeum/server:latest"
