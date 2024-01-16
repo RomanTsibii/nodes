@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# pkill -9 tmux 
 # запустити автопокупку
 # tmux new-session -d -s massa_buy_rolls_mainnet 'bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/massa/autobuy_rolls_mainet.sh) massa_password'
 
