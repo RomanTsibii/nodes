@@ -30,6 +30,7 @@ do
   if [ $int_balance -gt "99" ] ; then   
     resp=$(./massa-client -p $massa_pass buy_rolls $massa_wallet_address 1 0)
     echo "buy rolls"
+    # send Telegaram message 
     if [[ ! -z $BOT_TOKEN && $CHAT_ID ]]; then   
         send_message "Buy 100 rolls. Server IP *$HOSTNAME*"
     fi
