@@ -12,7 +12,7 @@
 NEW_INSTALL=$1 # new || all || node_name
 
 if [ -z "$NODE_OWNER" ] && [ -z "$NODENAME" ] && [ -z "$BOT_TOKEN" ] && [ -z "$CHAT_ID" ] && [ -z "$PRIVATE_ADDRESS" ] && [ -z "$MM_ADDRESS" ] && [ -z "$NODE_PASSWORD" ]; then
-  echo "break"
+  break
 fi
 
 # sleep if have some install
