@@ -1,14 +1,19 @@
 #!/bin/bash
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/install_full_pack.sh) new 
+# screen -S install_all -dm bash -c "bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/install_full_pack.sh) new "
 
-NODE_OWNER= >> $HOME/.profile
-NODENAME= >> $HOME/.profile
-BOT_TOKEN=6979653862:AAG5JsLzasCedd23d5M_6MNIq6Y0Ec3n_xk >> $HOME/.profile
-CHAT_ID=351645047 >> $HOME/.profile
-PRIVATE_ADDRESS= >> $HOME/.profile
-MM_ADDRESS= >> $HOME/.profile
-NODE_PASSWORD= >> $HOME/.profile # SHARDEUM 
-NEW_INSTALL=$1
+# NODE_OWNER= >> $HOME/.profile
+# NODENAME= >> $HOME/.profile
+# BOT_TOKEN= >> $HOME/.profile
+# CHAT_ID= >> $HOME/.profile
+# PRIVATE_ADDRESS= >> $HOME/.profile
+# MM_ADDRESS= >> $HOME/.profile
+# NODE_PASSWORD= >> $HOME/.profile # SHARDEUM HOLOGRAHP
+NEW_INSTALL=$1 # new || all || node_name
+
+if [ -z "$NODE_OWNER" ] && [ -z "$NODENAME" ] && [ -z "$BOT_TOKEN" ] && [ -z "$CHAT_ID" ] && [ -z "$PRIVATE_ADDRESS" ] && [ -z "$MM_ADDRESS" ] && [ -z "$NODE_PASSWORD" ]; then
+  echo "break"
+fi
 
 # sleep if have some install
 function wait_for_instaling {
@@ -42,7 +47,7 @@ function babylon_install {
   wait_for_instaling
   source $HOME/.profile
   # keys_babylon=$(babylond keys add wallet)
-  send_message "Node #Babylon was installed. On server *$HOSTNAME* to *$NODE_OWNER*."
+  # send_message "Node #Babylon was installed. On server *$HOSTNAME* to *$NODE_OWNER*."
   # send_message "You keys *$keys_babylon*"
 }
 
@@ -121,7 +126,7 @@ function elixir_install {
   screen -S install -X stuff $'\n' # press enter
   sleep 5
   wait_for_instaling
-  send_message "Node Elixir was installed. On server *$HOSTNAME* to *$NODE_OWNER*.%0A You can start stake and get role Alchemist(T2)"
+  # send_message "Node Elixir was installed. On server *$HOSTNAME* to *$NODE_OWNER*.%0A You can start stake and get role Alchemist(T2)"
 }
 
 # holograph
@@ -156,7 +161,12 @@ function holograph_install {
 }
 
 function bevm_install {
-
+  screen -S install -dm bash -c "bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/guides/main/bevm/install.sh)"
+  sleep 15
+  screen -S install -X stuff "$MM_ADDRESS" # MM_ADDRESS
+  sleep 2
+  screen -S install -X stuff $'\n' # press enter
+  wait_for_instaling
 }
 
 bevm_install
