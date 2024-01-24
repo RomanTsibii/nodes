@@ -54,7 +54,8 @@ function babylon_install {
 
 # masa
 function masa_install {
-  bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/guides/main/masa/install.sh)
+  screen -S install -dm bash -c "bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/guides/main/masa/install.sh)"
+  wait_for_instaling
   sleep 10
   MASA_PRIVATE=$(cat $HOME/.masa/masa_oracle_key.ecdsa)
   send_message "Node #Masa was installed. On server *$HOSTNAME* to *$NODE_OWNER*.%0AYour node private *$MASA_PRIVATE*"
@@ -111,7 +112,6 @@ function shardeum_install {
 
 # elixir
 function elixir_install {
-  
   screen -S install -dm bash -c "bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/guides/main/elixir/install.sh)"
   sleep 15 
   screen -S install -X stuff "$NODENAME" # validator name
