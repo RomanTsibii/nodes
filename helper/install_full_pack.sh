@@ -11,6 +11,7 @@
 # NODE_PASSWORD= >> $HOME/.profile # SHARDEUM HOLOGRAHP
 NEW_INSTALL=$1 # new || all || node_name
 
+source $HOME/.profile
 if [ -z "$NODE_OWNER" ] && [ -z "$NODENAME" ] && [ -z "$BOT_TOKEN" ] && [ -z "$CHAT_ID" ] && [ -z "$PRIVATE_ADDRESS" ] && [ -z "$MM_ADDRESS" ] && [ -z "$NODE_PASSWORD" ]; then
   break
 fi
