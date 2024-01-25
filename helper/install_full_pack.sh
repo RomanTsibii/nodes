@@ -60,7 +60,8 @@ function masa_install {
   wait_for_instaling
   sleep 10
   MASA_PRIVATE=$(cat $HOME/.masa/masa_oracle_key.ecdsa)
-  send_message "Node #Masa was installed. On server *$HOSTNAME* to *$NODE_OWNER*.%0AYour node private *$MASA_PRIVATE*"
+  PEER_ID=$(journalctl -u masa | grep "Starting node with ID" | awk -F'/' '{print $NF}' | tr -d '"')
+  send_message "Node #Masa was installed. On server *$HOSTNAME* to *$NODE_OWNER*.%0AYour node private *$MASA_PRIVATE*%0APEER_ID = *$PEER_ID*"
 }
 
 # penumbra
@@ -112,6 +113,7 @@ function shardeum_install {
   sleep 2400
   screen -S install -X stuff $'\n' # press enter: node installed
   # wait_for_instaling
+  send_message "Node #Shardeum was installed. On server *$HOSTNAME* to *$NODE_OWNER*.%0A"
 }
 
 # elixir
