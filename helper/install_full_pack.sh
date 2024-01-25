@@ -61,7 +61,7 @@ function masa_install {
   sleep 10
   MASA_PRIVATE=$(cat $HOME/.masa/masa_oracle_key.ecdsa)
   PEER_ID=$(journalctl -u masa | grep "Starting node with ID" | awk -F'/' '{print $NF}' | tr -d '"')
-  send_message "Node #Masa was installed. On server *$HOSTNAME* to *$NODE_OWNER*.%0AYour node private *$MASA_PRIVATE*%0APEER_ID = *$PEER_ID*"
+  send_message "Node #Masa was installed. On server *$HOSTNAME* to *$NODE_OWNER*.%0AYour node private *$MASA_PRIVATE* %0APeer id *$PEER_ID*"
 }
 
 # penumbra
