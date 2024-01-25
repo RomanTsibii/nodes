@@ -9,7 +9,7 @@
 # PRIVATE_ADDRESS= >> $HOME/.profile
 # MM_ADDRESS= >> $HOME/.profile
 # NODE_PASSWORD= >> $HOME/.profile # SHARDEUM HOLOGRAHP
-NEW_INSTALL=$1 # new || all || node_name
+INSTALL_PARAMS=$1 # new-all || all || babylon || masa || penumbra || shardeum || elixir || holograph || bevm
 
 source $HOME/.profile
 if [ -z "$NODE_OWNER" ] && [ -z "$NODENAME" ] && [ -z "$BOT_TOKEN" ] && [ -z "$CHAT_ID" ] && [ -z "$PRIVATE_ADDRESS" ] && [ -z "$MM_ADDRESS" ] && [ -z "$NODE_PASSWORD" ]; then
@@ -40,6 +40,7 @@ function send_message {
 
 # Babylon indstall
 function babylon_install {
+  echo "Start install Babylon"
   screen -S install -dm bash -c "bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/guides/main/babylon/install.sh)"
   sleep 10
   screen -S install -X stuff "$NODENAME" # set node name
@@ -54,6 +55,7 @@ function babylon_install {
 
 # masa
 function masa_install {
+  echo "Start install masa"
   screen -S install -dm bash -c "bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/guides/main/masa/install.sh)"
   wait_for_instaling
   sleep 10
@@ -63,10 +65,11 @@ function masa_install {
 
 # penumbra
 function penumbra_install {
+  echo "Start install penumbra"
   apt update && apt install curl -y
   bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/guides/main/penumbra/install_penumbra.sh)
   sleep 1 
-  if [ "$NEW_INSTALL" = "new" ]; then
+  if [[ "$INSTALL_PARAMS" == *"new"* ]]; then
       touch penumbra.txt
       pcli init soft-kms generate >> penymbra.txt
       pcli view address >> penymbra.txt
@@ -79,6 +82,7 @@ function penumbra_install {
 
 # shardeum
 function shardeum_install {
+  echo "Start install shardeum"
   # add stake variables
   STAKE_SHARDEUM="bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/shardeum/stake.sh) $PRIVATE_ADDRESS $MM_ADDRESS"
   echo 'alias STAKE_SHARDEUM='\'$STAKE_SHARDEUM\' >> $HOME/.profile 
@@ -112,6 +116,7 @@ function shardeum_install {
 
 # elixir
 function elixir_install {
+  echo "Start install elixir"
   screen -S install -dm bash -c "bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/guides/main/elixir/install.sh)"
   sleep 15 
   screen -S install -X stuff "$NODENAME" # validator name
@@ -132,6 +137,7 @@ function elixir_install {
 
 # holograph
 function holograph_install {
+  echo "Start install holograph"
   bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/tools/main/main.sh)
   bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/tools/main/node.sh)
   npm install -g @holographxyz/cli
@@ -162,6 +168,7 @@ function holograph_install {
 }
 
 function bevm_install {
+  echo "Start install bevm"
   screen -S install -dm bash -c "bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/guides/main/bevm/install.sh)"
   sleep 15
   screen -S install -X stuff "$MM_ADDRESS" # MM_ADDRESS
@@ -170,10 +177,14 @@ function bevm_install {
   wait_for_instaling
 }
 
-bevm_install
-masa_install
-babylon_install
-penumbra_install
-elixir_install
-holograph_install
-shardeum_install
+
+# params all-new,  all, bevm, masa, babylon, penumbra, elixir, holograph, shardeum
+if [[ $INSTALL_PARAMS == "bevm"      || $INSTALL_PARAMS == *"all"* ]]; then bevm_install      ; fi
+if [[ $INSTALL_PARAMS == "masa"      || $INSTALL_PARAMS == *"all"* ]]; then masa_install      ; fi
+if [[ $INSTALL_PARAMS == "babylon"   || $INSTALL_PARAMS == *"all"* ]]; then babylon_install   ; fi
+if [[ $INSTALL_PARAMS == "penumbra"  || $INSTALL_PARAMS == *"all"* ]]; then penumbra_install  ; fi
+if [[ $INSTALL_PARAMS == "elixir"    || $INSTALL_PARAMS == *"all"* ]]; then elixir_install    ; fi
+if [[ $INSTALL_PARAMS == "holograph" || $INSTALL_PARAMS == *"all"* ]]; then holograph_install ; fi
+if [[ $INSTALL_PARAMS == "shardeum"  || $INSTALL_PARAMS == *"all"* ]]; then shardeum_install  ; fi
+
+
