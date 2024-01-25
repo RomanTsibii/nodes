@@ -49,7 +49,7 @@ function babylon_install {
   wait_for_instaling
   source $HOME/.profile
   # keys_babylon=$(babylond keys add wallet)
-  # send_message "Node #Babylon was installed. On server *$HOSTNAME* to *$NODE_OWNER*."
+  # send_message "Node #Babylon installed. On server *$HOSTNAME* to *$NODE_OWNER*."
   # send_message "You keys *$keys_babylon*"
 }
 
@@ -61,7 +61,7 @@ function masa_install {
   sleep 10
   MASA_PRIVATE=$(cat $HOME/.masa/masa_oracle_key.ecdsa)
   PEER_ID=$(journalctl -u masa | grep "Starting node with ID" | awk -F'/' '{print $NF}' | tr -d '"')
-  send_message "Node #Masa was installed. On server *$HOSTNAME* to *$NODE_OWNER*.%0AYour node private *$MASA_PRIVATE* %0APeer id *$PEER_ID*"
+  send_message "Node #Masa installed. On server *$HOSTNAME* to *$NODE_OWNER*.%0AYour node private *$MASA_PRIVATE* %0APeer id *$PEER_ID*"
 }
 
 # penumbra
@@ -75,9 +75,9 @@ function penumbra_install {
       pcli init soft-kms generate >> penymbra.txt
       pcli view address >> penymbra.txt
       pemumbra_keys=$(cat penymbra.txt)
-      send_message "Node #Penumbra was installed. On server *$HOSTNAME* to *$NODE_OWNER*.%0AYou keys *$pemumbra_keys*"
+      send_message "Node #Penumbra installed. On server *$HOSTNAME* to *$NODE_OWNER*.%0AYou keys *$pemumbra_keys*"
   else
-      send_message "Node #Penumbra was installed. On server *$HOSTNAME* to *$NODE_OWNER*.%0AImport old memo"
+      send_message "Node #Penumbra installed. On server *$HOSTNAME* to *$NODE_OWNER*.%0AImport old memo"
   fi
 }
 
@@ -113,7 +113,7 @@ function shardeum_install {
   sleep 2400
   screen -S install -X stuff $'\n' # press enter: node installed
   # wait_for_instaling
-  send_message "Node #Shardeum was installed. On server *$HOSTNAME* to *$NODE_OWNER*.%0A"
+  send_message "Node #Shardeum installed. On server *$HOSTNAME* to *$NODE_OWNER*.%0A"
 }
 
 # elixir
@@ -134,7 +134,7 @@ function elixir_install {
   screen -S install -X stuff $'\n' # press enter
   sleep 5
   wait_for_instaling
-  # send_message "Node Elixir was installed. On server *$HOSTNAME* to *$NODE_OWNER*.%0A You can start stake and get role Alchemist(T2)"
+  # send_message "Node Elixir installed. On server *$HOSTNAME* to *$NODE_OWNER*.%0A You can start stake and get role Alchemist(T2)"
 }
 
 # holograph
