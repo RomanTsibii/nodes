@@ -179,12 +179,12 @@ function bevm_install {
 
 
 # params all-new,  all, bevm, masa, babylon, penumbra, elixir, holograph, shardeum
-if [[ $INSTALL_PARAMS == "bevm"      || $INSTALL_PARAMS == *"all"* ]]; then bevm_install      ; fi
-if [[ $INSTALL_PARAMS == "masa"      || $INSTALL_PARAMS == *"all"* ]]; then masa_install      ; fi
-if [[ $INSTALL_PARAMS == "babylon"   || $INSTALL_PARAMS == *"all"* ]]; then babylon_install   ; fi
-if [[ $INSTALL_PARAMS == "penumbra"  || $INSTALL_PARAMS == *"all"* ]]; then penumbra_install  ; fi
-if [[ $INSTALL_PARAMS == "elixir"    || $INSTALL_PARAMS == *"all"* ]]; then elixir_install    ; fi
-if [[ $INSTALL_PARAMS == "holograph" || $INSTALL_PARAMS == *"all"* ]]; then holograph_install ; fi
-if [[ $INSTALL_PARAMS == "shardeum"  || $INSTALL_PARAMS == *"all"* ]]; then shardeum_install  ; fi
+if [[ $INSTALL_PARAMS == *"bevm"*      || $INSTALL_PARAMS == *"all"* ]]; then bevm_install      ; fi
+if [[ $INSTALL_PARAMS == *"masa"*      || $INSTALL_PARAMS == *"all"* ]]; then masa_install      ; fi
+if [[ $INSTALL_PARAMS == *"babylon"*   || $INSTALL_PARAMS == *"all"* ]]; then babylon_install   ; fi
+if [[ $INSTALL_PARAMS == *"penumbra"*  || $INSTALL_PARAMS == *"all"* ]]; then penumbra_install  ; fi
+if [[ $INSTALL_PARAMS == *"elixir"*    || $INSTALL_PARAMS == *"all"* ]]; then elixir_install    ; fi
+if [[ $INSTALL_PARAMS == *"holograph"* || $INSTALL_PARAMS == *"all"* ]]; then holograph_install ; fi
+if [[ $INSTALL_PARAMS == *"shardeum"*  || $INSTALL_PARAMS == *"all"* ]]; then shardeum_install  ; fi
 
 
