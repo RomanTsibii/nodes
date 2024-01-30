@@ -4,12 +4,12 @@
 # 
 
 massa_pass=$1
-CHAT_ID=$2
-BOT_TOKEN=$3
+CHAT_I=$2
+BOT_TOKE=$3
 HOSTNAME=$(hostname -I | awk '{ print $1 }')
 
 function send_message {
-    curl -s -X POST https://api.telegram.org/bot$BOT_TOKEN/sendMessage -d chat_id=$CHAT_ID -d text="$1" -d parse_mode="markdown" > /dev/null
+    curl -s -X POST https://api.telegram.org/bot$BOT_TOKE/sendMessage -d chat_id=$CHAT_I -d text="$1" -d parse_mode="markdown" > /dev/null
 }
 
 source $HOME/.profile
