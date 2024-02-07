@@ -183,6 +183,16 @@ function bevm_install {
   wait_for_instaling
 }
 
+function bool_install {
+  echo "Start install bool"
+  screen -S install -dm bash -c "bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/guides/main/boolnetwork/install.sh)"
+  sleep 20
+  screen -S install -X stuff "$NODENAME" # MM_ADDRESS
+  sleep 2
+  screen -S install -X stuff $'\n' # press enter
+  wait_for_instaling
+}
+
 
 # params all-new,  all, bevm, masa, babylon, penumbra, elixir, holograph, shardeum
 if [[ $INSTALL_PARAMS == *"bevm"*      || $INSTALL_PARAMS == *"all"* ]]; then bevm_install      ; fi
@@ -190,7 +200,9 @@ if [[ $INSTALL_PARAMS == *"masa"*      || $INSTALL_PARAMS == *"all"* ]]; then ma
 if [[ $INSTALL_PARAMS == *"babylon"*   || $INSTALL_PARAMS == *"all"* ]]; then babylon_install   ; fi
 if [[ $INSTALL_PARAMS == *"penumbra"*  || $INSTALL_PARAMS == *"all"* ]]; then penumbra_install  ; fi
 if [[ $INSTALL_PARAMS == *"elixir"*    || $INSTALL_PARAMS == *"all"* ]]; then elixir_install    ; fi
+if [[ $INSTALL_PARAMS == *"bool"*      || $INSTALL_PARAMS == *"all"* ]]; then bool_install      ; fi
 if [[ $INSTALL_PARAMS == *"holograph"* || $INSTALL_PARAMS == *"all"* ]]; then holograph_install ; fi
 if [[ $INSTALL_PARAMS == *"shardeum"*  || $INSTALL_PARAMS == *"all"* ]]; then shardeum_install  ; fi
+
 
 
