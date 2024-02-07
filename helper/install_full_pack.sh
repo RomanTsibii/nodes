@@ -41,6 +41,7 @@ function send_message {
 # Babylon indstall
 function babylon_install {
   echo "Start install Babylon"
+  rm -rf /root/.babylond/config/genesis.json
   screen -S install -dm bash -c "bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/guides/main/babylon/install.sh)"
   sleep 10
   screen -S install -X stuff "$NODENAME" # set node name
