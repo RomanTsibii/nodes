@@ -10,4 +10,4 @@ function send_message {
 
 dusk_keys=$(cat $HOME/rusk/dusk/seed.txt)
 dusk_address=$(docker compose -f $HOME/rusk/docker-compose.yml run dusk bash -c "/opt/dusk/bin/rusk-wallet --state http://127.0.0.1:8980  --password \$DUSK_CONSENSUS_KEYS_PASS addresses")
-send_message "Node #Dusk. On server *$HOSTNAME* to *$NODE_OWNER*.%0AYou keys: %0A*$dusk_keys* %0AYou address%0A *$dusk_address*"
+send_message "Node #Dusk. On server *$HOSTNAME* to *$NODE_OWNER*.%0AYou keys: %0A\`$dusk_keys\` %0AYou address%0A \`$dusk_address\`"
