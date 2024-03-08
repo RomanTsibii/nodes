@@ -1,0 +1,116 @@
+[
+  {
+    "type": "useExcel",
+    "config": {
+      "path": "C:\\Users\\roman\\Downloads\\ads auto faucet.xlsx",
+      "variableList": [
+        "serial_number",
+        "mm_address",
+        "penumbra_address"
+      ],
+      "isSkip": "1",
+      "remark": "",
+      "variable": "FAUCET"
+    }
+  },
+  {
+    "type": "newPage",
+    "config": {}
+  },
+  {
+    "type": "gotoUrl",
+    "config": {
+      "url": "https://discord.com/channels/933959587462254612/1070780355931541514",
+      "timeout": 30000,
+      "remark": ""
+    }
+  },
+  {
+    "type": "waitTime",
+    "config": {
+      "timeoutType": "fixedValue",
+      "timeout": 15000,
+      "timeoutMin": 1000,
+      "timeoutMax": 300000,
+      "remark": ""
+    }
+  },
+  {
+    "type": "getActiveElement",
+    "config": {
+      "variable": "inputpass",
+      "remark": ""
+    }
+  },
+  {
+    "type": "forTimes",
+    "config": {
+      "times": 3,
+      "variableIndex": "for_times_index",
+      "remark": "",
+      "hiddenChildren": false,
+      "children": [
+        {
+          "type": "inputContent",
+          "config": {
+            "selector": "",
+            "serialType": "fixedValue",
+            "selectorType": "element",
+            "element": "inputpass",
+            "serial": 1,
+            "serialMin": 1,
+            "serialMax": 50,
+            "intervals": 30,
+            "content": "/faucet ${mm_address}",
+            "isRandom": "1",
+            "randomContent": "/faucet ${mm_address}",
+            "remark": "",
+            "randomInputNum": {
+              "min": 0.1,
+              "max": 10
+            },
+            "selectorRadio": "CSS"
+          }
+        },
+        {
+          "type": "keyboard",
+          "config": {
+            "type": "ArrowRight",
+            "remark": ""
+          }
+        },
+        {
+          "type": "waitTime",
+          "config": {
+            "timeoutType": "fixedValue",
+            "timeout": 8000,
+            "timeoutMin": 1000,
+            "timeoutMax": 300000,
+            "remark": "",
+            "_copyItemIndex": "0_2",
+            "_copyItemType": ""
+          }
+        },
+        {
+          "type": "keyboard",
+          "config": {
+            "type": "Enter",
+            "remark": ""
+          }
+        }
+      ]
+    }
+  },
+  {
+    "type": "waitTime",
+    "config": {
+      "timeoutType": "fixedValue",
+      "timeout": 8000,
+      "timeoutMin": 1000,
+      "timeoutMax": 300000,
+      "remark": "",
+      "_copyItemIndex": "0_5_2",
+      "_copyItemType": "children_children"
+    }
+  }
+]
