@@ -98,10 +98,10 @@
   {
     "type": "waitTime",
     "config": {
-      "timeoutType": "fixedValue",
+      "timeoutType": "randomInterval",
       "timeout": 60000,
-      "timeoutMin": 1000,
-      "timeoutMax": 300000,
+      "timeoutMin": 5000,
+      "timeoutMax": 400000,
       "remark": "",
       "_copyItemIndex": "0_5_2",
       "_copyItemType": "children_children"
