@@ -1,0 +1,110 @@
+[
+  {
+    "type": "useExcel",
+    "config": {
+      "path": "C:\\Users\\roman\\Downloads\\avail Ads auto faucet.xlsx",
+      "variableList": [
+        "serial_number",
+        "mm_address"
+      ],
+      "isSkip": "1",
+      "remark": "",
+      "variable": "FAUCET"
+    }
+  },
+  {
+    "type": "newPage",
+    "config": {}
+  },
+  {
+    "type": "gotoUrl",
+    "config": {
+      "url": "https://discord.com/channels/1065831819154563132/1171414018028740698",
+      "timeout": 30000,
+      "remark": ""
+    }
+  },
+  {
+    "type": "waitTime",
+    "config": {
+      "timeoutType": "fixedValue",
+      "timeout": 15000,
+      "timeoutMin": 1000,
+      "timeoutMax": 300000,
+      "remark": ""
+    }
+  },
+  {
+    "type": "getActiveElement",
+    "config": {
+      "variable": "inputpass",
+      "remark": ""
+    }
+  },
+  {
+    "type": "forTimes",
+    "config": {
+      "times": 1,
+      "variableIndex": "for_times_index",
+      "remark": "",
+      "hiddenChildren": false,
+      "children": [
+        {
+          "type": "inputContent",
+          "config": {
+            "selectorRadio": "CSS",
+            "selector": "",
+            "serialType": "fixedValue",
+            "selectorType": "element",
+            "element": "inputpass",
+            "serial": 1,
+            "serialMin": 1,
+            "serialMax": 50,
+            "intervals": 50,
+            "content": "/deposit ${mm_address}",
+            "isRandom": "1",
+            "randomContent": "/deposit ${mm_address}",
+            "randomInputNum": {
+              "min": 0.1,
+              "max": 10
+            },
+            "remark": "",
+            "_copyItemIndex": "0_5_0",
+            "_copyItemType": "children_children"
+          }
+        },
+        {
+          "type": "waitTime",
+          "config": {
+            "timeoutType": "fixedValue",
+            "timeout": 50000,
+            "timeoutMin": 1000,
+            "timeoutMax": 300000,
+            "remark": "",
+            "_copyItemIndex": "0_5_1",
+            "_copyItemType": "children_children"
+          }
+        },
+        {
+          "type": "keyboard",
+          "config": {
+            "type": "Enter",
+            "remark": ""
+          }
+        }
+      ]
+    }
+  },
+  {
+    "type": "waitTime",
+    "config": {
+      "timeoutType": "fixedValue",
+      "timeout": 60000,
+      "timeoutMin": 1000,
+      "timeoutMax": 300000,
+      "remark": "",
+      "_copyItemIndex": "0_5_2",
+      "_copyItemType": "children_children"
+    }
+  }
+]
