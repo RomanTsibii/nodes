@@ -17,16 +17,13 @@ validaaddress[1]=$(pcli query validator list | grep penumbravalid | awk '{print 
 validaaddress[2]=$(pcli query validator list | grep penumbravalid | awk '{print $6}' | shuf -n 1) # одна рандомка адреса валідатора серед всіх
 
 random_loop=$((1 + RANDOM % 3))
-for i in $(seq $random_loop); do 
-  size=${#validaaddress[@]}
-  index=$(($RANDOM % $size))
-  echo ${validaaddress[$index]}
-  
-  size1=${#array[@]}
+size1=${#array[@]}
+for i in $(seq $random_loop); do  
   index=$(($RANDOM % $size1))
   echo ${array[$index]}
 
-  pcli tx delegate ${array[$index]} --to ${validaaddress[$index]}
+  # pcli tx delegate ${array[$index]} --to ${validaaddress[$index]}
+ pcli tx delegate ${array[$index]} --to $(pcli query validator list | grep penumbravalid | awk '{print $6}' | shuf -n 1)
 done
 sleep 5
 pcli view staked
