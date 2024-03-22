@@ -2,8 +2,31 @@
 # bash <(curl -s  https://raw.githubusercontent.com/RomanTsibii/nodes/main/penumbra/update.sh)
 
 bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/guides/main/penumbra/update_penumbra.sh)
-pcli view address
-pcli tx delegate 35penumbra --to penumbravalid1ufwmfmtsgfp952z4cnyg9yh9a53642kvq7828vkjjcskdartnqpqzr9zx6
-pcli tx delegate 35penumbra --to penumbravalid19jp2gwykhmeekn64snzfl6kvq9dwnqel2vdjcqmtpl5wgfdn6c8q47kn66
-pcli tx delegate 5penumbra --to penumbravalid1emegmxe5yr3xuq4fldmj4sjd55wus4hcsey9tc3mzqycuccc65gsqzyq0z
+
+array[0]="5penumbra"
+array[1]="10penumbra"
+array[2]="15penumbra"
+array[3]="20penumbra"
+array[4]="25penumbra"
+array[5]="30penumbra"
+array[6]="35penumbra"
+array[7]="40penumbra"
+
+validaaddress[0]=$(pcli query validator list | grep penumbravalid | awk '{print $6}' | shuf -n 1) # одна рандомка адреса валідатора серед всіх
+validaaddress[1]=$(pcli query validator list | grep penumbravalid | awk '{print $6}' | shuf -n 1) # одна рандомка адреса валідатора серед всіх
+validaaddress[2]=$(pcli query validator list | grep penumbravalid | awk '{print $6}' | shuf -n 1) # одна рандомка адреса валідатора серед всіх
+
+random_loop=$((1 + RANDOM % 3))
+for i in $(seq $random_loop); do 
+  size=${#validaaddress[@]}
+  index=$(($RANDOM % $size))
+  echo ${validaaddress[$index]}
+  
+  size1=${#array[@]}
+  index=$(($RANDOM % $size1))
+  echo ${array[$index]}
+
+  pcli tx delegate ${array[$index]} --to ${validaaddress[$index]}
+done
+sleep 5
 pcli view staked
