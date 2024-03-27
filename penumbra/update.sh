@@ -12,10 +12,6 @@ array[5]="30penumbra"
 array[6]="35penumbra"
 array[7]="40penumbra"
 
-validaaddress[0]=$(pcli query validator list | grep penumbravalid | awk '{print $6}' | shuf -n 1) # одна рандомка адреса валідатора серед всіх
-validaaddress[1]=$(pcli query validator list | grep penumbravalid | awk '{print $6}' | shuf -n 1) # одна рандомка адреса валідатора серед всіх
-validaaddress[2]=$(pcli query validator list | grep penumbravalid | awk '{print $6}' | shuf -n 1) # одна рандомка адреса валідатора серед всіх
-
 random_loop=$((1 + RANDOM % 3))
 size1=${#array[@]}
 for i in $(seq $random_loop); do  
