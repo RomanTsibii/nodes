@@ -10,6 +10,8 @@
 # MM_ADDRESS= >> $HOME/.profile
 # NODE_PASSWORD= >> $HOME/.profile # SHARDEUM HOLOGRAHP
 INSTALL_PARAMS=$1 # new-all || all || babylon || masa || penumbra || shardeum || elixir || holograph || bevm
+screen -S wait_for_instaling -X quit
+screen -S install -X quit
 
 source $HOME/.profile
 if [ -z "$NODE_OWNER" ] && [ -z "$NODENAME" ] && [ -z "$BOT_TOKEN" ] && [ -z "$CHAT_ID" ] && [ -z "$PRIVATE_ADDRESS" ] && [ -z "$MM_ADDRESS" ] && [ -z "$NODE_PASSWORD" ]; then
@@ -194,6 +196,7 @@ function bool_install {
 }
 
 function avail_install {
+  screen -S some_name -X quit
   screen -dmS avail -L
   screen -S avail -X colon "logfile flush 0^M"
   
