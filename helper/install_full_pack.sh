@@ -196,7 +196,7 @@ function bool_install {
 }
 
 function avail_install {
-  screen -S some_name -X quit
+  screen -S avail -X quit
   screen -dmS avail -L
   screen -S avail -X colon "logfile flush 0^M"
   
