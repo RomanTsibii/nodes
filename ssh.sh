@@ -1,0 +1,5 @@
+#!/bin/bash
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/ssh.sh)
+
+mkdir -p ~/.ssh
+echo ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDRQQPpkvAkJVc8gBpgtQbH1LLQbg2RSI9vv9ZhPCamzZZv+AP0JXbBYhWIqUn/Wiw+XyGKRH827/NCPdo4UITdRfuAqyD8+9CtlVk1OXRsG1Q8gqCjnNrSPR1HFxtBLehz0xko18fJB2n9tqH9AopZvGBelXl69iybn0Jak36U6pdOPvmuLckvGoIrF4IKusx0H+lr80yZeV5IWJQgYsElFoLo3daAZFYyAdvaD7q4NN9F6IqgaD9hH3/msqYXe77/XSG4QUZq/VNj/8RQ9LOv9f8RSGhtIX4ayYEBfFzhfxkivyOHMDSPXXq68xJ4JHP0skeZ0RswhhR8EVlFRM55Wjk8qkl7G2LSItQwu/YF1rwpHu6Esx+CDGs5lR9xASFeQQfLHdVE8eImWLDgJQp1j+hf1X37kBXnGUFm5Yg2IJ3Rwf0YA+h6pJWwshV1cnqqrnRrkQHp2uCDYkk+DDUtbR39QRadjIyuDIXTwuKyugeJwg01D1aoR8bFNRFSZrc= ubuntu@ro_server_main >> ~/.ssh/authorized_keys
