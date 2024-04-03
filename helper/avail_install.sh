@@ -22,3 +22,5 @@ screen -S avail -X stuff $'\n' # press enter
 sleep 15
 PUBLIC=$(tail -n 1000 screenlog.0 | grep "public key:"  | awk '{print $11}')
 send_message "Node #Avail installed. On server *$HOSTNAME* to.%0AYou public key *$PUBLIC*"
+
+screen -S avail_helscheck -dm bash -c "bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/avail_helscheck.sh) "
