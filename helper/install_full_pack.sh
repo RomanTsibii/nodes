@@ -193,6 +193,19 @@ function bool_install {
   wait_for_instaling
 }
 
+function avail_install {
+  screen -dmS avail -L
+  screen -S avail -X colon "logfile flush 0^M"
+  
+  screen -S avail -X stuff "curl -sL1 avail.sh | bash"
+  screen -S avail -X stuff $'\n' # press enter
+  
+  sleep 50
+  
+  PUBLIC=$(tail -n 1000 screenlog.0 | grep "public key:"  | awk '{print $11}')
+  send_message "Node #Avail installed. On server *$HOSTNAME* to *$NODE_OWNER*.%0AYou public key *$PUBLIC*"
+}
+
 # if [[ $INSTALL_PARAMS == *"masa"*      || $INSTALL_PARAMS == *"all"* ]]; then masa_install      ; fi
 # if [[ $INSTALL_PARAMS == *"babylon"*   || $INSTALL_PARAMS == *"all"* ]]; then babylon_install   ; fi
 # params all-new,  all, bevm, masa, babylon, penumbra, elixir, holograph, shardeum
@@ -201,6 +214,8 @@ if [[ $INSTALL_PARAMS == *"bevm"*      || $INSTALL_PARAMS == *"all"* ]]; then be
 # if [[ $INSTALL_PARAMS == *"holograph"* || $INSTALL_PARAMS == *"all"* ]]; then holograph_install ; fi
 if [[ $INSTALL_PARAMS == *"shardeum"*  || $INSTALL_PARAMS == *"all"* ]]; then shardeum_install  ; fi
 if [[ $INSTALL_PARAMS == *"elixir"*    || $INSTALL_PARAMS == *"all"* ]]; then elixir_install    ; fi
+if [[ $INSTALL_PARAMS == *"avail"*    || $INSTALL_PARAMS == *"all"* ]]; then avail_install     ; fi
+
 # if [[ $INSTALL_PARAMS == *"bool"*      || $INSTALL_PARAMS == *"all"* ]]; then bool_install      ; fi
 
 
