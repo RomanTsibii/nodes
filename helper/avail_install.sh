@@ -19,7 +19,7 @@ screen -dmS avail -L
 screen -S avail -X colon "logfile flush 0^M"  
 screen -S avail -X stuff "curl -sL1 avail.sh | bash"
 screen -S avail -X stuff $'\n' # press enter
-sleep 15
+sleep 30
 PUBLIC=$(tail -n 1000 screenlog.0 | grep "public key:"  | awk '{print $11}')
 send_message "Node #Avail installed. On server *$HOSTNAME* to.%0AYou public key *$PUBLIC*"
 
