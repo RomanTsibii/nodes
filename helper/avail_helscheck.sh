@@ -10,9 +10,13 @@ while true
     # then
     echo "restart avail" 
     screen -S avail -X quit
+    sleep 1
     screen -dmS avail -L
+    sleep 1
     screen -S avail -X colon "logfile flush 0^M"  
+    sleep 1
     screen -S avail -X stuff "curl -sL1 avail.sh | bash"
+    sleep 1
     screen -S avail -X stuff $'\n' # press enter
     # fi
     sleep 20m
