@@ -9,7 +9,6 @@ while true
     # if [ -n "$fail"  ] || [ -n $fail1 ]
     # then
     echo "restart avail" 
-    screen -S avail -X quit
     sleep 1
     screen -dmS avail -L
     sleep 1
@@ -20,5 +19,6 @@ while true
     screen -S avail -X stuff $'\n' # press enter
     # fi
     sleep 20m
+    screen -S avail -X quit
   done
   
