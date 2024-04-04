@@ -5,8 +5,8 @@
 while true
   do
     fail=$(tail -n 10 screenlog.0 | grep "Avail has been added to your profile.")
-    
-    if [ -n "$fail" ]
+    fail1=(tail -n 10 screenlog.0 | grep "Avail stopped")
+    if [ -n "$fail"  ] || [ -n $fail1 ]
     then
           echo "\$var is NOT empty"
           screen -S avail -X quit
