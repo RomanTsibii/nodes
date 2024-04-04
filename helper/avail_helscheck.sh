@@ -8,6 +8,7 @@ while true
     # fail1=(tail -n 10 screenlog.0 | grep "Avail stopped")
     # if [ -n "$fail"  ] || [ -n $fail1 ]
     # then
+    echo "restart avail" 
     screen -S avail -X quit
     screen -dmS avail -L
     screen -S avail -X colon "logfile flush 0^M"  
