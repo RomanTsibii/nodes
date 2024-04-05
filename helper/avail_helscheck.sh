@@ -9,7 +9,6 @@ while true
     # if [ -n "$fail"  ] || [ -n $fail1 ]
     # then
     echo "restart avail" 
-    sleep 1
     screen -dmS avail -L
     sleep 1
     screen -S avail -X colon "logfile flush 0^M"  
