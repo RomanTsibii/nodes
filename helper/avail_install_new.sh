@@ -1,6 +1,6 @@
 #!/bin/bash
-# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/avail_helscheck.sh) 
-# screen -S avail_helscheck -dm bash -c "bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/avail_helscheck.sh)"
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/avail_install_new.sh) 
+# screen -S avail_helscheck -dm bash -c "bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/avail_install_new.sh)"
 
 # 1 створити файл з кодом
 
@@ -39,3 +39,4 @@ sleep 1
 screen -S avail -X stuff $'\n' # press enter
 
 echo "tail -Fn 10 screenlog.0"
+
