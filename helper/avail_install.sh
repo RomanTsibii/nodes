@@ -1,7 +1,7 @@
 #!/bin/bash
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/avail_install.sh) 
 
-sudo apt install ncdu tmux htop screen -y
+# sudo apt install ncdu tmux htop screen -y
 
 
 # roman-ubuntu@server-main ssh 
