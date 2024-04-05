@@ -13,7 +13,6 @@ function send_message {
     curl -s -X POST https://api.telegram.org/bot$BOT_TOKEN/sendMessage -d chat_id=$CHAT_ID -d text="$1" -d parse_mode="markdown" > /dev/null
 }
 
-apt install screen -y
 screen -S avail -X quit
 screen -dmS avail -L
 screen -S avail -X colon "logfile flush 0^M"  
