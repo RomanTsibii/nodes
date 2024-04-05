@@ -19,6 +19,6 @@ while true
     screen -S avail -X stuff $'\n' # press enter
     # fi
     sleep 20m
-    screen -S avail -X quit
+    screen -XS avail quit
   done
   
