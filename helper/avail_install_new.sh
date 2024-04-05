@@ -38,5 +38,7 @@ screen -S avail -X stuff "bash availscript.sh"
 sleep 1
 screen -S avail -X stuff $'\n' # press enter
 
-echo "logs - tail -Fn 10 screenlog.0"
-echo "publick key - tail -n 1000 screenlog.0 | grep ""public key:""  | awk '{print $11}' | head -1"
+echo "logs - "
+echo "tail -Fn 10 screenlog.0"
+echo "publick key - "
+echo "tail -n 1000 screenlog.0 | grep ""public key:""  | awk '{print $11}' | head -1"
