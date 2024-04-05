@@ -13,10 +13,13 @@ function send_message {
     curl -s -X POST https://api.telegram.org/bot$BOT_TOKEN/sendMessage -d chat_id=$CHAT_ID -d text="$1" -d parse_mode="markdown" > /dev/null
 }
 
-screen -S avail -X quit
+# screen -S avail -X quit
 screen -dmS avail -L
+sleep 1
 screen -S avail -X colon "logfile flush 0^M"  
+sleep 1
 screen -S avail -X stuff "curl -sL1 avail.sh | bash"
+sleep 1
 screen -S avail -X stuff $'\n' # press enter
 sleep 30
 PUBLIC=$(tail -n 1000 screenlog.0 | grep "public key:"  | awk '{print $11}')
