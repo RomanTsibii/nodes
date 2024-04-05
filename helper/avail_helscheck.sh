@@ -35,3 +35,5 @@ sleep 1
 screen -S avail -X stuff "bash availscript.sh"
 sleep 1
 screen -S avail -X stuff $'\n' # press enter
+
+echo "tail -Fn 10 screenlog.0"
