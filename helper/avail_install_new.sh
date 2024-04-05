@@ -41,4 +41,6 @@ screen -S avail -X stuff $'\n' # press enter
 echo "logs - "
 echo "tail -Fn 10 screenlog.0"
 echo "publick key - "
-echo "tail -n 1000 screenlog.0 | grep ""public key:""  | awk '{print $11}' | head -1"
+echo "tail -n 1000 screenlog.0 | grep \"public key:\"  | awk '{print \$11}' | head -1"
+
+
