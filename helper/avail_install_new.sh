@@ -39,4 +39,4 @@ sleep 1
 screen -S avail -X stuff $'\n' # press enter
 
 echo "tail -Fn 10 screenlog.0"
-
+echo "tail -n 1000 screenlog.0 | grep "public key:"  | awk '{print $11}' | head -1
