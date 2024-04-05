@@ -2,24 +2,36 @@
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/avail_helscheck.sh) 
 # screen -S avail_helscheck -dm bash -c "bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/avail_helscheck.sh)"
 
-while true
-  do
-    # fail=$(tail -n 10 screenlog.0 | grep "Avail has been added to your profile.")
-    # fail1=(tail -n 10 screenlog.0 | grep "Avail stopped")
-    # if [ -n "$fail"  ] || [ -n $fail1 ]
-    # then
+# 1 створити файл з кодом
 
-    sleep 1
-    echo "restart avail" 
-    screen -dmS avail -L
-    sleep 1
-    screen -S avail -X colon "logfile flush 0^M"  
-    sleep 1
-    screen -S avail -X stuff "curl -sL1 avail.sh | bash"
-    sleep 1
-    screen -S avail -X stuff $'\n' # press enter
-    # fi
-    sleep 20m
-    screen -XS avail quit
-  done
-  
+cat << EOF > $HOME/availscript.sh
+#!/bin/bash
+
+COMMAND="curl -sL1 avail.sh | bash" 
+while true; do
+    echo "Starting command: $COMMAND"
+    bash -c "$COMMAND" &
+    PID=$!
+    wait $PID
+    EXIT_STATUS=$?
+    if [ $EXIT_STATUS -eq 0 ]; then
+        echo "Command exited successfully. Restarting..."
+    else
+        echo "Command failed with status $EXIT_STATUS. Restarting..."
+    fi
+    sleep 10
+done
+EOF
+
+chmod u+x $HOME/availscript.sh
+# 2 запустити у ньому у фоні файл
+
+sleep 1
+echo "restart avail" 
+screen -dmS avail -L
+sleep 1
+screen -S avail -X colon "logfile flush 0^M"  
+sleep 1
+screen -S avail -X stuff "bash availscript.sh"
+sleep 1
+screen -S avail -X stuff $'\n' # press enter
