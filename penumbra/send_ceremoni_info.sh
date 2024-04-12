@@ -8,7 +8,7 @@ function send_message {
 }
 
 
-cer_info=$()
+cer_info=$(pcli ceremony contribute --phase 2 --bid 0penumbra)
 echo $cer_info | grep "for contribution slot from address" | awk '{print $14}'
 send_message "Node #Penumbra ceremoni 2. On server *$HOSTNAME* to *$NODE_OWNER*.%0AYour ceremoni address %0A\`$cer_info\`"
 
