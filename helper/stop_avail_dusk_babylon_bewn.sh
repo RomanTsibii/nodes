@@ -15,5 +15,6 @@ docker-compose -f $HOME/rusk/docker-compose.yml down -v
 
 sudo systemctl stop bevmd
 sudo systemctl disable bevmd
+docker stop bevm-node
 
 docker stop boolnetwork
