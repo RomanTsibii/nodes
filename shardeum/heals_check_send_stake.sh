@@ -12,8 +12,10 @@ function send_message {
 }
 
 status=$(docker exec -t shardeum-dashboard operator-cli status | grep state | awk '{ print $2 }')
+echo $status
 function send {
     send_message "Node #Shardeum updated. You need stake *$HOSTNAME*:8080 .%0AYou public key \`$PRIVATE_ADDRESS\`"
+    echo "send"
 }
 if [[ $status == *"need-stake"* ]]; then send ; fi
 
