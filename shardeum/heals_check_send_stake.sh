@@ -4,7 +4,7 @@
 
 tmux kill-session -t shardeum_healthcheck
 tmux new-session -d -s shardeum_healthcheck 'bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/guides/main/shardeum/health.sh)'
-sleep 200 
+sleep 100 
 source $HOME/.profile
 HOSTNAME=$(hostname -I | awk '{ print $1 }')
 function send_message {
