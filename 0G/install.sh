@@ -2,7 +2,7 @@
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/0G/install.sh)
 echo "-----------------------------------------------------------------------------"
 curl -s https://raw.githubusercontent.com/DOUBLE-TOP/tools/main/doubletop.sh | bash
-source $HOME./profile
+source $HOME/.profile
 OG_NODENAME=$NODENAME
 # echo "-----------------------------------------------------------------------------"
 # if [ ! $OG_NODENAME ]; then
