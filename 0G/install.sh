@@ -115,3 +115,8 @@ lz4 -d -c ./latest_snapshot.tar.lz4 | tar -xf - -C $HOME/.evmosd
 mv $HOME/.evmosd/priv_validator_state.json.backup $HOME/.evmosd/data/priv_validator_state.json
 sudo systemctl restart 0g
 rm -f latest_snapshot.tar.lz4
+
+
+sleep 20
+
+journalctl -n 100 -f -u 0g -o cat
