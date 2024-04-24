@@ -1,5 +1,7 @@
 #!/bin/bash
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/0G/install.sh)
+# screen -S 0G_run -dm bash -c "bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/0G/install.sh)"
+
 echo "-----------------------------------------------------------------------------"
 curl -s https://raw.githubusercontent.com/DOUBLE-TOP/tools/main/doubletop.sh | bash
 source $HOME/.profile
