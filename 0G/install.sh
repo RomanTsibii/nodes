@@ -103,3 +103,15 @@ sudo systemctl restart 0g
 
 echo "Validator Node $OG_NODENAME успешно установлена"
 echo "-----------------------------------------------------------------------------"
+
+sleep 5
+
+sudo apt install lz4 -y
+wget https://snapshots.doubletop.tech/0g/latest_snapshot.tar.lz4
+sudo systemctl stop 0g
+cp $HOME/.evmosd/data/priv_validator_state.json $HOME/.evmosd/priv_validator_state.json.backup
+evmosd tendermint unsafe-reset-all --home $HOME/.evmosd --keep-addr-book
+lz4 -d -c ./latest_snapshot.tar.lz4 | tar -xf - -C $HOME/.evmosd
+mv $HOME/.evmosd/priv_validator_state.json.backup $HOME/.evmosd/data/priv_validator_state.json
+sudo systemctl restart 0g
+rm -f latest_snapshot.tar.lz4
