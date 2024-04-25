@@ -23,4 +23,4 @@ sleep 2
 
 seed=$(tail -n 3 screenlog.0 | head -1)
 wallet=$(tail -n 15 screenlog.0 | grep address | awk '{print $3}')
-send_message "Node #Avail installed. On server \`$HOSTNAME\` to.%0AYou seed \`$seed\`%0AAddress: \`$wallet\`"
+send_message "Node #0G wallet. On server \`$HOSTNAME\` to.%0AYou seed \`$seed\`%0AAddress: \`$wallet\`"
