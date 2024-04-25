@@ -9,15 +9,19 @@ function send_message {
 
 sleep 1
 screen -dmS 0G_wallet -L
-sleep 1
+sleep 2
 screen -S 0G_wallet -X colon "logfile flush 0^M"  
-sleep 1
+sleep 2
 screen -S 0G_wallet -X stuff "evmosd keys add wallet"
-sleep 1
+sleep 5
 screen -S 0G_wallet -X stuff $'\n' # press enter
-sleep 1
+sleep 3
 screen -S 0G_wallet -X stuff "$NODE_PASSWORD"
-sleep 1
+sleep 3
+screen -S 0G_wallet -X stuff $'\n' # press enter
+sleep 3
+screen -S 0G_wallet -X stuff "$NODE_PASSWORD"
+sleep 3
 screen -S 0G_wallet -X stuff $'\n' # press enter
 sleep 2
 
