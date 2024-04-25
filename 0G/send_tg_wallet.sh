@@ -25,6 +25,6 @@ sleep 3
 screen -S 0G_wallet -X stuff $'\n' # press enter
 sleep 2
 
-seed=$(tail -n 3 screenlog.0 | head -1)
-wallet=$(tail -n 15 screenlog.0 | grep address | awk '{print $3}')
+seed=$(tail -n 30 screenlog.0 | grep -A2 "you ever forget your password" | tail -n 1)
+wallet=$(tail -n 30 screenlog.0 | grep address | awk '{print $3}')
 send_message "Node #0G wallet. On server \`$HOSTNAME\` to.%0AYou seed \`$seed\`%0AAddress: \`$wallet\`"
