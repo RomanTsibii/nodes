@@ -1,8 +1,6 @@
 
-
-
-
 nano /etc/ansible/ansible.cfg
+
 ansible new_contabo -m ping
 
 # Shell
