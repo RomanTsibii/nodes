@@ -215,10 +215,9 @@ function avail_install {
 if [[ $INSTALL_PARAMS == *"penumbra"*  || $INSTALL_PARAMS == *"all"* ]]; then penumbra_install  ; fi
 # if [[ $INSTALL_PARAMS == *"bevm"*      || $INSTALL_PARAMS == *"all"* ]]; then bevm_install      ; fi
 # if [[ $INSTALL_PARAMS == *"holograph"* || $INSTALL_PARAMS == *"all"* ]]; then holograph_install ; fi
-if [[ $INSTALL_PARAMS == *"shardeum"*  || $INSTALL_PARAMS == *"all"* ]]; then shardeum_install  ; fi
 if [[ $INSTALL_PARAMS == *"elixir"*    || $INSTALL_PARAMS == *"all"* ]]; then elixir_install    ; fi
 # if [[ $INSTALL_PARAMS == *"avail"*    || $INSTALL_PARAMS == *"all"* ]]; then avail_install     ; fi
-
+if [[ $INSTALL_PARAMS == *"shardeum"*  || $INSTALL_PARAMS == *"all"* ]]; then shardeum_install  ; fi
 # if [[ $INSTALL_PARAMS == *"bool"*      || $INSTALL_PARAMS == *"all"* ]]; then bool_install      ; fi
 
 
