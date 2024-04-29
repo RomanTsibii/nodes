@@ -29,8 +29,9 @@ function need_up {
 if  [ -z "$status" ]; then need_up ; fi # send info to TG when up docker
 
 function need_stake_send {
-    send_message "Node #Shardeum. You need stake *$HOSTNAME*:8080 .%0AYou public key \`$PRIVATE_ADDRESS\`%0AAddress: \`$MM_ADDRESS\`"
     echo "send need stake"
+    sleep $(shuf -i 5-30 -n 1)
+    send_message "Node #Shardeum. You need stake *$HOSTNAME*:8080 .%0AYou public key \`$PRIVATE_ADDRESS\`%0AAddress: \`$MM_ADDRESS\`"
 }
 if [[ $status == *"need-stake"* ]]; then need_stake_send ; fi # send info to TG if need stake
 
