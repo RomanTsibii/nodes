@@ -17,16 +17,13 @@ status=$(docker exec -t shardeum-dashboard operator-cli status | grep state | aw
 echo $status
 function need_stake_send {
     send_message "Node #Shardeum updated. You need stake *$HOSTNAME*:8080 .%0AYou public key \`$PRIVATE_ADDRESS\`%0AAddress: \`$MM_ADDRESS\`"
-    echo "send"
+    echo "send need stake"
 }
 if [[ $status == *"need-stake"* ]]; then need_stake_send ; fi
 
 function need_up {
     send_message "Node #Shardeum updated. You need stake \`$HOSTNAME\`"
-    echo "send"
+    echo "send need up"
 }
+if  [ -n "$status" ];; then need_up ; fi
 
-until [[ $status == *"need-stake"* ]] ||  [[ $status == *"active"* ]] || [[ $status == *"waiting-for-network"* ]] || [[ $status == *"standby"* ]] || [[ $status == *"stopped"* ]] || 
-do
-     need_up
-done
