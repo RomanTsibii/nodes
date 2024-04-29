@@ -26,7 +26,7 @@ function need_up {
     sleep 500
     status=$(docker exec -t shardeum-dashboard operator-cli status | grep state | awk '{ print $2 }')
 }
-if  [ -n "$status" ];; then need_up ; fi # send info to TG when up docker
+if  [ -n "$status" ]; then need_up ; fi # send info to TG when up docker
 
 function need_stake_send {
     send_message "Node #Shardeum. You need stake *$HOSTNAME*:8080 .%0AYou public key \`$PRIVATE_ADDRESS\`%0AAddress: \`$MM_ADDRESS\`"
