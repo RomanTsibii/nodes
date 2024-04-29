@@ -35,6 +35,5 @@ function need_stake_send {
 }
 if [[ $status == *"need-stake"* ]]; then need_stake_send ; fi # send info to TG if need stake
 
-
-
-
+status=$(docker exec -t shardeum-dashboard operator-cli status | grep state | awk '{ print $2 }')
+echo $status
