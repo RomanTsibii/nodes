@@ -26,7 +26,7 @@ function need_up {
     sleep 5m
     status=$(docker exec -t shardeum-dashboard operator-cli status | grep state | awk '{ print $2 }')
 }
-if  [ -z "$status" ]; then need_up ; fi # send info to TG when up docker
+# if  [ -z "$status" ]; then need_up ; fi # send info to TG when up docker
 
 function need_stake_send {
     echo "send need stake"
