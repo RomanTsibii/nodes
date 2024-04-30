@@ -6,7 +6,7 @@
 
 tmux kill-session -t shardeum_healthcheck
 tmux new-session -d -s shardeum_healthcheck 'bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/guides/main/shardeum/health.sh)'
-sleep 100 
+sleep 1m
 
 # info for TG
 source $HOME/.profile
@@ -23,7 +23,7 @@ function need_up {
     send_message "Node #Shardeum. i just up docker for \`$HOSTNAME\`"
     echo "send only up"
     cd $HOME/.shardeum && ./docker-up.sh
-    sleep 500
+    sleep 5m
     status=$(docker exec -t shardeum-dashboard operator-cli status | grep state | awk '{ print $2 }')
 }
 if  [ -z "$status" ]; then need_up ; fi # send info to TG when up docker
