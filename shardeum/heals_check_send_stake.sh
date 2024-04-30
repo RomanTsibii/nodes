@@ -23,10 +23,19 @@ function need_up {
     send_message "Node #Shardeum. i just up docker for \`$HOSTNAME\`"
     echo "send only up"
     cd $HOME/.shardeum && ./docker-up.sh
-    sleep 5m
+    sleep 1m
+    echo "send only up"
+    sleep 1m
+    echo "send only up"    
+    sleep 1m
+    echo "send only up"
+    sleep 1m
+    echo "send only up"    
+    sleep 1m
+    echo "send only up"
     status=$(docker exec -t shardeum-dashboard operator-cli status | grep state | awk '{ print $2 }')
 }
-# if  [ -z "$status" ]; then need_up ; fi # send info to TG when up docker
+if  [ -z "$status" ]; then need_up ; fi # send info to TG when up docker
 
 function need_stake_send {
     echo "send need stake"
