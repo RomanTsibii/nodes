@@ -14,7 +14,7 @@ massa_pass=$1
 source $HOME/.profile
 
 cd $HOME/massa/massa-client
-massa_wallet_address=$(./massa-client -p $massa_pass wallet_info | grep Address | awk '{ print $2 }')
+massa_wallet_address=$(./massa-client -p $massa_pass wallet_info | grep Address | awk '{ print $2 }') | tail -1
 
 # Telegram send message
 HOSTNAME=$(hostname -I | awk '{ print $1 }')
