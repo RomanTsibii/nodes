@@ -1,5 +1,5 @@
 #!/bin/bash
-# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/avail_send_publick_code.sh) 
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/avail/avail_send_publick_code.sh) 
 
 source $HOME/.profile
 HOSTNAME=$(hostname -I | awk '{ print $1 }')
