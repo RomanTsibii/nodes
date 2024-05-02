@@ -36,15 +36,17 @@ function send_tokens {
 while true
 do
   for addr in "${massa_wallet_addresses[@]}"; do
-      echo "$addr"
-      balance=$(./massa-client -p $massa_pass wallet_info | grep $addr -A 3 | grep "Balance" | awk '{ print $3 }' | sed 's/candidate=//;s/,//')
-      int_balance=${balance%%.*}
-      
-      # якщо баланс більше 1 то скинути монети на massa_node_address
-      if [ "$int_balance" -gt 1 ]; then send_tokens  ; fi
-      
-      # очікувати 10
-      sleep 10
+      if [[ ! -z "$address" ]]
+          echo "$addr"
+          balance=$(./massa-client -p $massa_pass wallet_info | grep $addr -A 3 | grep "Balance" | awk '{ print $3 }' | sed 's/candidate=//;s/,//')
+          int_balance=${balance%%.*}
+          
+          # якщо баланс більше 1 то скинути монети на massa_node_address
+          if [ "$int_balance" -gt 1 ]; then send_tokens  ; fi
+          
+          # очікувати 10
+          sleep 10
+      fi
   done
   sleep 12h
   echo "sleep 12h"
