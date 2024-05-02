@@ -38,7 +38,7 @@ while true
 do
   # цикл на перерахування всіх адрес 
   for addr in "${massa_wallet_addresses[@]}"; do
-      if [[ ! -z "$address" ]] ; then
+      # if [[ ! -z "$address" ]] ; then
           balance=$(./massa-client -p $massa_pass wallet_info | grep $addr -A 3 | grep "Balance" | awk '{ print $3 }' | sed 's/candidate=//;s/,//')
           int_balance=${balance%%.*}
           
@@ -47,7 +47,7 @@ do
           
           # очікувати 10
           sleep 10
-      fi
+      # fi
   done
   echo "sleep 12h"
   sleep 12h
