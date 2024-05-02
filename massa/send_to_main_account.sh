@@ -27,6 +27,7 @@ done < <(./massa-client -p "$massa_pass" wallet_info | grep Address | awk '{ pri
 massa_wallet_addresses=("${massa_wallet_addresses[@]/$massa_node_address}")
 
 function send_tokens {
+    echo "$addr"
     # send_transaction SenderAddress ReceiverAddress Amount Fee: send coins from a wallet address
     tx_trans=$(./massa-client -p $massa_pass send_transaction $addr $massa_node_address $int_balance 0)
     echo $tx_trans
@@ -38,7 +39,6 @@ do
   # цикл на перерахування всіх адрес 
   for addr in "${massa_wallet_addresses[@]}"; do
       if [[ ! -z "$address" ]] ; then
-          echo "$addr"
           balance=$(./massa-client -p $massa_pass wallet_info | grep $addr -A 3 | grep "Balance" | awk '{ print $3 }' | sed 's/candidate=//;s/,//')
           int_balance=${balance%%.*}
           
