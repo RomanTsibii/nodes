@@ -1,6 +1,6 @@
 #!/bin/bash
-# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/avail_health_check_errors.sh) 
-# screen -S helscheck_errors_ava -dm bash -c "bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/avail_health_check_errors.sh)"
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/avail/avail_health_check_errors.sh) 
+# screen -S helscheck_errors_ava -dm bash -c "bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/avail/avail_health_check_errors.sh)"
 
 while true
   do
