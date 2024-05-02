@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # запустити автопокупку
-# tmux new-session -d -s massa_buy_rolls_mainnet 'bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/massa/autobuy_rolls_mainet.sh) massa_password'
+# tmux new-session -d -s massa_buy_rolls_mainnet 'bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/massa/autobuy_rolls_mainet.sh) massa_password massa_wallet_address'
 
 # зупинити автопокупку
 # tmux kill-session -t massa_buy_rolls_mainnet 
@@ -11,10 +11,11 @@
 # Ctrl+B і потім D - це щоб вийти з логів
 
 massa_pass=$1
-source $HOME/.profile
+massa_wallet_address=$2
 
+source $HOME/.profile
 cd $HOME/massa/massa-client
-massa_wallet_address=$(./massa-client -p $massa_pass wallet_info | grep Address | awk '{ print $2 }') | tail -1
+# massa_wallet_address=$(./massa-client -p $massa_pass wallet_info | grep Address | awk '{ print $2 }' | tail -1) 
 
 # Telegram send message
 HOSTNAME=$(hostname -I | awk '{ print $1 }')
