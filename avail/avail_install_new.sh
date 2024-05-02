@@ -1,6 +1,6 @@
 #!/bin/bash
-# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/avail_install_new.sh) 
-# screen -S avail_helscheck -dm bash -c "bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/avail_install_new.sh)"
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/avail/avail_install_new.sh) 
+# screen -S avail_helscheck -dm bash -c "bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/avail/avail_install_new.sh)"
 
 # 1 створити файл з кодом
 
