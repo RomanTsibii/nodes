@@ -32,11 +32,12 @@ function send_tokens {
     echo $tx_trans
 }
 
-# цикл на перерахування всіх адрес 
+# цикл вічний з очікуванням
 while true
 do
+  # цикл на перерахування всіх адрес 
   for addr in "${massa_wallet_addresses[@]}"; do
-      if [[ ! -z "$address" ]]
+      if [[ ! -z "$address" ]] ; then
           echo "$addr"
           balance=$(./massa-client -p $massa_pass wallet_info | grep $addr -A 3 | grep "Balance" | awk '{ print $3 }' | sed 's/candidate=//;s/,//')
           int_balance=${balance%%.*}
@@ -48,6 +49,6 @@ do
           sleep 10
       fi
   done
-  sleep 12h
   echo "sleep 12h"
+  sleep 12h
 done
