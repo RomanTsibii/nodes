@@ -163,6 +163,9 @@ function check {
     bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/guides/main/initia/check.sh)
 }
 
+function load_snap_screen {
+  screen -S load_snap_intia -dm bash -c "bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/intia/load_snap.sh)"
+}
 function main {
     colors
     line
@@ -192,6 +195,11 @@ function main {
     check
     line
     output "Wish lifechange case with DOUBLETOP"
+    line
+    output "Stop and load snapshot in screen"
+    line
+    load_snap_screen
+    line
 }
 
 main
