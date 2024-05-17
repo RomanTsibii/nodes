@@ -168,7 +168,7 @@ function main {
     line
     output "Welcome to the Initia installation script"
     line
-    output "Enter your nodename"
+    output "Your nodename $INITIA_NODENAME"
     get_nodename
     line
     output "Installing Initia..."
