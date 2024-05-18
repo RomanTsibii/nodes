@@ -1,8 +1,6 @@
 #!/bin/bash
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/intia/check.sh)
 
-sleep 60
-
 # Время ожидания между измерениями (в секундах)
 wait_time=60
 
