@@ -13,3 +13,6 @@ cp $HOME.initia/data/priv_validator_state.json $HOME.initia/priv_validator_state
 rm -rf $HOME.initia/data/
 curl -L https://snapshots.polkachu.com/testnet-snapshots/initia/initia_187918.tar.lz4 | tar -Ilz4 -xf - -C $HOME/.initia
 systemctl restart initia
+
+curl -Ls https://snapshots.kjnodes.com/initia-testnet/addrbook.json > $HOME/.initia/config/addrbook.json
+sudo systemctl restart initia
