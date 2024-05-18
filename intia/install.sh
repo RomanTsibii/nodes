@@ -195,11 +195,11 @@ function main {
     check
     line
     output "Wish lifechange case with DOUBLETOP"
-    line
-    output "Stop and load snapshot in screen"
-    line
-    load_snap_screen
-    line
+    #line
+    #output "Stop and load snapshot in screen"
+    #line
+    #load_snap_screen
+    #line
 }
 
 main
