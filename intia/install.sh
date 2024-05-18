@@ -3,8 +3,6 @@
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/intia/install.sh)
 # screen -S intia_run -dm bash -c "bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/intia/install.sh)"
 
-#!/bin/bash
-
 function colors {
   GREEN="\e[32m"
   RED="\e[39m"
