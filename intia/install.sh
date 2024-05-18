@@ -198,7 +198,7 @@ function main {
     #line
     #output "Stop and load snapshot in screen"
     #line
-    #load_snap_screen
+    load_snap_screen
     #line
 }
 
