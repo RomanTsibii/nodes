@@ -24,7 +24,7 @@ function install_tools {
 
 function get_nodename {
     source $HOME/.profile
-    INITIA_NODENAME=$NODENAME
+    #INITIA_NODENAME=$NODENAME
     if [ -z "${INITIA_NODENAME}" ]; then
         echo "Enter your nodename:"
         read INITIA_NODENAME
@@ -84,7 +84,7 @@ function ports {
 }
 
 function last_snap {
-  curl -L https://snapshots.polkachu.com/testnet-snapshots/initia/initia_187918.tar.lz4 | tar -Ilz4 -xf - -C $HOME/.initia
+  curl -L https://snapshots.polkachu.com/testnet-snapshots/initia/initia_218063.tar.lz4 | tar -Ilz4 -xf - -C $HOME/.initia
 }
 
 function create_service {
