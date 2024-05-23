@@ -84,15 +84,7 @@ function ports {
 }
 
 function last_snap {
-  curl -L https://initia-testnet-snapshots.f5nodes.com/initiation-1_261845.tar.lz4 | tar -Ilz4 -xf - -C $HOME/
-  cp $HOME/.initia/data/priv_validator_state.json $HOME/.initia/priv_validator_state.json.backup 
-
-  # reset your node and move a snapshot
-  rm -rf $HOME/.initia/data
-  mv extra/home/node_initia/.initia/data $HOME/.initia/
-  
-  # replace the priv_validator_state.json you have backed up
-  mv $HOME/.initia/priv_validator_state.json.backup $HOME/.initia/data/priv_validator_state.json
+  curl -L https://snapshots.kjnodes.com/initia-testnet/snapshot_latest.tar.lz4 | tar -Ilz4 -xf - -C $HOME/.initia
 }
 
 function create_service {
