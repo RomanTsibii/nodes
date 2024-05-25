@@ -10,6 +10,8 @@ external_block=$(curl -s -X GET "https://initia-testnet.api.kjnodes.com/cosmos/b
 # Запрос к своей ноде для получения высоты последнего блока
 local_block_start=$(curl -s -X GET "http://localhost:25757/abci_info" | jq -r '.result.response.last_block_height')
 
+
+
 # Проверка, что оба значения были получены
 # if [[ -z "$external_block" || -z "$local_block_start" ]]; then
 #     echo "Не удалось получить значения блоков."
@@ -47,3 +49,11 @@ echo "Синхронизированные блоки за $wait_time секун
 echo "Скорость синхронизации: $sync_speed блоков/сек"
 # echo "Осталось догнать: $blocks_to_catch_up блоков"
 # echo "Ожидаемое время синхронизации: $time_to_sync минут"
+
+caching_up=$(initiad status | jq | grep "catching_up" | awk '{print $2}')
+if $caching_up; then
+    echo "restart initia"
+    # sudo systemctl restart initiad.service
+fi
+
+
