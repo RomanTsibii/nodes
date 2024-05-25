@@ -12,7 +12,7 @@ local_block_start=$(curl -s -X GET "http://localhost:25757/abci_info" | jq -r '.
 
 
 
-Проверка, что оба значения были получены
+# Проверка, что оба значения были получены
 if [[ -z "$external_block" || -z "$local_block_start" ]]; then
     echo "Не удалось получить значения блоков."
     exit 1
