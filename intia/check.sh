@@ -5,7 +5,7 @@
 wait_time=60
 
 # Запрос к внешнему API для получения последнего блока
-external_block=$(curl -s http://149.102.155.255:50112/  | xmllint --html --xpath '//body/p/text()' - | awk '{$1=$1};1')
+external_block=$(curl -s http://149.102.155.255:50112/ | sed -n 's:.*<p>\(.*\)</p>.*:\1:p')
 
 # Запрос к своей ноде для получения высоты последнего блока
 local_block_start=$(curl -s -X GET "http://localhost:25757/abci_info" | jq -r '.result.response.last_block_height')
