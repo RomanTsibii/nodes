@@ -24,6 +24,10 @@ sleep $wait_time
 # Запрос к своей ноде для получения высоты последнего блока после ожидания
 local_block_end=$(curl -s -X GET "http://localhost:25757/abci_info" | jq -r '.result.response.last_block_height')
 
+# кількість блоків после ожидания
+external_block_end=$(curl -s http://149.102.155.255:50112/ | sed -n 's:.*<p>\(.*\)</p>.*:\1:p')
+external=$((external_block_end - external_block))
+
 # Вычисление разницы блоков
 blocks_to_catch_up=$((external_block - local_block_end))
 
@@ -43,6 +47,7 @@ sync_speed=$(echo "scale=2; $blocks_synced / $wait_time" | bc)
 time_to_sync=$(echo "scale=2; ($blocks_to_catch_up / $sync_speed) / 60" | bc)
 
 echo "Внешний блок: $external_block"
+echo "Блоків за 60сек: $external"
 echo "Локальный блок (начало): $local_block_start"
 echo "Локальный блок (конец): $local_block_end"
 echo "Синхронизированные блоки за $wait_time секунд: $blocks_synced"
