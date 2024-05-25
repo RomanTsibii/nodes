@@ -46,17 +46,18 @@ sync_speed=$(echo "scale=2; $blocks_synced / $wait_time" | bc)
 # Вычисление времени до синхронизации в минутах
 time_to_sync=$(echo "scale=2; ($blocks_to_catch_up / $sync_speed) / 60" | bc)
 
-echo "Внешний блок: $external_block"
-echo "Блоків за 60сек: $external"
-echo "Локальный блок (начало): $local_block_start"
-echo "Локальный блок (конец): $local_block_end"
-echo "Синхронизированные блоки за $wait_time секунд: $blocks_synced"
-echo "Скорость синхронизации: $sync_speed блоков/сек"
-echo "Осталось догнать: $blocks_to_catch_up блоков"
-echo "Ожидаемое время синхронизации: $time_to_sync минут"
+echo "Blockchein block now: $external_block"
+echo "Blockchein blocks per 60s: $external"
+echo "Local blocks node (start): $local_block_start"
+echo "Local blocks node (end): $local_block_end"
+echo "Syning blocks on node per $wait_time seconds: $blocks_synced"
+echo "Speed syning: $sync_speed blocks per second"
+echo "Need Syning for catching_up: $blocks_to_catch_up blocks"
+echo "Time for full syning: $time_to_sync minutes"
 
 caching_up=$(initiad status | jq | grep "catching_up" | awk '{print $2}')
 if $caching_up; then
+    
     echo "restart initia"
     # sudo systemctl restart initiad.service
 fi
