@@ -1,8 +1,8 @@
 #!/bin/bash
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/intia/remove.sh)
 
-sudo systemctl disable initia
-sudo systemctl stop initia
+sudo systemctl disable initiad
+sudo systemctl stop initiad
 rm -rf $HOME/initia
 rm -rf $HOME/.initia
 
