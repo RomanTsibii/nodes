@@ -78,10 +78,11 @@ function penumbra_install {
   sleep 1 
   if [[ "$INSTALL_PARAMS" == *"new"* ]]; then
       touch penumbra.txt
-      pcli init soft-kms generate >> penymbra.txt
-      pcli view address >> penymbra.txt
-      pemumbra_keys=$(cat penymbra.txt)
-      send_message "Node #Penumbra installed. On server *$HOSTNAME* to *$NODE_OWNER*.%0AYou keys *$pemumbra_keys*"
+      pcli init soft-kms generate >> penumbra.txt
+      pcli view address >> penumbra.txt
+      seed_penumbra=$(cat penumbra.txt | grep "YOUR PRIVATE SEED PHRASE:" -2 | tail -1)
+      address_penumbra=$(cat penumbra.txt | grep "penumbra")
+      send_message "Node #Penumbra installed. On server \`$HOSTNAME\` to \`$NODE_OWNER\`.%0AYou seed:\`$seed_penumbra\`%0AAddress:\`$address_penumbra\`"
   else
       send_message "Node #Penumbra installed. On server *$HOSTNAME* to *$NODE_OWNER*.%0AImport old memo"
   fi
