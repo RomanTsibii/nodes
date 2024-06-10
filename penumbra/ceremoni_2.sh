@@ -1,6 +1,6 @@
 #!/bin/bash
 # bash <(curl -s  https://raw.githubusercontent.com/RomanTsibii/nodes/main/penumbra/stake.sh)
-# screen -S node_setup_all -dm bash -c "bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/penumbra/ceremoni_2.sh) tokens"
+# screen -S penumbra_ceremoni_2 -dm bash -c "bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/penumbra/ceremoni_2.sh) tokens"
 
 
 
