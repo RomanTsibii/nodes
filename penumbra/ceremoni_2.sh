@@ -18,5 +18,5 @@ new_balance_with_suffix="${new_balance}penumbra"
 
 echo $new_balance_with_suffix
 # запустити церемонію 
-pcli ceremony contribute --phase 2 --bid new_balance_with_suffix
+pcli ceremony contribute --phase 2 --bid $new_balance_with_suffix
 
