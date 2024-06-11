@@ -13,12 +13,14 @@ else
   # Отримати баланс
   balance=$(pcli view balance | grep "penumbra " | awk '{print $3}' | sed 's/penumbra//')
   balance_number=$(echo $balance | awk '{print $1 + 0}') # Конвертуємо у числове значення
+  rounded_balance=$(printf "%.0f" "$balance_number") # Заокруглюємо до цілого значення
+
 
   # Згенерувати випадкове число від 5 до 50
   random_number=$(shuf -i 5-50 -n 1)
 
   # Відняти випадкове число від балансу
-  new_balance=$((balance_number - random_number))
+  new_balance=$((rounded_balance - random_number))
   ceremoni_balance=$new_balance
 fi
 
