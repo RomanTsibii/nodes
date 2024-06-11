@@ -1,10 +1,10 @@
 #!/bin/bash
 # bash <(curl -s  https://raw.githubusercontent.com/RomanTsibii/nodes/main/penumbra/stake.sh)
-# screen -S run_penumbra_ceremoni_2 -dm bash -c "bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/penumbra/ceremoni_2.sh) tokens"
+# screen -S run_penumbra_ceremoni_2 -dm bash -c "bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/penumbra/ceremoni_2.sh) 0"
 
 # вписати кількість токенів з скрита
 tokens=$1
-
+tokens=0
 # Перевірка, чи існує змінна $tokens
 if [ -n "$tokens" ]; then
   ceremoni_balance=$tokens
@@ -39,9 +39,10 @@ if screen -list | grep -q "$SESSION_NAME"; then
 fi
 
 # Запуск нової сесії
-screen -dmS "$SESSION_NAME" -Logfile "$LOG_FILE"
+screen -dmS "$SESSION_NAME"
 sleep 1
-
+# добавити файл логування 
+screen -S "$SESSION_NAME" -X logfile "$LOG_FILE"
 # Виконання команди в новій сесії
 screen -S "$SESSION_NAME" -X stuff "pcli ceremony contribute --phase 2 --bid $ceremoni_balance_with_suffix"
 sleep 1
