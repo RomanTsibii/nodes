@@ -4,7 +4,6 @@
 
 # вписати кількість токенів з скрита
 tokens=$1
-tokens=0
 # Перевірка, чи існує змінна $tokens
 if [ -n "$tokens" ]; then
   ceremoni_balance=$tokens
