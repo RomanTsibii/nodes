@@ -38,7 +38,8 @@ LOG_FILE="/var/log/penumbra_ceremoni_2.log"
 # Перевірка, чи існує сесія
 if screen -list | grep -q "$SESSION_NAME"; then
   echo "Сесія $SESSION_NAME вже існує. Закриття..."
-  screen -S "$SESSION_NAME" -X quit
+  screen -ls | grep "$SESSION_NAME" | awk '{print $1}' | xargs -I {} screen -S {} -X quit
+
 fi
 
 # Запуск нової сесії
