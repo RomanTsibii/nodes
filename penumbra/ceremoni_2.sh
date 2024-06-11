@@ -1,7 +1,8 @@
 #!/bin/bash
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/penumbra/ceremoni_2.sh) 0
 # screen -S run_penumbra_ceremoni_2 -dm bash -c "bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/penumbra/ceremoni_2.sh) 0"
-# глянути логи  - tail -f -n 10 /var/log/penumbra_ceremoni_2.log
+# глянути логи  - "tail -f -n 10 /var/log/penumbra_ceremoni_2.log"
+# глянути останній рялок логу - "tail -n 1 /var/log/penumbra_ceremoni_2.log"
 
 # вписати кількість токенів з скрита
 tokens=$1
