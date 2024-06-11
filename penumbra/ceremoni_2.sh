@@ -44,6 +44,7 @@ screen -dmS "$SESSION_NAME"
 sleep 1
 # добавити файл логування 
 screen -S "$SESSION_NAME" -X logfile "$LOG_FILE"
+screen -S "$SESSION_NAME" -X log on
 # Виконання команди в новій сесії
 screen -S "$SESSION_NAME" -X stuff "pcli ceremony contribute --phase 2 --bid $ceremoni_balance_with_suffix"
 sleep 1
