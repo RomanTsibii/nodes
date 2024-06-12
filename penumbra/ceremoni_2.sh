@@ -5,24 +5,29 @@
 # глянути останній рялок логу - "tail -n 1 /var/log/penumbra_ceremoni_2.log"
 
 # вписати кількість токенів з скрита
-tokens=$1
+# tokens=$1
 # Перевірка, чи існує змінна $tokens
-if [ -n "$tokens" ]; then
-  ceremoni_balance=$tokens
-else
+# if [ -n "$tokens" ]; then
+#   ceremoni_balance=$tokens
+# else
   # Отримати баланс
   balance=$(pcli view balance | grep "penumbra " | awk '{print $3}' | sed 's/penumbra//')
   balance_number=$(echo $balance | awk '{print $1 + 0}') # Конвертуємо у числове значення
   rounded_balance=$(printf "%.0f" "$balance_number") # Заокруглюємо до цілого значення
 
+  # Перевірка на мінімальний баланс
+  if [ "$rounded_balance" -gt 100 ]; then
+    # Згенерувати випадкове число від 5 до 10
+    random_number=$(shuf -i 5-10 -n 1)
 
-  # Згенерувати випадкове число від 5 до 50
-  random_number=$(shuf -i 5-50 -n 1)
-
-  # Відняти випадкове число від балансу
-  new_balance=$((rounded_balance - random_number))
-  ceremoni_balance=$new_balance
-fi
+    # Відняти випадкове число від балансу 
+    new_balance=$((rounded_balance - random_number))
+    ceremoni_balance=$new_balance
+  # Перевірка на максимальний баланс
+  else #
+    ceremoni_balance=0
+  fi
+# fi
 
 # Вивести результати
 echo "Ceremoni balance: $ceremoni_balance"
