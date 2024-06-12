@@ -16,7 +16,7 @@
   rounded_balance=$(printf "%.0f" "$balance_number") # Заокруглюємо до цілого значення
 
   # Перевірка на мінімальний баланс
-  if [ "$rounded_balance" -gt 100 ]; then
+  if [ "$rounded_balance" -gt 99 ]; then
     # Згенерувати випадкове число від 5 до 10
     random_number=$(shuf -i 5-10 -n 1)
 
