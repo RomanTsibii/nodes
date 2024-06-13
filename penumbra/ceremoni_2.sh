@@ -21,6 +21,8 @@ function balance_for_ceremoni {
     # Відняти випадкове число від балансу 
     new_balance=$((rounded_balance - random_number))
     ceremoni_balance=$new_balance
+  else
+    exit # не робити нічого якщо баланс нижче 100
   fi
   # Вивести результати
   echo "Ceremoni balance: $ceremoni_balance"
