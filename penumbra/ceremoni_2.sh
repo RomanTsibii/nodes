@@ -1,6 +1,6 @@
 #!/bin/bash
-# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/penumbra/ceremoni_2.sh) 0
-# screen -S run_penumbra_ceremoni_2 -dm bash -c "bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/penumbra/ceremoni_2.sh) 0"
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/penumbra/ceremoni_2.sh)
+# screen -S run_penumbra_ceremoni_2 -dm bash -c "bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/penumbra/ceremoni_2.sh)"
 # глянути логи  - "tail -f -n 10 /var/log/penumbra_ceremoni_2.log"
 # глянути останній рялок логу - "tail -n 1 /var/log/penumbra_ceremoni_2.log"
 
@@ -10,9 +10,7 @@ function full_balance {
   balance_number=$(echo $balance | awk '{print $1 + 0}') # Конвертуємо у числове значення
   rounded_balance=$(printf "%.0f" "$balance_number") # Заокруглюємо до цілого значення
   echo $rounded_balance
-}
-
-function balance_for_ceremoni {
+  
   # Перевірка на мінімальний баланс
   if [ "$rounded_balance" -gt 99 ]; then
     # Згенерувати випадкове число від 5 до 10
@@ -31,7 +29,7 @@ function balance_for_ceremoni {
   ceremoni_balance_with_suffix="${ceremoni_balance}penumbra"
 }
 
-function remove_old_session {
+function session_for_seremoni {
   SESSION_NAME="penumbra_ceremoni_2"
   LOG_FILE="/var/log/penumbra_ceremoni_2.log"
   # Перевірка, чи існує сесія
@@ -39,9 +37,7 @@ function remove_old_session {
     echo "Сесія $SESSION_NAME вже існує. Закриття..."
     screen -ls | grep "$SESSION_NAME" | awk '{print $1}' | xargs -I {} screen -S {} -X quit
   fi
-}
 
-function create_new_session {
   # Запуск нової сесії
   screen -dmS "$SESSION_NAME"
   sleep 1
@@ -54,7 +50,9 @@ function create_new_session {
   screen -S "$SESSION_NAME" -X stuff $'\n' # натискання Enter
 }
 
-full_balance
-balance_for_ceremoni
-remove_old_session
-create_new_session
+full_balance # перевірити баланс і згенерувати змінну для церемонії якщо баланс більше 100 а якщо менше то зупинити скріпт
+session_for_seremoni # зупинити стару сесію і створити нову і попробувати добавити монет в церемонію
+sleep 30 # очікування на створення транзи в церемонію
+full_balance # перевірити баланс і згенерувати змінну для церемонії якщо баланс більше 100 а якщо менше то зупинити скріпт
+pcli view reset # якщо баланс не став менше 0 то помилка в блоках і треба перезагрузити блоки 
+session_for_seremoni # після рестарту мережі створити нову сесію 
