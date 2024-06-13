@@ -22,6 +22,7 @@ function balance_for_ceremoni {
     new_balance=$((rounded_balance - random_number))
     ceremoni_balance=$new_balance
   else
+    echo "balance less 100"
     exit # не робити нічого якщо баланс нижче 100
   fi
   # Вивести результати
