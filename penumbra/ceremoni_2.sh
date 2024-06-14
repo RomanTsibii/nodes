@@ -21,6 +21,13 @@ function full_balance {
     ceremoni_balance=$new_balance
   else
     echo "balance less 100"
+    
+    last_line=$(tail -n 1 /var/log/penumbra_ceremoni_2.log)
+    if [ -z "$last_line" ]; then 
+        echo "ceremoni not runing, create new ceremoni with 0penumbra"
+        ceremoni_balance_with_suffix="0penumbra"
+        session_for_seremoni
+    fi
     exit # не робити нічого якщо баланс нижче 100
   fi
   # Вивести результати
