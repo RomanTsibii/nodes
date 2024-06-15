@@ -36,6 +36,7 @@ function full_balance {
 }
 
 function session_for_seremoni {
+  screen -wipe
   SESSION_NAME="penumbra_ceremoni_2"
   LOG_FILE="/var/log/penumbra_ceremoni_2.log"
   # Перевірка, чи існує сесія
