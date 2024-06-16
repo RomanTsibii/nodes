@@ -22,7 +22,7 @@ function full_balance {
   else
     echo "balance less 100"
     # перевірити чи останні 5 рядків не було збоїв і чи не потрібно перезапустити церемонію
-    if tail -n 10 /var/log/penumbra_ceremoni_2.log | grep -q "Error"; then
+    if tail -n 30 /var/log/penumbra_ceremoni_2.log | grep -q "Error"; then
         echo "ceremoni not runing, create new ceremoni with 0penumbra"
         ceremoni_balance_with_suffix="0penumbra"
         session_for_seremoni
