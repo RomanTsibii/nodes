@@ -56,7 +56,7 @@ function session_for_seremoni {
   screen -S "$SESSION_NAME" -X stuff $'\n' # натискання Enter
 }
 
-screen -wipe
+screen -wipe &>/dev/null
 full_balance # перевірити баланс і згенерувати змінну для церемонії якщо баланс більше 100 а якщо менше то зупинити скріпт
 session_for_seremoni # зупинити стару сесію і створити нову і попробувати добавити монет в церемонію
 sleep 30 # очікування на створення транзи в церемонію
