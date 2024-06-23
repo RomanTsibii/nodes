@@ -1,5 +1,5 @@
 #!/bin/bash
-# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/shardeum/heals_check_send_stake.sh) 
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/shardeum/sheck_status_node.sh) 
 
 # cd $HOME/.shardeum && ./docker-up.sh
 # cd $HOME
