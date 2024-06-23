@@ -17,8 +17,8 @@ function send_message {
 }
 
 # get info from shardeum
-status=$(docker exec -t shardeum-dashboard operator-cli status | grep state | awk '{ print $2 }')
-echo $status
+#status=$(docker exec -t shardeum-dashboard operator-cli status | grep state | awk '{ print $2 }')
+#echo $status
 
 function need_up {
     #send_message "Node #Shardeum. Up docker for \`$HOSTNAME\`"
