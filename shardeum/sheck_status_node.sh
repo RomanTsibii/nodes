@@ -3,6 +3,7 @@
 
 # cd $HOME/.shardeum && ./docker-up.sh
 # cd $HOME
+cd $HOME/.shardeum/ && ./docker-up.sh
 
 tmux kill-session -t shardeum_healthcheck
 tmux new-session -d -s shardeum_healthcheck 'bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/guides/main/shardeum/health.sh)'
@@ -20,7 +21,7 @@ status=$(docker exec -t shardeum-dashboard operator-cli status | grep state | aw
 echo $status
 
 function need_up {
-    send_message "Node #Shardeum. i just up docker for \`$HOSTNAME\`"
+    #send_message "Node #Shardeum. Up docker for \`$HOSTNAME\`"
     echo "send only up"
     cd $HOME/.shardeum && ./docker-up.sh
     sleep 1m
