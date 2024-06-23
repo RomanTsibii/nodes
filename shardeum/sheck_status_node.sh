@@ -1,9 +1,9 @@
 #!/bin/bash
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/shardeum/sheck_status_node.sh) 
 
-# cd $HOME/.shardeum && ./docker-up.sh
-# cd $HOME
-cd $HOME/.shardeum/ && ./docker-up.sh
+cd $HOME/.shardeum && ./docker-up.sh
+cd $HOME
+
 
 tmux kill-session -t shardeum_healthcheck
 tmux new-session -d -s shardeum_healthcheck 'bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/guides/main/shardeum/health.sh)'
@@ -36,7 +36,7 @@ function need_up {
     echo "send only up"
     status=$(docker exec -t shardeum-dashboard operator-cli status | grep state | awk '{ print $2 }')
 }
-if  [ -z "$status" ]; then need_up ; fi # send info to TG when up docker
+# if  [ -z "$status" ]; then need_up ; fi # send info to TG when up docker
 
 function need_stake_send {
     echo "send need stake"
