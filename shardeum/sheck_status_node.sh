@@ -4,6 +4,7 @@
 cd $HOME/.shardeum && ./docker-up.sh
 cd $HOME
 
+docker exec -it shardeum-dashboard operator-cli start
 
 tmux kill-session -t shardeum_healthcheck
 tmux new-session -d -s shardeum_healthcheck 'bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/guides/main/shardeum/health.sh)'
