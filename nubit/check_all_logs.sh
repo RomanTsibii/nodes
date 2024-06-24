@@ -1,5 +1,6 @@
 #!/bin/bash
-# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/nubit/check_all_logs.sh )
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/nubit/check_all_logs.sh 5 -1)
 
-node_number=$1
-docker logs --tail=5 nubit$node_number
+logs=$1
+number=$2
+docker logs --tail=$logs nubit$number
