@@ -41,3 +41,5 @@ for ((i=1; i<=num_containers; i++)); do
   # Повернення до початкової директорії
   cd ..
 done
+
+echo "Done"
