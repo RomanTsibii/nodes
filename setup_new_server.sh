@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/setup_new_server.sh)
 
 # оновити час
