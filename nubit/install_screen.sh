@@ -1,6 +1,6 @@
 #!/bin/bash
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/nubit/install_screen.sh)
-# screen -S run_penumbra_ceremoni_2 -dm bash -c "bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/nubit/install_screen.sh)"
+# screen -S run_nubit -dm bash -c "bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/nubit/install_screen.sh)"
 # глянути логи  - "tail -f -n 10 /var/log/nubit.log"
 # глянути останній рялок логу - "tail -n 1 /var/log/nubit.log"
 
