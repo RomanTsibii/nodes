@@ -1,4 +1,5 @@
 #!/bin/bash
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/nubit/bulk_check_version.sh)
 
 # Виконати команду docker exec і зберегти результат
 output=$(docker exec -it nubit /home/nubit-user/nubit-node/bin/nubit version)
