@@ -18,3 +18,5 @@ screen -S "$SESSION_NAME" -X log on
 screen -S "$SESSION_NAME" -X stuff "curl -sL1 https:// nubit.sh/ | bash"
 sleep 1
 screen -S "$SESSION_NAME" -X stuff $'\n' # натискання Enter  
+sleep 10
+screen -S "$SESSION_NAME" -X stuff $'Y\n' # натискання Y Enter  
