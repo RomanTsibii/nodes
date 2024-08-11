@@ -22,7 +22,7 @@ screen -S "$SESSION_NAME" -X stuff "$pass"
 sleep 1
 screen -S "$SESSION_NAME" -X stuff $'\n' # натискання Enter
 sleep 1
-screen -S "$SESSION_NAME" -X stuff "$pass"
+screen -S "$SESSION_NAME" -X stuff "Y"
 sleep 1
 screen -S "$SESSION_NAME" -X stuff $'\n' # натискання Enter
 
