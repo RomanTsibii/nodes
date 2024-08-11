@@ -1,6 +1,6 @@
 #!/bin/bash
-# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/allora/create_keys.sh) pass
-# screen -S allora_allora -dm bash -c "bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/allora/create_keys.sh) pass" 
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/allora/create_new_wallets.sh) pass
+# screen -S allora_allora -dm bash -c "bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/allora/create_new_wallets.sh) pass" 
 
 pass=$1
 
