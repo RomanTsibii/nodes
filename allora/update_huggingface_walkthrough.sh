@@ -217,7 +217,7 @@ chmod +x init.config
 
 
 # sed -i "s|intervals = [\"1d\"]|intervals = [\"10m\", \"20m\", \"1h\", \"1d\"]|" $HOME/basic-coin-prediction-node/model.py
-sed -i 's/intervals = \["1d"\]/intervals = ["10m", "20m", "1h", "1d"]/g' $HOME/basic-coin-prediction-node/model.py
+sed -i 's/intervals = \["1d"\]/intervals = ["10m", "20m", "1h", "1d"]/g' model.py
 
 
 docker compose up -d --build
