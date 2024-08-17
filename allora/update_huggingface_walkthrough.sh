@@ -122,7 +122,7 @@ echo '{
 
 
 
-sed -i "s|Seed Phrase|$WALLET_SEED_PHRASE|" $HOME/basic-coin-prediction-node/config.json
+sed -i "s|Seed Phrase|$WALLET_SEED_PHRASE|" config.json
 
 
 cat <<EOF > app.py
