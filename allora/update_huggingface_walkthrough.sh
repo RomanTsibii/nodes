@@ -1,20 +1,16 @@
 #!/bin/bash
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/allora/update_huggingface_walkthrough.sh)
 
-
 echo "Введите сид фразу от кошелька, который будет использоваться для воркера"
 read WALLET_SEED_PHRASE
 
-
 docker compose -f $HOME/nwaku-compose/docker-compose.yml down -v
-
 
 cd basic-coin-prediction-node
 docker compose down -v
 docker stop $(docker ps -a | grep basic-coin-prediction-node-updater | awk '{print $1}') $(docker ps -a | grep basic-coin-prediction-node-inference | awk '{print $1}')  $(docker ps -a | grep alloranetwork | awk '{print $1}')
 docker rm $(docker ps -a | grep basic-coin-prediction-node-updater | awk '{print $1}') $(docker ps -a | grep basic-coin-prediction-node-inference | awk '{print $1}')  $(docker ps -a | grep alloranetwork | awk '{print $1}')
 cd $HOME && rm -rf basic-coin-prediction-node
-
 
 cd $HOME
 git clone https://github.com/allora-network/allora-huggingface-walkthrough
@@ -120,10 +116,7 @@ echo '{
    ]
 }' > config.json
 
-
-
 sed -i "s|Seed Phrase|$WALLET_SEED_PHRASE|" config.json
-
 
 cat <<EOF > app.py
 from flask import Flask, Response
@@ -210,14 +203,9 @@ if __name__ == '__main__':
     app.run(host="0.0.0.0", port=8000, debug=True)
 EOF
 
-
 chmod +x init.config
 ./init.config
 
-
-
-# sed -i "s|intervals = [\"1d\"]|intervals = [\"10m\", \"20m\", \"1h\", \"1d\"]|" $HOME/basic-coin-prediction-node/model.py
-sed -i 's/intervals = \["1d"\]/intervals = ["10m", "20m", "1h", "1d"]/g' model.py
-
+# sed -i 's/intervals = \["1d"\]/intervals = ["10m", "20m", "1h", "1d"]/g' model.py
 
 docker compose up -d --build
