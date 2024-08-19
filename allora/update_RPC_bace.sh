@@ -11,3 +11,4 @@ cd basic-coin-prediction-node
 chmod +x init.config
 ./init.config
 docker compose -f $HOME/basic-coin-prediction-node/docker-compose.yml up -d
+echo "docker compose -f $HOME/basic-coin-prediction-node/docker-compose.yml logs -f"
