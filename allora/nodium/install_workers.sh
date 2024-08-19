@@ -16,6 +16,7 @@ git clone https://github.com/nhunamit/basic-coin-prediction-node.git
 mv basic-coin-prediction-node worker1-10m
 cd worker1-10m
 git checkout worker1-10m
+git branch -a
 sed -i "/\"nodeRpc\"/ s|\"nodeRpc\": \".*\"|\"nodeRpc\": \"$RPC\"|" $HOME/worker1-10m/config.json
 sed -i "s|just clap slim ...|$WALLET_SEED_PHRASE|" config.json
 ./init.config
@@ -26,8 +27,8 @@ echo "------------- install 2 worker -------------"
 git clone https://github.com/nhunamit/basic-coin-prediction-node.git
 mv basic-coin-prediction-node worker2-24h
 cd worker2-24h
-git branch -a
 git checkout worker2-24h
+git branch -a
 sed -i "/\"nodeRpc\"/ s|\"nodeRpc\": \".*\"|\"nodeRpc\": \"$RPC\"|" $HOME/worker1-10m/config.json
 sed -i "s|just clap slim ...|$WALLET_SEED_PHRASE|" config.json
 ./init.config
@@ -39,6 +40,7 @@ git clone https://github.com/nhunamit/basic-coin-prediction-node.git
 mv basic-coin-prediction-node worker3-20m
 cd worker3-20m
 git checkout worker3-20m
+git branch -a
 sed -i "/\"nodeRpc\"/ s|\"nodeRpc\": \".*\"|\"nodeRpc\": \"$RPC\"|" $HOME/worker1-10m/config.json
 sed -i "s|just clap slim ...|$WALLET_SEED_PHRASE|" config.json
 ./init.config
