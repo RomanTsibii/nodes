@@ -7,6 +7,7 @@ read WALLET_SEED_PHRASE
 echo "Введите RPC"
 read RPC
 
+cd $HOME
 docker compose -f $HOME/allora-huggingface-walkthrough/docker-compose.yaml down -v
 rm -rf basic-coin-prediction-node
 
