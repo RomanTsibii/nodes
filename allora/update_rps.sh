@@ -11,3 +11,4 @@ cd allora-huggingface-walkthrough
 chmod +x init.config
 ./init.config
 docker compose -f $HOME/allora-huggingface-walkthrough/docker-compose.yaml up -d
+echo "docker compose -f $HOME/allora-huggingface-walkthrough/docker-compose.yaml logs -f"
