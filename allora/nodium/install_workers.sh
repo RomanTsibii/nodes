@@ -22,7 +22,7 @@ sed -i "/\"nodeRpc\"/ s|\"nodeRpc\": \".*\"|\"nodeRpc\": \"$RPC\"|" config.json
 sed -i "s|just clap slim ...|$WALLET_SEED_PHRASE|" config.json
 ./init.config
 docker compose build > /dev/null 2>&1
-docker compose up -d > /dev/null 2>&1
+docker compose up -d
 cd ..
 
 echo "------------- install 2 worker -------------"
@@ -35,7 +35,7 @@ sed -i "/\"nodeRpc\"/ s|\"nodeRpc\": \".*\"|\"nodeRpc\": \"$RPC\"|" config.json
 sed -i "s|just clap slim ...|$WALLET_SEED_PHRASE|" config.json
 ./init.config
 docker compose build > /dev/null 2>&1
-docker compose up -d > /dev/null 2>&1
+docker compose up -d
 cd ..
 
 echo "------------- install 3 worker -------------"
@@ -48,7 +48,7 @@ sed -i "/\"nodeRpc\"/ s|\"nodeRpc\": \".*\"|\"nodeRpc\": \"$RPC\"|" config.json
 sed -i "s|just clap slim ...|$WALLET_SEED_PHRASE|" config.json
 ./init.config
 docker compose build > /dev/null 2>&1
-docker compose up -d > /dev/null 2>&1
+docker compose up -d
 cd ..
 
 
