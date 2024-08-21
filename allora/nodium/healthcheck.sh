@@ -41,6 +41,10 @@ while true; do
         docker compose -f $HOME/worker1-10m/docker-compose.yml restart
         docker compose -f $HOME/worker2-24h/docker-compose.yml restart
         docker compose -f $HOME/worker3-20m/docker-compose.yml restart
+        
+        # Очікування протягом CHECK_INTERVAL після перезапуску контейнерів
+        echo "[$(date)] Очікуємо $((CHECK_INTERVAL / 60)) хвилин після перезапуску контейнерів..."
+        sleep $CHECK_INTERVAL
     else
         echo "[$(date)] Кількість запущених контейнерів allora дорівнює 9, додатковий перезапуск не потрібен."
     fi
@@ -53,5 +57,3 @@ while true; do
     # Очікування 10 хвилин перед наступною перевіркою
     sleep 10m
 done
-
-
