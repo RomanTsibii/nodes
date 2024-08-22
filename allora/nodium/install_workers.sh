@@ -21,7 +21,7 @@ git branch -a
 sed -i "/\"nodeRpc\"/ s|\"nodeRpc\": \".*\"|\"nodeRpc\": \"$RPC\"|" config.json
 sed -i "s|just clap slim ...|$WALLET_SEED_PHRASE|" config.json
 ./init.config
-docker compose build > /dev/null 2>&1
+docker compose build
 docker compose up -d
 cd ..
 
@@ -34,7 +34,7 @@ git branch -a
 sed -i "/\"nodeRpc\"/ s|\"nodeRpc\": \".*\"|\"nodeRpc\": \"$RPC\"|" config.json
 sed -i "s|just clap slim ...|$WALLET_SEED_PHRASE|" config.json
 ./init.config
-docker compose build > /dev/null 2>&1
+docker compose build
 docker compose up -d
 cd ..
 
@@ -47,7 +47,7 @@ git branch -a
 sed -i "/\"nodeRpc\"/ s|\"nodeRpc\": \".*\"|\"nodeRpc\": \"$RPC\"|" config.json
 sed -i "s|just clap slim ...|$WALLET_SEED_PHRASE|" config.json
 ./init.config
-docker compose build > /dev/null 2>&1
+docker compose build
 docker compose up -d
 cd ..
 
