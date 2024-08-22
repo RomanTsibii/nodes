@@ -1,5 +1,5 @@
 #!/bin/bash
-# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/allora/nodium/install_workers.sh)
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/allora/nodium/restart_with_remove_container.sh)
 
 # зупинка контейнерів
 docker compose -f $HOME/worker1-10m/docker-compose.yml down -v
