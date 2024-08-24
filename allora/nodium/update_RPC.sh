@@ -28,7 +28,6 @@ sed -i "/\"nodeRpc\"/ s|\"nodeRpc\": \".*\"|\"nodeRpc\": \"$RPC\"|" config.json
 ./init.config
 cd ..
 
-
 cd worker2-24h
 sed -i "/\"nodeRpc\"/ s|\"nodeRpc\": \".*\"|\"nodeRpc\": \"$RPC\"|" config.json
 ./init.config
