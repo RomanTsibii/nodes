@@ -8,6 +8,7 @@ docker compose -f $HOME/worker1-10m/docker-compose.yml down -v
 docker compose -f $HOME/worker2-24h/docker-compose.yml down -v
 docker compose -f $HOME/worker3-20m/docker-compose.yml down -v 
 
+rm -rf $HOME/allora_models/
 # видалити всі контейнери з алорою 
 docker ps -a | grep allora | awk '{print $1}' | xargs docker rm -f
 
