@@ -12,6 +12,8 @@ docker compose -f $HOME/allora-huggingface-walkthrough/docker-compose.yaml down 
 docker compose -f $HOME/worker1-10m/docker-compose.yml down
 docker compose -f $HOME/worker2-24h/docker-compose.yml down
 docker compose -f $HOME/worker3-20m/docker-compose.yml down
+rm -rf worker1-10m/ worker2-24h/ worker3-20m/
+
 rm -rf basic-coin-prediction-node
 
 
