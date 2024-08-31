@@ -23,11 +23,11 @@ mv basic-coin-prediction-node worker1-10m
 cd worker1-10m
 git checkout worker1-10m
 git branch -a
-# sed -i "/\"nodeRpc\"/ s|\"nodeRpc\": \".*\"|\"nodeRpc\": \"$RPC\"|" config.json
-# sed -i "/\"addressRestoreMnemonic\"/ s|\"addressRestoreMnemonic\": \".*\"|\"addressRestoreMnemonic\": \"$WALLET_SEED_PHRASE\"|" config.json
+sed -i "/\"nodeRpc\"/ s|\"nodeRpc\": \".*\"|\"nodeRpc\": \"$RPC\"|" config.json
+sed -i "/\"addressRestoreMnemonic\"/ s|\"addressRestoreMnemonic\": \".*\"|\"addressRestoreMnemonic\": \"$WALLET_SEED_PHRASE\"|" config.json
 
-jq --arg rpc "$RPC" '.wallet.nodeRpc = $rpc' config.json > tmp.json && mv tmp.json config.json
-jq --arg seed "$WALLET_SEED_PHRASE" '.wallet.addressRestoreMnemonic = $seed' config.json > tmp.json && mv tmp.json config.json
+# jq --arg rpc "$RPC" '.wallet.nodeRpc = $rpc' config.json > tmp.json && mv tmp.json config.json
+# jq --arg seed "$WALLET_SEED_PHRASE" '.wallet.addressRestoreMnemonic = $seed' config.json > tmp.json && mv tmp.json config.json
 
 ./init.config
 docker compose build
