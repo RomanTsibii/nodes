@@ -1,10 +1,10 @@
 #!/bin/bash
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/allora/nodium/install_workers.sh)
 
-echo "Введите сид фразу от кошелька, который будет использоваться для воркера"
+echo "Enter seed "
 read WALLET_SEED_PHRASE
 
-echo "Введите RPC"
+echo "Enter RPC "
 read RPC
 
 cd $HOME
