@@ -19,7 +19,7 @@ cd worker1-10m
 git checkout worker1-10m
 git branch -a
 sed -i "/\"nodeRpc\"/ s|\"nodeRpc\": \".*\"|\"nodeRpc\": \"$RPC\"|" config.json
-sed -i "s|just clap slim ...|$WALLET_SEED_PHRASE|" config.json
+sed -i "/\"addressRestoreMnemonic\"/ s|\"addressRestoreMnemonic\": \".*\"|\"addressRestoreMnemonic\": \"$WALLET_SEED_PHRASE\"|" config.json
 ./init.config
 docker compose build
 docker compose up -d
@@ -46,7 +46,7 @@ cd worker3-20m
 git checkout worker3-20m
 git branch -a
 sed -i "/\"nodeRpc\"/ s|\"nodeRpc\": \".*\"|\"nodeRpc\": \"$RPC\"|" config.json
-sed -i "s|just clap slim ...|$WALLET_SEED_PHRASE|" config.json
+sed -i "/\"addressRestoreMnemonic\"/ s|\"addressRestoreMnemonic\": \".*\"|\"addressRestoreMnemonic\": \"$WALLET_SEED_PHRASE\"|" config.json
 ./init.config
 docker compose build
 docker compose up -d
