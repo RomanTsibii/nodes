@@ -22,7 +22,7 @@ git clone https://github.com/nhunamit/basic-coin-prediction-node.git
 mv basic-coin-prediction-node worker1-10m
 cd worker1-10m
 git checkout worker1-10m
-git branch -a
+# git branch -a 
 sed -i "/\"nodeRpc\"/ s|\"nodeRpc\": \".*\"|\"nodeRpc\": \"$RPC\"|" config.json
 sed -i "/\"addressRestoreMnemonic\"/ s|\"addressRestoreMnemonic\": \".*\"|\"addressRestoreMnemonic\": \"$WALLET_SEED_PHRASE\"|" config.json
 
@@ -39,7 +39,7 @@ git clone https://github.com/nhunamit/basic-coin-prediction-node.git
 mv basic-coin-prediction-node worker2-24h
 cd worker2-24h
 git checkout worker2-24h
-git branch -a
+# git branch -a
 jq --arg rpc "$RPC" '.wallet.nodeRpc = $rpc' config.json > tmp.json && mv tmp.json config.json
 jq --arg seed "$WALLET_SEED_PHRASE" '.wallet.addressRestoreMnemonic = $seed' config.json > tmp.json && mv tmp.json config.json
 # sed -i "s|just clap slim ...|$WALLET_SEED_PHRASE|" config.json
@@ -53,7 +53,7 @@ git clone https://github.com/nhunamit/basic-coin-prediction-node.git
 mv basic-coin-prediction-node worker3-20m
 cd worker3-20m
 git checkout worker3-20m
-git branch -a
+# git branch -a
 jq --arg rpc "$RPC" '.wallet.nodeRpc = $rpc' config.json > tmp.json && mv tmp.json config.json
 jq --arg seed "$WALLET_SEED_PHRASE" '.wallet.addressRestoreMnemonic = $seed' config.json > tmp.json && mv tmp.json config.json
 ./init.config
