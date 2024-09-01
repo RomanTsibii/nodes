@@ -21,13 +21,32 @@ docker network rm worker1-10m_default worker2-24h_default worker3-20m_default
 # видалити всі volume з алорою 
 docker volume prune -f
 
-
+cd 
 # Вкажіть назви папок
 folders=("worker1-10m" "worker2-24h" "worker3-20m")
 
 # Вкажіть текстові рядки для перевірки та додавання
 texts=("xgboost")
 # texts=("xgboost" "numpy" "pandas")
+
+# Клонування репозиторію
+source_dir="$HOME/allora_models"
+cd $HOME/
+git clone https://github.com/RomanTsibii/allora_models.git
+
+my_model="${1}.py" 
+
+# Перевірка, чи існує модель з назвою $my_model
+if [ -n "$my_model" ] && [ -f "$source_dir/$my_model" ]; then
+    model="$my_model"
+else
+    model=$(ls "$source_dir" | shuf -n 1)
+fi
+
+# Копіювання вибраної моделі
+cp "$source_dir/$model" "$HOME/worker1-10m/model.py"
+cp "$source_dir/$model" "$HOME/worker2-24h/model.py"
+cp "$source_dir/$model" "$HOME/worker3-20m/model.py"
 
 # Перевіряємо кожну папку
 for dir in "${folders[@]}"; do
@@ -48,27 +67,6 @@ for dir in "${folders[@]}"; do
     echo "Файл $req_file не знайдено"
   fi
 done
-
-
-
-# Клонування репозиторію
-source_dir="$HOME/allora_models"
-cd $HOME/
-git clone https://github.com/RomanTsibii/allora_models.git
-
-my_model="${1}.py" 
-
-# Перевірка, чи існує модель з назвою $my_model
-if [ -n "$my_model" ] && [ -f "$source_dir/$my_model" ]; then
-    model="$my_model"
-else
-    model=$(ls "$source_dir" | shuf -n 1)
-fi
-
-# Копіювання вибраної моделі
-cp "$source_dir/$model" "$HOME/worker1-10m/model.py"
-cp "$source_dir/$model" "$HOME/worker2-24h/model.py"
-cp "$source_dir/$model" "$HOME/worker3-20m/model.py"
 
 rm -rf $HOME/allora_models/
 # запуск контейнерів
