@@ -21,8 +21,6 @@ docker network rm worker1-10m_default worker2-24h_default worker3-20m_default
 # видалити всі volume з алорою 
 docker volume prune -f
 
-cd 
-
 # Клонування репозиторію
 source_dir="$HOME/allora_models"
 cd $HOME/
@@ -62,7 +60,7 @@ for dir in "${folders[@]}"; do
     if [ -n "$last_line" ]; then
       echo "" >> "$req_file"
     fi
-    
+
     for text in "${texts[@]}"; do
       # Перевіряємо, чи є рядок у файлі
       if ! grep -qx "$text" "$req_file"; then
@@ -78,8 +76,13 @@ for dir in "${folders[@]}"; do
   fi
 done
 
-
-
+for folder in "${folders[@]}"; do
+    # Змінюємо maxRetries і delay в config.json
+    jq '.wallet.maxRetries = 5 | .wallet.delay = 5' "$folder/config.json" > "$folder/config_tmp.json" && mv "$folder/config_tmp.json" "$folder/config.json"
+    
+    # Заходимо в папку і виконуємо ./init.config
+    (cd "$folder" && ./init.config)
+done
 
 rm -rf $HOME/allora_models/
 # запуск контейнерів
