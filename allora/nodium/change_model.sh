@@ -57,10 +57,17 @@ for dir in "${folders[@]}"; do
   
   # Перевіряємо, чи файл існує
   if [ -f "$req_file" ]; then
+    # Перевіряємо, чи останній рядок пустий
+    last_line=$(tail -n 1 "$req_file")
+    if [ -n "$last_line" ]; then
+      echo "" >> "$req_file"
+    fi
+    
     for text in "${texts[@]}"; do
       # Перевіряємо, чи є рядок у файлі
       if ! grep -qx "$text" "$req_file"; then
-        echo -e "\n$text" >> "$req_file"
+        # Додаємо новий рядок з текстом
+        echo "$text" >> "$req_file"
         echo "Додано $text до $req_file з нового рядка"
       else
         echo "$text вже існує в $req_file"
@@ -70,6 +77,7 @@ for dir in "${folders[@]}"; do
     echo "Файл $req_file не знайдено"
   fi
 done
+
 
 
 
