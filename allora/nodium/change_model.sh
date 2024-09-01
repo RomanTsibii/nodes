@@ -22,12 +22,6 @@ docker network rm worker1-10m_default worker2-24h_default worker3-20m_default
 docker volume prune -f
 
 cd 
-# Вкажіть назви папок
-folders=("worker1-10m" "worker2-24h" "worker3-20m")
-
-# Вкажіть текстові рядки для перевірки та додавання
-texts=("xgboost")
-# texts=("xgboost" "numpy" "pandas")
 
 # Клонування репозиторію
 source_dir="$HOME/allora_models"
@@ -49,6 +43,14 @@ cp "$source_dir/$model" "$HOME/worker2-24h/model.py"
 cp "$source_dir/$model" "$HOME/worker3-20m/model.py"
 
 # Перевіряємо кожну папку
+# Вкажіть назви папок
+folders=("worker1-10m" "worker2-24h" "worker3-20m")
+
+# Вкажіть текстові рядки для перевірки та додавання
+texts=("xgboost")
+# texts=("xgboost" "numpy" "pandas")
+
+# Перевіряємо кожну папку
 for dir in "${folders[@]}"; do
   req_file="$dir/requirements.txt"
   
@@ -56,7 +58,7 @@ for dir in "${folders[@]}"; do
   if [ -f "$req_file" ]; then
     for text in "${texts[@]}"; do
       # Перевіряємо, чи є рядок у файлі
-      if ! grep -q "$text" "$req_file"; then
+      if ! grep -q "^$text$" "$req_file"; then
         echo "$text" >> "$req_file"
         echo "Додано $text до $req_file"
       else
@@ -67,6 +69,7 @@ for dir in "${folders[@]}"; do
     echo "Файл $req_file не знайдено"
   fi
 done
+
 
 rm -rf $HOME/allora_models/
 # запуск контейнерів
