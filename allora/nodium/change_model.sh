@@ -40,49 +40,27 @@ cp "$source_dir/$model" "$HOME/worker1-10m/model.py"
 cp "$source_dir/$model" "$HOME/worker2-24h/model.py"
 cp "$source_dir/$model" "$HOME/worker3-20m/model.py"
 
-# Перевіряємо кожну папку
 
 # Вкажіть назви папок
 folders=("worker1-10m" "worker2-24h" "worker3-20m")
 
-# Вкажіть текстові рядки для перевірки та додавання
-# texts=("xgboost" "numpy" "pandas")
-texts=("xgboost==1.7.6" "lightgbm==3.3.5" "catboost==1.1" "tensorflow==2.13.0" "torch==2.0.1" "statsmodels==0.14.0" "h2o==3.42.0.1" "tpot==0.11.7" "fbprophet==0.7.1" "keras-tuner==1.1.0")
-
-# Перевіряємо кожну папку
-for dir in "${folders[@]}"; do
-  req_file="$dir/requirements.txt"
-  
-  # Перевіряємо, чи файл існує
-  if [ -f "$req_file" ]; then
-    # Перевіряємо, чи останній рядок пустий
-    last_line=$(tail -n 1 "$req_file")
-    if [ -n "$last_line" ]; then
-      echo "" >> "$req_file"
-    fi
-
-    for text in "${texts[@]}"; do
-      # Перевіряємо, чи є рядок у файлі
-      if ! grep -qx "$text" "$req_file"; then
-        # Додаємо новий рядок з текстом
-        echo "$text" >> "$req_file"
-        echo "Додано $text до $req_file з нового рядка"
-      else
-        echo "$text вже існує в $req_file"
-      fi
-    done
-  else
-    echo "Файл $req_file не знайдено"
-  fi
-done
-
+# мінямо спроби і затримку і ініціалізацію 
 for folder in "${folders[@]}"; do
-    # Змінюємо maxRetries і delay в config.json
     jq '.wallet.maxRetries = 5 | .wallet.delay = 5' "$folder/config.json" > "$folder/config_tmp.json" && mv "$folder/config_tmp.json" "$folder/config.json"
-    
-    # Заходимо в папку і виконуємо ./init.config
     (cd "$folder" && ./init.config)
 done
+
+# Вказуємо посилання на файл та назви папок
+url="https://raw.githubusercontent.com/RomanTsibii/nodes/main/allora/nodium/requirements.txt"
+
+# Завантажуємо файл вимрг до всіх бібліотек у кожну з папок
+for folder in "${folders[@]}"; do
+    # Створюємо папку, якщо вона не існує
+    mkdir -p "$folder"
+    # Завантажуємо файл у папку
+    curl -o "$folder/requirements.txt" "$url"
+done
+
 
 rm -rf $HOME/allora_models/
 # запуск контейнерів
