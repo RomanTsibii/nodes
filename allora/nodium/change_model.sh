@@ -49,7 +49,7 @@ folders=("worker1-10m" "worker2-24h" "worker3-20m")
 
 # Вкажіть текстові рядки для перевірки та додавання
 # texts=("xgboost" "numpy" "pandas")
-texts=("xgboost")
+texts=("xgboost" "lightgbm")
 
 # Перевіряємо кожну папку
 for dir in "${folders[@]}"; do
