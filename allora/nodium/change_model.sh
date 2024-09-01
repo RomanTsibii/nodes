@@ -47,7 +47,7 @@ folders=("worker1-10m" "worker2-24h" "worker3-20m")
 
 # Вкажіть текстові рядки для перевірки та додавання
 # texts=("xgboost" "numpy" "pandas")
-texts=("xgboost" "lightgbm" "catboost")
+texts=("xgboost==1.7.6" "lightgbm==3.3.5" "catboost==1.1" "tensorflow==2.13.0" "torch==2.0.1" "statsmodels==0.14.0" "h2o==3.42.0.1" "tpot==0.11.7" "fbprophet==0.7.1" "keras-tuner==1.1.0")
 
 # Перевіряємо кожну папку
 for dir in "${folders[@]}"; do
