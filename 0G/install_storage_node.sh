@@ -27,7 +27,8 @@ cd 0g-storage-node
 git submodule update --init
 
 # cargo build --release
-cpulimit --limit=50 -- cargo build --release
+# cpulimit --limit=50 -- cargo build --release
+taskset -c 0,1 cargo build --release
 
 
 sudo cp $HOME/0g-storage-node/target/release/zgs_node /usr/local/bin
