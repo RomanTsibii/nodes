@@ -1,6 +1,6 @@
 #!/bin/bash
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/0G/install_storage_node.sh)
-# screen -S 0G_run -dm bash -c "bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/0G/install_storage_node.sh)"
+# screen -S 0G_install_stoprage_node -dm bash -c "bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/0G/install_storage_node.sh)"
 
 
 if [ -n "$1" ]; then
