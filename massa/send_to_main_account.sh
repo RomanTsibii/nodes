@@ -29,7 +29,7 @@ massa_wallet_addresses=("${massa_wallet_addresses[@]/$massa_node_address}")
 function send_tokens {
     echo "$addr"
     # send_transaction SenderAddress ReceiverAddress Amount Fee: send coins from a wallet address
-    tx_trans=$(./massa-client -p $massa_pass send_transaction $addr $massa_node_address $int_balance 0)
+    tx_trans=$(./massa-client -p $massa_pass send_transaction $addr $massa_node_address $int_balance 0.01)
     echo $tx_trans
 }
 
