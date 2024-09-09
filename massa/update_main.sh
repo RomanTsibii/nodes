@@ -13,9 +13,9 @@ fi
 sudo systemctl stop massad
 cd $HOME
 rm -rf $HOME/massa
-wget https://github.com/massalabs/massa/releases/download/MAIN.2.1/massa_MAIN.2.1_release_linux.tar.gz
-tar zxvf massa_MAIN.2.1_release_linux.tar.gz
-rm massa_MAIN.2.1_release_linux.tar.gz
+wget https://github.com/massalabs/massa/releases/download/MAIN.2.3/massa_MAIN.2.3_release_linux.tar.gz
+tar zxvf massa_MAIN.2.3_release_linux.tar.gz
+rm massa_MAIN.2.3_release_linux.tar.gz
 
 # піднімаємо бекап
 cp -r $HOME/massa_backup_main/wallets/ $HOME/massa/massa-client/
