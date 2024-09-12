@@ -6,7 +6,7 @@
 # cat $HOME/ritual_GB_restart.log
 
 
-sudo apt install cron -y
+sudo apt install nano cron -y
 
 # видалити кронтаб на запуск кожні 30 хв
 crontab -l | grep -v "ritual_GB_restart.sh" | crontab -
@@ -77,4 +77,4 @@ echo "Скрипт ritual_GB_restart.sh створено і додано до cr
 
 # Запускаємо скрипт одразу після виконання setup_ritual.sh
 echo "Запускаємо ritual_GB_restart.sh з аргументом $limit_gb..."
-/bin/bash ~/ritual_GB_restart.sh $limit_gb >> ~/ritual_GB_restart.log 2>&1
+/bin/bash ~/ritual_GB_restart.sh $limit_gb >> ~/ritual_GB_restart.log 
