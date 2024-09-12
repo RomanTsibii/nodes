@@ -14,18 +14,9 @@ crontab -l | grep -v "ritual_GB_restart.sh" | crontab -
 # Перехід до домашньої директорії
 cd $HOME
 
-FILE="$HOME/infernet-container-starter/deploy/docker-compose.yaml"
-
-awk '
-  # Якщо знайшли "container_name: infernet-anvil", встановлюємо прапорець
-  /container_name: infernet-anvil/ { found=1; print; next }
-
-  # Якщо знайдений другий екземпляр "restart: on-failure" після infernet-anvil, пропускаємо його
-  found && /restart: on-failure/ && ++count == 2 { found=0; next }
-
-  # Друкуємо всі інші рядки
-  { print }
-' "$FILE" > "$FILE.tmp" && mv "$FILE.tmp" "$FILE"
+bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/ritual/fix_docker_file.sh)
+bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/ritual/fix_docker_file.sh)
+bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/ritual/fix_docker_file.sh)
 
 # Встановлюємо дефолтний граничний розмір у 10 ГБ, якщо аргумент не передано
 limit_gb=${1:-10}
