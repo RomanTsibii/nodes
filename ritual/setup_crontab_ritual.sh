@@ -6,7 +6,7 @@
 # cat $HOME/ritual_GB_restart.log
 
 # видалити кронтаб на запуск кожні 30 хв
-# crontab -l | grep -v "ritual_GB_restart.sh" | crontab -
+crontab -l | grep -v "ritual_GB_restart.sh" | crontab -
 
 sudo apt install cron -y
 
