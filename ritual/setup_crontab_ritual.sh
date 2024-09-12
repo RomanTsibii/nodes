@@ -5,10 +5,11 @@
 # перевірити логи 
 # cat $HOME/ritual_GB_restart.log
 
-# видалити кронтаб на запуск кожні 30 хв
-crontab -l | grep -v "ritual_GB_restart.sh" | crontab -
 
 sudo apt install cron -y
+
+# видалити кронтаб на запуск кожні 30 хв
+crontab -l | grep -v "ritual_GB_restart.sh" | crontab -
 
 # Перехід до домашньої директорії
 cd $HOME
