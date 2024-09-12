@@ -8,6 +8,8 @@
 # видалити кронтаб на запуск кожні 30 хв
 # crontab -l | grep -v "ritual_GB_restart.sh" | crontab -
 
+sudo apt install cron -y
+
 # Перехід до домашньої директорії
 cd $HOME
 
