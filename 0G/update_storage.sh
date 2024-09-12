@@ -47,7 +47,7 @@ rm -rf $HOME/0g-storage-node/run/db
 rm -rf $HOME/0g-storage-node/run/network
 rm -rf $HOME/0g-storage-node/run/log
 
-sudo systemctl restart zgs.service
+sudo systemctl start zgs.service
 
 
 
