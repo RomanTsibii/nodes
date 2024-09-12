@@ -13,10 +13,14 @@ cd $HOME
 
 FILE="$HOME/infernet-container-starter/deploy/docker-compose.yaml"
 
-# Створюємо тимчасовий файл, щоб обробити вміст
 awk '
-  /container_name: infernet-anvil/ { found=1 }
-  found && /restart: on-failure/ && ++count == 2 { next }
+  # Якщо знайшли "container_name: infernet-anvil", встановлюємо прапорець
+  /container_name: infernet-anvil/ { found=1; print; next }
+
+  # Якщо знайдений другий екземпляр "restart: on-failure" після infernet-anvil, пропускаємо його
+  found && /restart: on-failure/ && ++count == 2 { found=0; next }
+
+  # Друкуємо всі інші рядки
   { print }
 ' "$FILE" > "$FILE.tmp" && mv "$FILE.tmp" "$FILE"
 
