@@ -1,5 +1,5 @@
 #!/bin/bash
-# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/0G/install_storage_node.sh) 
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/0G/update_storage.sh) 
 
 if [ -n "$1" ]; then
   PRIVATE_KEY="$1"
