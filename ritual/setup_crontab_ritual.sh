@@ -11,6 +11,15 @@
 # Перехід до домашньої директорії
 cd $HOME
 
+FILE="$HOME/infernet-container-starter/deploy/docker-compose.yaml"
+
+# Створюємо тимчасовий файл, щоб обробити вміст
+awk '
+  /container_name: infernet-anvil/ { found=1 }
+  found && /restart: on-failure/ && ++count == 2 { next }
+  { print }
+' "$FILE" > "$FILE.tmp" && mv "$FILE.tmp" "$FILE"
+
 # Встановлюємо дефолтний граничний розмір у 10 ГБ, якщо аргумент не передано
 limit_gb=${1:-10}
 
