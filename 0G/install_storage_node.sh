@@ -21,7 +21,7 @@ cd $HOME
 STORAGE_VERSION="v0.5.1"
 echo "STORAGE VERSION: $STORAGE_VERSION"
 
-if [ ! -d "0g-storage-node" ]; then
+if [ ! -d "./0g-storage-node" ]; then
   sudo apt update && sudo apt upgrade -y 
   bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/tools/main/main.sh) &>/dev/null
   bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/tools/main/rust.sh) &>/dev/null
@@ -45,7 +45,7 @@ else
   git checkout tags/$STORAGE_VERSION --force
   git submodule update --init
   sudo systemctl stop zgs
-  cargo build --release
+  taskset -c 0,1,2 cargo build --release
 fi
 
 cd 0g-storage-node
