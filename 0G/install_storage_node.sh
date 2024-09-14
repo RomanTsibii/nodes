@@ -48,14 +48,11 @@ else
   taskset -c 0,1,2 cargo build --release
 fi
 
-cd 0g-storage-node
-
-
 echo "Репозиторий успешно склонирован, начинаем настройку переменных"
 echo "-----------------------------------------------------------------------------"
 # Получение приватного ключа
 # PRIVATE_KEY=$($HOME/go/bin/0gchaind keys unsafe-export-eth-key wallet2 --keyring-backend test)
-ADDRES=$(echo "0x$(0gchaind debug addr $(0gchaind keys show wallet2 -a --keyring-backend test) | grep hex | awk '{print $3}')")
+# ADDRES=$(echo "0x$(0gchaind debug addr $(0gchaind keys show wallet2 -a --keyring-backend test) | grep hex | awk '{print $3}')")
 #Получаем IP
 ENR_ADDR=$(wget -qO- eth0.me)
 
