@@ -2,7 +2,7 @@
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/0G/install_storage_node.sh)
 # screen -S 0G_install_stoprage_node -dm bash -c "bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/0G/install_storage_node.sh)"
 
-sudo apt update && sudo apt upgrade -y
+# sudo apt update && sudo apt upgrade -y
 
 if [ -n "$1" ]; then
   PRIVATE_KEY="$1"
