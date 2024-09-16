@@ -24,3 +24,5 @@ wget -O storage_0gchain_snapshot.lz4 "http://$random_ip/storage_0gchain_snapshot
 
 # Виведення обраної IP-адреси
 # echo "Використано IP: $random_ip"
+
+echo "DONE"
