@@ -2,8 +2,8 @@
 
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/0G/download_snapshot.sh)
 # Список IP-адрес, записаний через перенесення рядків
+# 188.40.61.176
 ips=(
-    188.40.61.176
     161.97.84.217
     84.247.135.34
     161.97.97.252
