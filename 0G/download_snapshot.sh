@@ -49,6 +49,7 @@ if [ "$file_valid" = false ]; then
 fi
 
 # Розпаковка та перезапуск служби
+sudo apt-get install wget lz4 aria2 pv -y &>/dev/null
 lz4 -c -d storage_0gchain_snapshot.lz4 | pv | tar -x -C $HOME/0g-storage-node/run
 sudo systemctl restart zgs.service
 
