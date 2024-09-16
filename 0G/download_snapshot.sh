@@ -51,6 +51,8 @@ fi
 # Розпаковка та перезапуск служби
 sudo apt-get install wget lz4 aria2 pv -y &>/dev/null
 lz4 -c -d storage_0gchain_snapshot.lz4 | pv | tar -x -C $HOME/0g-storage-node/run
-sudo systemctl restart zgs.service
+sudo systemctl restart zgs.service &>/dev/null
+sudo systemctl restart 0g_storage &>/dev/null
 
+echo "tail -f ~/0g-storage-node/run/log/*"
 echo "DONE"
