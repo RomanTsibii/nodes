@@ -5,8 +5,8 @@
 # 188.40.61.176
 cd $HOME
 FILE="storage_0gchain_snapshot.lz4"
-MIN_SIZE=16865300
-MAX_SIZE=16865400
+MIN_SIZE=16985884
+MAX_SIZE=16986084
 file_valid=false
 
 # Перевірка наявності файлу та його розміру
