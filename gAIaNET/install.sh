@@ -21,6 +21,7 @@ pip install requests faker
 wget -O random_chat_with_faker.py https://raw.githubusercontent.com/RomanTsibii/nodes/refs/heads/main/gAIaNET/random_chat_with_faker.py
 
 sed -i "s/АДРЕСВАШЕГОКОШЕЛЬКА/$Node_ID/g" $HOME/random_chat_with_faker.py
+sed -i 's/\x1B\[[0-9;]*[a-zA-Z]//g' $HOME/random_chat_with_faker.py
 
 if [ "$#" -ne 2 ]; then
     echo "Used sleep fron 60 to 180"
