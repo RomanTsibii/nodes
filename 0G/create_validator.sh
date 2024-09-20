@@ -8,6 +8,7 @@ if [ "$#" -ne 2 ]; then
     exit 1
 fi
 
+source $HOME/.profile
 # Змінні для Telegram
 BOT_TOKEN="$1"
 CHAT_ID="$2"
