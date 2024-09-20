@@ -22,23 +22,23 @@ docker volume prune -f
 
 # заміна рпс 
 cd worker1-10m
-jq '.wallet.submitTx = true | .wallet.gasAdjustment = 1.5 | .wallet.gas = "auto"' config.json > tmp.$$.json && mv tmp.$$.json config.json
-sed -i 's|image: alloranetwork/allora-offchain-node:v0.1.0|image: alloranetwork/allora-offchain-node:latest|g' docker-compose.yml
-./init.config
+# jq '.wallet.submitTx = true | .wallet.gasAdjustment = 1.5 | .wallet.gas = "auto"' config.json > tmp.$$.json && mv tmp.$$.json config.json
+# sed -i 's|image: alloranetwork/allora-offchain-node:v0.1.0|image: alloranetwork/allora-offchain-node:latest|g' docker-compose.yml
+# ./init.config
 docker compose pull
 cd ..
 
 cd worker2-24h
-jq '.wallet.submitTx = true | .wallet.gasAdjustment = 1.5 | .wallet.gas = "auto"' config.json > tmp.$$.json && mv tmp.$$.json config.json
-sed -i 's|image: alloranetwork/allora-offchain-node:v0.1.0|image: alloranetwork/allora-offchain-node:latest|g' docker-compose.yml
-./init.config
+# jq '.wallet.submitTx = true | .wallet.gasAdjustment = 1.5 | .wallet.gas = "auto"' config.json > tmp.$$.json && mv tmp.$$.json config.json
+# sed -i 's|image: alloranetwork/allora-offchain-node:v0.1.0|image: alloranetwork/allora-offchain-node:latest|g' docker-compose.yml
+# ./init.config
 docker compose pull
 cd ..
 
 cd worker3-20m
-jq '.wallet.submitTx = true | .wallet.gasAdjustment = 1.5 | .wallet.gas = "auto"' config.json > tmp.$$.json && mv tmp.$$.json config.json
-sed -i 's|image: alloranetwork/allora-offchain-node:v0.1.0|image: alloranetwork/allora-offchain-node:latest|g' docker-compose.yml
-./init.config
+# jq '.wallet.submitTx = true | .wallet.gasAdjustment = 1.5 | .wallet.gas = "auto"' config.json > tmp.$$.json && mv tmp.$$.json config.json
+# sed -i 's|image: alloranetwork/allora-offchain-node:v0.1.0|image: alloranetwork/allora-offchain-node:latest|g' docker-compose.yml
+# ./init.config
 docker compose pull
 cd ..
 
