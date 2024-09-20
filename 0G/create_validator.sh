@@ -30,8 +30,7 @@ while true; do
   sudo systemctl start 0g
   send_telegram_message "Введіть сід-фразу від OG для відновлення:"
   echo "Введіть сід-фразу від OG для відновлення:"
-  read OG_SEED
-  0gchaind keys add wallet --eth --recover <<< "$OG_SEED"
+  0gchaind keys add wallet --eth --recover 
   echo "Введите OG_NODENAME"
   read OG_NODENAME
   
