@@ -32,7 +32,7 @@ while true; do
   # Перевіряємо коректність даних
   if ! [[ "$local_height" =~ ^[0-9]+$ ]] || ! [[ "$network_height" =~ ^[0-9]+$ ]]; then
     echo -e "\033[1;31mError: Invalid block height data. Retrying...\033[0m"
-    sleep 5
+    sleep 1
     continue
   fi
 
@@ -51,5 +51,5 @@ while true; do
     send_telegram_message "$message"
   fi
 
-  sleep 5
+  sleep 1
 done
