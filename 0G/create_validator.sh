@@ -1,6 +1,12 @@
 #!/bin/bash
 
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/0G/create_validator.sh)
+# і у файл seed_data.txt  (сід сід сід сід | нік_нейм)
+# Перевірка, чи передано два аргументи (токен бота і chat_id)
+if [ "$#" -ne 2 ]; then
+    echo "Помилка: потрібно передати два параметри: <токен бота> <chat_id>"
+    exit 1
+fi
 
 # Змінні для Telegram
 BOT_TOKEN="$1"
@@ -33,62 +39,72 @@ recover_wallet_with_seed() {
 EOF
 }
 
-while true; do
-  # Зупиняємо сервіс
-  sudo systemctl stop 0g
-  
-  # Виконуємо reset Tendermint
-  0gchaind tendermint unsafe-reset-all
-  rm -rf $HOME/.0gchain/data 
+# Шлях до файлу з сід-фразами та іменами вузлів
+SEED_FILE="seed_data.txt"
 
-  # Завантажуємо та розпаковуємо snapshot
-  curl https://server-5.itrocket.net/testnet/og/og_2024-09-20_1142635_snap.tar.lz4 | lz4 -dc - | tar -xf - -C $HOME/.0gchain
+# Перевіряємо, чи файл існує
+if [ ! -f "$SEED_FILE" ]; then
+    echo "Помилка: файл $SEED_FILE не знайдено."
+    exit 1
+fi
 
-  # Запускаємо сервіс
-  sudo systemctl start 0g
-  
-  # Повідомлення в Telegram для вводу сід-фрази
-  send_telegram_message "Введіть сід-фразу від OG для відновлення:"
-  
-  echo "Введіть сід-фразу від OG для відновлення:"
-  read OG_SEED
-  
-  # Викликаємо функцію для відновлення гаманця за допомогою expect
-  recover_wallet_with_seed "$OG_SEED"
+# Цикл для обробки кожного рядка з файлу
+while IFS='|' read -r seed OG_NODENAME; do
+    seed=$(echo "$seed" | xargs)  # Видаляємо зайві пробіли
+    OG_NODENAME=$(echo "$OG_NODENAME" | xargs)  # Видаляємо зайві пробіли
+    echo "Обробка валідатора: $OG_NODENAME з сід-фразою: $seed"
 
-  # Зчитуємо назву вузла
-  echo "Введите OG_NODENAME"
-  read OG_NODENAME
-  
-  # Створення валідатора
-  VALIDATOR_OUTPUT=$(0gchaind tx staking create-validator \
-    --amount=100000ua0gi \
-    --pubkey=$(0gchaind tendermint show-validator) \
-    --moniker="$OG_NODENAME" \
-    --chain-id=zgtendermint_16600-2 \
-    --commission-rate="0.10" \
-    --commission-max-rate="0.20" \
-    --commission-max-change-rate="0.01" \
-    --min-self-delegation=10000 \
-    --gas=auto \
-    --gas-adjustment=1.6 \
-    --fees=800ua0gi \
-    --from=wallet \
-    -y)
+    # Зупиняємо сервіс
+    sudo systemctl stop 0g
 
-  # Збереження резервної копії приватного ключа валідатора
-  mkdir -p backpus_0G_validators
-  mv $HOME/.0gchain/config/priv_validator_key.json backpus_0G_validators/$OG_NODENAME.json
+    # Виконуємо reset Tendermint
+    0gchaind tendermint unsafe-reset-all
+    # rm -rf $HOME/.0gchain/data
 
-  # Витягуємо хеш транзакції (txhash)
-  TX_HASH=$(echo "$VALIDATOR_OUTPUT" | grep -oP '(?<=txhash: )\w+')
+    # Завантажуємо та розпаковуємо snapshot
+    # curl https://server-5.itrocket.net/testnet/og/og_2024-09-20_1142635_snap.tar.lz4 | lz4 -dc - | tar -xf - -C $HOME/.0gchain
+    lz4 -dc og_2024-09-21_1161268_snap.tar.lz4 | tar -xf - -C $HOME/.0gchain
 
-  # Перевірка, чи є txhash і чи транзакція успішна (code: 0)
-  if [[ $TX_HASH ]]; then
-      # Надсилаємо повідомлення в Telegram про успішне створення валідатора з хешем транзакції
-      send_telegram_message "Валідатор *$OG_NODENAME* успішно створено | txhash: $TX_HASH"
-  else
-      # Повідомлення в Telegram про помилку
-      send_telegram_message "Помилка при створенні валідатора *$OG_NODENAME*"
-  fi
-done
+    # Запускаємо сервіс
+    sudo systemctl start 0g
+
+    sleep 20
+    # Відновлення гаманця за допомогою сід-фрази
+    recover_wallet_with_seed "$seed"
+
+    # Створення валідатора
+    VALIDATOR_OUTPUT=$(0gchaind tx staking create-validator \
+      --amount=100000ua0gi \
+      --pubkey=$(0gchaind tendermint show-validator) \
+      --moniker="$OG_NODENAME" \
+      --chain-id=zgtendermint_16600-2 \
+      --commission-rate="0.10" \
+      --commission-max-rate="0.20" \
+      --commission-max-change-rate="0.01" \
+      --min-self-delegation=10000 \
+      --gas=auto \
+      --gas-adjustment=1.6 \
+      --fees=800ua0gi \
+      --from=wallet \
+      -y)
+
+    # Збереження резервної копії приватного ключа валідатора
+    mkdir -p backpus_0G_validators
+    mv $HOME/.0gchain/config/priv_validator_key.json backpus_0G_validators/$OG_NODENAME.json
+
+    # Витягуємо хеш транзакції (txhash)
+    TX_HASH=$(echo "$VALIDATOR_OUTPUT" | grep -oP '(?<=txhash: )\w+')
+
+    # Перевірка, чи є txhash і чи транзакція успішна (code: 0)
+    if [[ $TX_HASH ]]; then
+        # Надсилаємо повідомлення в Telegram про успішне створення валідатора з хешем транзакції
+        send_telegram_message "Валідатор *$OG_NODENAME* успішно створено | txhash: https://testnet.0g.explorers.guru/transaction/$TX_HASH"
+    else
+        # Повідомлення в Telegram про помилку
+        send_telegram_message "Помилка при створенні валідатора *$OG_NODENAME*"
+    fi
+
+    # Затримка перед обробкою наступного валідатора (якщо потрібно)
+    sleep 25
+
+done < "$SEED_FILE"
