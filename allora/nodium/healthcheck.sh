@@ -14,7 +14,7 @@ DOCKER_COMPOSE_PATHS=(
 # Функція для перевірки логів і перезапуску контейнера
 check_and_restart() {
     local compose_file=$1
-    local current_time=$(date +%s)
+    local current_time=$(date -u +%s)  # Поточний час в UTC
 
     # Отримуємо останній час із логів у форматі ISO 8601
     local last_log_time=$(docker compose -f "$compose_file" logs worker | grep "Send Worker Data to chain" | grep txHash | awk -F'"time":' '{split($2, a, ","); gsub(/"|Z/, "", a[1]); print a[1]}' | tail -1)
@@ -23,8 +23,17 @@ check_and_restart() {
         echo "[$(date)] Помилка: Не вдалося знайти час у логах або логи порожні для $compose_file. Перезапускаємо Docker-контейнери..."
         docker compose -f "$compose_file" restart
     else
-        # Конвертуємо ISO дату у Unix timestamp
-        local last_log_timestamp=$(date -d "$last_log_time" +%s)
+        # Конвертуємо ISO дату у Unix timestamp, також в UTC
+        local last_log_timestamp=$(date -ud "$last_log_time" +%s 2>/dev/null)
+        
+        if [ $? -ne 0 ]; then
+            echo "[$(date)] Помилка: Невірний формат дати $last_log_time для $compose_file."
+            return
+        fi
+
+        # Вивести діагностичні повідомлення для налагодження
+        echo "[$(date)] Час останньої транзакції: $last_log_time (Unix timestamp: $last_log_timestamp)"
+        echo "[$(date)] Поточний час (UTC): $(date -u) (Unix timestamp: $current_time)"
 
         if [ $((current_time - last_log_timestamp)) -gt $CHECK_INTERVAL ]; then
             echo "[$(date)] Не було даних протягом останніх 40 хвилин, перезапускаємо контейнер $compose_file..."
