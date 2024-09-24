@@ -45,5 +45,5 @@ cd ..
 
 # запуск контейнерів
 docker compose -f $HOME/worker1-10m/docker-compose.yml up -d --build
-docker compose -f $HOME/worker2-24h/docker-compose.yml up -d --build
+# docker compose -f $HOME/worker2-24h/docker-compose.yml up -d --build
 docker compose -f $HOME/worker3-20m/docker-compose.yml up -d --build
