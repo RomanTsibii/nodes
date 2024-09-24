@@ -24,7 +24,7 @@ docker compose -f $HOME/worker3-20m/docker-compose.yml down -v
 
 # заміна рпс 
 cd worker1-10m
-sed -i "/\"nodeRpc\"/ s|\"nodeRpc\": \".*\"|\"nodeRpc\": \"$RPC\"|" config.json
+sudo sed -i "/\"nodeRpc\"/ s|\"nodeRpc\": \".*\"|\"nodeRpc\": \"$RPC\"|" config.json
 ./init.config
 cd ..
 
@@ -34,7 +34,7 @@ cd ..
 # cd ..
 
 cd worker3-20m
-sed -i "/\"nodeRpc\"/ s|\"nodeRpc\": \".*\"|\"nodeRpc\": \"$RPC\"|" config.json
+sudo sed -i "/\"nodeRpc\"/ s|\"nodeRpc\": \".*\"|\"nodeRpc\": \"$RPC\"|" config.json
 ./init.config
 cd ..
 
