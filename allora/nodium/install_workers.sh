@@ -44,8 +44,8 @@ jq --arg rpc "$RPC" '.wallet.nodeRpc = $rpc' config.json > tmp.json && mv tmp.js
 jq --arg seed "$WALLET_SEED_PHRASE" '.wallet.addressRestoreMnemonic = $seed' config.json > tmp.json && mv tmp.json config.json
 # sed -i "s|just clap slim ...|$WALLET_SEED_PHRASE|" config.json
 ./init.config
-docker compose build
-docker compose up -d
+# docker compose build
+# docker compose up -d
 cd ..
 
 echo "------------- install 3 worker -------------"
@@ -57,8 +57,8 @@ git checkout worker3-20m
 jq --arg rpc "$RPC" '.wallet.nodeRpc = $rpc' config.json > tmp.json && mv tmp.json config.json
 jq --arg seed "$WALLET_SEED_PHRASE" '.wallet.addressRestoreMnemonic = $seed' config.json > tmp.json && mv tmp.json config.json
 ./init.config
-# docker compose build
-# docker compose up -d
+docker compose build
+docker compose up -d
 cd ..
 
 
