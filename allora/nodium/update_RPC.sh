@@ -3,6 +3,7 @@
 
 echo "Введите RPC"
 read RPC
+cd $HOME
 
 # зупинка контейнерів
 docker compose -f $HOME/worker1-10m/docker-compose.yml down -v
