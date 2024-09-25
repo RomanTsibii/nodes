@@ -37,7 +37,7 @@ fi
 
 # Копіювання вибраної моделі
 cp "$source_dir/$model" "$HOME/worker1-10m/model.py"
-cp "$source_dir/$model" "$HOME/worker2-24h/model.py"
+# cp "$source_dir/$model" "$HOME/worker2-24h/model.py"
 cp "$source_dir/$model" "$HOME/worker3-20m/model.py"
 
 
