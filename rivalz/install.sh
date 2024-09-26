@@ -64,24 +64,18 @@ WorkingDirectory=/root/.rivalz
 WantedBy=multi-user.target
 EOL
 
-# Оновлення конфігурації systemd
-echo "Оновлюємо конфігурацію systemd"
 sudo systemctl daemon-reload
 
-# Увімкнення сервісу для автозапуску
-echo "Увімкнення сервісу для автозапуску"
 sudo systemctl enable rivalz.service
 
-# Запуск сервісу
-echo "Запуск сервісу"
 sudo systemctl start rivalz.service
 
 # Перевірка статусу сервісу
-echo "Статус сервісу:"
-sleep 10
-sudo systemctl status rivalz.service
+echo "Wail 20sec info status:"
+sleep 20
 rivalz info
 
-
-echo "Логи:"
+echo "Chech Logs:"
 echo "sudo journalctl -u rivalz.service  -n 80 -f"
+
+sudo systemctl status rivalz.service
