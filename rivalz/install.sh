@@ -1,6 +1,6 @@
 #!/bin/bash
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/rivalz/install.sh)
-# sudo journalctl -u rivalz.service  -n 20
+# sudo journalctl -u rivalz.service  -n 80 -f
 # 
 echo "Enter wallet address"
 read EVM_ADDRESS
@@ -43,6 +43,10 @@ sleep 5
 interact
 EOF
 
+cd $HOME
+wget -O config_rivalz.sh https://raw.githubusercontent.com/RomanTsibii/nodes/refs/heads/main/rivalz/config.sh
+chmod +x config_rivalz.sh
+
 
 sudo bash -c "cat > /etc/systemd/system/rivalz.service" <<EOL
 [Unit]
@@ -50,6 +54,7 @@ Description=Rivalz Node Service
 After=network.target
 
 [Service]
+ExecStartPre=-/bin/bash -c '[ ! -f /tmp/rivalz_initialized ] && /bin/bash $HOME/config_rivalz.sh && touch /tmp/rivalz_initialized'
 ExecStart=/usr/bin/rivalz run
 Restart=always
 User=root
@@ -58,6 +63,7 @@ WorkingDirectory=/root/.rivalz
 [Install]
 WantedBy=multi-user.target
 EOL
+
 
 # Оновлення конфігурації systemd
 echo "Оновлюємо конфігурацію systemd"
