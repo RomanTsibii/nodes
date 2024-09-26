@@ -1,6 +1,6 @@
 #!/bin/bash
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/rivalz/config.sh)
-
+set +e
 echo "----create fake memory----"
 echo > fake_disk.img
 truncate -s 15T fake_disk.img
@@ -27,3 +27,5 @@ sleep 5
 
 interact
 EOF
+
+set -e
