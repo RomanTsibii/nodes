@@ -7,7 +7,7 @@ read EVM_ADDRESS
 
 
 echo "----Install nodejs----"
-sudo apt update && sudo apt upgrade -y
+sudo apt update  # && sudo apt upgrade -y
 curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -  &>/dev/null
 sudo apt install -y nodejs expect
 npm i -g rivalz-node-cli
