@@ -43,7 +43,7 @@ sleep 5
 interact
 EOF
 
-cd $HOME
+cd /root
 wget -O config_rivalz.sh https://raw.githubusercontent.com/RomanTsibii/nodes/refs/heads/main/rivalz/config.sh
 chmod +x config_rivalz.sh
 
@@ -54,7 +54,7 @@ Description=Rivalz Node Service
 After=network.target
 
 [Service]
-ExecStartPre=-/bin/bash -c '[ ! -f /tmp/rivalz_initialized ] && /bin/bash $HOME/config_rivalz.sh && touch /tmp/rivalz_initialized'
+ExecStartPre=-/bin/bash -c '[ ! -f /tmp/rivalz_initialized ] && /bin/bash /root/config_rivalz.sh && touch /tmp/rivalz_initialized'
 ExecStart=/usr/bin/rivalz run
 Restart=always
 User=root
