@@ -78,4 +78,4 @@ rivalz info
 echo "Chech Logs:"
 echo "sudo journalctl -u rivalz.service  -n 80 -f"
 
-sudo systemctl status rivalz.service
+# sudo systemctl status rivalz.service
