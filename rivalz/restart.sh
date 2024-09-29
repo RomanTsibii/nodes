@@ -1,5 +1,5 @@
 #!/bin/bash
-# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/rivalz/install.sh)
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/rivalz/restart.sh)
 # sudo journalctl -u rivalz.service  -n 80 -f
 
 loop_devices=$(losetup -a | grep "fake_disk.img" | awk -F: '{print $1}')
