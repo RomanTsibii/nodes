@@ -7,7 +7,31 @@ curl -sSfL 'https://github.com/GaiaNet-AI/gaianet-node/releases/latest/download/
 
 source ~/.bashrc
 gaianet init --config https://raw.githubusercontent.com/GaiaNet-AI/node-configs/main/qwen2-0.5b-instruct/config.json
-gaianet start
+
+sudo bash -c "cat > /etc/systemd/system/gaianet.service" <<EOL
+[Unit]
+Description=GaiaNet Node Service
+After=network.target
+
+[Service]
+Type=forking
+ExecStart=/root/gaianet/bin/gaianet run
+ExecStop=/root/gaianet/bin/gaianet stop
+PIDFile=/var/run/gaianet.pid
+Restart=on-failure
+User=root
+WorkingDirectory=/root/gaianet
+Environment=GAIANET_ENV=production
+
+[Install]
+WantedBy=multi-user.target
+EOL
+
+
+sudo systemctl daemon-reload
+sudo systemctl enable gaianet
+sudo systemctl start gaianet
+sudo systemctl status gaianet --no-pager
 
 gaianet_info=$(gaianet info)
 Node_ID=$(echo "$gaianet_info" | awk -F 'Node ID: ' '{print $2}' | awk '{print $1}')
