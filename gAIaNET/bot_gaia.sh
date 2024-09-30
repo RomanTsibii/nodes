@@ -19,14 +19,16 @@ stats_file="token_stats.txt"
 responses_file="responses.txt"
 
 # Змінні для налаштування динамічного контролю запитів
-max_time=60  # Максимальний час очікування для одного запиту (60 секунд)
-request_words=200  # Початкове значення для кількості слів у запиті
+max_time=120  # Максимальний час очікування для одного запиту (60 секунд)
+request_words=450  # Початкове значення для кількості символів у запиті
 execution_times=()  # Масив для зберігання часу виконання останніх 50 запитів
+tokens_per_second_values=()  # Масив для зберігання кількості токенів на секунду за останні 50 запитів
 
 # Змінні для збереження загальної кількості токенів, кількості запитів та загального часу виконання запитів
 total_sum=0
 request_count=0
 total_execution_time=0
+average_tokens_per_second=0
 
 # Функція для обчислення середнього часу останніх 50 запитів
 calculate_average_execution_time_50() {
@@ -40,6 +42,21 @@ calculate_average_execution_time_50() {
         average_execution_time_50=$((sum / count))
     else
         average_execution_time_50=0
+    fi
+}
+
+# Функція для обчислення середньої кількості токенів на секунду за останні 50 запитів
+calculate_average_tokens_per_second() {
+    local sum=0
+    local count=${#tokens_per_second_values[@]}
+
+    if [[ $count -gt 0 ]]; then
+        for tps in "${tokens_per_second_values[@]}"; do
+            sum=$(echo "$sum + $tps" | bc)
+        done
+        average_tokens_per_second=$(echo "scale=2; $sum / $count" | bc)
+    else
+        average_tokens_per_second=0
     fi
 }
 
@@ -60,6 +77,7 @@ save_response() {
     echo "Tokens per second: $tokens_per_second" >> "$responses_file"
     echo "Request count: $request_count" >> "$responses_file"
     echo "Average execution time (last 50 requests): ${average_execution_time_50}s" >> "$responses_file"
+    echo "Average tokens per second (last 50 requests): ${average_tokens_per_second}" >> "$responses_file"
     echo "Request words: $request_words" >> "$responses_file"
     echo "------------------------" >> "$responses_file"
 }
@@ -67,11 +85,12 @@ save_response() {
 # Функція для динамічного регулювання кількості слів у запиті
 adjust_request_words() {
     calculate_average_execution_time_50  # Обчислюємо середній час для останніх 50 запитів
+    calculate_average_tokens_per_second  # Обчислюємо середню кількість токенів на секунду за останні 50 запитів
 
     if [[ $average_execution_time_50 -gt 50 ]]; then
-        request_words=$((request_words - 10))  # Зменшуємо на 10, якщо середній час > 50 секунд
-    elif [[ $average_execution_time_50 -lt 30 ]]; then
-        request_words=$((request_words + 10))  # Збільшуємо на 10, якщо середній час < 30 секунд
+        request_words=$((request_words - 30))  # Зменшуємо на 30, якщо середній час > 50 секунд
+    elif [[ $average_execution_time_50 -lt 20 ]]; then
+        request_words=$((request_words + 30))  # Збільшуємо на 30, якщо середній час < 40 секунд
     fi
 
     # Перевіряємо, щоб request_words не стало негативним або занадто малим
@@ -91,11 +110,11 @@ send_request() {
     escaped_line=$(echo "$line" | jq -R .)
 
     while [[ $retry_count -lt $max_retry ]]; do
-        # Виконання запиту з динамічною зміною кількості слів
+        # Виконання запиту з динамічною зміною кількості символів
         response=$(curl -s --max-time $max_time -X POST "$url" \
             -H 'accept: application/json' \
             -H 'Content-Type: application/json' \
-            -d "{\"messages\":[{\"role\":\"system\", \"content\": \"You are a helpful assistant. Please provide concise responses with no more than ${request_words} words.\"}, {\"role\":\"user\", \"content\": $escaped_line}]}")
+            -d "{\"messages\":[{\"role\":\"system\", \"content\": \"You are a helpful assistant. Please provide a response that is close to ${request_words} characters.\"}, {\"role\":\"user\", \"content\": $escaped_line}]}")
 
         # Виведення відповіді для діагностики
         echo "API response: $response" | tee -a "$log_file"
@@ -117,10 +136,10 @@ send_request() {
         fi
     done
 
-    if [[ $retry_count -eq $max_retry ]]; then
-        echo "Max retries reached. Skipping request." | tee -a "$log_file"
-        request_words=$((request_words - 30))  # Якщо помилка, зменшуємо кількість слів на 30
-        return
+    # Якщо після всіх спроб виникла помилка або час виконання > 59 секунд, зменшуємо request_words на 100
+    if [[ $retry_count -eq $max_retry || $execution_time -gt 59 ]]; then
+        echo "Request words reduced by 100 due to timeout or execution time exceeding 59 seconds." | tee -a "$log_file"
+        request_words=$((request_words - 100))
     fi
 
     # Кінцевий час і тривалість
@@ -133,32 +152,35 @@ send_request() {
 
     # Зберігаємо час виконання останніх 50 запитів
     execution_times+=("$execution_time")
-    if [[ ${#execution_times[@]} -gt 50 ]]; then
+    if [[ ${#execution_times[@]} -gt 15 ]]; then
         execution_times=("${execution_times[@]:1}")  # Зберігаємо тільки останні 50 значень
     fi
 
-    # Обчислюємо середній час виконання запиту
-    calculate_average_execution_time_50
-
     # Обчислюємо кількість токенів за секунду
-    if [[ $execution_time -gt 0 ]]; then
+    if [[ $execution_time -gt 0 && $tokens -gt 0 ]]; then
         tokens_per_second=$(echo "scale=2; $tokens / $execution_time" | bc)
+        # Зберігаємо токени за секунду, тільки якщо значення валідне
+        tokens_per_second_values+=("$tokens_per_second")
+        if [[ ${#tokens_per_second_values[@]} -gt 50 ]]; then
+            tokens_per_second_values=("${tokens_per_second_values[@]:1}")  # Зберігаємо тільки останні 50 значень
+        fi
     else
-        tokens_per_second=0
+        echo "Error: Invalid execution time or tokens, skipping tokens per second calculation" | tee -a "$log_file"
     fi
 
     # Виводимо результат із відступами для кожного рядка, записуємо в файл окрім суми балансу
     echo '----------------------------------------------------------------------------' | tee -a "$log_file"
     echo "      Request: $line" | tee -a "$log_file"
-    
+
     echo "      Content: " | tee -a "$log_file"
     echo "$content" | sed 's/^/      /' | tee -a "$log_file"
-    
+
     echo "      Total tokens: $tokens" | tee -a "$log_file"
     echo "      Execution time: ${execution_time}s" | tee -a "$log_file"
     echo "      Tokens per second: $tokens_per_second" | tee -a "$log_file"
     echo "      Request count: $request_count" | tee -a "$log_file"
     echo "      Average execution time (last 50 requests): ${average_execution_time_50}s" | tee -a "$log_file"
+    echo "      Average tokens per second (last 50 requests): ${average_tokens_per_second}" | tee -a "$log_file"
     echo "      Request words: $request_words" | tee -a "$log_file"
 
     # Додаємо кількість токенів до загальної суми
@@ -186,7 +208,7 @@ while true; do
         sleep 1
     else
         echo "File '$file' not found. Retrying in 5 seconds..." | tee -a "$log_file"
-        request_words=$((request_words - 30))  # Зменшуємо на 30 у випадку помилки
+        request_words=$((request_words - 100))  # Зменшуємо на 100 у випадку помилки
         sleep 5
     fi
 done
