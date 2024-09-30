@@ -15,7 +15,7 @@ export DEBIAN_FRONTEND=noninteractive
 # curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - &>/dev/null
 # sudo apt install -y nodejs expect -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
 
-npm i -g rivalz-node-cli
+# npm i -g rivalz-node-cli
 
 echo "----create fake memory----"
 echo > fake_disk.img
