@@ -7,9 +7,14 @@ read EVM_ADDRESS
 
 
 echo "----Install nodejs----"
-sudo apt update  # && sudo apt upgrade -y
-curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -  &>/dev/null
-sudo apt install -y nodejs expect
+# Отключаем интерактивный режим и устанавливаем необходимые пакеты
+export DEBIAN_FRONTEND=noninteractive
+
+# Установка пакетов с подавлением интерактивных запросов
+sudo apt update -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - &>/dev/null
+sudo apt install -y nodejs expect -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
+
 npm i -g rivalz-node-cli
 
 echo "----create fake memory----"
