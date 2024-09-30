@@ -1,16 +1,16 @@
 #!/bin/bash
 
 # Файл із фразами
-file=($(jq -r '.pathToFile' config.json))
+file=($(jq -r '.pathToFile' bot_config.json))
 
 # Перевіряємо, чи встановлена змінна середовища API_URL
-if [[ -z "${API_URL}" ]]; then
-    echo "Error: API_URL environment variable is not set."
-    exit 1
-fi
+# if [[ -z "${API_URL}" ]]; then
+#     echo "Error: API_URL environment variable is not set."
+#     exit 1
+# fi
 
 # URL для API (тільки зі змінної середовища)
-url=$API_URL
+url=($(jq -r '.url' bot_config.json))
 echo "API URL: $url"
 
 # Файли для збереження виводу
