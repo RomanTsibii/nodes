@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Файл із фразами
-file=($(jq -r '.pathToFile' bot_config.json))
+file=($(jq -r '.pathToFile' /root/gaianet/bot_config.json))
 
 # Перевіряємо, чи встановлена змінна середовища API_URL
 # if [[ -z "${API_URL}" ]]; then
@@ -10,7 +10,7 @@ file=($(jq -r '.pathToFile' bot_config.json))
 # fi
 
 # URL для API (тільки зі змінної середовища)
-url=($(jq -r '.url' bot_config.json))
+url=($(jq -r '.url' /root/gaianet/bot_config.json))
 echo "API URL: $url"
 
 # Файли для збереження виводу
@@ -20,7 +20,7 @@ responses_file="responses.txt"
 
 # Змінні для налаштування динамічного контролю запитів
 max_time=120  # Максимальний час очікування для одного запиту (60 секунд)
-request_words=450  # Початкове значення для кількості символів у запиті
+request_words=350  # Початкове значення для кількості символів у запиті
 execution_times=()  # Масив для зберігання часу виконання останніх 50 запитів
 tokens_per_second_values=()  # Масив для зберігання кількості токенів на секунду за останні 50 запитів
 
