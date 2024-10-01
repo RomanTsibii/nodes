@@ -1,4 +1,5 @@
 #!/bin/bash
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/gAIaNET/stop.sh)
 
 # Зупиняємо всі процеси, пов'язані з gaianet
 gaianet stop
