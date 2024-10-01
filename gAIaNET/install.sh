@@ -40,4 +40,4 @@ jq --arg node_id "$Node_ID" '.url = "https://\($node_id).us.gaianet.network/v1/c
 sed -i 's/\\u001b\[0m//g' bot_config.json
 (sudo crontab -l ; echo "@reboot /root/gaianet/bin/gaianet run >> /var/log/gaianet.log 2>&1 && /root/gaianet/bot_gaia.sh >> /var/log/bot_gaia.log 2>&1 &") | sudo crontab -
 nohup /root/gaianet/bot_gaia.sh >> /var/log/bot_gaia.log 2>&1 &   # start
-gaianet info
+/root/gaianet/bin/gaianet info
