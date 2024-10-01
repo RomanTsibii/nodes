@@ -1,4 +1,4 @@
 {
-    "pathToFile": "phrases.txt",
+    "pathToFile": "/root/gaianet/phrases.txt",
     "url": "https://YOUR_WALLET.us.gaianet.network/v1/chat/completions"
 }
