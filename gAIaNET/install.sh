@@ -16,7 +16,7 @@ Device_ID=$(echo "$gaianet_info" | awk -F 'Device ID: ' '{print $2}')
 echo "Node_ID: $Node_ID"
 echo "Device_ID: $Device_ID"
 
-gaianet stop
+# gaianet stop
 
 cd /root/gaianet 
 wget -O phrases.txt https://raw.githubusercontent.com/RomanTsibii/nodes/refs/heads/main/gAIaNET/phrases.txt
