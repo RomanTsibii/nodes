@@ -52,6 +52,7 @@ After=network.target
 [Service]
 Type=oneshot
 ExecStart=/root/gaianet/bin/gaianet run
+ExecStop=/root/gaianet/bin/gaianet stop
 RemainAfterExit=true
 PIDFile=/var/run/gaianet.pid
 Restart=on-failure
