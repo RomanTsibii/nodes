@@ -1,5 +1,12 @@
 #!/bin/bash
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/gAIaNET/install.sh)
+# tail -f /var/log/bot_gaia.log
+# tail -f /var/log/gaianet.log
+# 
+# nohup /root/gaianet/bot_gaia.sh >> /var/log/bot_gaia.log 2>&1 &   # start
+#
+#
+
 cd /root
 sudo apt update -y 
 # sudo apt-get update
@@ -22,56 +29,14 @@ cd /root/gaianet
 wget -O phrases.txt https://raw.githubusercontent.com/RomanTsibii/nodes/refs/heads/main/gAIaNET/phrases.txt
 wget -O bot_config.json https://raw.githubusercontent.com/RomanTsibii/nodes/refs/heads/main/gAIaNET/bot_config.json
 wget -O bot_gaia.sh https://raw.githubusercontent.com/RomanTsibii/nodes/refs/heads/main/gAIaNET/bot_gaia.sh
+wget -O start.sh https://raw.githubusercontent.com/RomanTsibii/nodes/refs/heads/main/gAIaNET/start.sh
+
 chmod +x bot_gaia.sh
+chmod +x start.sh
+
 # sed -i "s/YOUR_WALLET/$Node_ID/" config.json
 jq --arg node_id "$Node_ID" '.url = "https://\($node_id).us.gaianet.network/v1/chat/completions"' bot_config.json > temp.json && mv temp.json bot_config.json
 sed -i 's/\\u001b\[0m//g' bot_config.json
-
-sudo bash -c "cat > /etc/systemd/system/bot_gaia.service" <<EOL
-[Unit]
-Description=Bot Gaia Service
-After=gaianet.service
-Requires=gaianet.service
-
-[Service]
-ExecStart=/bin/bash /root/gaianet/bot_gaia.sh
-Restart=on-failure
-User=root
-WorkingDirectory=/root/gaianet
-Environment=GAIANET_ENV=production
-
-[Install]
-WantedBy=multi-user.target
-EOL
-
-sudo bash -c "cat > /etc/systemd/system/gaianet.service" <<EOL
-[Unit]
-Description=GaiaNet Node Service
-After=network.target
-
-[Service]
-Type=oneshot
-ExecStart=/root/gaianet/bin/gaianet run
-ExecStop=/root/gaianet/bin/gaianet stop
-RemainAfterExit=true
-PIDFile=/var/run/gaianet.pid
-Restart=on-failure
-User=root
-WorkingDirectory=/root/gaianet
-Environment=GAIANET_ENV=production
-
-[Install]
-WantedBy=multi-user.target
-EOL
-
-sudo systemctl daemon-reload
-sudo systemctl enable gaianet.service
-sudo systemctl enable bot_gaia.service
-sudo systemctl start gaianet.service
-sudo systemctl start bot_gaia.service
-# sudo systemctl status gaianet --no-pager
-
-echo "journalctl -xeu gaianet.service -f"
-echo "journalctl -xeu bot_gaia.service -f"
+(sudo crontab -l ; echo "@reboot /root/gaianet/bin/gaianet run >> /var/log/gaianet.log 2>&1 && /root/gaianet/bot_gaia.sh >> /var/log/bot_gaia.log 2>&1 &") | sudo crontab -
+nohup /root/gaianet/bot_gaia.sh >> /var/log/bot_gaia.log 2>&1 &   # start
 gaianet info
-
