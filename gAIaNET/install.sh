@@ -72,3 +72,5 @@ sudo systemctl start bot_gaia.service
 
 echo "journalctl -xeu gaianet.service -f"
 echo "journalctl -xeu bot_gaia.service -f"
+gaianet info
+
