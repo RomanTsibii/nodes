@@ -32,7 +32,7 @@ my_model="${1}.py"
 if [ -n "$my_model" ] && [ -f "$source_dir/$my_model" ]; then
     model="$my_model"
 else
-    model=$(ls "$source_dir" | shuf -n 1)
+    model=$(ls "$source_dir" | grep ".py" | shuf -n 1)
 fi
 
 # Копіювання вибраної моделі
