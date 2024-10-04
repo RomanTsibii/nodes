@@ -1,6 +1,8 @@
 #!/bin/bash
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/allora/nodium/restart_with_remove_container.sh)
 
+echo "----------------------------------------------------------------------"
+echo "Script started at: $(date)"
 # зупинка контейнерів
 docker compose -f $HOME/worker1-10m/docker-compose.yml down -v
 docker compose -f $HOME/worker2-24h/docker-compose.yml down -v
