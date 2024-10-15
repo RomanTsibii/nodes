@@ -14,8 +14,8 @@ bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/add_ssh_
 sudo apt install ncdu tmux htop screen -y
  
 # install proxy for adspower
-# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/proxy_for_antick.sh)
-bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/proxy_den_alex.sh)
+bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/proxy_for_antick.sh)
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/proxy_den_alex.sh)
 
 # встановити докер
 bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/tools/main/docker.sh)
