@@ -5,7 +5,33 @@
 echo "Enter wallet address"
 read EVM_ADDRESS
 
+### remove old if exists
+systemctl stop rivalz
+mount_point="/mnt/fake_disk"
+image_file="fake_disk.img"
 
+if mountpoint -q "$mount_point"; then
+    sudo umount "$mount_point"
+fi
+
+loop_device=$(losetup -a | grep "$image_file" | awk -F: '{print $1}')
+
+if [ -n "$loop_device" ]; then
+    sudo losetup -d "$loop_device"
+fi
+
+if [ -f "$image_file" ]; then
+    rm "$image_file"
+fi
+
+loop_devices=$(losetup -a | grep "fake_disk.img" | awk -F: '{print $1}')
+for loop_device in $loop_devices; do
+    sudo losetup -d "$loop_device"
+done
+
+
+
+### install
 echo "----Install nodejs----"
 # Отключаем интерактивный режим и устанавливаем необходимые пакеты
 export DEBIAN_FRONTEND=noninteractive
