@@ -32,9 +32,10 @@ done
 
 # Ділимо на 100000000 для отримання бажаного формату
 min_fee=$((min_fee / 100000000))
+mid_value=$(( (min_fee + average) / 2 ))
 
 # Заміна значення у файлі конфігурації
-sudo sed -i "s/Environment=\"POPM_STATIC_FEE=.*/Environment=\"POPM_STATIC_FEE=$min_fee\"/" /etc/systemd/system/hemi.service
+sudo sed -i "s/Environment=\"POPM_STATIC_FEE=.*/Environment=\"POPM_STATIC_FEE=$mid_value\"/" /etc/systemd/system/hemi.service
 
 # Перезапуск сервісу
 sudo systemctl daemon-reload
@@ -43,3 +44,4 @@ sudo systemctl restart hemi.service
 # Виведення результатів
 echo "Мінімальне значення: $min_fee"
 echo "Average of total fees: $average"
+echo "Середнє значення між мінімальним і середнім: $mid_value"
