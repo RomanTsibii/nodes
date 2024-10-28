@@ -44,5 +44,6 @@ sudo systemctl restart hemi.service
 # Виведення результатів
 # echo "Мінімальне значення: $min_fee"
 # echo "Average of total fees: $average"
-echo "Set to hemi FEE: $mid_value"
+echo "Set to hemi FEE: $mid_value on $(date '+%Y-%m-%d %H:%M:%S')"
+
 # echo "journalctl -u hemi.service -f -n 30"
