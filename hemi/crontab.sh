@@ -19,3 +19,4 @@ minute=$((RANDOM % 60))
 
 # Записуємо завдання в crontab
 (crontab -l 2>/dev/null; echo "$minute */2 * * * /root/scripts/hemi_min_free_2h.sh >> /root/scripts/hemi_min_free_2h.log 2>&1") | crontab -
+/root/scripts/hemi_min_free_2h.sh >> /root/scripts/hemi_min_free_2h.log
