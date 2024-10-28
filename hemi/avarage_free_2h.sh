@@ -2,17 +2,13 @@
 
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/hemi/avarage_free_2h.sh)
 
-# Отримання даних з API
-response=$(curl -s https://mempool.space/testnet/api/v1/statistics/2h)
-
-# Витягнення значень total_fee в масив
-total_fees=($(echo "$response" | jq '.[].total_fee'))
+total_fees=$(curl -s https://mempool.space/testnet/api/v1/statistics/2h | jq '.[].total_fee')
 
 # Обчислення суми
 sum=0
 count=0
 
-for fee in "${total_fees[@]}"; do
+for fee in $total_fees; do
     sum=$((sum + fee))
     count=$((count + 1))
 done
