@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/hemi/avarage_free_2h.sh)
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/hemi/min_free_2h.sh)
 
 # Витягнення значень total_fee в масив
 total_fees=$(curl -s https://mempool.space/testnet/api/v1/statistics/2h | jq '.[].total_fee')
