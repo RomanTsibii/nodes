@@ -1,5 +1,8 @@
 #!/bin/bash
 
+
+# логи 
+# tail -n 50 /root/scripts/hemi_min_free_2h.log
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/hemi/crontab.sh)
 # видалити кронтаб
 crontab -l | grep -v "/root/scripts/hemi_min_free_2h.sh" | crontab -
