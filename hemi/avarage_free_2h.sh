@@ -30,4 +30,4 @@ sudo systemctl restart hemi.service
 
 # Виведення результатів
 
-echo "Average of total fees: $average on $(date '+%Y-%m-%d %H:%M:%S')"
+echo "Set to hemi FEE average: $average on $(date '+%Y-%m-%d %H:%M:%S')"
