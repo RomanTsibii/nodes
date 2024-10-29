@@ -11,7 +11,8 @@ crontab -l | grep -v "/root/scripts/hemi_min_free_2h.sh" | crontab -
 mkdir -p /root/scripts
 
 # Скачуємо файл і перейменовуємо його
-curl -o /root/scripts/hemi_min_free_2h.sh https://raw.githubusercontent.com/RomanTsibii/nodes/main/hemi/min_free_2h.sh
+# curl -o /root/scripts/hemi_min_free_2h.sh https://raw.githubusercontent.com/RomanTsibii/nodes/main/hemi/min_free_2h.sh
+curl -o /root/scripts/hemi_min_free_2h.sh https://raw.githubusercontent.com/RomanTsibii/nodes/main/hemi/avarage_free_2h.sh
 
 # Надаємо права на виконання файлу
 chmod +x /root/scripts/hemi_min_free_2h.sh
