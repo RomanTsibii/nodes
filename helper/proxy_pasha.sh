@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/proxy_for_antick.sh)
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/proxy_pasha.sh)
 
 sudo systemctl stop 3proxy.service
 systemctl disable 3proxy.service
