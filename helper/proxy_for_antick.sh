@@ -41,7 +41,7 @@ allow * * * 80-88,8080-8088 HTTP
 allow * * * 443,8443 HTTPS
 
 proxy -p28386 -n -a
-users BnBuser:CL:RomBod@999
+users tsibaa:CL:ebshRVA247
 
 EOF
 
