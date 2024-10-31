@@ -6,6 +6,8 @@
 # nohup /root/gaianet/bot_gaia.sh >> /var/log/bot_gaia.log 2>&1 &       # start
 # kill $(ps aux | grep bot_gaia.sh | grep -v grep | awk '{print $2}')   # stop
 #
+sudo crontab -l | grep -v "@reboot /root/gaianet/bin/gaianet run >> /var/log/gaianet.log 2>&1 && /root/gaianet/bot_gaia.sh >> /var/log/bot_gaia.log 2>&1 &" | sudo crontab -
+
 kill $(ps aux | grep bot_gaia.sh | grep -v grep | awk '{print $2}')   # stop
 cd /root
 sudo apt update -y 
