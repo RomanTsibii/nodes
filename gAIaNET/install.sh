@@ -6,7 +6,7 @@
 # nohup /root/gaianet/bot_gaia.sh >> /var/log/bot_gaia.log 2>&1 &       # start
 # kill $(ps aux | grep bot_gaia.sh | grep -v grep | awk '{print $2}')   # stop
 #
-
+kill $(ps aux | grep bot_gaia.sh | grep -v grep | awk '{print $2}')   # stop
 cd /root
 sudo apt update -y 
 # sudo apt-get update
