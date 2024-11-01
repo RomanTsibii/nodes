@@ -35,9 +35,6 @@ else
   average_median_fee=0
 fi
 
-# Вивід результату
-# echo "Середня medianFee за останні 10 блоків: $average_median_fee сатоші"
-
 # Округлення значення average_with_percent до цілого числа
 average=$(printf "%.0f\n" "$average_median_fee")
 
