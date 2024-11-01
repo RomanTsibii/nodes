@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/hemi/avarage_free_2h.sh) 10
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/hemi/avarage_free_2h.sh)
 # set -- 10  # Це задасть $1 значення 10
 
 blocks=$(curl -s https://mempool.space/testnet/api/v1/blocks | jq '.[0:20]')
