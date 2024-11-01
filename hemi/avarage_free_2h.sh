@@ -3,44 +3,43 @@
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/hemi/avarage_free_2h.sh) 10
 # set -- 10  # Це задасть $1 значення 10
 
-total_fees=$(curl -s https://mempool.space/testnet/api/v1/statistics/2h | jq '.[].total_fee')
+blocks=$(curl -s https://mempool.space/testnet/api/v1/blocks | jq '.[0:20]')
 
-# Обчислення суми
-sum=0
-count=0
+# Ініціалізація змінних для підрахунку
+total_median_fee=0
+block_count=0
 
-for fee in $total_fees; do
-    sum=$((sum + fee))
-    count=$((count + 1))
+# Обхід кожного блоку для підрахунку medianFee
+for block in $(echo "$blocks" | jq -r '.[] | @base64'); do
+  # Декодування JSON з base64
+  _jq() {
+    echo "${block}" | base64 --decode | jq -r "${1}"
+  }
+
+  # Витягування medianFee
+  median_fee=$(_jq '.extras.medianFee')
+
+  # Перевірка, чи medianFee існує і не є null
+  if [[ -n $median_fee && $median_fee != "null" ]]; then
+    total_median_fee=$(echo "$total_median_fee + $median_fee" | bc)
+    block_count=$((block_count + 1))
+  else
+    echo "medianFee для блоку $(_jq '.id') не знайдено або дорівнює null"
+  fi
 done
 
-# Знаходження середнього значення
-if [ $count -ne 0 ]; then
-    average=$((sum / count))
-    average=$((average / 100000000))  # Ділимо на 100000000
+# Обчислення середньої medianFee
+if [ $block_count -gt 0 ]; then
+  average_median_fee=$(echo "scale=2; $total_median_fee / $block_count" | bc)
 else
-    average=0
+  average_median_fee=0
 fi
 
-# Перевірка на існування параметра
-if [[ -n $1 ]]; then
-  # Перевірка, чи є параметр цілим числом
-  if [[ $1 =~ ^-?[0-9]+$ ]]; then
-    percent=$1
-  else
-    echo "Введене значення не є цілим числом. Використовується значення за замовчуванням (0%)."
-    percent=0
-  fi
-else
-  # Значення за замовчуванням
-  percent=0
-fi
-
-# Додавання відсотків до average
-average_with_percent=$(echo "$average + ($average * $percent / 100)" | bc)
+# Вивід результату
+# echo "Середня medianFee за останні 10 блоків: $average_median_fee сатоші"
 
 # Округлення значення average_with_percent до цілого числа
-average=$(printf "%.0f\n" "$average_with_percent")
+average=$(printf "%.0f\n" "$average_median_fee")
 
 # Заміна значення у файлі конфігурації
 sudo sed -i "s/Environment=\"POPM_STATIC_FEE=.*/Environment=\"POPM_STATIC_FEE=$average\"/" /etc/systemd/system/hemi.service
