@@ -32,8 +32,12 @@ cd /root/unichain-node
 sed -i '/^OP_NODE_L1_ETH_RPC/c\OP_NODE_L1_ETH_RPC=https://ethereum-sepolia-rpc.publicnode.com' .env.sepolia
 sed -i '/^OP_NODE_L1_BEACON/c\OP_NODE_L1_BEACON=https://ethereum-sepolia-beacon-api.publicnode.com' .env.sepolia
 
-поміняти в докер файлі порт на з 8545 на 8547 і з start_interval на interval
-- 8547:8545/tcp
+sed -i 's/      start_interval: 5s/      interval: 5s/g' docker-compose.yml
+sed -i 's/      - 8545:8545\/tcp/      - 8547:8545\/tcp/g' docker-compose.yml
+
+
+# поміняти в докер файлі порт на з 8545 на 8547 і з start_interval на interval
+# - 8547:8545/tcp
 
 docker-compose up -d
 echo "You Private Key"
