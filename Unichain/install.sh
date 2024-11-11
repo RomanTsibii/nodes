@@ -1,7 +1,8 @@
 #!/bin/bash
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/Unichain/install.sh)
-# docker-compose logs -f --tail=100
-# docker-compose logs -f | grep "Syncing: state download in progress"
+# docker compose -f /root/unichain-node/docker-compose.yml logs -f --tail=100
+# docker compose -f /root/unichain-node/docker-compose.yml logs -f --tail=100 | grep "Syncing: state download in progress"
+
 # curl -d '{"id":1,"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":["latest",false]}' -H "Content-Type: application/json" http://localhost:8547
 # 
 function colors {
