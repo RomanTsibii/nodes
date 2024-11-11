@@ -2,6 +2,7 @@
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/Unichain/install.sh)
 # docker compose -f /root/unichain-node/docker-compose.yml logs -f --tail=100
 # docker compose -f /root/unichain-node/docker-compose.yml logs -f --tail=100 | grep "Syncing: state download in progress"
+# docker compose -f /root/unichain-node/docker-compose.yml logs -f --tail=100 | grep "Syncing"
 
 # explorer
 # https://unichain-sepolia.blockscout.com/ 
