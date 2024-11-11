@@ -45,4 +45,4 @@ sed -i 's/      - 8546:8546\/tcp/      - 8548:8546\/tcp/g' docker-compose.yml
 
 docker-compose up -d
 echo "You Private Key"
-echo $(cat geth-data/geth/nodekey)
+echo $(cat /root/unichain-node/geth-data/geth/nodekey)
