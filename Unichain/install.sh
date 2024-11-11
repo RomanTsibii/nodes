@@ -3,7 +3,7 @@
 # docker compose -f /root/unichain-node/docker-compose.yml logs -f --tail=100
 # docker compose -f /root/unichain-node/docker-compose.yml logs -f --tail=100 | grep "Syncing: state download in progress"
 
-# curl -d '{"id":1,"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":["latest",false]}' -H "Content-Type: application/json" http://localhost:8547
+# curl -d '{"id":1,"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":["latest",false]}' -H "Content-Type: application/json" http://localhost:8547 | jq
 # 
 function colors {
   GREEN="\e[32m"
