@@ -18,7 +18,7 @@ echo "Private key: $PRIVATE_KEY"
 cd $HOME
 
 
-STORAGE_VERSION="v0.5.1"
+STORAGE_VERSION="v0.7.3"
 echo "STORAGE VERSION: $STORAGE_VERSION"
 
 if [ ! -d "./0g-storage-node" ]; then
