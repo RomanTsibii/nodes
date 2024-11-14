@@ -111,12 +111,18 @@ CPUQuota=70%
 WantedBy=multi-user.target
 EOF
 
-# rm -rf $HOME/0g-storage-node/run/db
-# rm -rf $HOME/0g-storage-node/run/network
-# rm -rf $HOME/0g-storage-node/run/log
+rm -rf $HOME/0g-storage-node/run/db
+rm -rf $HOME/0g-storage-node/run/network
+rm -rf $HOME/0g-storage-node/run/log
 
-wget -O storage_0gchain_snapshot.lz4 http://188.40.61.176/storage_0gchain_snapshot.lz4
+# wget -O storage_0gchain_snapshot.lz4 http://188.40.61.176/storage_0gchain_snapshot.lz4
+cd $HOME
+rm storage_0gchain_snapshot.lz4
+aria2c -x 16 -s 16 -k 1M https://josephtran.co/storage_0gchain_snapshot.lz4
+
+# rm -rf $HOME/0g-storage-node/run/db
 lz4 -c -d storage_0gchain_snapshot.lz4 | pv | tar -x -C $HOME/0g-storage-node/run
+# lz4 -c -d storage_0gchain_snapshot.lz4 | pv | tar -x -C $HOME/0g-storage-node/run
 
 
 sudo systemctl daemon-reload
