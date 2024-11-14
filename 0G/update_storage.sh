@@ -23,7 +23,7 @@ cd $HOME/0g-storage-node
 git stash
 git fetch --tags
 # git fetch --all --tags
-git checkout v0.7.3
+git checkout v0.7.0
 # git checkout 702680f 
 git submodule update --init
 # cargo build --release
