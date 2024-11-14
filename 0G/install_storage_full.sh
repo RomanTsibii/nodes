@@ -19,6 +19,7 @@ echo "Private key: $PRIVATE_KEY"
 echo "RPC: $RPC"
 
 cd /root/
+source .profile
 
 echo "Updating package lists..."
 sudo apt-get update
