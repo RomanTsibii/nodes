@@ -81,6 +81,8 @@ sed -i 's|^blockchain_rpc_endpoint = .*|blockchain_rpc_endpoint = "'"$RPC"'"|' /
 
 echo "Download Snapshot from https://service.josephtran.xyz/testnet/zero-gravity-0g/0g-storage-node/snapshot"
 sudo apt-get install wget lz4 aria2 pv -y
+cd /root/
+rm storage_0gchain_snapshot.lz4
 aria2c -x 16 -s 16 -k 1M https://josephtran.co/storage_0gchain_snapshot.lz4
 lz4 -c -d storage_0gchain_snapshot.lz4 | pv | tar -x -C $HOME/0g-storage-node/run
 
