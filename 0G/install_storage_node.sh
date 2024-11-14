@@ -25,7 +25,7 @@ echo "RPC: $RPC"
 cd $HOME
 
 
-STORAGE_VERSION="v0.7.3"
+STORAGE_VERSION="v0.7.4"
 echo "STORAGE VERSION: $STORAGE_VERSION"
 
 if [ ! -d "./0g-storage-node" ]; then
