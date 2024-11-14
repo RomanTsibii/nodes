@@ -125,6 +125,7 @@ rm -rf $HOME/0g-storage-node/run/log
 # wget -O storage_0gchain_snapshot.lz4 http://188.40.61.176/storage_0gchain_snapshot.lz4
 cd $HOME
 rm storage_0gchain_snapshot.lz4
+sudo apt-get install wget lz4 aria2 pv -y
 aria2c -x 16 -s 16 -k 1M https://josephtran.co/storage_0gchain_snapshot.lz4
 
 # rm -rf $HOME/0g-storage-node/run/db
