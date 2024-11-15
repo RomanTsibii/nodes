@@ -85,7 +85,7 @@ sudo apt-get install wget lz4 aria2 pv -y
 cd /root/
 rm storage_0gchain_snapshot.lz4
 aria2c -x 16 -s 16 -k 1M https://josephtran.co/storage_0gchain_snapshot.lz4
-lz4 -c -d storage_0gchain_snapshot.lz4 | pv | tar -x -C $HOME/0g-storage-node/run
+lz4 -c -d storage_0gchain_snapshot.lz4 | pv | tar -x -C /root/0g-storage-node/run
 
 echo "Reloading systemd daemon, enabling and starting the service..."
 sudo systemctl daemon-reload && sudo systemctl enable zgs && sudo systemctl start zgs
