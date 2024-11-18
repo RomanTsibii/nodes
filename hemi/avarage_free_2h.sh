@@ -39,11 +39,41 @@
 
 # Округлення значення average_with_percent до цілого числа
 # average=$(printf "%.0f\n" "$average_median_fee")
+# ----------------------------------------------------
+# Максимальна кількість спроб
+max_attempts=10
+attempt=0
+valid=false
 
-average=$(curl -s https://mempool.space/testnet/api/v1/fees/recommended | jq -r '.hourFee')
+while [[ $attempt -lt $max_attempts && $valid == false ]]; do
+    # Збільшуємо лічильник спроб
+    attempt=$((attempt + 1))
+
+    # Виконуємо запит
+    average=$(curl -s https://mempool.space/testnet/api/v1/fees/recommended)
+
+    # Перевіряємо, чи успішно спарсило JSON
+    if echo "$average" | jq -e '.hourFee' >/dev/null 2>&1; then
+        # Витягуємо значення hourFee
+        hour_fee=$(echo "$average" | jq -r '.hourFee')
+
+        # Перевіряємо, чи значення більше або дорівнює 2
+        if [[ "$hour_fee" -ge 2 ]]; then
+            valid=true
+            echo $hour_fee
+            break
+        fi
+    fi
+
+    # Невелика пауза між запитами
+    sleep 1
+done
+
+
+# average=$(curl -s https://mempool.space/testnet/api/v1/fees/recommended | jq -r '.hourFee')
 
 # Заміна значення у файлі конфігурації
-sudo sed -i "s/Environment=\"POPM_STATIC_FEE=.*/Environment=\"POPM_STATIC_FEE=$average\"/" /etc/systemd/system/hemi.service
+sudo sed -i "s/Environment=\"POPM_STATIC_FEE=.*/Environment=\"POPM_STATIC_FEE=$hour_fee\"/" /etc/systemd/system/hemi.service
 
 # Перезапуск сервісу
 sudo systemctl daemon-reload
@@ -51,4 +81,4 @@ sudo systemctl restart hemi.service
 
 # Виведення результатів
 
-echo "Set to hemi FEE average: $average on $(date '+%Y-%m-%d %H:%M:%S')"
+echo "Set to hemi FEE average: $hour_fee on $(date '+%Y-%m-%d %H:%M:%S')"
