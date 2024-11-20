@@ -41,7 +41,7 @@
 # average=$(printf "%.0f\n" "$average_median_fee")
 # ----------------------------------------------------
 # Максимальна кількість спроб
-max_attempts=10
+max_attempts=20
 attempt=0
 valid=false
 
