@@ -51,7 +51,8 @@ echo "Updating submodules..."
 git submodule update --init
 
 echo "Building the project..."
-cargo build --release
+# cargo build --release
+taskset -c 0,1,2 cargo build --release
 
 echo "Removing old config file..."
 rm -rf /root/0g-storage-node/run/config.toml
