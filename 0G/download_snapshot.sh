@@ -26,7 +26,7 @@ file_valid=false
 # fi
 
 # Якщо файл не валідний, завантажуємо його
-if [ "$file_valid" = false ]; then
+# if [ "$file_valid" = false ]; then
     ips=(
         161.97.84.217
         84.247.135.34
@@ -46,7 +46,7 @@ if [ "$file_valid" = false ]; then
     # Завантаження файлу через wget
     echo "Завантажую файл з http://$random_ip/storage_0gchain_snapshot.lz4"
     wget -O "$FILE" "http://$random_ip/storage_0gchain_snapshot.lz4"
-fi
+# fi
 
 # Розпаковка та перезапуск служби
 sudo apt-get install wget lz4 aria2 pv -y &>/dev/null
