@@ -8,7 +8,7 @@ FILE="storage_0gchain_snapshot.lz4"
 # MIN_SIZE=16985884
 # MAX_SIZE=16986084
 file_valid=false
-
+sudo systemctl stop zgs.service &>/dev/null
 # Перевірка наявності файлу та його розміру
 # if [ -f "$FILE" ]; then
 #     # Отримуємо розмір файлу через du -s
@@ -50,7 +50,7 @@ file_valid=false
 
 # Розпаковка та перезапуск служби
 sudo apt-get install wget lz4 aria2 pv -y &>/dev/null
-sudo systemctl stop zgs.service &>/dev/null
+
 rm -rf /root/0g-storage-node/run/{db,log,network}
 lz4 -c -d storage_0gchain_snapshot.lz4 | pv | tar -x -C /root/0g-storage-node/run
 sudo systemctl restart zgs.service &>/dev/null
