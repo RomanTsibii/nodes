@@ -32,7 +32,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
 echo "Removing existing 0g-storage-node directory..."
 sudo systemctl stop zgs && rm -r /root/0g-storage-node
-sudo systemctl stop 0g && sudo systemctl disable 0g && rm -rf /etc/systemd/system/0g_storage.service
+sudo systemctl stop 0g_storage.service && sudo systemctl disable 0g_storage.service && rm -rf /etc/systemd/system/0g_storage.service
 
 echo "Cloning the repository..."
 git clone -b v0.7.4 https://github.com/0glabs/0g-storage-node.git
