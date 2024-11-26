@@ -8,6 +8,9 @@ docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
 
 # removing all logs
 # rm -rf /var/log/*
+rm -rf /var/log/syslog /var/log/syslog.1 /var/log/syslog.2
+
+
 
 sudo journalctl --vacuum-size=100M
 sudo systemctl restart systemd-journald
