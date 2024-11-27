@@ -1,6 +1,6 @@
 #!/bin/bash
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/sonaric/get_points.sh)
-
+sonaric points
 if ! command -v screen &> /dev/null; then
     sudo apt update && sudo apt install screen -y 2>&1
 fi
