@@ -1,7 +1,10 @@
 #!/bin/bash
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/sonaric/get_points.sh)
 
-sudo apt install screen -y
+if ! command -v screen &> /dev/null; then
+    sudo apt update && sudo apt install screen -y 2>&1
+fi
+
 SESSION_NAME="sonaric_get_points"
 LOG_FILE="/var/log/sonaric.log"
 
@@ -17,4 +20,7 @@ sleep 1
 screen -S "$SESSION_NAME" -X stuff $'\n' # натискання Enter
 sleep 1
 
-cat $LOG_FILE | tail -3 | grep Points | sed -E 's/.*Points: ([0-9.]+)/\1/'
+screen -wipe > /dev/null 2>&1
+screen -list | grep -q "$SESSION_NAME" && screen -S "$SESSION_NAME" -X quit
+
+tail -3 $LOG_FILE | grep Points | awk '{print $NF}'
