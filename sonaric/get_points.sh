@@ -16,7 +16,7 @@ screen -S "$SESSION_NAME" -X logfile "$LOG_FILE"
 screen -S "$SESSION_NAME" -X log on
 # Виконання команди в новій сесії
 screen -S "$SESSION_NAME" -X stuff "sonaric points"
-sleep 1
+sleep 3
 screen -S "$SESSION_NAME" -X stuff $'\n' # натискання Enter
 sleep 1
 
