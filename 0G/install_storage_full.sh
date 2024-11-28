@@ -81,12 +81,15 @@ EOF
 sed -i 's|^miner_key = .*|miner_key = "'"$PRIVATE_KEY"'"|' /root/0g-storage-node/run/config.toml
 sed -i 's|^blockchain_rpc_endpoint = .*|blockchain_rpc_endpoint = "'"$RPC"'"|' /root/0g-storage-node/run/config.toml
 
-echo "Download Snapshot from https://service.josephtran.xyz/testnet/zero-gravity-0g/0g-storage-node/snapshot"
-sudo apt-get install wget lz4 aria2 pv -y
-cd /root/
-rm storage_0gchain_snapshot.lz4
-aria2c -x 16 -s 16 -k 1M https://josephtran.co/storage_0gchain_snapshot.lz4
-lz4 -c -d storage_0gchain_snapshot.lz4 | pv | tar -x -C /root/0g-storage-node/run
+# echo "Download Snapshot from https://service.josephtran.xyz/testnet/zero-gravity-0g/0g-storage-node/snapshot"
+# sudo apt-get install wget lz4 aria2 pv -y
+# cd /root/
+# rm storage_0gchain_snapshot.lz4
+# aria2c -x 16 -s 16 -k 1M https://josephtran.co/storage_0gchain_snapshot.lz4
+# lz4 -c -d storage_0gchain_snapshot.lz4 | pv | tar -x -C /root/0g-storage-node/run
+
+# download my snapshot 2kk+
+bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/0G/download_snapshot.sh)
 
 echo "Reloading systemd daemon, enabling and starting the service..."
 sudo systemctl daemon-reload && sudo systemctl enable zgs && sudo systemctl start zgs
