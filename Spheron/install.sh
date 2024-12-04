@@ -2,13 +2,13 @@
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/Spheron/install.sh)
 
 if [ -n "$1" ]; then
-  PRIVATE_KEY="$1"
+  WALLET_ADDRESS="$1"
 else
   read -p "Enter your WALLET_ADDRESS: " WALLET_ADDRESS
 fi
 
 if [ -n "$2" ]; then
-  RPC="$2"
+  USER_TOKEN="$2"
 else
   read -p "Enter your USER_TOKEN: " USER_TOKEN
 fi
