@@ -20,17 +20,27 @@ function install_docker {
 
 
 curl -fsSL https://ollama.com/install.sh | sh
-rm -rf ~/infera
-curl -O https://www.infera.org/scripts/infera-linux-intel.sh
-chmod +x ./infera-linux-intel.sh
-./infera-linux-intel.sh
-grep 'alias init-infera' ~/.bashrc
-source ~/.bashrc
+# rm -rf ~/infera
+# curl -O https://www.infera.org/scripts/infera-linux-intel.sh
+# chmod +x ./infera-linux-intel.sh
+# ./infera-linux-intel.sh
+# grep 'alias init-infera' ~/.bashrc
+# source ~/.bashrc
 mkdir ~/infera-docker
 cd ~/infera-docker
-cp ~/infera ~/infera-docker/
+curl -O http://161.97.84.217/infera
+chmod +x infera
+# cp ~/infera ~/infera-docker/
 
 curl -O https://raw.githubusercontent.com/RomanTsibii/nodes/refs/heads/main/infera/Dockerfile
 docker build -t infera-app .
 docker run -d --name infera --restart always --network="host" infera-app
 
+echo "------------------logs------------------" 
+echo "docker logs -f infera"
+
+echo "------------------Node------------------"
+echo "curl -X 'GET' 'http://localhost:11025/node_details' -H 'accept: application/json'"
+
+echo "------------------Points------------------"
+echo "curl http://localhost:11025/points | jq"
