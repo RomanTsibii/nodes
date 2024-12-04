@@ -18,8 +18,17 @@ function install_docker {
     fi
 }
 
+function install_ollama {
+    if ! type "ollama" > /dev/null; then
+        echo -e "${YELLOW}Устанавливаем докер${NORMAL}"
+        curl -fsSL https://ollama.com/install.sh | sh
+    else
+        echo -e "${YELLOW}ollama уже установлен. Переходим на следующий шаг${NORMAL}"
+    fi
+}
 
-curl -fsSL https://ollama.com/install.sh | sh
+install_docker
+install_ollama
 # rm -rf ~/infera
 # curl -O https://www.infera.org/scripts/infera-linux-intel.sh
 # chmod +x ./infera-linux-intel.sh
