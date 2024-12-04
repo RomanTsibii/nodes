@@ -29,3 +29,8 @@ source ~/.bashrc
 mkdir ~/infera-docker
 cd ~/infera-docker
 cp ~/infera ~/infera-docker/
+
+curl -O https://raw.githubusercontent.com/RomanTsibii/nodes/refs/heads/main/infera/Dockerfile
+docker build -t infera-app .
+docker run -d --name infera --restart always --network="host" infera-app
+
