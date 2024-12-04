@@ -43,4 +43,4 @@ echo "------------------Node------------------"
 echo "curl -X 'GET' 'http://localhost:11025/node_details' -H 'accept: application/json'"
 
 echo "------------------Points------------------"
-echo "curl http://localhost:11025/points | jq"
+echo "curl -s http://localhost:11025/points | jq"
