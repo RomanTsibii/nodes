@@ -1,5 +1,5 @@
 #!/bin/bash
-# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/nillion/install.sh)
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/infera/install.sh)
 
 function colors {
   GREEN="\e[32m"
