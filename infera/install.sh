@@ -11,19 +11,19 @@ function colors {
 
 function install_docker {
     if ! type "docker" > /dev/null; then
-        echo -e "${YELLOW}Устанавливаем докер${NORMAL}"
+        echo -e "${YELLOW}Docker installing...${NORMAL}"
         bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/tools/main/docker.sh)
     else
-        echo -e "${YELLOW}Докер уже установлен. Переходим на следующий шаг${NORMAL}"
+        echo -e "${YELLOW}Docker installed.${NORMAL}"
     fi
 }
 
 function install_ollama {
     if ! type "ollama" > /dev/null; then
-        echo -e "${YELLOW}Устанавливаем докер${NORMAL}"
+        echo -e "${YELLOW}Ollama installing...${NORMAL}"
         curl -fsSL https://ollama.com/install.sh | sh
     else
-        echo -e "${YELLOW}ollama уже установлен. Переходим на следующий шаг${NORMAL}"
+        echo -e "${YELLOW}Ollama installed.${NORMAL}"
     fi
 }
 
