@@ -69,6 +69,9 @@ while [[ $attempt -lt $max_attempts && $valid == false ]]; do
     sleep 1
 done
 
+if [ "$hour_fee" -gt 1500 ]; then
+    hour_fee=1500
+fi
 
 # average=$(curl -s https://mempool.space/testnet/api/v1/fees/recommended | jq -r '.hourFee')
 
