@@ -54,5 +54,5 @@ sed -i "s|USER_TOKEN=\"[^\"]*\"|USER_TOKEN=\"$USER_TOKEN\"|" install.sh
 sleep 30
 ./restart.sh
 
-(sudo crontab -l ; echo "@reboot sleep 120; /root/scripts/spheron/restart.sh") | sudo crontab -
+(sudo crontab -l ; echo "@reboot sleep 120;/bin/bash /root/scripts/spheron/restart.sh") | sudo crontab -
 RANDOM_MIN=$((RANDOM % 60));(sudo crontab -l ; echo "$RANDOM_MIN */12 * * * /bin/bash /root/scripts/spheron/restart.sh") | sudo crontab -
