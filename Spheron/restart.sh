@@ -1,6 +1,7 @@
 #!/bin/bash
 
-docker-compose -f ~/.spheron/fizz/docker-compose.yml logs -f
+docker-compose -f ~/.spheron/fizz/docker-compose.yml down
+docker-compose -f ~/.spheron/fizz/docker-compose.yml up -d
 sleep 5
 
 # Поточна кількість ядер
