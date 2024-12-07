@@ -1,7 +1,11 @@
 #!/bin/bash
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/Spheron/install.sh)
+# 
 # логи
+# docker-compose -f ~/.spheron/fizz/docker-compose.yml logs  -f
 # видалити кронтаб 
+sudo crontab -l | grep -v "@reboot sleep 120; /root/scripts/spheron/restart.sh  >> /var/log/spheron_restart.log 2>&1" | sudo crontab -
+(sudo crontab -l ; echo "@reboot sleep 120; /root/scripts/spheron/restart.sh  >> /var/log/spheron_restart.log 2>&1") | sudo crontab -
 
 if [ -n "$1" ]; then
   WALLET_ADDRESS="$1"
@@ -35,15 +39,18 @@ function install_docker {
     fi
 }
 
+cd /root
 
-зайти у папку скрыпт і створити якщо нема 
-зайти у папку спхерон і створити якщо нема 
-curl -O https://raw.githubusercontent.com/RomanTsibii/nodes/refs/heads/main/Spheron/install.sh записати у install.sh
+mkdir -p scripts/spheron && cd scripts/spheron
+curl -s -O https://raw.githubusercontent.com/RomanTsibii/nodes/refs/heads/main/Spheron/install.sh
+curl -s -O https://raw.githubusercontent.com/RomanTsibii/nodes/refs/heads/main/Spheron/restart.sh
+chmod +x install.sh
+chmod +x restart.sh
 
-# замінити значення WALLET_ADDRESS 
-# замінити значення USER_TOKEN
+sed -i "s|WALLET_ADDRESS=\"[^\"]*\"|WALLET_ADDRESS=\"$WALLET_ADDRESS\"|" install.sh
+sed -i "s|USER_TOKEN=\"[^\"]*\"|USER_TOKEN=\"$USER_TOKEN\"|" install.sh
 
-# скачати файл злому 
-# створити код для запуску кронтабу у якому буде рестарт і запуск злому 
+./install.sh
+./restart.sh
 
-
+(sudo crontab -l ; echo "@reboot sleep 120; /root/scripts/spheron/restart.sh  >> /var/log/spheron_restart.log 2>&1") | sudo crontab -
