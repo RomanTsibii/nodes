@@ -2,7 +2,7 @@
 
 docker-compose -f ~/.spheron/fizz/docker-compose.yml down
 docker-compose -f ~/.spheron/fizz/docker-compose.yml up -d
-sleep 5
+sleep 60
 
 # Поточна кількість ядер
 CURRENT_CORES=$(grep -c "^processor" /proc/cpuinfo)
@@ -52,6 +52,27 @@ echo "Файл з фейковим CPU створено: $OUTPUT_FILE_CPU"
 docker cp /tmp/fake_cpuinfo fizz-fizz-1:/tmp/fake_cpuinfo
 docker exec fizz-fizz-1 sh -c "mount --bind /tmp/fake_cpuinfo /proc/cpuinfo"
 
+# -------------------------------------------------------------
+# Исходный файл
+SOURCE_FILE="/proc/stat"
+OUTPUT_FILE="/tmp/fake_stat"
+
+# Копируем оригинальные данные
+cat "$SOURCE_FILE" > "$OUTPUT_FILE"
+
+# Генерируем фейковые данные для первого cpu и всех отдельных процессоров
+awk '/^cpu[0-9]*/ {
+    $5 = $5 + 100000000  # Увеличиваем idle (пятый столбец)
+    print
+} !/^cpu/ { print }' "$SOURCE_FILE" > "$OUTPUT_FILE"
+
+echo "Файл с поддельной нагрузкой создан: $OUTPUT_FILE"
+
+# Монтируем фейковый файл в /proc/stat
+docker cp "$OUTPUT_FILE" fizz-fizz-1:/tmp/fake_stat
+docker exec fizz-fizz-1 sh -c "mount --bind /tmp/fake_stat /proc/stat"
+
+# -------------------------------------------------------------
 # Вихідний файл /proc/meminfo
 SOURCE_FILE_MEM="/proc/meminfo"
 TARGET_FILE_MEM="/tmp/fake_meminfo"
