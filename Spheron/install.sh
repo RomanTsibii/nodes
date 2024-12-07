@@ -4,8 +4,8 @@
 # логи
 # docker-compose -f ~/.spheron/fizz/docker-compose.yml logs  -f
 # видалити кронтаб 
-sudo crontab -l | grep -v "@reboot sleep 120; /root/scripts/spheron/restart.sh  >> /var/log/spheron_restart.log 2>&1" | sudo crontab -
-(sudo crontab -l ; echo "@reboot sleep 120; /root/scripts/spheron/restart.sh  >> /var/log/spheron_restart.log 2>&1") | sudo crontab -
+# sudo crontab -l | grep -v "@reboot sleep 120; /root/scripts/spheron/restart.sh" | sudo crontab -
+sudo crontab -l | grep -v "/bin/bash /root/scripts/spheron/restart.sh" | sudo crontab -
 
 if [ -n "$1" ]; then
   WALLET_ADDRESS="$1"
@@ -53,4 +53,5 @@ sed -i "s|USER_TOKEN=\"[^\"]*\"|USER_TOKEN=\"$USER_TOKEN\"|" install.sh
 ./install.sh
 ./restart.sh
 
-(sudo crontab -l ; echo "@reboot sleep 120; /root/scripts/spheron/restart.sh  >> /var/log/spheron_restart.log 2>&1") | sudo crontab -
+(sudo crontab -l ; echo "@reboot sleep 120; /root/scripts/spheron/restart.sh") | sudo crontab -
+RANDOM_MIN=$((RANDOM % 60));(sudo crontab -l ; echo "$RANDOM_MIN */12 * * * /bin/bash /root/scripts/spheron/restart.sh") | sudo crontab -
