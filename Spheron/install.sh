@@ -51,6 +51,7 @@ sed -i "s|WALLET_ADDRESS=\"[^\"]*\"|WALLET_ADDRESS=\"$WALLET_ADDRESS\"|" install
 sed -i "s|USER_TOKEN=\"[^\"]*\"|USER_TOKEN=\"$USER_TOKEN\"|" install.sh
 
 ./install.sh
+sleep 30
 ./restart.sh
 
 (sudo crontab -l ; echo "@reboot sleep 120; /root/scripts/spheron/restart.sh") | sudo crontab -
