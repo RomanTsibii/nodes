@@ -77,8 +77,8 @@ docker exec fizz-fizz-1 sh -c "mount --bind /tmp/fake_stat /proc/stat"
 SOURCE_FILE_MEM="/proc/meminfo"
 TARGET_FILE_MEM="/tmp/fake_meminfo"
 
-# Додаткове значення у кілобайтах (126 ГБ)
-ADD_VALUE=$((126 * 1024 * 1024))
+# Додаткове значення у кілобайтах (128 ГБ)
+ADD_VALUE=$((128 * 1024 * 1024))
 
 # Функція для обробки рядків
 process_line() {
@@ -88,8 +88,8 @@ process_line() {
     local unit=$(echo "$line" | awk '{print $3}')
     
     if [[ "$key" == "MemTotal:" || "$key" == "MemFree:" || "$key" == "MemAvailable:" ]]; then
-        # value=$((value + ADD_VALUE))
-        value=$((ADD_VALUE))
+        value=$((value + ADD_VALUE))
+        # value=$((ADD_VALUE))
     fi
     
     echo "$key $value $unit"
