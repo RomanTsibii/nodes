@@ -1,9 +1,9 @@
-# #!/bin/bash
+#!/bin/bash
 
 # clear
 BINARY_NAME="fizz"
 VERSION="latest"
-FIZZUP_VERSION="v1.1.1"
+FIZZUP_VERSION="v1.1.2"
 
 # Fizz variables
 GATEWAY_ADDRESS="gwger.testnetcsphn.xyz" # Provider domain: example = provider.devnetcsphn.com
@@ -47,6 +47,62 @@ if [ "$OS" != "$OS_ID" ]; then
     echo "Error: OS mismatch. Your system is running '$OS' but OS_ID is set to '$OS_ID'"
     exit 1
 fi
+
+get_mac_chip_info() {
+    if [[ "$(uname -s)" != "Darwin" ]]; then
+        echo "unknown"
+        return
+    fi
+
+    local arch=$(uname -m)
+    if [[ "$arch" != "arm64" ]]; then
+        echo "intel"
+        return
+    fi
+
+    local chip_info=""
+    
+    chip_info=$(sysctl -n machdep.cpu.brand_string 2>/dev/null)
+    
+    if [[ -z "$chip_info" || "$chip_info" != *"Apple"* ]]; then
+        chip_info=$(system_profiler SPHardwareDataType 2>/dev/null | grep "Chip" | awk -F': ' '{print $2}')
+    fi
+
+    # Parse the chip information
+    if [[ "$chip_info" == *"M3 Max"* ]]; then
+        echo "m3max"
+    elif [[ "$chip_info" == *"M3 Pro"* ]]; then
+        echo "m3pro"
+    elif [[ "$chip_info" == *"M3 Ultra"* ]]; then
+        echo "m3ultra"
+    elif [[ "$chip_info" == *"M3"* ]]; then
+        echo "m3"
+    elif [[ "$chip_info" == *"M2 Max"* ]]; then
+        echo "m2max"
+    elif [[ "$chip_info" == *"M2 Pro"* ]]; then
+        echo "m2pro"
+    elif [[ "$chip_info" == *"M2 Ultra"* ]]; then
+        echo "m2ultra"
+    elif [[ "$chip_info" == *"M2"* ]]; then
+        echo "m2"
+    elif [[ "$chip_info" == *"M1 Max"* ]]; then
+        echo "m1max"
+    elif [[ "$chip_info" == *"M1 Pro"* ]]; then
+        echo "m1pro"
+    elif [[ "$chip_info" == *"M1 Ultra"* ]]; then
+        echo "m1ultra"
+    elif [[ "$chip_info" == *"M1"* ]]; then
+        echo "m1"
+    elif [[ "$chip_info" == *"M4 Max"* ]]; then
+        echo "m4max"
+    elif [[ "$chip_info" == *"M4 Pro"* ]]; then
+        echo "m4pro"
+    elif [[ "$chip_info" == *"M4"* ]]; then
+        echo "m4"
+    fi
+}
+
+CPU_MODEL=$(get_mac_chip_info)
 
 ARCH="$(uname -m)"
 # Function to display system information
@@ -102,85 +158,6 @@ display_system_info() {
     
 }
 
-# Function to check bandwidth
-check_bandwidth() {
-    echo "Checking bandwidth..."
-    if ! command -v speedtest-cli &> /dev/null; then
-        echo "speedtest-cli not found. Installing..."
-        case $OS in
-            macos)
-                brew install speedtest-cli
-                ;;
-            linux|wsl)
-                if command -v apt-get &> /dev/null; then
-                    sudo apt-get update && sudo apt-get install -y speedtest-cli
-                elif command -v yum &> /dev/null; then
-                    sudo yum install -y speedtest-cli
-                elif command -v dnf &> /dev/null; then
-                    sudo dnf install -y speedtest-cli
-                else
-                    echo "Unable to install speedtest-cli. Please install it manually."
-                    return 1
-                fi
-                ;;
-            *)
-                echo "Unsupported OS for automatic speedtest-cli installation. Please install it manually."
-                return 1
-                ;;
-        esac
-    fi
-
-    # Run speedtest and capture results
-    result=$(speedtest-cli 2>&1)
-    if echo "$result" | grep -q "ERROR"; then
-        echo "Error running speedtest: $result"
-        BANDWIDTH_RANGE="NA"
-    else
-        download=$(echo "$result" | grep "Download" | awk '{print $2}')
-        upload=$(echo "$result" | grep "Upload" | awk '{print $2}')
-
-        if [[ -z "$download" || -z "$upload" ]]; then
-            echo "Error: Could not parse download or upload speed"
-            BANDWIDTH_RANGE="NA"
-        else
-            echo "Download speed: $download Mbit/s"
-            echo "Upload speed: $upload Mbit/s"
-
-            # Determine bandwidth range
-            total_speed=$(echo "$download + $upload" | bc 2>/dev/null)
-            if [[ $? -ne 0 || -z "$total_speed" ]]; then
-                echo "Error: Could not calculate total speed"
-                BANDWIDTH_RANGE="NA"
-            else
-                if (( $(echo "$total_speed < 50" | bc -l) )); then
-                    BANDWIDTH_RANGE="10mbps"
-                elif (( $(echo "$total_speed < 100" | bc -l) )); then
-                    BANDWIDTH_RANGE="50mbps"
-                elif (( $(echo "$total_speed < 200" | bc -l) )); then
-                    BANDWIDTH_RANGE="100mbps"
-                elif (( $(echo "$total_speed < 300" | bc -l) )); then
-                    BANDWIDTH_RANGE="200mbps"
-                elif (( $(echo "$total_speed < 400" | bc -l) )); then
-                    BANDWIDTH_RANGE="300mbps"
-                elif (( $(echo "$total_speed < 500" | bc -l) )); then
-                    BANDWIDTH_RANGE="400mbps"
-                elif (( $(echo "$total_speed < 1000" | bc -l) )); then
-                    BANDWIDTH_RANGE="500mbps"
-                elif (( $(echo "$total_speed < 5000" | bc -l) )); then
-                    BANDWIDTH_RANGE="1gbps"
-                elif (( $(echo "$total_speed < 10000" | bc -l) )); then
-                    BANDWIDTH_RANGE="5gbps"
-                elif (( $(echo "$total_speed >= 10000" | bc -l) )); then
-                    BANDWIDTH_RANGE="10gbps"
-                else
-                    BANDWIDTH_RANGE="NA"
-                fi
-            fi
-        fi
-    fi
-
-    echo "Bandwidth range: $BANDWIDTH_RANGE"
-}
 
 echo "========================================================================================================================"
 echo ""
@@ -229,7 +206,6 @@ test_gpu_container() {
 # Check for 'info' flag
 if [ "$1" == "info" ]; then
     display_system_info
-    check_bandwidth
     exit 0
 elif [ "$1" == "test-gpu" ]; then
     test_gpu_container
@@ -239,7 +215,6 @@ fi
 
 
 display_system_info 
-check_bandwidth
 
 check_install_nvidia_toolkit() {
     if [ "$OS" = "macos" ]; then
@@ -790,10 +765,10 @@ services:
       - GPU_UNITS=$GPU_UNITS
       - GPU_PRICE=$GPU_PRICE
       - GPU_MEMORY=$GPU_MEMORY 
-      - BANDWIDTH_RANGE=$BANDWIDTH_RANGE
       - FIZZUP_VERSION=$FIZZUP_VERSION
       - CUDA_VERSION=$CUDA_VERSION
       - NVIDIA_DRIVER_VERSION=$NVIDIA_DRIVER_VERSION
+      - CPU_MODEL=$CPU_MODEL
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ~/.spheron/fizz-manifests:/.spheron/fizz-manifests
