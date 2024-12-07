@@ -42,8 +42,8 @@ function install_docker {
 cd /root
 
 mkdir -p scripts/spheron && cd scripts/spheron
-curl -s -o install.sh https://raw.githubusercontent.com/RomanTsibii/nodes/refs/heads/main/Spheron/install_file.sh
-curl -s -O restart.sh https://raw.githubusercontent.com/RomanTsibii/nodes/refs/heads/main/Spheron/restart.sh
+wget -O install.sh https://raw.githubusercontent.com/RomanTsibii/nodes/refs/heads/main/Spheron/install_file.sh
+wget -O restart.sh https://raw.githubusercontent.com/RomanTsibii/nodes/refs/heads/main/Spheron/restart.sh
 chmod +x install.sh
 chmod +x restart.sh
 
