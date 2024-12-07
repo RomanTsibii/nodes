@@ -823,4 +823,4 @@ echo "Thank you for installing Fizz! 🎉"
 echo "============================================"
 echo ""
 echo "Fizz logs:"
-$DOCKER_COMPOSE_CMD -f ~/.spheron/fizz/docker-compose.yml logs -f
+# $DOCKER_COMPOSE_CMD -f ~/.spheron/fizz/docker-compose.yml logs -f
