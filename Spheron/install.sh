@@ -4,7 +4,7 @@
 # логи
 # docker-compose -f ~/.spheron/fizz/docker-compose.yml logs  -f
 # видалити кронтаб 
-# sudo crontab -l | grep -v "@reboot sleep 120; /root/scripts/spheron/restart.sh" | sudo crontab -
+sudo crontab -l | grep -v "@reboot sleep 120; /root/scripts/spheron/restart.sh" | sudo crontab -
 sudo crontab -l | grep -v "/bin/bash /root/scripts/spheron/restart.sh" | sudo crontab -
 
 if [ -n "$1" ]; then
