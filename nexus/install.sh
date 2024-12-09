@@ -47,6 +47,18 @@ if [ -z "$NONINTERACTIVE" ] && [ "${#PROVER_ID}" -ne "28" ]; then
     done
 fi
 
+function install_cargo {
+    if ! type "cargo" > /dev/null; then
+        echo -e "${YELLOW}cargo installing...${NORMAL}"
+        sudo apt install cargo
+        sudo apt install -y protobuf-compiler
+    else
+        echo -e "${YELLOW}cargo installed.${NORMAL}"
+    fi
+}
+
+install_cargo
+
 rustc --version || curl https://sh.rustup.rs -sSf | sh
 
 REPO_PATH=$NEXUS_HOME/network-api
