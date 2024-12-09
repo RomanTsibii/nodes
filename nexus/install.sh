@@ -61,7 +61,3 @@ fi
 
 (cd $REPO_PATH/clients/cli && cargo run --release --bin prover -- beta.orchestrator.nexus.xyz)
 
-
-echo "-----------------------------------------------------------------------------"
-echo "Wish lifechange case with DOUBLETOP"
-echo "-----------------------------------------------------------------------------"
