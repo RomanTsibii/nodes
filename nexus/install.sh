@@ -51,7 +51,7 @@ function install_cargo {
     if ! type "cargo" > /dev/null; then
         echo -e "${YELLOW}cargo installing...${NORMAL}"
         sudo apt install -y protobuf-compiler 
-        bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/tools/main/rust.sh) &>/dev/null
+        bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/tools/main/rust.sh)
     else
         echo -e "${YELLOW}cargo installed.${NORMAL}"
     fi
