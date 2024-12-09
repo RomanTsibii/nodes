@@ -17,6 +17,8 @@ if screen -list | grep -q "$SESSION_NAME"; then
   screen -ls | grep "$SESSION_NAME" | awk '{print $1}' | xargs -I {} screen -S {} -X quit
 fi
 
+mkdir -p /root/.nexus && cd /root/.nexus
+echo "$prover_id" > prover-id
 # Запуск нової сесії
 screen -dmS "$SESSION_NAME"
 sleep 1
