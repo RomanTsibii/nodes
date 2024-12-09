@@ -1,5 +1,5 @@
 #!/bin/bash
-# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/nexus/scree_install.sh)
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/nexus/screen_install.sh)
 
 SESSION_NAME="nexus"
 LOG_FILE="/var/log/nexus.log"
