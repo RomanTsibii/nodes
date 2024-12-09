@@ -50,8 +50,7 @@ fi
 function install_cargo {
     if ! type "cargo" > /dev/null; then
         echo -e "${YELLOW}cargo installing...${NORMAL}"
-        sudo apt install cargo
-        sudo apt install -y protobuf-compiler
+        sudo apt install -y cargo protobuf-compiler 
     else
         echo -e "${YELLOW}cargo installed.${NORMAL}"
     fi
