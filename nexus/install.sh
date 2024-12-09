@@ -5,7 +5,7 @@
 # curl -s https://raw.githubusercontent.com/DOUBLE-TOP/tools/main/doubletop.sh | bash
 # echo "-----------------------------------------------------------------------------"
 
-rustc --version || curl https://sh.rustup.rs -sSf | sh
+
 NEXUS_HOME=$HOME/.nexus
 
 # while [ -z "$NONINTERACTIVE" ] && [ ! -f "$NEXUS_HOME/prover-id" ]; do
@@ -18,12 +18,12 @@ NEXUS_HOME=$HOME/.nexus
 #     esac
 # done
 
-git --version 2>&1 >/dev/null
-GIT_IS_AVAILABLE=$?
-if [ $GIT_IS_AVAILABLE != 0 ]; then
-  echo Unable to find git. Please install it and try again.
-  exit 1;
-fi
+# git --version 2>&1 >/dev/null
+# GIT_IS_AVAILABLE=$?
+# if [ $GIT_IS_AVAILABLE != 0 ]; then
+#   echo Unable to find git. Please install it and try again.
+#   exit 1;
+# fi
 
 PROVER_ID=$(cat $NEXUS_HOME/prover-id 2>/dev/null)
 if [ -z "$NONINTERACTIVE" ] && [ "${#PROVER_ID}" -ne "28" ]; then
@@ -46,6 +46,8 @@ if [ -z "$NONINTERACTIVE" ] && [ "${#PROVER_ID}" -ne "28" ]; then
         read -p "Prover Id (optional)> " PROVER_ID </dev/tty
     done
 fi
+
+rustc --version || curl https://sh.rustup.rs -sSf | sh
 
 REPO_PATH=$NEXUS_HOME/network-api
 if [ -d "$REPO_PATH" ]; then
