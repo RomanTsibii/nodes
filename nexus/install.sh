@@ -5,12 +5,18 @@
 # curl -s https://raw.githubusercontent.com/DOUBLE-TOP/tools/main/doubletop.sh | bash
 # echo "-----------------------------------------------------------------------------"
 
-curl -s https://raw.githubusercontent.com/DOUBLE-TOP/tools/main/main.sh | bash &>/dev/null
-curl -s https://raw.githubusercontent.com/DOUBLE-TOP/tools/main/ufw.sh | bash &>/dev/null
-curl -s https://raw.githubusercontent.com/DOUBLE-TOP/tools/main/rust.sh | bash &>/dev/null
-
-
+rustc --version || curl https://sh.rustup.rs -sSf | sh
 NEXUS_HOME=$HOME/.nexus
+
+# while [ -z "$NONINTERACTIVE" ] && [ ! -f "$NEXUS_HOME/prover-id" ]; do
+#     read -p "Do you agree to the Nexus Beta Terms of Use (https://nexus.xyz/terms-of-use)? (Y/n) " yn </dev/tty
+#     case $yn in
+#         [Nn]* ) exit;;
+#         [Yy]* ) break;;
+#         "" ) break;;
+#         * ) echo "Please answer yes or no.";;
+#     esac
+# done
 
 git --version 2>&1 >/dev/null
 GIT_IS_AVAILABLE=$?
@@ -20,8 +26,11 @@ if [ $GIT_IS_AVAILABLE != 0 ]; then
 fi
 
 PROVER_ID=$(cat $NEXUS_HOME/prover-id 2>/dev/null)
-if [ -z [ "${#PROVER_ID}" -ne "28" ]; then
-    read -p "Prover Id " PROVER_ID </dev/tty
+if [ -z "$NONINTERACTIVE" ] && [ "${#PROVER_ID}" -ne "28" ]; then
+    echo To receive credit for proving in Nexus testnets, click on your prover id
+    echo "(bottom left) at https://beta.nexus.xyz/ to copy the full prover id and"
+    echo paste it here. Press Enter to continue.
+    read -p "Prover Id (optional)> " PROVER_ID </dev/tty
     while [ ! ${#PROVER_ID} -eq "0" ]; do
         if [ ${#PROVER_ID} -eq "28" ]; then
             if [ -f "$NEXUS_HOME/prover-id" ]; then
@@ -48,29 +57,8 @@ else
 fi
 (cd $REPO_PATH && git -c advice.detachedHead=false checkout $(git rev-list --tags --max-count=1))
 
-cat <<EOF | sudo tee /etc/systemd/system/nexus.service >/dev/null
-[Unit]
-Description=Nexus prover
-After=network-online.target
-StartLimitIntervalSec=0
+(cd $REPO_PATH/clients/cli && cargo run --release --bin prover -- beta.orchestrator.nexus.xyz)
 
-[Service]
-User=root
-Restart=always
-RestartSec=30
-LimitNOFILE=65535
-Type=simple
-WorkingDirectory=$REPO_PATH/clients/cli
-ExecStart=cargo run --release --bin prover -- beta.orchestrator.nexus.xyz
-Restart=on-failure
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
-systemctl daemon-reload
-systemctl enable nexus
-systemctl start nexus
 
 echo "-----------------------------------------------------------------------------"
 echo "Wish lifechange case with DOUBLETOP"
