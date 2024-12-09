@@ -57,8 +57,8 @@ function install_cargo {
     fi
 }
 
-install_cargo
-
+# install_cargo
+sudo apt install -y protobuf-compiler 
 rustc --version || curl https://sh.rustup.rs -sSf | sh
 
 REPO_PATH=$NEXUS_HOME/network-api
