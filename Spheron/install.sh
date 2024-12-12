@@ -19,8 +19,25 @@ else
   read -p "Enter your USER_TOKEN: " USER_TOKEN
 fi
 
+echo "Germany GATEWAY_ADDRESS:gwger.testnetcsphn.xyz"
+echo "Spain GATEWAY_ADDRESS:gwsp.testnetcsphn.xyz"
+echo "FRANCE GATEWAY_ADDRESS:provider.testnetbsphn.xyz"
+echo "BULGARIA GATEWAY_ADDRESS:provider.vycod.com"
+echo "ROMANIA GATEWAY_ADDRESS:gwrom.testnetcsphn.xyz"
+echo "TURKEY GATEWAY_ADDRESS:gwa.testnetcsphn.xyz"
+echo "SINGAPORE GATEWAY_ADDRESS:gwsing.testnetcsphn.xyz"
+echo "CHINA GATEWAY_ADDRESS:gwhong.testnetcsphn.xyz"
+
+if [ -n "$3" ]; then
+  GATEWAY_ADDRESS="$3"
+else
+  read -p "Enter your GATEWAY_ADDRESS: " GATEWAY_ADDRESS
+  # GATEWAY_ADDRESS=gwger.testnetcsphn.xyz
+fi
+
 echo "WALLET_ADDRESS: $WALLET_ADDRESS"
 echo "USER_TOKEN: $USER_TOKEN"
+echo "GATEWAY_ADDRESS: $GATEWAY_ADDRESS"
 
 function colors {
   GREEN="\e[32m"
@@ -49,6 +66,7 @@ chmod +x restart.sh
 
 sed -i "s|WALLET_ADDRESS=\"[^\"]*\"|WALLET_ADDRESS=\"$WALLET_ADDRESS\"|" install.sh
 sed -i "s|USER_TOKEN=\"[^\"]*\"|USER_TOKEN=\"$USER_TOKEN\"|" install.sh
+sed -i "s|GATEWAY_ADDRESS=\"[^\"]*\"|GATEWAY_ADDRESS=\"$GATEWAY_ADDRESS\"|" install.sh
 
 ./install.sh
 sleep 30
