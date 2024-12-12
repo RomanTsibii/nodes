@@ -8,10 +8,10 @@ sudo crontab -l | grep -v "@reboot sleep 120; /root/scripts/spheron/restart.sh" 
 sudo crontab -l | grep -v "/bin/bash /root/scripts/spheron/restart.sh" | sudo crontab -
 
 function colors {
-  GREEN="\e[32m"
-  YELLOW="\e[33m"
-  RED="\e[39m"
-  NORMAL="\e[0m"
+  GREEN="\033[32m"
+  YELLOW="\033[33m"
+  RED="\033[31m"
+  NORMAL="\033[0m"
 }
 
 if [ -n "$1" ]; then
