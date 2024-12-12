@@ -7,6 +7,13 @@
 sudo crontab -l | grep -v "@reboot sleep 120; /root/scripts/spheron/restart.sh" | sudo crontab -
 sudo crontab -l | grep -v "/bin/bash /root/scripts/spheron/restart.sh" | sudo crontab -
 
+function colors {
+  GREEN="\e[32m"
+  YELLOW="\e[33m"
+  RED="\e[39m"
+  NORMAL="\e[0m"
+}
+
 if [ -n "$1" ]; then
   WALLET_ADDRESS="$1"
 else
@@ -18,16 +25,16 @@ if [ -n "$2" ]; then
 else
   read -p "Enter your USER_TOKEN: " USER_TOKEN
 fi
-
-echo "Germany GATEWAY_ADDRESS:gwger.testnetcsphn.xyz"
-echo "Spain GATEWAY_ADDRESS:gwsp.testnetcsphn.xyz"
-echo "FRANCE GATEWAY_ADDRESS:provider.testnetbsphn.xyz"
-echo "BULGARIA GATEWAY_ADDRESS:provider.vycod.com"
-echo "ROMANIA GATEWAY_ADDRESS:gwrom.testnetcsphn.xyz"
-echo "TURKEY GATEWAY_ADDRESS:gwa.testnetcsphn.xyz"
-echo "SINGAPORE GATEWAY_ADDRESS:gwsing.testnetcsphn.xyz"
-echo "CHINA GATEWAY_ADDRESS:gwhong.testnetcsphn.xyz"
-
+echo -e "--------------------------------------------------------"
+echo -e "${YELLOW}Germany   :${GREEN}gwger.testnetcsphn.xyz${NORMAL}"
+echo -e "${YELLOW}Spain     :${GREEN}gwsp.testnetcsphn.xyz${NORMAL}"
+echo -e "${YELLOW}FRANCE    :${GREEN}provider.testnetbsphn.xyz${NORMAL}"
+echo -e "${YELLOW}BULGARIA  :${GREEN}provider.vycod.com${NORMAL}"
+echo -e "${YELLOW}ROMANIA   :${GREEN}gwrom.testnetcsphn.xyz${NORMAL}"
+echo -e "${YELLOW}TURKEY    :${GREEN}gwa.testnetcsphn.xyz${NORMAL}"
+echo -e "${YELLOW}SINGAPORE :${GREEN}gwsing.testnetcsphn.xyz${NORMAL}"
+echo -e "${YELLOW}CHINA     :${GREEN}gwhong.testnetcsphn.xyz${NORMAL}"
+echo "--------------------------------------------------------"
 if [ -n "$3" ]; then
   GATEWAY_ADDRESS="$3"
 else
@@ -35,17 +42,9 @@ else
   # GATEWAY_ADDRESS=gwger.testnetcsphn.xyz
 fi
 
-echo "WALLET_ADDRESS: $WALLET_ADDRESS"
-echo "USER_TOKEN: $USER_TOKEN"
-echo "GATEWAY_ADDRESS: $GATEWAY_ADDRESS"
-
-function colors {
-  GREEN="\e[32m"
-  YELLOW="\e[33m"
-  RED="\e[39m"
-  NORMAL="\e[0m"
-}
-
+echo -e "${GREEN}WALLET_ADDRESS: $WALLET_ADDRESS${NORMAL}"
+echo -e "${GREEN}USER_TOKEN: $USER_TOKEN${NORMAL}"
+echo -e "${GREEN}GATEWAY_ADDRESS: $GATEWAY_ADDRESS${NORMAL}"
 
 function install_docker {
     if ! type "docker" > /dev/null; then
