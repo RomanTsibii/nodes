@@ -1,6 +1,6 @@
 #!/bin/bash
-# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/kuzco/kuzco_install_new.sh) 
-# screen -S kuzco_restart -dm bash -c "bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/kuzco/kuzco_install_new.sh)"
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/kuzco/restart_always.sh) 
+# screen -S kuzco_restart -dm bash -c "bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/kuzco/restart_always.sh)"
 
 
 cat > "$HOME/kuzco_start.sh" << EOF
