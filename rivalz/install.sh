@@ -100,6 +100,7 @@ sudo systemctl daemon-reload
 sudo systemctl enable rivalz.service
 
 sudo systemctl start rivalz.service
+bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/rivalz/restart.sh)
 
 # Перевірка статусу сервісу
 echo "Wail 20sec info status:"
