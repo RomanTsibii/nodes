@@ -9,7 +9,7 @@
 sudo crontab -l | grep -v "@reboot /root/gaianet/bin/gaianet run >> /var/log/gaianet.log 2>&1 && /root/gaianet/bot_gaia.sh >> /var/log/bot_gaia.log 2>&1 &" | sudo crontab -
 
 kill $(ps aux | grep bot_gaia.sh | grep -v grep | awk '{print $2}')   # stop
-# /root/gaianet/bin/gaianet stop 
+/root/gaianet/bin/gaianet stop 
 cd /root
 sudo apt update -y 
 # sudo apt-get update
@@ -17,7 +17,7 @@ curl -sSfL 'https://github.com/GaiaNet-AI/gaianet-node/releases/latest/download/
 
 source ~/.bashrc
 /root/gaianet/bin/gaianet init --config https://raw.githubusercontent.com/GaiaNet-AI/node-configs/main/qwen2-0.5b-instruct/config.json
-
+/root/gaianet/bin/gaianet config --port 48070
 /root/gaianet/bin/gaianet run
 sleep 10
 gaianet_info=$(/root/gaianet/bin/gaianet info)
