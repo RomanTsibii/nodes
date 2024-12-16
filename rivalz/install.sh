@@ -68,7 +68,7 @@ sleep 1
 send "\r"         
 # sleep 1
 expect "Enter Disk size of /dev/loop0 (SSD) you want to use (GB, Max 14469 GB):"
-# sleep 3
+sleep 3
 send "$DISK_SIZE\r"
 sleep 5
 interact
