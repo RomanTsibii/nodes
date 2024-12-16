@@ -38,7 +38,7 @@ export DEBIAN_FRONTEND=noninteractive
 
 # Установка пакетов с подавлением интерактивных запросов
 sudo apt update -y # -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
-curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - &>/dev/null
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - # &>/dev/null
 sudo apt install -y nodejs  # expect -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
 
 npm i -g rivalz-node-cli
