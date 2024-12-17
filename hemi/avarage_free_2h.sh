@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/hemi/avarage_free_2h.sh)
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/hemi/avarage_free_2h.sh) max_gas
 # set -- 10  # Це задасть $1 значення 10
 
 # blocks=$(curl -s https://mempool.space/testnet/api/v1/blocks | jq '.[0:20]')
@@ -69,9 +69,15 @@ while [[ $attempt -lt $max_attempts && $valid == false ]]; do
     sleep 1
 done
 
-if [ "$hour_fee" -gt 1500 ]; then
-    hour_fee=1500
+if [ -n "$1" ]; then
+  hour_fee="$1"
+else
+    if [ "$hour_fee" -gt 1500 ]; then
+        hour_fee=1500
+    fi
 fi
+
+
 
 # average=$(curl -s https://mempool.space/testnet/api/v1/fees/recommended | jq -r '.hourFee')
 
