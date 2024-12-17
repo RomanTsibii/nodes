@@ -23,4 +23,10 @@ rm -rf "$HOME/heminetwork_${LATEST_VERSION}_linux_amd64"
 sudo systemctl daemon-reload
 sudo systemctl start hemi
 
-bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/hemi/crontab.sh)
+
+if [ -n "$1" ]; then
+  max_fee="$1"
+  bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/hemi/crontab.sh) $max_fee
+else
+  bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/hemi/crontab.sh)
+fi
