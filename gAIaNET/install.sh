@@ -19,7 +19,7 @@ curl -sSfL 'https://github.com/GaiaNet-AI/gaianet-node/releases/download/0.4.7/i
 
 source ~/.bashrc
 /root/gaianet/bin/gaianet init --config https://raw.githubusercontent.com/GaiaNet-AI/node-configs/main/qwen2-0.5b-instruct/config.json
-/root/gaianet/bin/gaianet config --port 48070
+# /root/gaianet/bin/gaianet config --port 48070
 /root/gaianet/bin/gaianet run
 sleep 10
 gaianet_info=$(/root/gaianet/bin/gaianet info)
