@@ -20,6 +20,8 @@ if screen -list | grep -q "$SCREEN_NAME"; then
   screen -ls | grep "$SCREEN_NAME" | awk '{print $1}' | xargs -I {} screen -S {} -X quit
 fi
 
+kuzco upgrade
+
 # Створення скрипта з коректною підстановкою змінної
 wget -O "$HOME/${SCREEN_NAME}_start.sh" https://raw.githubusercontent.com/RomanTsibii/nodes/refs/heads/main/helper/restart_always.sh
 sed -i "s|COMMAND=\"[^\"]*\"|COMMAND=\"$COMMAND\"|" "$HOME/${SCREEN_NAME}_start.sh"
