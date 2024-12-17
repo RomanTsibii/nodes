@@ -13,7 +13,7 @@ kill $(ps aux | grep bot_gaia.sh | grep -v grep | awk '{print $2}')   # stop
 cd /root
 sudo apt update -y 
 # sudo apt-get update
-curl -sSfL 'https://github.com/GaiaNet-AI/gaianet-node/releases/download/latest/install.sh' | bash
+curl -sSfL 'https://github.com/GaiaNet-AI/gaianet-node/releases/latest/download/install.sh' | bash
 # curl -sSfL 'https://github.com/GaiaNet-AI/gaianet-node/releases/download/0.4.7/install.sh' | bash
 
 
