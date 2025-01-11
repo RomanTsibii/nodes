@@ -33,6 +33,7 @@ install_screen
 
 docker stop $(docker ps | grep spheronnetwork | awk {'print $1'})
 cd /root
+screen -ls | grep "$SCREEN_NAME" | awk '{print $1}' | xargs -I{} screen -S {} -X quit # закрити скрін сесію
 
 # echo "restart $SCREEN_NAME" 
 screen -dmS "$SCREEN_NAME" -L
