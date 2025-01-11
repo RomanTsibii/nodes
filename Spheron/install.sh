@@ -50,13 +50,14 @@ sleep 1
 screen -S "$SCREEN_NAME" -X stuff $'\n' # press enter
 
 MAX_RETRIES=120 # 120 * 5 = 600 секунд(10хв) - очікувати поки не запуститься контейнер сперону
+echo "Start install spheron, just wait for install..."
 while [ 0 -lt $MAX_RETRIES ]; do
     # Перевірка, чи існує контейнер "spheronnetwork"
     if docker ps | grep -q "spheronnetwork"; then
         echo "Контейнер 'spheronnetwork' запущено."
         break
     else
-        echo "Контейнер 'spheronnetwork' не знайдено. Очікування 5 секунд..."
+        echo "."
         sleep 5
     fi
     ((counter++))
