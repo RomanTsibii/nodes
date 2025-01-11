@@ -49,7 +49,7 @@ screen -S "$SCREEN_NAME" -X stuff "sphnctl fizz start --token $USER_TOKEN"
 sleep 1
 screen -S "$SCREEN_NAME" -X stuff $'\n' # press enter
 
-MAX_RETRIES=120 # 120 * 5 = 600 секунд(10хв) - очікувати поки не запуститься контейнер сперону
+MAX_RETRIES=120 # 120 * 10 = 1200 секунд(20хв) - очікувати поки не запуститься контейнер сперону
 echo "Start install spheron, just wait for install..."
 while [ 0 -lt $MAX_RETRIES ]; do
     # Перевірка, чи існує контейнер "spheronnetwork"
@@ -58,7 +58,7 @@ while [ 0 -lt $MAX_RETRIES ]; do
         break
     else
         echo "."
-        sleep 5
+        sleep 10
     fi
     ((counter++))
 done
