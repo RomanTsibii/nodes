@@ -1,0 +1,30 @@
+services:
+  worker:
+    image: openledgerhub/worker:1.0.0
+    ports:
+      - "8284:8284"
+      - "5555:5555"
+    volumes:
+      - ./config.yaml:/app/config.yaml
+      - ./keystore/keystore.json:/app/keystore.json
+    env_file:
+      - .env
+    networks:
+      - worker-network
+    restart: always
+
+  scraper:
+    image: openledgerhub/scraper:1.0.0
+    ports:
+      - "8000:8285"
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - worker-network
+    depends_on:
+      - worker
+    restart: always
+
+networks:
+  worker-network:
+    name: worker-network
