@@ -16,7 +16,7 @@ services:
   scraper:
     image: openledgerhub/scraper:1.0.0
     ports:
-      - "8000:8285"
+      - "8001:8000"
     environment:
       - PYTHONUNBUFFERED=1
     networks:
