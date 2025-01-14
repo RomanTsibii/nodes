@@ -41,9 +41,9 @@ while [[ $attempts -lt 5 ]]; do
         echo "Gaia URL найден: $gaia_url"
         break  # Виходимо з циклу, якщо gaia_url знайдений
     fi
-
     # Якщо gaia_url не знайдений, чекаємо 5 секунд
     echo "Gaia URL не найден, попытка $attempts из 5..."
+    /root/gaianet/bin/gaianet stop 
     sleep 5
 done
 
