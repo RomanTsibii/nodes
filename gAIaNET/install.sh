@@ -20,14 +20,17 @@ curl -sSfL 'https://github.com/GaiaNet-AI/gaianet-node/releases/latest/download/
 source ~/.bashrc
 /root/gaianet/bin/gaianet init --config https://raw.githubusercontent.com/GaiaNet-AI/node-configs/main/qwen2-0.5b-instruct/config.json
 # /root/gaianet/bin/gaianet config --port 48070
-/root/gaianet/bin/gaianet run
+gaia_run=$(/root/gaianet/bin/gaianet run)
+gaia_url=$(echo "$gaia_run" | grep -o 'https://[a-zA-Z0-9.-]\+')
 sleep 10
 gaianet_info=$(/root/gaianet/bin/gaianet info)
+gaia_url=$(echo "$gaia_run" | grep -o 'https://[a-zA-Z0-9.-]\+')
 Node_ID=$(echo "$gaianet_info" | awk -F 'Node ID: ' '{print $2}' | awk '{print $1}')
 Device_ID=$(echo "$gaianet_info" | awk -F 'Device ID: ' '{print $2}')
 
 echo "Node_ID: $Node_ID"
 echo "Device_ID: $Device_ID"
+echo "gaia url: $gaia_url"
 
 # gaianet stop
 
@@ -41,7 +44,8 @@ chmod +x bot_gaia.sh
 chmod +x start.sh
 
 # sed -i "s/YOUR_WALLET/$Node_ID/" config.json
-jq --arg node_id "$Node_ID" '.url = "https://\($node_id).us.gaianet.network/v1/chat/completions"' bot_config.json > temp.json && mv temp.json bot_config.json
+# jq --arg node_id "$Node_ID" '.url = "https://\($node_id).us.gaianet.network/v1/chat/completions"' bot_config.json > temp.json && mv temp.json bot_config.json
+jq --arg gaia_url "$gaia_url" '.url = "\($gaia_url)/v1/chat/completions"' bot_config.json > temp.json && mv temp.json bot_config.json
 sed -i 's/\\u001b\[0m//g' bot_config.json
 (sudo crontab -l ; echo "@reboot /root/gaianet/bin/gaianet run >> /var/log/gaianet.log 2>&1 && /root/gaianet/bot_gaia.sh >> /var/log/bot_gaia.log 2>&1 &") | sudo crontab -
 nohup /root/gaianet/bot_gaia.sh >> /var/log/bot_gaia.log 2>&1 &   # start
