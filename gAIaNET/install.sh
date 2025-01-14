@@ -65,7 +65,7 @@ Device_ID=$(echo "$gaianet_info" | awk -F 'Device ID: ' '{print $2}')
 
 echo "Node_ID: $Node_ID"
 echo "Device_ID: $Device_ID"
-echo "gaia url: $gaia_url"
+# echo "gaia url: $gaia_url"
 
 # gaianet stop
 
