@@ -20,14 +20,16 @@ curl -sSfL 'https://github.com/GaiaNet-AI/gaianet-node/releases/latest/download/
 source ~/.bashrc
 /root/gaianet/bin/gaianet init --config https://raw.githubusercontent.com/GaiaNet-AI/node-configs/main/qwen2-0.5b-instruct/config.json
 # /root/gaianet/bin/gaianet config --port 48070
+echo "Starts node..."
 gaia_run=$(/root/gaianet/bin/gaianet run)
 gaia_url=$(echo "$gaia_run" | grep -o 'https://[a-zA-Z0-9.-]\+')
-sleep 10
+sleep 20
 gaianet_info=$(/root/gaianet/bin/gaianet info)
 gaia_url=$(echo "$gaia_run" | grep -o 'https://[a-zA-Z0-9.-]\+')
 Node_ID=$(echo "$gaianet_info" | awk -F 'Node ID: ' '{print $2}' | awk '{print $1}')
 Device_ID=$(echo "$gaianet_info" | awk -F 'Device ID: ' '{print $2}')
 
+echo "Node logs: $gaianet_info"
 echo "Node_ID: $Node_ID"
 echo "Device_ID: $Device_ID"
 echo "gaia url: $gaia_url"
