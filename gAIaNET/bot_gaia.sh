@@ -110,6 +110,7 @@ send_request() {
     escaped_line=$(echo "$line" | jq -R .)
 
     while [[ $retry_count -lt $max_retry ]]; do
+        echo "Do request..."
         # Виконання запиту з динамічною зміною кількості символів
         response=$(curl -s --max-time $max_time -X POST "$url" \
             -H 'accept: application/json' \
@@ -117,7 +118,7 @@ send_request() {
             -d "{\"messages\":[{\"role\":\"system\", \"content\": \"You are a helpful assistant. Please provide a response that is close to ${request_words} characters.\"}, {\"role\":\"user\", \"content\": $escaped_line}]}")
 
         # Виведення відповіді для діагностики
-        echo "API response: $response" | tee -a "$log_file"
+        # echo "API response: $response" | tee -a "$log_file"
 
         # Перевірка на валідність JSON-формату
         if echo "$response" | jq empty 2>/dev/null; then
@@ -205,7 +206,7 @@ while true; do
         send_request "$line"
 
         # Затримка перед наступним запитом
-        sleep 1
+        # sleep 1
     else
         echo "File '$file' not found. Retrying in 5 seconds..." | tee -a "$log_file"
         request_words=$((request_words - 100))  # Зменшуємо на 100 у випадку помилки
