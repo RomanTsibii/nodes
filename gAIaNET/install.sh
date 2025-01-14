@@ -49,11 +49,6 @@ done
 
 if [[ -z "$gaia_url" ]]; then
     echo "Gaia URL не найден: $gaia_url"
-    exit
-fi
-
-if [[ -z "$gaia_url" ]]; then
-    echo "Gaia URL не найден: $gaia_url"
     exit 1  # Завершаем выполнение скрипта с ошибкой
 fi
 
