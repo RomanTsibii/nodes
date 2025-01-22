@@ -30,6 +30,7 @@ function install_screen {
 
 install_docker
 install_screen
+echo "Start install spheron, just wait for install..."
 
 docker stop $(docker ps | grep spheronnetwork | awk {'print $1'})
 cd /root
@@ -50,7 +51,7 @@ sleep 1
 screen -S "$SCREEN_NAME" -X stuff $'\n' # press enter
 
 MAX_RETRIES=120 # 120 * 10 = 1200 секунд(20хв) - очікувати поки не запуститься контейнер сперону
-echo "Start install spheron, just wait for install..."
+
 while [ 0 -lt $MAX_RETRIES ]; do
     # Перевірка, чи існує контейнер "spheronnetwork"
     if docker ps | grep -q "spheronnetwork"; then
