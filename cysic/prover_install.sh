@@ -12,6 +12,7 @@ else
   read -p "Enter your address: " address
 fi
 
+cd
 apt-get install htop -y
 apt update
 apt install -y supervisor
