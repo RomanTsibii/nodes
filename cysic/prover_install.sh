@@ -3,7 +3,8 @@
 # 
 # логи
 # supervisorctl tail -f cysic-prover
-
+# restart 
+# supervisorctl restart cysic-prover
 
 if [ -n "$1" ]; then
   address="$1"
