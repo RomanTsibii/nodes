@@ -32,10 +32,10 @@ fi
 
 cd ~/cysic-prover/
 # Створення скрипта з коректною підстановкою змінної
-# wget -O "$HOME/cysic-prover/${SCREEN_NAME}_start.sh" https://raw.githubusercontent.com/RomanTsibii/nodes/refs/heads/main/helper/restart_always.sh
-# sed -i "s|COMMAND=\"[^\"]*\"|COMMAND=\"$COMMAND\"|" "${SCREEN_NAME}_start.sh"
+wget -O "$HOME/cysic-prover/${SCREEN_NAME}_start.sh" https://raw.githubusercontent.com/RomanTsibii/nodes/refs/heads/main/helper/restart_always.sh
+sed -i "s|COMMAND=\"[^\"]*\"|COMMAND=\"$COMMAND\"|" "${SCREEN_NAME}_start.sh"
 
-# chmod u+x "${SCREEN_NAME}_start.sh"
+chmod u+x "${SCREEN_NAME}_start.sh"
 
 # 2 запустити у ньому у фоні файл
 sleep 1
