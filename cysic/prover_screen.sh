@@ -1,12 +1,15 @@
 #!/bin/bash
-# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/cysic/prover_install.sh) address
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/cysic/prover_screen.sh) address
 # 
 # логи
-# journalctl -u cysic-prover -f
+# tail -f /root/cysic-prover/logs.log
 
 # restart 
 # sudo systemctl restart cysic-prover
 
+# stop
+
+# start
 
 if [ -n "$1" ]; then
   address="$1"
@@ -47,7 +50,6 @@ sed -i "s|COMMAND=\"[^\"]*\"|COMMAND=\"$COMMAND\"|" "${SCREEN_NAME}_start.sh"
 chmod u+x "${SCREEN_NAME}_start.sh"
 
 # 2 запустити у ньому у фоні файл
-
 sleep 1
 echo "restart $SCREEN_NAME" 
 screen -dmS "$SCREEN_NAME" -L
@@ -63,4 +65,4 @@ sleep 20
 # journalctl -u cysic-prover 
 
 echo "DONE"
-echo "Logs: tail -f cysic_logs.log"
+echo "Logs: tail -f /root/cysic-prover/logs.log"
