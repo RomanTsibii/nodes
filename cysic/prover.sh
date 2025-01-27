@@ -16,7 +16,7 @@ fi
 
 SCREEN_NAME=cysic
 COMMAND="bash start.sh"
-LOG_FILE="$HOME/cysic-prover/cysic_logs.log"
+LOG_FILE="$HOME/cysic-prover/logs.log"
 
 cd
 apt-get install htop screen -y
