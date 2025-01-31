@@ -17,7 +17,7 @@ else
 fi
 
 if [ -d "/root/.cysic/keys/" ]; then
-    echo "Існує бекап ноди... видаліть його тут(/root/.cysic) і запустіть ще раз "
+    echo "Існує бекап ноди... видаліть його тут(rm -rf /root/.cysic) і запустіть ще раз "
     exit
 fi
 
