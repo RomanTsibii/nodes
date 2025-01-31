@@ -2,6 +2,10 @@
 
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/proxy_L.sh)
 
+sudo sysctl -w net.ipv6.conf.all.disable_ipv6=1
+sudo sysctl -w net.ipv6.conf.default.disable_ipv6=1
+sudo sysctl -w net.ipv6.conf.lo.disable_ipv6=1
+
 sudo systemctl stop 3proxy.service
 systemctl disable 3proxy.service
 
