@@ -7,7 +7,7 @@ systemctl disable 3proxy.service
 
 apt update
 apt-get install build-essential -y
-wget https://github.com/z3APA3A/3proxy/archive/0.9.3.tar.gz
+wget -O 0.9.3.tar.gz https://github.com/z3APA3A/3proxy/archive/0.9.3.tar.gz
 tar xzf 0.9.3.tar.gz
 cd 3proxy-*
 sed -i '1s/^/#define ANONYMOUS 1\n/' ./src/proxy.h
