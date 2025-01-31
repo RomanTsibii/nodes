@@ -10,20 +10,21 @@
 # stop
 # sudo systemctl stop cysic.service
 
-
 if [ -n "$1" ]; then
   address="$1"
 else
   read -p "Enter your address: " address
 fi
 
+if [ -d "/root/.cysic/keys/" ]; then
+    echo "Папка існує. Вихід..."
+    exit
+fi
 
 sudo apt update
 
 curl -L https://github.com/cysic-labs/phase2_libs/releases/download/v1.0.0/setup_linux.sh > ~/setup_linux.sh
 bash ~/setup_linux.sh $address
-
-
 
 sudo bash -c 'cat > /etc/systemd/system/cysic.service <<EOF
 [Unit]
