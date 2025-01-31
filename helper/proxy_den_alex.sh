@@ -26,8 +26,8 @@ nserver 1.0.0.1
 nscache 65536
 timeouts 1 5 30 60 180 1800 15 60
 
-external `curl -s ifconfig.me`
-internal `curl -s ifconfig.me`
+external `curl -4 -s ifconfig.me`
+internal `curl -4 -s ifconfig.me`
 
 daemon
 
