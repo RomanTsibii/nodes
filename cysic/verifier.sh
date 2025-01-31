@@ -20,7 +20,8 @@ fi
 
 sudo apt update
 
-curl -L https://github.com/cysic-labs/phase2_libs/releases/download/v1.0.0/setup_linux.sh > ~/setup_linux.sh && bash ~/setup_linux.sh $address
+curl -L https://github.com/cysic-labs/phase2_libs/releases/download/v1.0.0/setup_linux.sh > ~/setup_linux.sh
+bash ~/setup_linux.sh $address
 
 
 
