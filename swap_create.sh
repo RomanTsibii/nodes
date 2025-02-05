@@ -1,6 +1,6 @@
 #!/bin/bash
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/swap_create.sh) ГБ
-
+echo "до установки"
 free -h
 
 if [ -n "$1" ]; then
@@ -25,7 +25,7 @@ if grep -q '/swapfile none swap sw 0 0' /etc/fstab; then
 else
     echo "No swap file entry found in /etc/fstab."
 fi
-
+echo "Після видалення якщо вже було додано"
 sudo swapon --show
 free -h
 sudo fallocate -l ${swap_GB}G /swapfile
@@ -36,3 +36,7 @@ sudo mkswap /swapfile
 sudo swapon /swapfile
 sudo cp /etc/fstab /etc/fstab.bak
 echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+
+echo "Після додавання swap"
+sudo swapon --show
+free -h
