@@ -14,6 +14,7 @@ fi
 if sudo swapon --show | grep -q '/swapfile'; then
     echo "Swap file /swapfile is active. Disabling it..."
     sudo swapoff /swapfile
+    sudo rm /swapfile
 else
     echo "Swap file /swapfile is not active."
 fi
@@ -25,6 +26,7 @@ if grep -q '/swapfile none swap sw 0 0' /etc/fstab; then
 else
     echo "No swap file entry found in /etc/fstab."
 fi
+
 echo "Після видалення якщо вже було додано"
 sudo swapon --show
 free -h
