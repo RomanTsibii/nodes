@@ -28,7 +28,7 @@ fi
 
 sudo swapon --show
 free -h
-sudo fallocate -l 6G /swapfile
+sudo fallocate -l ${swap_GB}G /swapfile
 ls -lh /swapfile
 sudo chmod 600 /swapfile
 ls -lh /swapfile
