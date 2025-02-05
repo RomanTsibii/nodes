@@ -1,5 +1,5 @@
 #!/bin/bash
-# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/Spheron/install.sh) ГБ
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/swap_create.sh) ГБ
 
 free -h
 
