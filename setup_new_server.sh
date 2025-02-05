@@ -12,6 +12,9 @@ bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/add_ssh_
 # встановити tmux
 # встановити ncdu
 sudo apt install ncdu tmux htop screen -y
+
+# добавити свап на 8гб оперативки
+bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/swap_create.sh) 8
  
 # install proxy for adspower
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/proxy_for_antick.sh)
