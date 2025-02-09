@@ -23,6 +23,11 @@ LOG_FILE="$HOME/cysic-prover/logs.log"
 
 cd
 apt-get install htop screen -y
+
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-keyring_1.0-1_all.deb
+sudo dpkg -i cuda-keyring_1.0-1_all.deb
+sudo apt-get update
+
 apt update
 # apt install -y supervisor
 wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-ubuntu2204.pin
