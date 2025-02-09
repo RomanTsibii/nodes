@@ -2,7 +2,7 @@
 
 docker-compose -f ~/.spheron/fizz/docker-compose.yml down
 docker-compose -f ~/.spheron/fizz/docker-compose.yml up -d
-sleep 30
+# sleep 10
 name=$(docker ps --filter "ancestor=spheronnetwork/fizz" --format "{{.Names}}")
 # Поточна кількість ядер
 CURRENT_CORES=$(grep -c "^processor" /proc/cpuinfo)
@@ -61,8 +61,15 @@ OUTPUT_FILE="/tmp/fake_stat"
 cat "$SOURCE_FILE" > "$OUTPUT_FILE"
 
 # Генерируем фейковые данные для первого cpu и всех отдельных процессоров
-awk '/^cpu[0-9]*/ {
-    $5 = $5 + 100000000  # Увеличиваем idle (пятый столбец)
+# awk '/^cpu[0-9]*/ {
+#     $5 = $5 + 100000000  # Увеличиваем idle (пятый столбец)
+#     print
+# } !/^cpu/ { print }' "$SOURCE_FILE" > "$OUTPUT_FILE"
+
+awk 'BEGIN { srand() } 
+/^cpu[0-9]*/ {
+    rand_offset = int(100000000 * (0.99 + rand() * 0.1))  # Випадкове число від 99 млн до 101 млн; Увеличиваем idle (пятый столбец)
+    $5 = $5 + rand_offset  
     print
 } !/^cpu/ { print }' "$SOURCE_FILE" > "$OUTPUT_FILE"
 
@@ -78,8 +85,9 @@ SOURCE_FILE_MEM="/proc/meminfo"
 TARGET_FILE_MEM="/tmp/fake_meminfo"
 
 # Додаткове значення у кілобайтах (128 ГБ)
-ADD_VALUE=$((128 * 1024 * 1024))
-
+# ADD_VALUE=$((128 * 1024 * 1024))
+# генеруємо випадкове число яке буде від 120 до 128 гб оперативки  - значення вказане у кб
+ADD_VALUE=$(shuf -i 1250829120-134217728 -n 1) 
 # Функція для обробки рядків
 process_line() {
     local line=$1
@@ -88,8 +96,8 @@ process_line() {
     local unit=$(echo "$line" | awk '{print $3}')
     
     if [[ "$key" == "MemTotal:" || "$key" == "MemFree:" || "$key" == "MemAvailable:" ]]; then
-        value=$((value + ADD_VALUE))
-        # value=$((ADD_VALUE))
+        # value=$((value + ADD_VALUE))
+        value=$((ADD_VALUE))
     fi
     
     echo "$key $value $unit"
