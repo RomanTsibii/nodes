@@ -1,5 +1,5 @@
 #!/bin/bash
-# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/Spheron/install.sh) token
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/Spheron/update.sh)
 # 
 # логи
 # docker-compose -f ~/.spheron/fizz/docker-compose.yml logs  -f
