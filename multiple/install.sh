@@ -13,12 +13,6 @@ else
   read -p "Установите ваш PIN:" PIN
 fi
 
-if [ -n "$2" ]; then
-  PIN="$2"
-else
-  read -p "Установите ваш PIN:" PIN
-fi
-
 # echo -e "Введите ваш Account ID:"
 # read IDENTIFIER
 # echo -e "Установите ваш PIN:"
