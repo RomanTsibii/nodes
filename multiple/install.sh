@@ -81,7 +81,8 @@ echo "-----------------------------------------------------------------------"
 # ./multiple-cli bind --bandwidth-download 3000 --identifier $IDENTIFIER --pin $PIN --storage 50000 --bandwidth-upload 1000
 
 while true; do
-    OUTPUT=$(./multiple-cli bind --bandwidth-download 3000 --identifier $IDENTIFIER --pin $PIN --storage 50000 --bandwidth-upload 1000 2>&1)
+    # OUTPUT=$(./multiple-cli bind --bandwidth-download 3000 --identifier $IDENTIFIER --pin $PIN --storage 50000 --bandwidth-upload 1000 2>&1)
+    OUTPUT=$(./multiple-cli bind --bandwidth-download 1000 --identifier $IDENTIFIER --pin $PIN --storage 2000 --bandwidth-upload 1000 2>&1)
     
     echo "$OUTPUT"
     
