@@ -13,6 +13,12 @@ else
   read -p "Установите ваш PIN:" PIN
 fi
 
+if [ -n "$2" ]; then
+  PIN="$2"
+else
+  read -p "Установите ваш PIN:" PIN
+fi
+
 # echo -e "Введите ваш Account ID:"
 # read IDENTIFIER
 # echo -e "Установите ваш PIN:"
@@ -72,9 +78,10 @@ echo "Привязка аккаунта"
 echo "-----------------------------------------------------------------------"
 
 # ./multiple-cli bind --bandwidth-download 100 --identifier $IDENTIFIER --pin $PIN --storage 200 --bandwidth-upload 100
+# ./multiple-cli bind --bandwidth-download 3000 --identifier $IDENTIFIER --pin $PIN --storage 50000 --bandwidth-upload 1000
 
 while true; do
-    OUTPUT=$(./multiple-cli bind --bandwidth-download 100 --identifier "$IDENTIFIER" --pin "$PIN" --storage 200 --bandwidth-upload 100 2>&1)
+    OUTPUT=$(./multiple-cli bind --bandwidth-download 3000 --identifier $IDENTIFIER --pin $PIN --storage 50000 --bandwidth-upload 1000 2>&1)
     
     echo "$OUTPUT"
     
