@@ -11,33 +11,13 @@ mkdir -p scripts/spheron && cd scripts/spheron
 wget -O restart.sh https://raw.githubusercontent.com/RomanTsibii/nodes/refs/heads/main/Spheron/restart.sh
 chmod +x restart.sh
 
-sudo bash -c 'cat > /etc/systemd/system/cheker_spheron.service <<EOF
-[Unit]
-Description=Відстеження запуску контейнера fizz та виконання скрипта
-After=docker.service
-Wants=docker.service
+sudo curl -o /etc/systemd/system/cheker_spheron.service https://raw.githubusercontent.com/RomanTsibii/nodes/refs/heads/main/Spheron/cheker_spheron.service
+# sudo chmod 644 /etc/systemd/system/cheker_spheron.service
+# sudo chown root:root /etc/systemd/system/cheker_spheron.service
 
-[Service]
-Type=simple
-ExecStart=/bin/bash -c '"'"'
-  docker events --filter container=fizz-fizz-1 --filter event=start | while read event; do
-    echo "Container fizz-fizz-1 started, waiting for full startup..."
-    while [ "$(docker inspect -f \"{{.State.Running}}\" fizz-fizz-1)" != "true" ]; do
-      sleep 5
-    done
-    echo "Container fizz-fizz-1 is fully running, executing script..."
-    /bin/bash /root/scripts/spheron/restart.sh
-  done
-'"'"'
-Restart=always
-
-[Install]
-WantedBy=multi-user.target
-EOF'
-
-systemctl daemon-reload
-systemctl enable cheker_spheron
-systemctl start cheker_spheron
+sudo systemctl daemon-reload
+sudo systemctl enable cheker_spheron.service
+sudo systemctl start cheker_spheron.service
 
 docker-compose -f ~/.spheron/fizz/docker-compose.yml down
 docker-compose -f ~/.spheron/fizz/docker-compose.yml up -d
