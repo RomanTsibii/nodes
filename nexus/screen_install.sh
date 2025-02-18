@@ -3,11 +3,11 @@
 
 
 
-# if [ -n "$1" ]; then
-#   prover_id="$1"
-# else
-#   read -p "Enter your prover id: " prover_id
-# fi
+if [ -n "$1" ]; then
+  prover_id="$1"
+else
+  read -p "Enter your prover id: " prover_id
+fi
 
 SESSION_NAME="nexus"
 LOG_FILE="/var/log/nexus.log"
