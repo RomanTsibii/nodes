@@ -1,7 +1,7 @@
 #!/bin/bash
 
-docker-compose -f ~/.spheron/fizz/docker-compose.yml down
-docker-compose -f ~/.spheron/fizz/docker-compose.yml up -d
+# docker-compose -f ~/.spheron/fizz/docker-compose.yml down
+# docker-compose -f ~/.spheron/fizz/docker-compose.yml up -d
 # sleep 10
 name=$(docker ps --filter "ancestor=spheronnetwork/fizz" --format "{{.Names}}")
 # Поточна кількість ядер
