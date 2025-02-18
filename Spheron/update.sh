@@ -36,8 +36,8 @@ WantedBy=multi-user.target
 EOF'
 
 systemctl daemon-reload
-systemctl enable docker-container-watcher
-systemctl start docker-container-watcher
+systemctl enable cheker_spheron
+systemctl start cheker_spheron
 
 docker-compose -f ~/.spheron/fizz/docker-compose.yml down
 docker-compose -f ~/.spheron/fizz/docker-compose.yml up -d
