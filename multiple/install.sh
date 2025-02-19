@@ -74,9 +74,17 @@ echo "-----------------------------------------------------------------------"
 # ./multiple-cli bind --bandwidth-download 100 --identifier $IDENTIFIER --pin $PIN --storage 200 --bandwidth-upload 100
 # ./multiple-cli bind --bandwidth-download 3000 --identifier $IDENTIFIER --pin $PIN --storage 50000 --bandwidth-upload 1000
 
+min=1500000  # 1.5 GB
+max=3000000  # 3 GB
+step=100000  # 100 MB
+steps=$(( (max - min) / step ))
+random_step=$(( RANDOM % (steps + 1) ))
+random_size=$(( min + random_step * step ))
+echo "Випадковий розмір: $random_size KB"
+
 while true; do
     # OUTPUT=$(./multiple-cli bind --bandwidth-download 3000 --identifier $IDENTIFIER --pin $PIN --storage 50000 --bandwidth-upload 1000 2>&1)
-    OUTPUT=$(./multiple-cli bind --bandwidth-download 1000 --identifier $IDENTIFIER --pin $PIN --storage 2000000 --bandwidth-upload 1000 2>&1)
+    OUTPUT=$(./multiple-cli bind --bandwidth-download 1000 --identifier $IDENTIFIER --pin $PIN --storage $random_size --bandwidth-upload 1000 2>&1)
     
     echo "$OUTPUT"
     
