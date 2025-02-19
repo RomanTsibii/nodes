@@ -66,7 +66,7 @@ fi
 
 cd $REPO_PATH/clients/cli
 cargo run --release -- --beta
-wget -O /root/.nexus/network-api/clients/cli/src/setup.rs https://raw.githubusercontent.com/RomanTsibii/nodes/refs/heads/main/nexus/setup.rs
+# wget -O /root/.nexus/network-api/clients/cli/src/setup.rs https://raw.githubusercontent.com/RomanTsibii/nodes/refs/heads/main/nexus/setup.rs
 
 cd /root/.nexus/network-api/clients/cli/
 rustup target add riscv32i-unknown-none-elf
