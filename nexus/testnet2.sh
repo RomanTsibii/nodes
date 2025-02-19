@@ -10,7 +10,7 @@ cargo --version && \
 rustup target add riscv32i-unknown-none-elf && \
 sudo apt remove -y protobuf-compiler && \
 curl -LO https://github.com/protocolbuffers/protobuf/releases/download/v25.2/protoc-25.2-linux-x86_64.zip && \
-unzip protoc-25.2-linux-x86_64.zip -d /root/.local && \
+unzip -o protoc-25.2-linux-x86_64.zip -d /root/.local && \
 export PATH="/root/.local/bin:$PATH" && \
 protoc --version
 
