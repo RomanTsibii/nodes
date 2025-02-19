@@ -1,8 +1,6 @@
 #!/bin/bash
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/nexus/screen_install.sh) prover_id
 
-
-
 if [ -n "$1" ]; then
   prover_id="$1"
 else
@@ -26,11 +24,12 @@ sleep 1
 screen -S "$SESSION_NAME" -X logfile "$LOG_FILE"
 screen -S "$SESSION_NAME" -X log on
 # Виконання команди в новій сесії
-screen -S "$SESSION_NAME" -X stuff "bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/nexus/install.sh)"
+# screen -S "$SESSION_NAME" -X stuff "bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/nexus/install.sh)"
+screen -S "$SESSION_NAME" -X stuff "bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/nexus/testnet2.sh) "
 sleep 1
 screen -S "$SESSION_NAME" -X stuff $'\n' # натискання Enter
-sleep 10
+sleep 1
 
-screen -S "$SESSION_NAME" -X stuff "$prover_id" # натискання Enter
-sleep 1
-screen -S "$SESSION_NAME" -X stuff $'\n' # натискання Enter
+# screen -S "$SESSION_NAME" -X stuff "$prover_id" # натискання Enter
+# sleep 1
+# screen -S "$SESSION_NAME" -X stuff $'\n' # натискання Enter
