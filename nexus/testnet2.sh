@@ -3,7 +3,7 @@
 
 
 sudo apt update && sudo apt upgrade -y && \
-sudo apt install -y tmux nano build-essential pkg-config libssl-dev git-all unzip python3-pexpect && \
+sudo apt install -y tmux nano build-essential pkg-config libssl-dev git-all unzip python3-pexpect expect && \
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && \
 source /root/.cargo/env && \
 cargo --version && \
