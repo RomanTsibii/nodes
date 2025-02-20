@@ -2,6 +2,7 @@
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/nexus/testnet2.sh) 
 
 
+
 sudo apt update && sudo apt upgrade -y && \
 sudo apt install -y tmux nano build-essential pkg-config libssl-dev git-all unzip python3-pexpect expect && \
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && \
@@ -62,11 +63,13 @@ if [ -d "$REPO_PATH" ]; then
 else
   (cd $NEXUS_HOME && git clone https://github.com/nexus-xyz/network-api)
 fi
-(cd $REPO_PATH && git -c advice.detachedHead=false checkout $(git rev-list --tags --max-count=1))
+
+# (cd "$REPO_PATH" && git -c advice.detachedHead=false checkout tags/0.4.8) # old version
+
+(cd $REPO_PATH && git -c advice.detachedHead=false checkout $(git rev-list --tags --max-count=1))  # new versions
 
 cd $REPO_PATH/clients/cli
 cargo run --release -- --beta
-# wget -O /root/.nexus/network-api/clients/cli/src/setup.rs https://raw.githubusercontent.com/RomanTsibii/nodes/refs/heads/main/nexus/setup.rs
 
 cd /root/.nexus/network-api/clients/cli/
 rustup target add riscv32i-unknown-none-elf
