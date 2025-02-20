@@ -1,7 +1,11 @@
 #!/bin/bash
-# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/nexus/testnet2.sh) 
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/nexus/testnet2.sh) prover_id
 
-
+# if [ -n "$1" ]; then
+  prover_id="$1"
+# else
+#   read -p "Enter your prover id: " prover_id
+# fi
 
 sudo apt update && sudo apt upgrade -y && \
 sudo apt install -y tmux nano build-essential pkg-config libssl-dev git-all unzip python3-pexpect expect && \
@@ -71,13 +75,16 @@ fi
 cd $REPO_PATH/clients/cli
 cargo run --release -- --beta
 
+mkdir -p /root/.nexus && cd /root/.nexus
+echo "$prover_id" > prover-id
+
 cd /root/.nexus/network-api/clients/cli/
 rustup target add riscv32i-unknown-none-elf
 
 # cargo run --release -- --start --beta
 
 wget -O run_expect.sh https://raw.githubusercontent.com/RomanTsibii/nodes/refs/heads/main/nexus/run_expect.sh
-chmod +x run_expect.sh
+chmod +x run_expect.sh 
 ./run_expect.sh
 
 # For local testing
