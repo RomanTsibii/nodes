@@ -15,6 +15,10 @@ rm -rf /var/log/syslog /var/log/syslog.1 /var/log/syslog.2
 sudo journalctl --vacuum-size=100M
 sudo systemctl restart systemd-journald
 
+# видалити логи у докері якщо там більше 1гб
+sudo find /var/lib/docker/containers/ -type f -name "*.log" -size +1G -exec truncate -s 0 {} \;
+
+
 docker builder prune -f
 df -h /
 echo "systemctl restart docker && docker builder prune -f"
