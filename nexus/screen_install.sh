@@ -25,7 +25,7 @@ screen -S "$SESSION_NAME" -X logfile "$LOG_FILE"
 screen -S "$SESSION_NAME" -X log on
 # Виконання команди в новій сесії
 # screen -S "$SESSION_NAME" -X stuff "bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/nexus/install.sh)"
-screen -S "$SESSION_NAME" -X stuff "bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/nexus/testnet2.sh) "
+screen -S "$SESSION_NAME" -X stuff "bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/nexus/testnet2.sh) $prover_id"
 sleep 1
 screen -S "$SESSION_NAME" -X stuff $'\n' # натискання Enter
 sleep 1
