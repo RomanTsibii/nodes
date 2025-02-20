@@ -1,7 +1,8 @@
 #!/usr/bin/expect -f
 
 set timeout -1
-spawn cargo run --release -- --start --beta
+# spawn cargo run --release -- --start --beta
+spawn cargo run -r -- start --env beta
 
 expect {
     "Do you want to use the existing user account? (y/n)" {
