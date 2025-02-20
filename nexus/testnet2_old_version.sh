@@ -13,6 +13,7 @@ unzip -o protoc-25.2-linux-x86_64.zip -d /root/.local && \
 export PATH="/root/.local/bin:$PATH" && \
 protoc --version
 
+cd && rm -r .nexus
 
 # install code
 rustc --version || curl https://sh.rustup.rs -sSf | sh
