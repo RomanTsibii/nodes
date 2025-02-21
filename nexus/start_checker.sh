@@ -11,3 +11,6 @@ chmod +x /root/nexus_checker.sh
 
 # 3. Додавання cron-запису (кожні 10 хвилин)
 (crontab -l 2>/dev/null; echo "*/10 * * * * /root/nexus_checker.sh >> /var/log/nexus_checker.log 2>&1") | crontab -
+
+# Запуск
+/root/nexus_checker.sh >> /var/log/nexus_checker.log
