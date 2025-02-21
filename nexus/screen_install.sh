@@ -23,7 +23,7 @@ sleep 1
 # добавити файл логування
 screen -S "$SESSION_NAME" -X logfile "$LOG_FILE"
 screen -S "$SESSION_NAME" -X log on
-screen -S "$SESSION_NAME" -X stuff "echo hello"
+screen -S "$SESSION_NAME" -X stuff "echo $SHELL"
 screen -S "$SESSION_NAME" -X stuff $'\n' # натискання Enter
 screen -S "$SESSION_NAME" -X stuff "sleep 20"
 screen -S "$SESSION_NAME" -X stuff $'\n' # натискання Enter
