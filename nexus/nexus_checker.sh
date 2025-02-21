@@ -45,7 +45,7 @@ restart_nexus() {
     prover_id=$(get_prover_id)
     log "🔁 Перезапуск Nexus з prover_id=$prover_id"
     screen -S nexus -X quit 2>/dev/null
-    bash <(curl -s "$INSTALL_URL") "$prover_id"
+    curl -s "$INSTALL_URL" | bash -s "$prover_id"
     log "✅ Nexus успішно перезапущено"
     echo $(date +%s) > "$RESTART_TIME_FILE"
 }
