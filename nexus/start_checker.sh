@@ -1,7 +1,7 @@
 #!/bin/bash
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/nexus/start_checker.sh)
 # видалити кронтаб
-# crontab -l | grep -v '/root/nexus_checker.sh' | crontab -
+crontab -l | grep -v '/root/nexus_checker.sh' | crontab -
 
 # 1. Завантаження скрипта у каталог /root
 curl -o /root/nexus_checker.sh https://raw.githubusercontent.com/RomanTsibii/nodes/refs/heads/main/nexus/nexus_checker.sh
