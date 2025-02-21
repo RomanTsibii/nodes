@@ -3,6 +3,7 @@
 
 # if [ -n "$1" ]; then
   prover_id="$1"
+  prover_id=$(cat /root/.nexus/prover-id)
 # else
 #   read -p "Enter your prover id: " prover_id
 # fi
