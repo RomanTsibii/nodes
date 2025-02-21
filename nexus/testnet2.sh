@@ -85,7 +85,7 @@ rustup target add riscv32i-unknown-none-elf
 
 wget -O run_expect.sh https://raw.githubusercontent.com/RomanTsibii/nodes/refs/heads/main/nexus/run_expect.sh
 chmod +x run_expect.sh 
-./run_expect.sh
+bash run_expect.sh
 
 # For local testing
 # echo "Current location: $(pwd)"
