@@ -18,7 +18,9 @@ fi
 mkdir -p /root/.nexus && cd /root/.nexus
 echo "$prover_id" > prover-id
 # Запуск нової сесії
-screen -dmS "$SESSION_NAME"
+# screen -dmS "$SESSION_NAME"
+bash -c "screen -dmS \"$SESSION_NAME\""
+
 sleep 1
 # добавити файл логування
 screen -S "$SESSION_NAME" -X logfile "$LOG_FILE"
