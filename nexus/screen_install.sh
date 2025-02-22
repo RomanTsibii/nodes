@@ -25,10 +25,10 @@ sleep 1
 # добавити файл логування
 screen -S "$SESSION_NAME" -X logfile "$LOG_FILE"
 screen -S "$SESSION_NAME" -X log on
-screen -S "$SESSION_NAME" -X stuff "echo $SHELL"
-screen -S "$SESSION_NAME" -X stuff $'\n' # натискання Enter
-screen -S "$SESSION_NAME" -X stuff "sleep 20"
-screen -S "$SESSION_NAME" -X stuff $'\n' # натискання Enter
+# screen -S "$SESSION_NAME" -X stuff "echo $SHELL"
+# screen -S "$SESSION_NAME" -X stuff $'\n' # натискання Enter
+# screen -S "$SESSION_NAME" -X stuff "sleep 20"
+# screen -S "$SESSION_NAME" -X stuff $'\n' # натискання Enter
 
 # Виконання команди в новій сесії
 # screen -S "$SESSION_NAME" -X stuff "bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/nexus/install.sh)"
