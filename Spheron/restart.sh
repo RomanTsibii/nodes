@@ -3,7 +3,7 @@
 # docker-compose -f ~/.spheron/fizz/docker-compose.yml down
 # docker-compose -f ~/.spheron/fizz/docker-compose.yml up -d
 # sleep 10
-docker ps --filter "ancestor=spheronnetwork/fizz-node:latest" --format "{{.Names}}"
+name=$(docker ps --filter "ancestor=spheronnetwork/fizz-node:latest" --format "{{.Names}}")
 # Поточна кількість ядер
 CURRENT_CORES=$(grep -c "^processor" /proc/cpuinfo)
 
