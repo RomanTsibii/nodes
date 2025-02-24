@@ -72,8 +72,6 @@ wget -O restart.sh https://raw.githubusercontent.com/RomanTsibii/nodes/refs/head
 chmod +x restart.sh
 
 sudo curl -o /etc/systemd/system/cheker_spheron.service https://raw.githubusercontent.com/RomanTsibii/nodes/refs/heads/main/Spheron/cheker_spheron.service
-# sudo chmod 644 /etc/systemd/system/cheker_spheron.service
-# sudo chown root:root /etc/systemd/system/cheker_spheron.service
 
 sudo systemctl daemon-reload
 sudo systemctl enable cheker_spheron.service
