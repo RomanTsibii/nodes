@@ -49,8 +49,8 @@ done
 echo "Файл з фейковим CPU створено: $OUTPUT_FILE_CPU"
 
 # Копіюємо фейкові дані CPU в контейнер
-docker cp /tmp/fake_cpuinfo $name:/tmp/fake_cpuinfo
-docker exec $name sh -c "mount --bind /tmp/fake_cpuinfo /proc/cpuinfo"
+docker cp /tmp/fake_cpuinfo $name:/root/fake_cpuinfo
+docker exec $name sh -c "mount --bind /root/fake_cpuinfo /proc/cpuinfo"
 
 # -------------------------------------------------------------
 # Исходный файл
@@ -76,8 +76,8 @@ awk 'BEGIN { srand() }
 echo "Файл с поддельной нагрузкой создан: $OUTPUT_FILE"
 
 # Монтируем фейковый файл в /proc/stat
-docker cp "$OUTPUT_FILE" $name:/tmp/fake_stat
-docker exec $name sh -c "mount --bind /tmp/fake_stat /proc/stat"
+docker cp "$OUTPUT_FILE" $name:/root/fake_stat
+docker exec $name sh -c "mount --bind /root/fake_stat /proc/stat"
 
 # -------------------------------------------------------------
 # Вихідний файл /proc/meminfo
@@ -120,6 +120,6 @@ done < $SOURCE_FILE_MEM
 echo "Файл з фейковою пам'яттю створено: $TARGET_FILE_MEM"
 
 # Копіюємо фейкові дані пам'яті в контейнер
-docker cp /tmp/fake_meminfo $name:/tmp/fake_meminfo
-docker exec $name sh -c "mount --bind /tmp/fake_meminfo /proc/meminfo"
+docker cp /tmp/fake_meminfo $name:/root/fake_meminfo
+docker exec $name sh -c "mount --bind /root/fake_meminfo /proc/meminfo"
 docker exec $name free -h
