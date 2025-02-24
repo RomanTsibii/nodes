@@ -79,8 +79,8 @@ sudo systemctl daemon-reload
 sudo systemctl enable cheker_spheron.service
 sudo systemctl start cheker_spheron.service
 
-docker-compose -f ~/.spheron/fizz/docker-compose.yml down
-docker-compose -f ~/.spheron/fizz/docker-compose.yml up -d
+# docker-compose -f ~/.spheron/fizz/docker-compose.yml down
+# docker-compose -f ~/.spheron/fizz/docker-compose.yml up -d
 
 # (sudo crontab -l ; echo "@reboot sleep 120;/bin/bash /root/scripts/spheron/restart.sh") | sudo crontab -
 # RANDOM_MIN=$((RANDOM % 60));(sudo crontab -l ; echo "$RANDOM_MIN */3 * * * /bin/bash /root/scripts/spheron/restart.sh") | sudo crontab -
