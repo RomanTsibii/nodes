@@ -73,7 +73,7 @@ echo "-----------------------------------------------------------------------"
 
 # ./multiple-cli bind --bandwidth-download 100 --identifier $IDENTIFIER --pin $PIN --storage 200 --bandwidth-upload 100
 # ./multiple-cli bind --bandwidth-download 3000 --identifier $IDENTIFIER --pin $PIN --storage 50000 --bandwidth-upload 1000
-
+sleep 80
 min=1500000  # 1.5 GB
 max=3000000  # 3 GB
 step=100000  # 100 MB
@@ -89,9 +89,9 @@ while true; do
     echo "$OUTPUT"
     
     if echo "$OUTPUT" | grep -q "Node binding successful"; then
-        echo "Binding successful, exiting..."
+        echo "Node binding successful, exiting..."
         break
-    elif echo "$OUTPUT" | grep -q "Node data read exception"; then
+    elif echo "$OUTPUT" | grep -q "Node not bound"; then
         echo "Error encountered: Node data read exception. Retrying in 10 seconds..."
         sleep 10
     else
