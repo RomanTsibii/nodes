@@ -2,7 +2,7 @@
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/Spheron/install.sh) token
 # 
 # логи
-# docker-compose -f ~/.spheron/fizz/docker-compose.yml logs  -f
+# journalctl -u cheker_spheron.service --no-pager -n 20
 # логи  заміни даних
 # journalctl -u cheker_spheron.service -f
 # видалити кронтаб 
@@ -85,14 +85,16 @@ sudo systemctl restart cheker_spheron.service
 
 sphnctl fizz stop
 
-docker-compose -f ~/.spheron/fizz/docker-compose.yml down
+# docker-compose -f ~/.spheron/fizz/docker-compose.yml down
 docker-compose -f ~/.spheron/fizz/docker-compose.yml up -d
 
-sleep 5 
+sleep 15
+journalctl -u cheker_spheron.service --no-pager -n 20
+
 # ./restart.sh
 
-name=$(docker ps --format "{{.Image}} {{.Names}}" | grep "spheronnetwork" | awk '{print $2}')
-docker exec $name free -h
+# name=$(docker ps --format "{{.Image}} {{.Names}}" | grep "spheronnetwork" | awk '{print $2}')
+# docker exec $name free -h
 
 # docker-compose -f ~/.spheron/fizz/docker-compose.yml up -d
 
