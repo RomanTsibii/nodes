@@ -3,6 +3,8 @@
 # 
 # логи
 # docker-compose -f ~/.spheron/fizz/docker-compose.yml logs  -f
+# логи  заміни даних
+# journalctl -u cheker_spheron.service -f
 # видалити кронтаб 
 sudo crontab -l | grep -v "@reboot sleep 120; /root/scripts/spheron/restart.sh" | sudo crontab -
 sudo crontab -l | grep -v "/bin/bash /root/scripts/spheron/restart.sh" | sudo crontab -
