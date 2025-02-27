@@ -18,6 +18,7 @@ sudo curl -o /etc/systemd/system/cheker_spheron.service https://raw.githubuserco
 sudo systemctl daemon-reload
 sudo systemctl enable cheker_spheron.service
 sudo systemctl start cheker_spheron.service
+sudo systemctl restart cheker_spheron.service
 
 docker-compose -f ~/.spheron/fizz/docker-compose.yml down
 docker-compose -f ~/.spheron/fizz/docker-compose.yml up -d
