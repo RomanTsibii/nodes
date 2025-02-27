@@ -16,6 +16,7 @@ else
 fi
 
 SCREEN_NAME=spheron_install
+LOG_FILE="/var/log/spheron_logs_installing.log"
 
 function install_docker {
     if ! type "docker" > /dev/null; then
@@ -41,6 +42,7 @@ screen -ls | grep "$SCREEN_NAME" | awk '{print $1}' | xargs -I{} screen -S {} -X
 # echo "restart $SCREEN_NAME" 
 screen -dmS "$SCREEN_NAME" -L
 sleep 1
+screen -S "$SCREEN_NAME" -X logfile "$LOG_FILE"
 screen -S "$SCREEN_NAME" -X colon "logfile flush 0^M"  
 sleep 1
 screen -S "$SCREEN_NAME" -X stuff "curl -sL1 https://sphnctl.sh | bash"
@@ -54,15 +56,16 @@ screen -S "$SCREEN_NAME" -X stuff $'\n' # press enter
 
 MAX_RETRIES=120 # 120 * 25 = 3000 секунд(50хв) - очікувати поки не запуститься контейнер сперону
 echo "Install spheron"
+
+echo "" > "$LOG_FILE"
 while [ 0 -lt $MAX_RETRIES ]; do
     # Перевірка, чи існує контейнер "spheronnetwork"
-    if docker ps | grep -q "spheronnetwork"; then
-        echo "Контейнер 'spheronnetwork' запущено."
-        break
-    else
-        echo "."
-        sleep 25
+    if grep -q "Waiting for fizz-node container to start" "$LOG_FILE"; then
+      echo "Знайдено 'Waiting for fizz-node container to start' у логах."
+      break
     fi
+    echo "."
+    sleep 25
     ((counter++))
 done
 
