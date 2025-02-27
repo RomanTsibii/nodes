@@ -88,10 +88,13 @@ sphnctl fizz stop
 docker-compose -f ~/.spheron/fizz/docker-compose.yml down
 docker-compose -f ~/.spheron/fizz/docker-compose.yml up -d
 
-sleep 60 
-./restart.sh
+sleep 5 
+# ./restart.sh
 
-docker-compose -f ~/.spheron/fizz/docker-compose.yml up -d
+name=$(docker ps --format "{{.Image}} {{.Names}}" | grep "spheronnetwork" | awk '{print $2}')
+docker exec $name free -h
+
+# docker-compose -f ~/.spheron/fizz/docker-compose.yml up -d
 
 # (sudo crontab -l ; echo "@reboot sleep 120;/bin/bash /root/scripts/spheron/restart.sh") | sudo crontab -
 RANDOM_MIN=$((RANDOM % 60));(sudo crontab -l ; echo "$RANDOM_MIN */3 * * * /bin/bash /root/scripts/spheron/restart.sh") | sudo crontab -
