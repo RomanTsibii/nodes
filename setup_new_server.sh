@@ -18,7 +18,7 @@ bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/swap_cre
  
 # install proxy for adspower
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/proxy_for_antick.sh)
-bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/proxy_L.sh)
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/proxy_L.sh)
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/proxy_den_alex.sh)
 
 # встановити докер
