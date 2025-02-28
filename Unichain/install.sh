@@ -36,6 +36,7 @@ cd /root/unichain-node
 sed -i '/^OP_NODE_L1_ETH_RPC/c\OP_NODE_L1_ETH_RPC=https://ethereum-sepolia-rpc.publicnode.com' .env.sepolia
 sed -i '/^OP_NODE_L1_BEACON/c\OP_NODE_L1_BEACON=https://ethereum-sepolia-beacon-api.publicnode.com' .env.sepolia
 
+sed -i 's/#     - .env.sepolia/    - .env.sepolia/' docker-compose.yml
 sed -i 's/      start_interval: 5s/      interval: 5s/g' docker-compose.yml
 sed -i 's/      - 8545:8545\/tcp/      - 8547:8545\/tcp/g' docker-compose.yml
 sed -i 's/      - 8546:8546\/tcp/      - 8548:8546\/tcp/g' docker-compose.yml
