@@ -4,7 +4,8 @@ set -x
 
 # оновити час
 echo "set Ukraine timezone"
-sudo timedatectl set-timezone Europe/Kiev
+sudo timedatectl set-timezone Europe/Kiev  # old
+sudo timedatectl set-timezone Europe/Kyiv  # new
 
 # adds ssh keys
 bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/add_ssh_keys.sh)
