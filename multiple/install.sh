@@ -82,8 +82,28 @@ random_step=$(( RANDOM % (steps + 1) ))
 random_size=$(( min + random_step * step ))
 echo "Випадковий розмір: $random_size KB"
 
-while true; do
-    # OUTPUT=$(./multiple-cli bind --bandwidth-download 3000 --identifier $IDENTIFIER --pin $PIN --storage 50000 --bandwidth-upload 1000 2>&1)
+# while true; do
+#     # OUTPUT=$(./multiple-cli bind --bandwidth-download 3000 --identifier $IDENTIFIER --pin $PIN --storage 50000 --bandwidth-upload 1000 2>&1)
+#     OUTPUT=$(./multiple-cli bind --bandwidth-download 1000 --identifier $IDENTIFIER --pin $PIN --storage $random_size --bandwidth-upload 1000 2>&1)
+    
+#     echo "$OUTPUT"
+    
+#     if echo "$OUTPUT" | grep -q "Node binding successful"; then
+#         echo "Node binding successful, exiting..."
+#         break
+#     elif echo "$OUTPUT" | grep -q "Node not bound"; then
+#         echo "Error encountered: Node data read exception. Retrying in 10 seconds..."
+#         sleep 10
+#     else
+#         echo "Unexpected output, exiting..."
+#         break
+#     fi
+# done
+
+attempts=0
+max_attempts=10
+
+for ((attempts=1; attempts<=max_attempts; attempts++)); do
     OUTPUT=$(./multiple-cli bind --bandwidth-download 1000 --identifier $IDENTIFIER --pin $PIN --storage $random_size --bandwidth-upload 1000 2>&1)
     
     echo "$OUTPUT"
@@ -91,12 +111,13 @@ while true; do
     if echo "$OUTPUT" | grep -q "Node binding successful"; then
         echo "Node binding successful, exiting..."
         break
-    elif echo "$OUTPUT" | grep -q "Node not bound"; then
-        echo "Error encountered: Node data read exception. Retrying in 10 seconds..."
-        sleep 10
+    fi
+    
+    if [ "$attempts" -lt "$max_attempts" ]; then
+        echo "Binding failed, retrying in 20 seconds... (Attempt $attempts/$max_attempts)"
+        sleep 20
     else
-        echo "Unexpected output, exiting..."
-        break
+        echo "Maximum attempts reached, exiting..."
     fi
 done
 
@@ -104,6 +125,4 @@ $HOME/multipleforlinux/multiple-cli status
 echo "-----------------------------------------------------------------------"
 echo -e "Команда для проверки статуса ноды:"
 echo -e "\$HOME/multipleforlinux/multiple-cli status"
-echo "-----------------------------------------------------------------------------"
-echo "DOUBLETOP SCAM"
 echo "-----------------------------------------------------------------------------"
