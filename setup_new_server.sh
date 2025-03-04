@@ -12,7 +12,7 @@ bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/add_ssh_
 
 # встановити tmux
 # встановити ncdu
-sudo apt install ncdu tmux htop screen python3-pip -y
+sudo apt install ncdu tmux htop screen python3-pip python3-requests -y
 sudo pip3 install requests
 
 # добавити свап на 8гб оперативки
