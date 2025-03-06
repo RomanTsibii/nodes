@@ -28,5 +28,5 @@ sleep 5
 screen -S "$SCREEN_NAME" -X stuff "$pass\n" # press enter
 sleep 5
 screen -S "$SCREEN_NAME" -X stuff "$pass\n" # press enter
-
+sleep 5
 screen -ls | grep "$SCREEN_NAME" | awk '{print $1}' | xargs -I{} screen -S {} -X quit # закрити скрін сесію
