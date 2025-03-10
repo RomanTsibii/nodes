@@ -45,14 +45,14 @@ sleep 1
 screen -S "$SCREEN_NAME" -X logfile "$LOG_FILE"
 screen -S "$SCREEN_NAME" -X colon "logfile flush 0^M"  
 sleep 1
-screen -S "$SCREEN_NAME" -X stuff "curl -sL1 https://sphnctl.sh | bash"
+screen -S "$SCREEN_NAME" -X stuff "curl -sL1 https://sphnctl.sh | bash;sphnctl fizz start --token $USER_TOKEN"
 sleep 1
 screen -S "$SCREEN_NAME" -X stuff $'\n' # press enter
-sleep 40
-# screen -S "$SCREEN_NAME" -X stuff "bash $HOME/${SCREEN_NAME}_start.sh"
-screen -S "$SCREEN_NAME" -X stuff "sphnctl fizz start --token $USER_TOKEN"
-sleep 1
-screen -S "$SCREEN_NAME" -X stuff $'\n' # press enter
+# sleep 40
+# # screen -S "$SCREEN_NAME" -X stuff "bash $HOME/${SCREEN_NAME}_start.sh"
+# screen -S "$SCREEN_NAME" -X stuff "sphnctl fizz start --token $USER_TOKEN"
+# sleep 1
+# screen -S "$SCREEN_NAME" -X stuff $'\n' # press enter
 
 echo "Install spheron"
 
