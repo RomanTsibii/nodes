@@ -5,7 +5,7 @@ Wants=docker.service
 
 [Service]
 Type=simple
-ExecStart=/bin/bash -c 'docker events --filter container=fizz-fizz-1 --filter event=start | while read event; do /bin/bash /root/scripts/spheron/restart.sh; done'
+ExecStart=/bin/bash -c 'docker events --filter container=fizz-node --filter event=start | while read event; do /bin/bash /root/scripts/spheron/restart.sh; done'
 Restart=always
 
 [Install]
