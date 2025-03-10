@@ -56,21 +56,11 @@ screen -S "$SCREEN_NAME" -X stuff $'\n' # press enter
 
 echo "Install spheron"
 
-mkdir -p scripts/spheron && cd scripts/spheron
-wget -O restart.sh https://raw.githubusercontent.com/RomanTsibii/nodes/refs/heads/main/Spheron/restart.sh
-chmod +x restart.sh
-
-sudo curl -o /etc/systemd/system/cheker_spheron.service https://raw.githubusercontent.com/RomanTsibii/nodes/refs/heads/main/Spheron/cheker_spheron.service
-sudo systemctl daemon-reload
-sudo systemctl enable cheker_spheron.service
-sudo systemctl start cheker_spheron.service
-sudo systemctl restart cheker_spheron.service
-
 MAX_RETRIES=120 # 120 * 25 = 3000 секунд(50хв) - очікувати поки не запуститься контейнер сперону
 echo "" > "$LOG_FILE"
 while [ 0 -lt $MAX_RETRIES ]; do
     # Перевірка, чи існує контейнер "spheronnetwork"
-    if grep -q "Fizz Is Installed and Running successfully" "$LOG_FILE"; then
+    if grep -q "Waiting for fizz-node container to start" "$LOG_FILE"; then
       echo "Знайдено 'Fizz Is Installed and Running successfully' у логах."
       # Waiting for fizz-node container to start # старе
       # Fizz Is Installed and Running successfully # нове
@@ -81,16 +71,25 @@ while [ 0 -lt $MAX_RETRIES ]; do
     ((counter++))
 done
 
-sleep 20
+sleep 5
 screen -ls | grep "$SCREEN_NAME" | awk '{print $1}' | xargs -I{} screen -S {} -X quit # закрити скрін сесію
 
+mkdir -p scripts/spheron && cd scripts/spheron
+wget -O restart.sh https://raw.githubusercontent.com/RomanTsibii/nodes/refs/heads/main/Spheron/restart.sh
+chmod +x restart.sh
+
+sudo curl -o /etc/systemd/system/cheker_spheron.service https://raw.githubusercontent.com/RomanTsibii/nodes/refs/heads/main/Spheron/cheker_spheron.service
+sudo systemctl daemon-reload
+sudo systemctl enable cheker_spheron.service
+sudo systemctl start cheker_spheron.service
+sudo systemctl restart cheker_spheron.service
 
 # ./restart.sh
 
-# sphnctl fizz stop
+sphnctl fizz stop
 
-# docker-compose -f ~/.spheron/fizz/docker-compose.yml down
-# docker-compose -f ~/.spheron/fizz/docker-compose.yml up -d
+docker-compose -f ~/.spheron/fizz/docker-compose.yml down
+docker-compose -f ~/.spheron/fizz/docker-compose.yml up -d
 
 sleep 15
 journalctl -u cheker_spheron.service --no-pager -n 20
