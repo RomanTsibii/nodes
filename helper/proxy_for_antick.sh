@@ -3,7 +3,7 @@
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/proxy_for_antick.sh)
 
 sudo systemctl stop 3proxy.service
-systemctl disable 3proxy.service
+sudo systemctl disable 3proxy.service
 
 apt update
 apt-get install build-essential -y
@@ -60,7 +60,7 @@ Restart=on-failure
 WantedBy=multi-user.target
 EOF
 
-systemctl daemon-reload
-systemctl start 3proxy
-systemctl restart 3proxy
-systemctl enable 3proxy
+sudo systemctl daemon-reload
+sudo systemctl start 3proxy
+sudo systemctl restart 3proxy
+sudo systemctl enable 3proxy
