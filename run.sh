@@ -66,6 +66,6 @@ docker images | grep basic-coin | awk '{print $3}' | xargs docker rmi -f 2>/dev/
 docker images | grep openledgerhub | awk '{print $3}' | xargs docker rmi -f 2>/dev/null
 # docker images | grep waku | awk '{print $3}' | xargs docker rmi -f
 
-
-
+sudo systemctl stop cysic.service
+sudo systemctl disable cysic.service
 
