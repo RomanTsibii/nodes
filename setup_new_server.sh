@@ -2,7 +2,7 @@
 set -x
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/setup_new_server.sh)
 # розблокувати
-# sudo fail2ban-client set sshd unbanip 109.199.126.221
+# sudo fail2ban-client set sshd unbanip 115.1.1.21
 
 # оновити час
 echo "set Ukraine timezone"
