@@ -33,10 +33,11 @@ docker rm $(docker ps -aq --filter ancestor=rusk-dusk) 2>/dev/null
 docker rmi $(docker images -q rusk-dusk) 2>/dev/null
 long_line
 
-cd ;rm -rf openledger-node* minimadocker* ritual_GB_restart* worker1* worker2* worker3* allora-chain* 0g-chain fake_disk.img log_output.txt penumbra* dawn-installer.tar.gz  dawn_validator_project penymbra* setup_linux.sh availscript.sh config_rivalz.sh elixir screenlog.0 responses.txt  restart_with_remove_container.sh script.log Dockerfile token_stats.txt update.txt
-rm -rf vmagent-prod vmalert-prod vmbackup-prod vmctl-prod vmrestore-prod vmauth-prod 0.9.3.tar.gz* /root/.0gchain allora-huggingface-walkthrough /root/.allorad
-rm -rf .rivalz .sonaric elixir
-
+cd ;
+rm -rf openledger-node* minimadocker* ritual_GB_restart* worker1* worker2* worker3* allora-chain* 0g-chain fake_disk.img log_output.txt penumbra* dawn-installer.tar.gz  dawn_validator_project  2>/dev/null
+rm -rf penymbra* setup_linux.sh availscript.sh config_rivalz.sh elixir screenlog.0 responses.txt  restart_with_remove_container.sh script.log Dockerfile token_stats.txt update.txt 2>/dev/null
+rm -rf vmagent-prod vmalert-prod vmbackup-prod vmctl-prod vmrestore-prod vmauth-prod 0.9.3.tar.gz* /root/.0gchain allora-huggingface-walkthrough /root/.allorad 2>/dev/null
+rm -rf .rivalz .sonaric elixir 2>/dev/null
 
 sudo systemctl stop rivalz 2>/dev/null
 sudo systemctl disable rivalz 2>/dev/null
@@ -64,6 +65,7 @@ docker images | grep minima | awk '{print $3}' | xargs docker rmi -f 2>/dev/null
 docker images | grep basic-coin | awk '{print $3}' | xargs docker rmi -f 2>/dev/null
 docker images | grep openledgerhub | awk '{print $3}' | xargs docker rmi -f 2>/dev/null
 # docker images | grep waku | awk '{print $3}' | xargs docker rmi -f
+
 
 
 
