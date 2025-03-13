@@ -25,3 +25,6 @@ bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/swap_cre
 
 # встановити докер
 bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/tools/main/docker.sh)
+
+# встановити fail2ban
+bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/fail2ban.sh)
