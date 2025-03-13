@@ -1,5 +1,7 @@
 #!/bin/bash
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/fail2ban.sh)
+# розблокувати
+# sudo fail2ban-client set sshd unbanip 115.1.1.21
 
 # Оновлення пакетів та встановлення fail2ban
 echo "[+] Оновлення системи та встановлення fail2ban..."
