@@ -52,6 +52,7 @@ mkdir -p $HOME/hyperlane_db_base && chmod -R 777 $HOME/hyperlane_db_base
 # Запуск Docker контейнера
 docker run -d -it \
 --name hyperlane \
+--restart unless-stopped \
 --mount type=bind,source=$HOME/hyperlane_db_base,target=/hyperlane_db_base \
 gcr.io/abacus-labs-dev/hyperlane-agent:agents-v1.0.0 \
 ./validator \
