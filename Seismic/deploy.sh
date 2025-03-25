@@ -1,5 +1,5 @@
 #!/bin/bash
-# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/Seismic/deploy.sh) PRIV_KEY
+# source ~/.bashrc; bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/Seismic/deploy.sh) PRIV_KEY
 
 source ~/.bashrc
 cd $HOME/try-devnet/packages/contract/
