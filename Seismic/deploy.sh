@@ -2,7 +2,7 @@
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/Seismic/deploy.sh) PRIV_KEY
 
 source ~/.bashrc
-cd try-devnet/packages/contract/
+cd $HOME/try-devnet/packages/contract/
 
 if [ -n "$1" ]; then
   PRIV="$1"
@@ -15,6 +15,7 @@ FILE="/root/try-devnet/packages/contract/script/deploy.sh"
 # Видаляємо рядок, що містить 'dev_wallet'
 sed -i '/dev_wallet/d' "$FILE"
 sed -i '/prelude/d' "$FILE"
+sed -i '/^prelude() {/,/^}/d' /root/try-devnet/packages/contract/script/deploy.sh
 
 # Замінюємо рядок з privkey=... на privkey=$PRIV
 sed -i "s/^privkey=.*/privkey=$PRIV/" "$FILE"
