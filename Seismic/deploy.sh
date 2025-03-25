@@ -15,7 +15,7 @@ FILE="/root/try-devnet/packages/contract/script/deploy.sh"
 # Видаляємо рядок, що містить 'dev_wallet'
 sed -i '/dev_wallet/d' "$FILE"
 sed -i '/prelude/d' "$FILE"
-sed -i '/^prelude() {/,/^}/d' /root/try-devnet/packages/contract/script/deploy.sh
+sed -i '/^prelude() {/,/^}/d' "$FILE"
 
 # Замінюємо рядок з privkey=... на privkey=$PRIV
 sed -i "s/^privkey=.*/privkey=$PRIV/" "$FILE"
