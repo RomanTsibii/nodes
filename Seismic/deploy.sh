@@ -9,7 +9,7 @@ WALLET_FILE="/root/try-devnet/packages/common/wallet.sh"
 if [ -n "$1" ]; then
   PRIV="$1"
 else
-  read -p "Enter your PRIV_KEY 0x:" PRIV
+  read -p "Enter your PRIV_KEY WITH 0x:" PRIV
 fi
 
 if [ -n "$2" ]; then
@@ -33,10 +33,13 @@ sed -i 's/echo\s\+-ne/echo -e/g' /root/try-devnet/packages/contract/script/deplo
 sed -i 's/^\(.*read\s\+-r.*\)/# \1/' "$WALLET_FILE"
 sed -i 's/^\(.*read\s\+-r.*\)/# \1/' /root/try-devnet/packages/cli/script/transact.sh
 sed -i 's/^\(.*read\s\+-r.*\)/# \1/' /root/try-devnet/packages/contract/script/deploy.sh
-
+echo ""
 echo "------------------------------------------contract deploy------------------------------------------"
+echo ""
 cd $HOME/try-devnet/packages/contract/
 bash script/deploy.sh
+echo ""
 echo "-------------------------------------------cli transact--------------------------------------------"
+echo ""
 cd $HOME/try-devnet/packages/cli/
 bash script/transact.sh
