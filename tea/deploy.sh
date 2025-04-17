@@ -1,5 +1,5 @@
 #!/bin/bash
-bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/tea/deploy.sh) MM_PRIV
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/tea/deploy.sh) MM_PRIV
 
 # Отримати значення MM_PRIV
 if [ -n "$1" ]; then
