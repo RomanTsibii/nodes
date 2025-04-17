@@ -6,9 +6,10 @@ LOG_FILE="/root/rl-swarm/logs.log"
 
 # зупинити сесія якщо вже існує
 if screen -list | grep -q "\.${SCREEN_NAME}"; then
+   screen -wipe
    screen -S "$SCREEN_NAME" -X stuff $'\003'
    sleep 5
-    screen -ls | grep "$SCREEN_NAME" | awk '{print $1}' | xargs -I{} screen -S {} -X quit # закрити скрін сесію
+   screen -ls | grep "$SCREEN_NAME" | awk '{print $1}' | xargs -I{} screen -S {} -X quit # закрити скрін сесію
 fi
 
 screen -dmS "$SCREEN_NAME" -L
