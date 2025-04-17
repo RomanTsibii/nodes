@@ -1,6 +1,8 @@
 #!/bin/bash
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/gensyn/health_check.sh)
-# Шлях до скрипта
+# видалити кронтаб
+# crontab -l | grep -v '/root/need_restart.sh' | crontab -
+# 
 SCRIPT_PATH="/root/need_restart.sh"
 SCRIPT_URL="https://raw.githubusercontent.com/RomanTsibii/nodes/main/gensyn/need_restart.sh"
 
