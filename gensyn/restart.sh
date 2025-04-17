@@ -25,7 +25,7 @@ while [ 0 -lt $MAX_RETRIES ]; do
       echo "Gensyn успішно запущено."
       break
     fi
-    tail -n 2 $LOG_FILE
+    tail -n 3 $LOG_FILE
     sleep 5
     ((counter++))
 done
