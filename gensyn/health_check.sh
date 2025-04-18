@@ -1,7 +1,7 @@
 #!/bin/bash
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/gensyn/health_check.sh)
 # видалити кронтаб
-# crontab -l | grep -v '/root/need_restart.sh' | crontab -
+crontab -l | grep -v '/root/need_restart.sh' | crontab -
 # 
 SCRIPT_PATH="/root/need_restart.sh"
 SCRIPT_URL="https://raw.githubusercontent.com/RomanTsibii/nodes/main/gensyn/need_restart.sh"
@@ -23,6 +23,10 @@ bash "$SCRIPT_PATH"
 
 # Команда для crontab
 CRON_CMD="* * * * * bash $SCRIPT_PATH"
+
+if ! crontab -l 2>/dev/null | grep -q '^SHELL=/bin/bash'; then
+    (crontab -l 2>/dev/null; echo "SHELL=/bin/bash") | crontab -
+fi
 
 # Перевірка, чи запис вже існує в crontab
 (crontab -l 2>/dev/null | grep -Fq "$CRON_CMD") || (
