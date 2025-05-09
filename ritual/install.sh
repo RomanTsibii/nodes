@@ -38,6 +38,9 @@ else
     exit 1
 fi
 
+docker-compose -f /root/infernet-container-starter/deploy/docker-compose.yaml down -v
+rm -rf infernet-container-starter
+
 REGISTRY_ADDRESS=0x3B1554f346DFe5c482Bb4BA31b880c1C18412170
 IMAGE="ritualnetwork/infernet-node:1.4.0"
 
@@ -113,8 +116,8 @@ foundryup
 cd $HOME/infernet-container-starter/projects/hello-world/contracts/lib/
 rm -r forge-std
 rm -r infernet-sdk
-forge install foundry-rs/forge-std
-forge install ritual-net/infernet-sdk
+forge install foundry-rs/forge-std --no-git
+forge install ritual-net/infernet-sdk --no-git
 
 # Deploy Consumer Contract
 cd $HOME/infernet-container-starter
