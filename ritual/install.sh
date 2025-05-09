@@ -147,5 +147,9 @@ docker compose up -d
 
 docker rm -fv infernet-anvil  &>/dev/null
 sleep 5
+
+screen -wipe
+screen -S ritual_checker -X quit
+
 source /root/.profile && bash <(curl -s https://raw.githubusercontent.com/AndriiKok/grafana-node-checker/refs/heads/main/Source/Ritual/update.sh)
 source /root/.profile && bash <(curl -s https://raw.githubusercontent.com/AndriiKok/grafana-node-checker/refs/heads/main/Source/Ritual/ritual_checker.sh)
