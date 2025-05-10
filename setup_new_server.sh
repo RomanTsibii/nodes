@@ -28,3 +28,7 @@ bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/tools/main/docker.sh
 
 # встановити fail2ban
 bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/fail2ban.sh)
+
+# визначає максимальну кількість файлів або директорій, за якими один користувач може одночасно спостерігати за допомогою механізму inotify
+# Inotify використовується багатьма системними службами, такими як systemd, journald, udev, docker для моніторингу змін у файловій системі 
+echo 'fs.inotify.max_user_watches=524288' >> /etc/sysctl.conf
