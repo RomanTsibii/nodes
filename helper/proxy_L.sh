@@ -2,12 +2,8 @@
 
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/proxy_L.sh)
 
-# sudo sysctl -w net.ipv6.conf.all.disable_ipv6=1
-# sudo sysctl -w net.ipv6.conf.default.disable_ipv6=1
-# sudo sysctl -w net.ipv6.conf.lo.disable_ipv6=1
-
 sudo systemctl stop 3proxy.service
-systemctl disable 3proxy.service
+sudo systemctl disable 3proxy.service
 
 apt update
 apt-get install build-essential -y
@@ -64,5 +60,7 @@ Restart=on-failure
 WantedBy=multi-user.target
 EOF
 
-systemctl restart 3proxy
-systemctl enable 3proxy
+sudo systemctl daemon-reload
+sudo systemctl start 3proxy
+sudo systemctl restart 3proxy
+sudo systemctl enable 3proxy
