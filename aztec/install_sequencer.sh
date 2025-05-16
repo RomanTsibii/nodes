@@ -64,6 +64,7 @@ EOF
 
 docker run -d \
   --name aztec-sequencer \
+  --restart unless-stopped \
   --network host \
   --env-file "$HOME/aztec-sequencer/.evm" \
   -e DATA_DIRECTORY=/data \
