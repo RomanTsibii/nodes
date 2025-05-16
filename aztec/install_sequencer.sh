@@ -8,6 +8,10 @@ BLUE='\033[0;34m'
 PURPLE='\033[0;35m'
 CYAN='\033[0;36m'
 NC='\033[0m'
+read -p "Enter your URL RPC Sepolia: " RPC
+read -p "Enter your URL Beacon Sepolia: " CONSENSUS
+read -p "Enter your private key (0x…): " PRIVATE_KEY
+read -p "Enter your EVM address (0x…): " WALLET
 
 echo -e "${BLUE}Installing...${NC}"
 sudo apt-get update && sudo apt-get upgrade -y
@@ -47,11 +51,6 @@ mkdir -p "$HOME/aztec-sequencer"
 cd "$HOME/aztec-sequencer"
 
 docker pull aztecprotocol/aztec:0.85.0-alpha-testnet.8
-
-read -p "Enter your URL RPC Sepolia: " RPC
-read -p "Enter your URL Beacon Sepolia: " CONSENSUS
-read -p "Enter your private key (0x…): " PRIVATE_KEY
-read -p "Enter your EVM address (0x…): " WALLET
 
 SERVER_IP=$(curl -s https://api.ipify.org)
         
