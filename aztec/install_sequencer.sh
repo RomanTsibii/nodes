@@ -65,7 +65,7 @@ EOF
 
 if [ -n "$1" ]; then
   PORT="$1"
-  sudo iptables -I INPUT -p tcp --dport 18080 -j ACCEPT
+  sudo iptables -I INPUT -p tcp --dport $PORT -j ACCEPT
 
 docker run -d \
   --name aztec-sequencer \
