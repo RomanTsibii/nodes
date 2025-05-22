@@ -1,4 +1,5 @@
 #!/bin/bash
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/aztec/vote.sh) 18080
 set -e
 
 RED='\033[0;31m'
