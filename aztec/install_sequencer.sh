@@ -63,6 +63,22 @@ WALLET=$WALLET
 GOVERNANCE_PROPOSER_PAYLOAD_ADDRESS=0x54F7fe24E349993b363A5Fa1bccdAe2589D5E5Ef
 EOF
 
+if [ -n "$1" ]; then
+  PORT="$1"
+  sudo iptables -I INPUT -p tcp --dport 18080 -j ACCEPT
+
+docker run -d \
+  --name aztec-sequencer \
+  --restart unless-stopped \
+  --network host \
+  --env-file "$HOME/aztec-sequencer/.evm" \
+  -e DATA_DIRECTORY=/data \
+  -e LOG_LEVEL=debug \
+  -v "$HOME/my-node/node":/data \
+  aztecprotocol/aztec:0.85.0-alpha-testnet.8 \
+  sh -c "node --no-warnings /usr/src/yarn-project/aztec/dest/bin/index.js \
+    start --network alpha-testnet --node --archiver --sequencer --port $PORT"
+else
 docker run -d \
   --name aztec-sequencer \
   --restart unless-stopped \
@@ -74,6 +90,7 @@ docker run -d \
   aztecprotocol/aztec:0.85.0-alpha-testnet.8 \
   sh -c 'node --no-warnings /usr/src/yarn-project/aztec/dest/bin/index.js \
     start --network alpha-testnet --node --archiver --sequencer'
+fi
 
 cd ~
 
