@@ -1,55 +1,77 @@
 #!/bin/bash
-# Використання: bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/0G/validator_statistic.sh) <TG_TOKEN> <TG_ID>
+# Використання: bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/0G/validator_statistic.sh) 
 
-# Перевірка наявності аргументів для Telegram
-# if [ -z "$1" ] || [ -z "$2" ]; then
-#   echo "Використання: bash <(curl -s URL) <TG_TOKEN> <TG_ID>"
-#   exit 1
-# fi
+# Кольори
+RED=$'\033[0;31m'
+GREEN=$'\033[0;32m'
+YELLOW=$'\033[1;33m'
+CYAN=$'\033[0;36m'
+NC=$'\033[0m' # Скидання кольору
 
-# # Змінні для Telegram
-# TG_TOKEN="$1"
-# TG_ID="$2"
+# Інтервал між перевірками (в секундах)
+INTERVAL=30
 
-# # Функція для відправки повідомлень у Telegram
-# send_telegram_message() {
-#   local message="$1"
-#   curl -s -X POST "https://api.telegram.org/bot$TG_TOKEN/sendMessage" \
-#     -d chat_id="$TG_ID" \
-#     -d text="$message" \
-#     -d parse_mode="HTML" > /dev/null
-# }
+# URL віддаленого вузла
+REMOTE_URL="https://chainscan-galileo.0g.ai/v1/homeDashboard"
 
-# Отримуємо RPC порт
-rpc_port=$(grep -m 1 -oP '^laddr = "\K[^"]+' "$HOME/.0gchain/config/config.toml" | cut -d ':' -f 3)
+# Ініціалізація змінних
+PREV_LOCAL_BLOCK=0
+PREV_TIME=0
+FIRST_RUN=true
 
-# Починаємо цикл
 while true; do
-  # Отримуємо висоту блоків ноди та мережі
-  local_height=$(curl -s localhost:$rpc_port/status | jq -r '.result.sync_info.latest_block_height')
-  network_height=$(curl -s https://api.oneiricts.com:8445/cosmos/base/tendermint/v1beta1/blocks/latest | jq -r '.block.header.height')
+  CURRENT_TIME=$(date '+%H:%M:%S')
 
-  # Перевіряємо коректність даних
-  if ! [[ "$local_height" =~ ^[0-9]+$ ]] || ! [[ "$network_height" =~ ^[0-9]+$ ]]; then
-    echo -e "\033[1;31mError: Invalid block height data. Retrying...\033[0m"
-    sleep 1
+  # Отримання номера блоку віддаленого вузла
+  REMOTE_BLOCK=$(curl -s "$REMOTE_URL" | jq -r '.result.blockNumber')
+
+  # Отримання номера блоку локального вузла
+  LOCAL_BLOCK=$(curl -s http://localhost:26657/status | jq -r '.result.sync_info.latest_block_height')
+
+  # Перевірка наявності помилок у відповіді
+  if [[ -z "$REMOTE_BLOCK" || -z "$LOCAL_BLOCK" || "$REMOTE_BLOCK" == "null" || "$LOCAL_BLOCK" == "null" ]]; then
+    echo -e "${RED}[$CURRENT_TIME] ❌ Помилка: не вдалося отримати дані про блоки.${NC}"
+    sleep "$INTERVAL"
     continue
   fi
 
-  # Рахуємо кількість блоків, що залишилися для синхронізації
-  blocks_left=$((network_height - local_height))
-  if [ "$blocks_left" -lt 0 ]; then
-    blocks_left=0
+  # Обчислення кількості блоків, що залишилися
+  REMAINING=$((REMOTE_BLOCK - LOCAL_BLOCK))
+
+  # Вивід результату
+  if (( REMAINING > 0 )); then
+    OUTPUT="${YELLOW}[$CURRENT_TIME] ⏳ Залишилося: $REMAINING блоків (локальний: $LOCAL_BLOCK / віддалений: $REMOTE_BLOCK)"
+  else
+    echo -e "${GREEN}[$CURRENT_TIME] ✅ Синхронізація завершена! (локальний: $LOCAL_BLOCK / віддалений: $REMOTE_BLOCK)${NC}"
+    exit 0
   fi
 
-  # Виводимо інформацію на екран
-  echo -e "\033[1;33mYour Node Height:\033[1;34m $local_height\033[0m \033[1;33m| Network Height:\033[1;36m $network_height\033[0m \033[1;33m| Blocks Left:\033[1;31m $blocks_left\033[0m"
+  # Обчислення швидкості синхронізації та оцінка залишкового часу
+  if [ "$FIRST_RUN" = false ]; then
+    BLOCK_DIFF=$((LOCAL_BLOCK - PREV_LOCAL_BLOCK))
+    TIME_DIFF=$(( $(date +%s) - PREV_TIME ))
 
-  # Відправляємо повідомлення в Telegram кожні 30 хвилин
-  # if (( $(date +%s) % 1800 == 0 )); then
-  #   message="⛓ <b>Your Node Height:</b> <code>$local_height</code>\n<b>Network Height:</b> <code>$network_height</code>\n<b>Blocks Left:</b> <code>$blocks_left</code>"
-  #   send_telegram_message "$message"
-  # fi
+    if (( TIME_DIFF > 0 && BLOCK_DIFF > 0 )); then
+      SPEED=$(echo "scale=2; $BLOCK_DIFF / $TIME_DIFF" | bc)
+      ETA_SECONDS=$(echo "scale=0; $REMAINING / $SPEED" | bc)
+      ETA_MINUTES=$((ETA_SECONDS / 60))
+      ETA_HOURS=$((ETA_MINUTES / 60))
+      ETA_MINUTES=$((ETA_MINUTES % 60))
+      ETA_SECONDS=$((ETA_SECONDS % 60))
+      OUTPUT+=" ${CYAN}⏱️ Залишковий час: ${ETA_HOURS}г ${ETA_MINUTES}хв ${ETA_SECONDS}с${NC}"
+    else
+      OUTPUT+=" ${CYAN}🚀 Швидкість: недостатньо даних для оцінки.${NC}"
+    fi
+  else
+    FIRST_RUN=false
+  fi
 
-  sleep 1
+  echo -e "$OUTPUT"
+
+  # Оновлення попередніх значень
+  PREV_LOCAL_BLOCK=$LOCAL_BLOCK
+  PREV_TIME=$(date +%s)
+
+  sleep "$INTERVAL"
 done
+
