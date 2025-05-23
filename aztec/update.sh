@@ -11,11 +11,10 @@ NC='\033[0m'
 echo -e "${BLUE}Обновлення ноди Aztec...${NC}"
 docker pull aztecprotocol/aztec:0.87.2
 
-docker stop aztec-sequencer
-docker rm aztec-sequencer
+docker rm -f aztec-sequencer
 
 rm -rf "$HOME/my-node/node/"*
-
+           
 if [ -n "$1" ]; then
   PORT="$1"
   sudo iptables -I INPUT -p tcp --dport 18080 -j ACCEPT
@@ -24,24 +23,26 @@ docker run -d \
   --name aztec-sequencer \
   --restart unless-stopped \
   --network host \
+  --entrypoint /bin/sh \
   --env-file "$HOME/aztec-sequencer/.evm" \
   -e DATA_DIRECTORY=/data \
   -e LOG_LEVEL=debug \
   -v "$HOME/my-node/node":/data \
-  aztecprotocol/aztec:0.87.2\
-  sh -c "node --no-warnings /usr/src/yarn-project/aztec/dest/bin/index.js \
-    start --network alpha-testnet --node --archiver --sequencer --port $PORT"
+  aztecprotocol/aztec:0.87.2 \
+  -c "node --no-warnings /usr/src/yarn-project/aztec/dest/bin/index.js \
+   start --network alpha-testnet --node --archiver --sequencer --port $PORT"
 else
 docker run -d \
   --name aztec-sequencer \
   --restart unless-stopped \
   --network host \
+  --entrypoint /bin/sh \
   --env-file "$HOME/aztec-sequencer/.evm" \
   -e DATA_DIRECTORY=/data \
   -e LOG_LEVEL=debug \
   -v "$HOME/my-node/node":/data \
- aztecprotocol/aztec:0.87.2 \
-  sh -c 'node --no-warnings /usr/src/yarn-project/aztec/dest/bin/index.js \
+  aztecprotocol/aztec:0.87.2 \
+  -c 'node --no-warnings /usr/src/yarn-project/aztec/dest/bin/index.js \
     start --network alpha-testnet --node --archiver --sequencer'
 fi
 
