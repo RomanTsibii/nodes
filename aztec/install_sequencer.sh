@@ -63,8 +63,8 @@ WALLET=$WALLET
 GOVERNANCE_PROPOSER_PAYLOAD_ADDRESS=0x54F7fe24E349993b363A5Fa1bccdAe2589D5E5Ef
 EOF
 
-if [ -n "$5" ]; then
-  PORT="$5"
+if [ -n "$1" ]; then
+  PORT="$1"
   sudo iptables -I INPUT -p tcp --dport 18080 -j ACCEPT
 
 docker run -d \
