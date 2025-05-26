@@ -5,7 +5,7 @@
 if [ -n "$1" ]; then
   PRIVATE_KEY="$1"
 else
-  read -p "Enter your USER_TOKEN: " PRIVATE_KEY
+  read -p "Enter your PRIVATE_KEY (without the 0x prefix): " PRIVATE_KEY
 fi
 
 echo "Устанавливаем софт (временной диапазон ожидания ~5-15 min.)"
