@@ -1,7 +1,7 @@
 #!/bin/bash
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/drosera/helper.sh) 
 
-rm -rf /root/.drosera
+# rm -rf /root/.drosera
 rm -f /tmp/drosera_install.log /tmp/drosera*.tar.gz /tmp/drosera_install.sh
 rm -rf ~/drosera
 VERSION="v1.16.2"
