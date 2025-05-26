@@ -42,8 +42,7 @@ while true; do
   if (( REMAINING > 0 )); then
     OUTPUT="${YELLOW}[$CURRENT_TIME] ⏳ Залишилося: $REMAINING блоків (локальний: $LOCAL_BLOCK / віддалений: $REMOTE_BLOCK)"
   else
-    echo -e "${GREEN}[$CURRENT_TIME] ✅ Синхронізація завершена! (локальний: $LOCAL_BLOCK / віддалений: $REMOTE_BLOCK)${NC}"
-    exit 0
+    OUTPUT="${GREEN}[$CURRENT_TIME] ✅ Синхронізація завершена! (локальний: $LOCAL_BLOCK / віддалений: $REMOTE_BLOCK)${NC}"
   fi
 
   # Обчислення швидкості синхронізації та оцінка залишкового часу
@@ -74,4 +73,3 @@ while true; do
 
   sleep "$INTERVAL"
 done
-
