@@ -16,4 +16,4 @@ docker run -d \
   -v "$HOME/my-node/node":/data \
   aztecprotocol/aztec:0.87.2 \
   -c "node --no-warnings /usr/src/yarn-project/aztec/dest/bin/index.js \
-   start --network alpha-testnet --node --archiver --sequencer --port $PORT"
+   start --network alpha-testnet --node --archiver --sequencer --port 18080"
