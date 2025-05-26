@@ -26,7 +26,7 @@ sudo systemctl start massa
 
 # глянути логи 
 # sudo journalctl -u massad -f
-echo "sudo journalctl -u massad -f"
+echo "sudo journalctl -u massa -f"
 
 # перезапустити і глянути логи 
 # sudo systemctl restart massad && sudo journalctl -u massad -f
