@@ -26,7 +26,7 @@ while true; do
   REMOTE_BLOCK=$(curl -s "$REMOTE_URL" | jq -r '.result.blockNumber')
 
   # Отримання номера блоку локального вузла
-  LOCAL_BLOCK=$(curl -s http://localhost:26657/status | jq -r '.result.sync_info.latest_block_height')
+  LOCAL_BLOCK=$(curl -s http://localhost:12657/status | jq -r '.result.sync_info.latest_block_height')
 
   # Перевірка наявності помилок у відповіді
   if [[ -z "$REMOTE_BLOCK" || -z "$LOCAL_BLOCK" || "$REMOTE_BLOCK" == "null" || "$LOCAL_BLOCK" == "null" ]]; then
