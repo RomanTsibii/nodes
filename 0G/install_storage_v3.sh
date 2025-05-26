@@ -54,6 +54,11 @@ sed -i 's|# batcher_file_capacity = 1|batcher_file_capacity = 10|' $HOME/0g-stor
 sed -i 's|# batcher_announcement_capacity = 1|batcher_announcement_capacity = 100|' $HOME/0g-storage-node/run/config.toml
 sed -i 's|# auto_sync_enabled = false|auto_sync_enabled = true|' $HOME/0g-storage-node/run/config.toml
 
+sed -i 's|^#\? *network_enr_tcp_port = [0-9]\+|network_enr_tcp_port = 1235|' $HOME/0g-storage-node/run/config.toml
+sed -i 's|^#\? *network_enr_udp_port = [0-9]\+|network_enr_udp_port = 1235|' $HOME/0g-storage-node/run/config.toml
+sed -i 's|^#\? *network_libp2p_port = [0-9]\+|network_libp2p_port = 1235|' $HOME/0g-storage-node/run/config.toml
+sed -i 's|^#\? *network_discovery_port = [0-9]\+|network_discovery_port = 1235|' $HOME/0g-storage-node/run/config.toml
+
 echo "Переходим к инициализации ноды"
 echo "-----------------------------------------------------------------------------"
 sudo tee /etc/systemd/system/0g_storage.service > /dev/null <<EOF
