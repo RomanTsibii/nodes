@@ -18,6 +18,7 @@ rm -rf /var/log/syslog /var/log/syslog.1 /var/log/syslog.2
 sudo journalctl --vacuum-size=100M
 sudo systemctl restart systemd-journald
 
+docker image prune -a -f
 docker builder prune -f
 df -h /
 echo "systemctl restart docker && docker builder prune -f"
