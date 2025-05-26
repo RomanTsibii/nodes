@@ -22,6 +22,7 @@ sleep 1
 echo "Весь необходимый софт установлен"
 echo "-----------------------------------------------------------------------------"
 cd $HOME
+rm -rf 0g-storage-node
 git clone -b v1.0.0 https://github.com/0glabs/0g-storage-node.git
 cd 0g-storage-node
 git submodule update --init
