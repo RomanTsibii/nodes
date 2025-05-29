@@ -9,7 +9,7 @@ CYAN='\033[0;36m'
 NC='\033[0m'
 
 echo -e "${BLUE}Обновлення ноди Aztec...${NC}"
-docker pull aztecprotocol/aztec:0.87.2
+docker pull aztecprotocol/aztec:0.87.4
 
 docker rm -f aztec-sequencer
 
@@ -28,7 +28,7 @@ docker run -d \
   -e DATA_DIRECTORY=/data \
   -e LOG_LEVEL=debug \
   -v "$HOME/my-node/node":/data \
-  aztecprotocol/aztec:0.87.2 \
+  aztecprotocol/aztec:0.87.4 \
   -c "node --no-warnings /usr/src/yarn-project/aztec/dest/bin/index.js \
    start --network alpha-testnet --node --archiver --sequencer --port $PORT"
 else
@@ -41,7 +41,7 @@ docker run -d \
   -e DATA_DIRECTORY=/data \
   -e LOG_LEVEL=debug \
   -v "$HOME/my-node/node":/data \
-  aztecprotocol/aztec:0.87.2 \
+  aztecprotocol/aztec:0.87.4 \
   -c 'node --no-warnings /usr/src/yarn-project/aztec/dest/bin/index.js \
     start --network alpha-testnet --node --archiver --sequencer'
 fi
