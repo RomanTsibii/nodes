@@ -19,7 +19,7 @@ echo ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC8UIJ6AuUFdShNyHKWv5Os/fYeMxp1GfICSWs
 
 # artur
 echo ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINP4kbYQIDfL8YbI889mV/W+Dq+kYpzu8OA63pVWpUB3 ubuntu@DESKTOP-GII69AB >> ~/.ssh/authorized_keys
-echo ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINs6nGQ2CLTrAG1V3EXKsGDXTTcm+J3hREdWMt2N7A7X artur_komp >> ~/.ssh/authorized_keys
+echo ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIwf4rLeA8JH4kcob73To1g/3kYJKMBFwUQHWMCZEGJY ubuntu@DESKTOP-komp >> ~/.ssh/authorized_keys
 # yara-noteboot
 #echo ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDBtHi2kz3CNBgpRmwE6VZzYdlyjSLBylO9zuok6OsbN71Y2FJwqqZ/hJQTE0yhgwypnQRUhtRyp1TBb8n/q9EALTgoNdsDaXaPuPyVScyn6hib57WS1izGO4ry6yBXC+qzyVT7tG5ht2n+wmpfmzCkSA9ne0RcNcHWs9MY6k0JSIRp+5ItJW9/LQYPz46m+nVRuYKHOkAAGnouwSRkWXgyDuihFKZrwetqpupfvuxy0Ik5Eg9TadoC1oa0c3/oIgEtX8/ChYMuyNOTXhlrQM0aPpSBsfRWMNySBpp/zKEn2D6rvqzuUXyTDm3mapnDLLWdTnmyRgltQ/u78bD4BtOF0y9BJzCIjtyPla6mcF2qyURYcvmR1FDtLhLGI0FLdUw5wHZ867UDOUtz/A4uO0VtvO+HhHy+e6205Qq/3oWPSsoEplcvInCFb/i1pVJITqTixPywPUs3TE0qXztlLmUDcEQTZFYPjiOwjZLqSOpbmDZNGDPlnu7SwbRycM3/UGE= Яруся@DESKTOP-R87AIEM >> ~/.ssh/authorized_keys
 
