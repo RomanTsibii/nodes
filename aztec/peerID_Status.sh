@@ -1,5 +1,5 @@
 #!/bin/bash
-# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/aztec/peerID%20Status)
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/aztec/peerID_Status.sh)
 
 # 1. Try to get peerID from container named 'aztec' using DiscV5 log
 peerid=$(sudo docker logs $(docker ps -q --filter "name=aztec" | head -1) 2>&1 | \
