@@ -24,6 +24,12 @@ docker rm -f infera
 docker rm -f unichain-node-op-node-1
 docker rm -f unichain-node-execution-client-1
 
+docker rm -f nwaku-compose-postgres-exporter-1
+docker rm -f text-ui
+docker rm -f upscaler
+docker rm -f hyperlane
+docker rm -f rembg
+
 docker system prune -a -f
 # docker image prune -a -f
 # docker builder prune -f
