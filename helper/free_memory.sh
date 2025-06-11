@@ -24,7 +24,8 @@ docker rm -f infera
 docker rm -f unichain-node-op-node-1
 docker rm -f unichain-node-execution-client-1
 
-docker image prune -a -f
-docker builder prune -f
+docker system prune -a -f
+# docker image prune -a -f
+# docker builder prune -f
 df -h /
 echo "systemctl restart docker && docker builder prune -f"
