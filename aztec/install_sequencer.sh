@@ -50,7 +50,7 @@ sudo sh -c "iptables-save > /etc/iptables/rules.v4"
 mkdir -p "$HOME/aztec-sequencer"
 cd "$HOME/aztec-sequencer"
 
-docker pull aztecprotocol/aztec:0.85.0-alpha-testnet.8
+# docker pull aztecprotocol/aztec:0.85.0-alpha-testnet.8
 
 SERVER_IP=$(curl -s https://api.ipify.org)
         
@@ -65,7 +65,7 @@ EOF
 
 if [ -n "$1" ]; then
   PORT="$1"
-  sudo iptables -I INPUT -p tcp --dport 18080 -j ACCEPT
+  sudo iptables -I INPUT -p tcp --dport $PORT -j ACCEPT
 
 docker run -d \
   --name aztec-sequencer \
@@ -76,7 +76,7 @@ docker run -d \
   -e DATA_DIRECTORY=/data \
   -e LOG_LEVEL=debug \
   -v "$HOME/my-node/node":/data \
-  aztecprotocol/aztec:0.87.2 \
+  aztecprotocol/aztec:0.87.8 \
   -c "node --no-warnings /usr/src/yarn-project/aztec/dest/bin/index.js \
    start --network alpha-testnet --node --archiver --sequencer --port $PORT"
 else
@@ -89,11 +89,10 @@ docker run -d \
   -e DATA_DIRECTORY=/data \
   -e LOG_LEVEL=debug \
   -v "$HOME/my-node/node":/data \
-  aztecprotocol/aztec:0.87.2 \
+  aztecprotocol/aztec:0.87.8 \
   -c 'node --no-warnings /usr/src/yarn-project/aztec/dest/bin/index.js \
     start --network alpha-testnet --node --archiver --sequencer'
 fi
-
 
 cd ~
 
