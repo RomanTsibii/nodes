@@ -1,75 +1,59 @@
 #!/bin/bash
 # Використання: bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/0G/validator_statistic.sh) 
 
-# Кольори
+# Colors
 RED=$'\033[0;31m'
 GREEN=$'\033[0;32m'
 YELLOW=$'\033[1;33m'
 CYAN=$'\033[0;36m'
-NC=$'\033[0m' # Скидання кольору
+NC=$'\033[0m'
 
-# Інтервал між перевірками (в секундах)
 INTERVAL=30
-
-# URL віддаленого вузла
 REMOTE_URL="https://chainscan-galileo.0g.ai/v1/homeDashboard"
-
-# Ініціалізація змінних
 PREV_LOCAL_BLOCK=0
 PREV_TIME=0
 FIRST_RUN=true
 
 while true; do
-  CURRENT_TIME=$(date '+%H:%M:%S')
+  NOW=$(date '+%H:%M:%S')
+  REMOTE=$(curl -s "$REMOTE_URL" | jq -r '.result.blockNumber')
+  LOCAL=$(curl -s http://localhost:26657/status | jq -r '.result.sync_info.latest_block_height')
+  PEERS=$(curl -s http://localhost:26657/net_info | jq -r '.result.n_peers')
 
-  # Отримання номера блоку віддаленого вузла
-  REMOTE_BLOCK=$(curl -s "$REMOTE_URL" | jq -r '.result.blockNumber')
-
-  # Отримання номера блоку локального вузла
-  LOCAL_BLOCK=$(curl -s http://localhost:26657/status | jq -r '.result.sync_info.latest_block_height')
-
-  # Перевірка наявності помилок у відповіді
-  if [[ -z "$REMOTE_BLOCK" || -z "$LOCAL_BLOCK" || "$REMOTE_BLOCK" == "null" || "$LOCAL_BLOCK" == "null" ]]; then
-    echo -e "${RED}[$CURRENT_TIME] ❌ Помилка: не вдалося отримати дані про блоки.${NC}"
+  if [[ -z "$REMOTE" || -z "$LOCAL" || "$REMOTE" == "null" || "$LOCAL" == "null" ]]; then
+    echo -e "${RED}[$NOW] ❌ Error fetching blocks${NC}"
     sleep "$INTERVAL"
     continue
   fi
 
-  # Обчислення кількості блоків, що залишилися
-  REMAINING=$((REMOTE_BLOCK - LOCAL_BLOCK))
+  LEFT=$((REMOTE - LOCAL))
 
-  # Вивід результату
-  if (( REMAINING > 0 )); then
-    OUTPUT="${YELLOW}[$CURRENT_TIME] ⏳ Залишилося: $REMAINING блоків (локальний: $LOCAL_BLOCK / віддалений: $REMOTE_BLOCK)"
+  if (( LEFT > 0 )); then
+    OUT="${YELLOW}[$NOW] 🔄 $LEFT blocks ⬇️ (🖥️ $LOCAL / 🌐 $REMOTE) peers: $PEERS"
   else
-    OUTPUT="${GREEN}[$CURRENT_TIME] ✅ Синхронізація завершена! (локальний: $LOCAL_BLOCK / віддалений: $REMOTE_BLOCK)${NC}"
+    OUT="${GREEN}[$NOW] ✅ Sync done! (🖥️ $LOCAL / 🌐 $REMOTE) peers: $PEERS${NC}"
   fi
 
-  # Обчислення швидкості синхронізації та оцінка залишкового часу
   if [ "$FIRST_RUN" = false ]; then
-    BLOCK_DIFF=$((LOCAL_BLOCK - PREV_LOCAL_BLOCK))
-    TIME_DIFF=$(( $(date +%s) - PREV_TIME ))
+    DIFF=$((LOCAL - PREV_LOCAL_BLOCK))
+    TDIFF=$(( $(date +%s) - PREV_TIME ))
 
-    if (( TIME_DIFF > 0 && BLOCK_DIFF > 0 )); then
-      SPEED=$(echo "scale=2; $BLOCK_DIFF / $TIME_DIFF" | bc)
-      ETA_SECONDS=$(echo "scale=0; $REMAINING / $SPEED" | bc)
-      ETA_MINUTES=$((ETA_SECONDS / 60))
-      ETA_HOURS=$((ETA_MINUTES / 60))
-      ETA_MINUTES=$((ETA_MINUTES % 60))
-      ETA_SECONDS=$((ETA_SECONDS % 60))
-      OUTPUT+=" ${CYAN}⏱️ Залишковий час: ${ETA_HOURS}г ${ETA_MINUTES}хв ${ETA_SECONDS}с${NC}"
+    if (( TDIFF > 0 && DIFF > 0 )); then
+      SPEED=$(echo "scale=2; $DIFF / $TDIFF" | bc)
+      ETA=$(echo "scale=0; $LEFT / $SPEED" | bc)
+      HM=$((ETA / 60)); HS=$((ETA % 60))
+      OUT+=" ${CYAN}⏱️ ${HM}m ${HS}s${NC}"
     else
-      OUTPUT+=" ${CYAN}🚀 Швидкість: недостатньо даних для оцінки.${NC}"
+      OUT+=" ${CYAN}⚡ Estimating...${NC}"
     fi
   else
     FIRST_RUN=false
   fi
 
-  echo -e "$OUTPUT"
+  echo -e "$OUT"
 
-  # Оновлення попередніх значень
-  PREV_LOCAL_BLOCK=$LOCAL_BLOCK
+  PREV_LOCAL_BLOCK=$LOCAL
   PREV_TIME=$(date +%s)
-
   sleep "$INTERVAL"
 done
+
