@@ -10,7 +10,13 @@ MAGENTA=$'\033[0;35m'
 NC=$'\033[0m'
 
 # Settings
-INTERVAL=${1:-30}
+# INTERVAL=${INTERVAL:-30}
+if [ -n "$1" ]; then
+    INTERVAL=$1
+else
+    INTERVAL=30
+fi
+
 PORT=5678
 REMOTE_URL="https://chainscan-galileo.0g.ai/v1/homeDashboard"
 ENDPOINT="http://localhost:$PORT"
