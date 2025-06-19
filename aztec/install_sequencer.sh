@@ -76,7 +76,7 @@ docker run -d \
   -e DATA_DIRECTORY=/data \
   -e LOG_LEVEL=debug \
   -v "$HOME/my-node/node":/data \
-  aztecprotocol/aztec:0.87.8 \
+  aztecprotocol/aztec:0.87.9 \
   -c "node --no-warnings /usr/src/yarn-project/aztec/dest/bin/index.js \
    start --network alpha-testnet --node --archiver --sequencer --port $PORT"
 else
@@ -89,7 +89,7 @@ docker run -d \
   -e DATA_DIRECTORY=/data \
   -e LOG_LEVEL=debug \
   -v "$HOME/my-node/node":/data \
-  aztecprotocol/aztec:0.87.8 \
+  aztecprotocol/aztec:0.87.9 \
   -c 'node --no-warnings /usr/src/yarn-project/aztec/dest/bin/index.js \
     start --network alpha-testnet --node --archiver --sequencer'
 fi
