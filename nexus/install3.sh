@@ -22,6 +22,14 @@ else
   INDEX=1
 fi
 
+function install_docker {
+    if ! type "docker" > /dev/null; then
+        bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/tools/main/docker.sh)
+    fi
+}
+
+install_docker
+
 ENV_FILE="/root/nexus/nexus$INDEX.env"
 CONTAINER_NAME="nexus$INDEX"
 
