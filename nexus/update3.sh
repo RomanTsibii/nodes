@@ -3,21 +3,43 @@
 
 echo "🔁 Оновлення всіх nexus-контейнерів..."
 
-docker pull nexusxyz/nexus-cli:latest
+# Отримуємо поточний локальний image ID
+OLD_IMAGE_ID=$(docker images nexusxyz/nexus-cli:latest --format "{{.ID}}")
+echo "🔍 Поточна локальна версія: $OLD_IMAGE_ID"
 
-for ENV_FILE in /root/nexus/nexus*.env; do
-  source "$ENV_FILE"
-  CONTAINER_NAME="nexus$INDEX"
+# Скачуємо останній образ
+docker pull nexusxyz/nexus-cli:latest > /dev/null
 
-  echo "➡️  Перезапуск $CONTAINER_NAME (node-id: $NODE_ID, threads: $MAX_THREADS)..."
+# Отримуємо новий image ID після pull
+NEW_IMAGE_ID=$(docker images nexusxyz/nexus-cli:latest --format "{{.ID}}")
+echo "📦 Нова версія образу: $NEW_IMAGE_ID"
 
-  docker rm -f "$CONTAINER_NAME" 2>/dev/null
+# Порівняння
+if [ "$OLD_IMAGE_ID" = "$NEW_IMAGE_ID" ]; then
+  echo "✅ Образ не змінився — оновлення не потрібне"
+else
+  echo "♻️ Образ оновлено — перезапускаємо контейнери..."
 
-  docker run -d \
-    --name "$CONTAINER_NAME" \
-    --restart unless-stopped \
-    nexusxyz/nexus-cli:latest \
-    start --node-id "$NODE_ID" --headless --max-threads "$MAX_THREADS"
+  for ENV_FILE in /root/nexus/nexus*.env; do
+    if [ -f "$ENV_FILE" ]; then
+      source "$ENV_FILE"
+      CONTAINER_NAME="nexus$INDEX"
 
-  echo "✅ $CONTAINER_NAME оновлено."
-done
+      echo "➡️  Перезапуск $CONTAINER_NAME (node-id: $NODE_ID, threads: $MAX_THREADS)..."
+
+      # Видаляємо старий контейнер, якщо існує
+      if docker ps -a --format '{{.Names}}' | grep -wq "$CONTAINER_NAME"; then
+        docker rm -f "$CONTAINER_NAME"
+      fi
+
+      # Запускаємо новий контейнер
+      docker run -d \
+        --name "$CONTAINER_NAME" \
+        --restart unless-stopped \
+        nexusxyz/nexus-cli:latest \
+        start --node-id "$NODE_ID" --headless --max-threads "$MAX_THREADS"
+
+      echo "✅ $CONTAINER_NAME оновлено."
+    fi
+  done
+fi
