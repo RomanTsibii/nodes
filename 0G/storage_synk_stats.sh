@@ -11,7 +11,6 @@ if [ -n "$1" ]; then
 else
     INTERVAL=30
 fi
-
 PORT=5678
 REMOTE_URL="https://chainscan-galileo.0g.ai/v1/homeDashboard"
 ENDPOINT="http://localhost:$PORT"
@@ -51,23 +50,28 @@ while true; do
 
   CURRENT_DB_MB=$(du -sm "$DB_DIR" 2>/dev/null | cut -f1)
   NODE_SIZE_MB=$(du -sm "$NODE_DIR" 2>/dev/null | cut -f1)
+  FORMATTED_SIZE=$(printf "%'7d MB" "${NODE_SIZE_MB:-0}")
 
-  DB_CHANGE="${CYAN}➖ 0 MB${NC}"
+  # --- Зміна розміру
+  DB_CHANGE_RAW="➖ 0 MB"
   if [[ -n "$CURRENT_DB_MB" ]]; then
     if [ -f "$SIZE_FILE" ]; then
       PREV_DB_MB=$(cat "$SIZE_FILE")
       DB_DIFF=$((CURRENT_DB_MB - PREV_DB_MB))
       if (( DB_DIFF > 0 )); then
-        DB_CHANGE="${RED}📈 +${DB_DIFF} MB${NC}"
+        DB_CHANGE_RAW="📈 +${DB_DIFF} MB"
       elif (( DB_DIFF < 0 )); then
-        DB_CHANGE="${GREEN}📉 $(( -1 * DB_DIFF )) MB${NC}"
+        DB_CHANGE_RAW="📉 $(( -1 * DB_DIFF )) MB"
       fi
     fi
     echo "$CURRENT_DB_MB" > "$SIZE_FILE"
   fi
+  DB_CHANGE=$(printf "%-12s" "$DB_CHANGE_RAW")
 
+  # --- Швидкість
   LEFT=$((REMOTE - LOCAL))
-  SPEED_INFO=""; ETA_STR=""; BLOCKS_PER_SEC=""
+  SPEED_RAW="0 bl/s"
+  ETA_RAW=""
 
   if [ "$FIRST_RUN" = false ]; then
     CURRENT_TIME=$(date +%s)
@@ -75,24 +79,27 @@ while true; do
     TIME_DIFF=$((CURRENT_TIME - PREV_TIME))
     if (( TIME_DIFF > 0 )); then
       BLOCKS_PER_SEC=$(echo "scale=2; $BLOCK_DIFF / $TIME_DIFF" | bc)
-      SPEED_INFO=" ${MAGENTA}⚡️ ${BLOCKS_PER_SEC} bl/s${NC}"
+      SPEED_RAW="${BLOCKS_PER_SEC} bl/s"
       if (( $(echo "$BLOCKS_PER_SEC > 0" | bc -l) )) && (( LEFT > 0 )); then
         ETA=$(echo "scale=0; $LEFT / $BLOCKS_PER_SEC" | bc 2>/dev/null || echo "0")
         if (( ETA >= 3600 )); then
           H=$((ETA / 3600)); M=$(((ETA % 3600) / 60))
-          ETA_STR=" ${CYAN}⏱️ ${H}h ${M}m${NC}"
+          ETA_RAW="${H}h ${M}m"
         elif (( ETA >= 60 )); then
           M=$((ETA / 60)); S=$((ETA % 60))
-          ETA_STR=" ${CYAN}⏱️ ${M}m ${S}s${NC}"
+          ETA_RAW="${M}m ${S}s"
         else
-          ETA_STR=" ${CYAN}⏱️ ${ETA}s${NC}"
+          ETA_RAW="${ETA}s"
         fi
       fi
     fi
   fi
 
-  # --- Форматований вивід — завжди один рядок
-  echo -e "[$NOW] 🔄 $LEFT ⬇️ (🖥 $LOCAL / 🌐 $REMOTE) peers: $PEERS$SPEED_INFO $DB_CHANGE$ETA_STR  ${CYAN}📂 node size: ${NODE_SIZE_MB:-0} MB${NC}"
+  SPEED_INFO=$(printf "⚡️ %-8s" "$SPEED_RAW")
+  ETA_INFO=$(printf "⏱️ %-14s" "${ETA_RAW:- }")
+
+  # --- Вивід
+  echo -e "[$NOW] 🔄 $(printf '%-4s' "$LEFT") ⬇️ (🖥 $LOCAL / 🌐 $REMOTE) peers: $(printf '%-2s' "$PEERS") $SPEED_INFO $DB_CHANGE $ETA_INFO 📂 node size: $FORMATTED_SIZE"
 
   PREV_LOCAL_BLOCK=$LOCAL
   PREV_TIME=$(date +%s)
@@ -100,3 +107,4 @@ while true; do
 
   sleep "$INTERVAL"
 done
+
