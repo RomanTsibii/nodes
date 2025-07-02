@@ -11,6 +11,7 @@ if [ -n "$1" ]; then
 else
     INTERVAL=30
 fi
+
 PORT=5678
 REMOTE_URL="https://chainscan-galileo.0g.ai/v1/homeDashboard"
 ENDPOINT="http://localhost:$PORT"
@@ -29,13 +30,11 @@ echo -e "${BLUE}📡 Port $PORT monitor started. Checking every $INTERVAL sec...
 while true; do
   NOW=$(date '+%H:%M:%S')
 
-  # --- 1. Отримання блоків
   REMOTE_RAW=$(curl -s --max-time 5 "$REMOTE_URL")
   RESPONSE_RAW=$(curl -s --max-time 5 -X POST "$ENDPOINT" \
     -H "Content-Type: application/json" \
     -d '{"jsonrpc":"2.0","method":"zgs_getStatus","params":[],"id":1}')
 
-  # --- Валідація JSON
   if ! echo "$REMOTE_RAW" | jq -e . >/dev/null 2>&1 || ! echo "$RESPONSE_RAW" | jq -e . >/dev/null 2>&1; then
     echo -e "${RED}[$NOW][$PORT] ⚠️  Node/remote unreachable or invalid response. Retrying...${NC}"
     sleep "$INTERVAL"; continue
@@ -50,11 +49,10 @@ while true; do
     sleep "$INTERVAL"; continue
   fi
 
-  # --- 2. Розмір бази
   CURRENT_DB_MB=$(du -sm "$DB_DIR" 2>/dev/null | cut -f1)
   NODE_SIZE_MB=$(du -sm "$NODE_DIR" 2>/dev/null | cut -f1)
 
-  DB_CHANGE="${YELLOW}📦 недоступно${NC}"
+  DB_CHANGE="${CYAN}➖ 0 MB${NC}"
   if [[ -n "$CURRENT_DB_MB" ]]; then
     if [ -f "$SIZE_FILE" ]; then
       PREV_DB_MB=$(cat "$SIZE_FILE")
@@ -63,18 +61,13 @@ while true; do
         DB_CHANGE="${RED}📈 +${DB_DIFF} MB${NC}"
       elif (( DB_DIFF < 0 )); then
         DB_CHANGE="${GREEN}📉 $(( -1 * DB_DIFF )) MB${NC}"
-      else
-        DB_CHANGE="${CYAN}➖ 0 MB${NC}"
       fi
-    else
-      DB_CHANGE="${YELLOW}📦 перше вимірювання${NC}"
     fi
     echo "$CURRENT_DB_MB" > "$SIZE_FILE"
   fi
 
-  # --- Швидкість
   LEFT=$((REMOTE - LOCAL))
-  SPEED_INFO=""
+  SPEED_INFO=""; ETA_STR=""; BLOCKS_PER_SEC=""
 
   if [ "$FIRST_RUN" = false ]; then
     CURRENT_TIME=$(date +%s)
@@ -82,42 +75,24 @@ while true; do
     TIME_DIFF=$((CURRENT_TIME - PREV_TIME))
     if (( TIME_DIFF > 0 )); then
       BLOCKS_PER_SEC=$(echo "scale=2; $BLOCK_DIFF / $TIME_DIFF" | bc)
-      if (( $(echo "$BLOCKS_PER_SEC > 0" | bc -l) )); then
-        SPEED_INFO=" ${MAGENTA}⚡️ ${BLOCKS_PER_SEC} bl/s${NC}"
+      SPEED_INFO=" ${MAGENTA}⚡️ ${BLOCKS_PER_SEC} bl/s${NC}"
+      if (( $(echo "$BLOCKS_PER_SEC > 0" | bc -l) )) && (( LEFT > 0 )); then
+        ETA=$(echo "scale=0; $LEFT / $BLOCKS_PER_SEC" | bc 2>/dev/null || echo "0")
+        if (( ETA >= 3600 )); then
+          H=$((ETA / 3600)); M=$(((ETA % 3600) / 60))
+          ETA_STR=" ${CYAN}⏱️ ${H}h ${M}m${NC}"
+        elif (( ETA >= 60 )); then
+          M=$((ETA / 60)); S=$((ETA % 60))
+          ETA_STR=" ${CYAN}⏱️ ${M}m ${S}s${NC}"
+        else
+          ETA_STR=" ${CYAN}⏱️ ${ETA}s${NC}"
+        fi
       fi
     fi
   fi
 
-  # --- ETA
-  ETA_STR=""
-  if (( LEFT > 0 )) && [ "$FIRST_RUN" = false ] && [ -n "$BLOCKS_PER_SEC" ]; then
-    ETA=$(echo "scale=0; $LEFT / $BLOCKS_PER_SEC" | bc 2>/dev/null || echo "0")
-    if (( ETA > 0 )); then
-      if (( ETA >= 3600 )); then
-        H=$((ETA / 3600)); M=$(((ETA % 3600) / 60))
-        ETA_STR=" ${CYAN}⏱️ ${H}h ${M}m${NC}"
-      elif (( ETA >= 60 )); then
-        M=$((ETA / 60)); S=$((ETA % 60))
-        ETA_STR=" ${CYAN}⏱️ ${M}m ${S}s${NC}"
-      else
-        ETA_STR=" ${CYAN}⏱️ ${ETA}s${NC}"
-      fi
-    fi
-  fi
-
-  # --- Вивід
-  if (( LEFT > 0 )); then
-    OUT="${YELLOW}[$NOW] 🔄 $LEFT ⬇️ (🖥 $LOCAL / 🌐 $REMOTE) peers: $PEERS${SPEED_INFO} ${DB_CHANGE}${ETA_STR}${NC}"
-    SYNCED=false
-  else
-    if [ "$SYNCED" = false ]; then
-      echo -e "${GREEN}[$NOW] ✅ Synced! (🖥 $LOCAL / 🌐 $REMOTE)${NC}"
-      SYNCED=true
-    fi
-    OUT="${GREEN}[$NOW] 📦 Synced 🖥 $LOCAL | peers: $PEERS${SPEED_INFO} ${DB_CHANGE}${NC}"
-  fi
-
-  echo -e "$OUT  ${CYAN}📂 node size: ${NODE_SIZE_MB:-0} MB${NC}"
+  # --- Форматований вивід — завжди один рядок
+  echo -e "[$NOW] 🔄 $LEFT ⬇️ (🖥 $LOCAL / 🌐 $REMOTE) peers: $PEERS$SPEED_INFO $DB_CHANGE$ETA_STR  ${CYAN}📂 node size: ${NODE_SIZE_MB:-0} MB${NC}"
 
   PREV_LOCAL_BLOCK=$LOCAL
   PREV_TIME=$(date +%s)
@@ -125,4 +100,3 @@ while true; do
 
   sleep "$INTERVAL"
 done
-
