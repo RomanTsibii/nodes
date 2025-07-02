@@ -52,7 +52,7 @@ while true; do
   FORMATTED_SIZE=$(printf "%'7d MB" "${NODE_SIZE_MB:-0}")
 
   # --- Зміна бази
-  DB_CHANGE_RAW="➖ 0 MB"
+  DB_CHANGE_RAW="➖0 MB"
   DB_COLOR=$CYAN
   if [[ -n "$CURRENT_DB_MB" ]]; then
     if [ -f "$SIZE_FILE" ]; then
