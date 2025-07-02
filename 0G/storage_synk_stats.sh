@@ -6,7 +6,11 @@ RED=$'\033[0;31m'; GREEN=$'\033[0;32m'; YELLOW=$'\033[1;33m'
 CYAN=$'\033[0;36m'; BLUE=$'\033[0;34m'; MAGENTA=$'\033[0;35m'; NC=$'\033[0m'
 
 # === Параметри ===
-INTERVAL=${1:-30}
+if [ -n "$1" ]; then
+    INTERVAL=$1
+else
+    INTERVAL=30
+fi
 PORT=5678
 REMOTE_URL="https://chainscan-galileo.0g.ai/v1/homeDashboard"
 ENDPOINT="http://localhost:$PORT"
