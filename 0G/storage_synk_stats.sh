@@ -59,10 +59,10 @@ while true; do
       PREV_DB_MB=$(cat "$SIZE_FILE")
       DB_DIFF=$((CURRENT_DB_MB - PREV_DB_MB))
       if (( DB_DIFF > 0 )); then
-        DB_CHANGE_RAW="📈 +${DB_DIFF} MB"
+        DB_CHANGE_RAW="🔴 +${DB_DIFF} MB"
         DB_COLOR=$RED
       elif (( DB_DIFF < 0 )); then
-        DB_CHANGE_RAW="📉 $(( -1 * DB_DIFF )) MB"
+        DB_CHANGE_RAW="🟢 $(( -1 * DB_DIFF )) MB"
         DB_COLOR=$GREEN
       fi
     fi
