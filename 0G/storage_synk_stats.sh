@@ -18,7 +18,6 @@ NODE_DIR="/root/0g-storage-node"
 DB_DIR="$NODE_DIR/run/db"
 SIZE_FILE="/tmp/.db_size_tracker"
 
-# === Стартові змінні ===
 PREV_LOCAL_BLOCK=0
 PREV_TIME=0
 FIRST_RUN=true
@@ -52,26 +51,30 @@ while true; do
   NODE_SIZE_MB=$(du -sm "$NODE_DIR" 2>/dev/null | cut -f1)
   FORMATTED_SIZE=$(printf "%'7d MB" "${NODE_SIZE_MB:-0}")
 
-  # --- Зміна розміру
+  # --- Зміна бази
   DB_CHANGE_RAW="➖ 0 MB"
+  DB_COLOR=$CYAN
   if [[ -n "$CURRENT_DB_MB" ]]; then
     if [ -f "$SIZE_FILE" ]; then
       PREV_DB_MB=$(cat "$SIZE_FILE")
       DB_DIFF=$((CURRENT_DB_MB - PREV_DB_MB))
       if (( DB_DIFF > 0 )); then
         DB_CHANGE_RAW="📈 +${DB_DIFF} MB"
+        DB_COLOR=$RED
       elif (( DB_DIFF < 0 )); then
         DB_CHANGE_RAW="📉 $(( -1 * DB_DIFF )) MB"
+        DB_COLOR=$GREEN
       fi
     fi
     echo "$CURRENT_DB_MB" > "$SIZE_FILE"
   fi
-  DB_CHANGE=$(printf "%-12s" "$DB_CHANGE_RAW")
+  DB_CHANGE="${DB_COLOR}$(printf "%-13s" "$DB_CHANGE_RAW")${NC}"
 
-  # --- Швидкість
+  # --- LEFT та швидкість
   LEFT=$((REMOTE - LOCAL))
   SPEED_RAW="0 bl/s"
   ETA_RAW=""
+  SPEED_COLOR=$MAGENTA
 
   if [ "$FIRST_RUN" = false ]; then
     CURRENT_TIME=$(date +%s)
@@ -95,11 +98,11 @@ while true; do
     fi
   fi
 
-  SPEED_INFO=$(printf "⚡️ %-8s" "$SPEED_RAW")
-  ETA_INFO=$(printf "⏱️ %-14s" "${ETA_RAW:- }")
+  SPEED_INFO="${SPEED_COLOR}⚡️ $(printf '%-10s' "$SPEED_RAW")${NC}"
+  ETA_INFO="${CYAN}⏱️ $(printf '%-14s' "${ETA_RAW:-}")${NC}"
 
-  # --- Вивід
-  echo -e "[$NOW] 🔄 $(printf '%-4s' "$LEFT") ⬇️ (🖥 $LOCAL / 🌐 $REMOTE) peers: $(printf '%-2s' "$PEERS") $SPEED_INFO $DB_CHANGE $ETA_INFO 📂 node size: $FORMATTED_SIZE"
+  # --- Вивід (усі поля фіксовано)
+  echo -e "${YELLOW}[$NOW]${NC} 🔄 $(printf '%-4s' "$LEFT") ⬇️ (🖥 $LOCAL / 🌐 $REMOTE) peers: $(printf '%-2s' "$PEERS") $SPEED_INFO $DB_CHANGE $ETA_INFO ${CYAN}📂 node size: $FORMATTED_SIZE${NC}"
 
   PREV_LOCAL_BLOCK=$LOCAL
   PREV_TIME=$(date +%s)
@@ -107,4 +110,3 @@ while true; do
 
   sleep "$INTERVAL"
 done
-
