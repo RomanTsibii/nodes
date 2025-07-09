@@ -8,6 +8,8 @@ if [ -n "$PRIVATE_KEY" ]; then
 else
   read -p "Enter your PRIVATE_KEY (without the 0x prefix): " PRIVATE_KEY
 fi
+source .profile
+source .bashrc
 
 STORAGE_VERSION="v1.1.0"
 
