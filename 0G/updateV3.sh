@@ -13,7 +13,7 @@ STORAGE_VERSION="v1.1.0"
 
 cd 0g-storage-node/
 git checkout -- run/config.toml
-git tag -d $STORAGE_VERSION
+git tag -d $STORAGE_VERSION > /dev/null 2>&1
 git fetch --all --tags
 git checkout tags/$STORAGE_VERSION --force
 git submodule update --init
