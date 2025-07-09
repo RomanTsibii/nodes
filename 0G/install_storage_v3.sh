@@ -24,7 +24,7 @@ echo "Весь необходимый софт установлен"
 echo "-----------------------------------------------------------------------------"
 cd $HOME
 rm -rf 0g-storage-node
-git clone -b v1.0.0 https://github.com/0glabs/0g-storage-node.git
+git clone -b v1.1.0 https://github.com/0glabs/0g-storage-node.git
 cd 0g-storage-node
 git submodule update --init
 taskset -c 0,1,2 cargo build --release
