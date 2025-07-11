@@ -2,7 +2,7 @@
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/gensyn/need_restart.sh)
 
 LOG_FILE="/root/rl-swarm/logs.log"
-MAX_AGE_MINUTES=16
+MAX_AGE_MINUTES=9
 
 if [ ! -f "$LOG_FILE" ]; then
   echo "Файл $LOG_FILE не існує."
