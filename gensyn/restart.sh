@@ -17,6 +17,8 @@ screen -S "$SCREEN_NAME" -X logfile "$LOG_FILE"
 screen -S "$SCREEN_NAME" -X colon "logfile flush 0^M" 
 screen -S "$SCREEN_NAME" -X stuff "cd /root/rl-swarm; python3 -m venv .venv; source .venv/bin/activate; ./run_rl_swarm.sh"
 screen -S "$SCREEN_NAME" -X stuff $'\n' # press enter
+screen -S "$SCREEN_NAME" -X stuff $'\n' # press enter
+screen -S "$SCREEN_NAME" -X stuff $'\n' # press enter
 
 screen -x "$SCREEN_NAME"
 # echo "Install Ge$SCREEN_NAMEnsyn"
