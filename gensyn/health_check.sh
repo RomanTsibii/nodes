@@ -2,8 +2,7 @@
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/gensyn/health_check.sh)
 
 # Створюємо директорію для логів
-LOG_DIR="/root/gensyn"
-mkdir -p "$LOG_DIR"
+LOG_DIR="/root/rl-swarm"
 
 # Файл для логів
 LOG_FILE="$LOG_DIR/health_check.log"
