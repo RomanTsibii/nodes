@@ -15,11 +15,11 @@ log_message() {
 log_message "=== Початок виконання health_check.sh ==="
 
 # Видалити кронтаб
-log_message "Видалення старих записів з crontab"
+# log_message "Видалення старих записів з crontab"
 crontab -l | grep -v '/root/need_restart.sh' | crontab -
 
 # Змінні
-SCRIPT_PATH="/root/need_restart.sh"
+SCRIPT_PATH="/root/need_restart.sh/rl-swarm"
 SCRIPT_URL="https://raw.githubusercontent.com/RomanTsibii/nodes/main/gensyn/need_restart.sh"
 
 # Завантаження скрипта
