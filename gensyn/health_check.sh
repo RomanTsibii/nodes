@@ -2,7 +2,7 @@
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/gensyn/health_check.sh)
 
 # Створюємо директорію для логів
-LOG_DIR="/var/log/gensyn"
+LOG_DIR="/root/gensyn"
 mkdir -p "$LOG_DIR"
 
 # Файл для логів
