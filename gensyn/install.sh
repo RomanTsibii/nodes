@@ -14,69 +14,43 @@ NC='\033[0m' # Нет цвета (сброс цвета)
 echo -e "${BLUE}Установка ноды Gensyn...${NC}"
 
 # Обновление и установка зависимостей
-sudo apt-get update && sudo apt-get upgrade -y
-sudo apt install curl build-essential git wget lz4 jq make gcc nano automake autoconf tmux htop nvme-cli libgbm1 pkg-config libssl-dev libleveldb-dev tar clang bsdmainutils ncdu unzip libleveldb-dev  -y
+# sudo apt-get update && sudo apt-get upgrade -y
+sudo apt-get update
+sudo apt-get install -y nvidia-cuda-toolkit
+sudo apt install screen curl iptables build-essential git wget lz4 jq make gcc nano automake autoconf tmux htop nvme-cli libgbm1 pkg-config libssl-dev libleveldb-dev tar clang bsdmainutils ncdu unzip libleveldb-dev  -y
 
-# Проверка наличия Docker и Docker Compose
-function install_docker {
-    if ! type "docker" > /dev/null; then
-        bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/tools/main/docker.sh)
-    fi
-}
+sudo apt install python3 python3-pip python3-venv python3-dev -y
 
-install_docker
+sudo apt update
+curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
+apt install -y nodejs
+node -v
+npm install -g yarn
+yarn -v
 
-sudo apt-get install python3 python3-pip
 sleep 1
 
 git clone https://github.com/gensyn-ai/rl-swarm/
 cd rl-swarm
 
-mv docker-compose.yaml docker-compose.yaml.old
+python3 -m venv .venv
+source .venv/bin/activate
 
-cat << 'EOF' > docker-compose.yaml
-version: '3'
+wget -O login_v1.py https://raw.githubusercontent.com/RomanTsibii/nodes/refs/heads/main/gensyn/login_v1.py
 
-services:
-  otel-collector:
-    image: otel/opentelemetry-collector-contrib:0.120.0
-    ports:
-      - "4317:4317"  # OTLP gRPC
-      - "4318:4318"  # OTLP HTTP
-      - "55679:55679"  # Prometheus metrics (optional)
-    environment:
-      - OTEL_LOG_LEVEL=DEBUG
+pip3 install selenium imapclient pyzmail36 webdriver-manager
 
-  swarm_node:
-    image: europe-docker.pkg.dev/gensyn-public-b7d9/public/rl-swarm:v0.0.2
-    command: ./run_hivemind_docker.sh
-    #runtime: nvidia  # Enables GPU support; remove if no GPU is available
-    environment:
-      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
-      - PEER_MULTI_ADDRS=/ip4/38.101.215.13/tcp/30002/p2p/QmQ2gEXoPJg6iMBSUFWGzAabS2VhnzuS782Y637hGjfsRJ
-      - HOST_MULTI_ADDRS=/ip4/0.0.0.0/tcp/38331
-    ports:
-      - "38331:38331"  # Exposes the swarm node's P2P port
-    depends_on:
-      - otel-collector
+# 1. Перевірка та встановлення Google Chrome
+if ! command -v google-chrome > /dev/null 2>&1; then
+    echo "Встановлюю Google Chrome..."
+    wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+    sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+    sudo apt update
+    sudo apt install -y google-chrome-stable
+else
+    echo "Google Chrome вже встановлено."
+fi
 
-  fastapi:
-    build:
-      context: .
-      dockerfile: Dockerfile.webserver
-    environment:
-      - OTEL_SERVICE_NAME=rlswarm-fastapi
-      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
-      - INITIAL_PEERS=/ip4/38.101.215.13/tcp/30002/p2p/QmQ2gEXoPJg6iMBSUFWGzAabS2VhnzuS782Y637hGjfsRJ
-    ports:
-      - "8177:8000"  # Maps port 8177 on the host to 8000 in the container 
-    depends_on:
-      - otel-collector
-      - swarm_node
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/api/healthz"]
-      interval: 30s
-      retries: 3
-EOF
-
-docker compose up --build -d
+echo "For getting email app code go to https://myaccount.google.com/apppasswords, before need turn on 2FA"
+echo "bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/gensyn/restart.sh)"
+echo "logs tail -f /root/rl-swarm/logs.log -n 100" 
