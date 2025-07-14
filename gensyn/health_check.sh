@@ -50,7 +50,7 @@ else
 fi
 
 # Команда для crontab з логуванням
-CRON_CMD="*/5 * * * * bash $SCRIPT_PATH >> $LOG_FILE 2>&1"
+CRON_CMD="*/1 * * * * bash $SCRIPT_PATH >> $LOG_FILE 2>&1"
 
 # Перевірка наявності SHELL в crontab
 if ! crontab -l 2>/dev/null | grep -q '^SHELL=/bin/bash'; then
