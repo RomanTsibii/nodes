@@ -37,6 +37,10 @@ python3 -m venv .venv
 source .venv/bin/activate
 
 wget -O login_v1.py https://raw.githubusercontent.com/RomanTsibii/nodes/refs/heads/main/gensyn/login_v1.py
+# добавляємо файл для авто логіну через пошту по IMAP
+if ! grep -q "python3 login_v1.py" /root/rl-swarm/run_rl_swarm.sh; then
+    sed -i '/echo_green ">> Waiting for modal userData\.json to be created\.\.\."/i\    python3 login_v1.py' /root/rl-swarm/run_rl_swarm.sh
+fi
 
 pip3 install selenium imapclient pyzmail36 webdriver-manager
 
