@@ -128,7 +128,7 @@ def load_email_env():
     else:
         print(f"[INFO] Файл {env_path} не знайдено. Введіть дані вручну (Enter — стандартне для Gmail):")
         config['EMAIL'] = input('Email: ').strip()
-        config['EMAIL_PASSWORD'] = getpass.getpass('Пароль від пошти (App Password для Gmail): ').strip()
+        config['EMAIL_PASSWORD'] = input('Пароль від пошти (App Password для Gmail): ').strip()
         config['IMAP_SERVER'] = input('IMAP сервер [imap.gmail.com]: ').strip() or 'imap.gmail.com'
         port = input('IMAP порт [993]: ').strip()
         config['IMAP_PORT'] = int(port) if port else 993
