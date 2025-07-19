@@ -22,7 +22,14 @@ echo "================================================="
 # Function to test single RPC
 test_rpc() {
     local rpc_url="$1"
-    local rpc_name=$(echo "$rpc_url" | sed 's|https\?://||' | cut -d'/' -f1)
+    
+    # Add http:// if no protocol specified
+    if [[ ! "$rpc_url" =~ ^https?:// ]]; then
+        rpc_url="http://$rpc_url"
+    fi
+    
+    # Extract display name (keep full URL for display)
+    local rpc_display="$rpc_url"
     
     echo -e "\n⏳ Testing RPC: $rpc_url"
     echo "Time       | Latency (ms)"
@@ -64,17 +71,17 @@ test_rpc() {
         local avg=$(printf '%s\n' "${latencies[@]}" | awk '{sum+=$1} END {printf "%.2f", sum/NR}')
         local success_rate=$(awk "BEGIN {printf \"%.1f\", $successful_requests/($successful_requests+$failed_requests)*100}")
         
-        echo -e "\n📊 Summary for $rpc_name:"
+        echo -e "\n📊 Summary for $rpc_display:"
         echo "➤ Min:          $min ms"
         echo "➤ Max:          $max ms"
         echo "➤ Average:      $avg ms"
         echo "➤ Success rate: $success_rate% ($successful_requests/$((successful_requests+failed_requests)))"
         
         # Return average latency for comparison (multiply by 1000 to avoid floating point in bash)
-        echo "${avg%.*}${avg#*.}:$rpc_url:$success_rate" >> /tmp/rpc_results.tmp
+        echo "${avg%.*}${avg#*.}|$rpc_url|$success_rate" >> /tmp/rpc_results.tmp
     else
-        echo -e "\n❌ RPC $rpc_name failed all requests!"
-        echo "0:$rpc_url:0" >> /tmp/rpc_results.tmp
+        echo -e "\n❌ RPC $rpc_display failed all requests!"
+        echo "999999|$rpc_url|0" >> /tmp/rpc_results.tmp
     fi
     
     echo "================================================="
@@ -97,12 +104,15 @@ echo "================================================="
 
 if [ -f /tmp/rpc_results.tmp ]; then
     # Sort by average latency (ascending) and success rate (descending)
-    best_result=$(sort -t: -k1,1n -k3,3nr /tmp/rpc_results.tmp | head -n1)
+    # First filter out failed RPCs (success rate > 0), then sort
+    working_rpcs=$(grep -v "|0$" /tmp/rpc_results.tmp)
     
-    if [ -n "$best_result" ]; then
-        avg_latency=$(echo "$best_result" | cut -d: -f1)
-        best_rpc=$(echo "$best_result" | cut -d: -f2)
-        success_rate=$(echo "$best_result" | cut -d: -f3)
+    if [ -n "$working_rpcs" ]; then
+        best_result=$(echo "$working_rpcs" | sort -t'|' -k1,1n -k3,3nr | head -n1)
+        
+        avg_latency=$(echo "$best_result" | cut -d'|' -f1)
+        best_rpc=$(echo "$best_result" | cut -d'|' -f2)
+        success_rate=$(echo "$best_result" | cut -d'|' -f3)
         
         # Convert back to decimal format
         if [ ${#avg_latency} -gt 2 ]; then
@@ -115,33 +125,34 @@ if [ -f /tmp/rpc_results.tmp ]; then
         echo "➤ Average latency: $formatted_avg ms"
         echo "➤ Success rate: $success_rate%"
         
-        # Show all results ranked
-        echo -e "\n📋 All RPCs ranked by performance:"
+        # Show all working RPCs ranked
+        echo -e "\n📋 Working RPCs ranked by performance:"
         rank=1
-        while IFS=: read -r latency rpc_url success; do
-            if [ "$success" != "0" ]; then
-                if [ ${#latency} -gt 2 ]; then
-                    formatted_lat="${latency:0:-2}.${latency: -2}"
-                else
-                    formatted_lat="0.$latency"
-                fi
-                rpc_name=$(echo "$rpc_url" | sed 's|https\?://||' | cut -d'/' -f1)
-                echo "$rank. $rpc_name - ${formatted_lat}ms (${success}% success)"
-                ((rank++))
+        echo "$working_rpcs" | sort -t'|' -k1,1n -k3,3nr | while IFS='|' read -r latency rpc_url success; do
+            if [ ${#latency} -gt 2 ]; then
+                formatted_lat="${latency:0:-2}.${latency: -2}"
+            else
+                formatted_lat="0.$latency"
             fi
-        done < <(sort -t: -k1,1n -k3,3nr /tmp/rpc_results.tmp)
+            echo "$rank. $rpc_url - ${formatted_lat}ms (${success}% success)"
+            rank=$((rank + 1))
+        done
         
         # Show failed RPCs
-        failed_rpcs=$(grep ":0$" /tmp/rpc_results.tmp | cut -d: -f2)
+        failed_rpcs=$(grep "|0$" /tmp/rpc_results.tmp | cut -d'|' -f2)
         if [ -n "$failed_rpcs" ]; then
             echo -e "\n❌ Failed RPCs:"
-            while IFS= read -r failed_rpc; do
-                rpc_name=$(echo "$failed_rpc" | sed 's|https\?://||' | cut -d'/' -f1)
-                echo "• $rpc_name"
-            done <<< "$failed_rpcs"
+            echo "$failed_rpcs" | while IFS= read -r failed_rpc; do
+                echo "• $failed_rpc"
+            done
         fi
     else
-        echo "❌ No successful RPC tests found!"
+        echo "❌ All RPCs failed!"
+        
+        echo -e "\n❌ Failed RPCs:"
+        cut -d'|' -f2 /tmp/rpc_results.tmp | while IFS= read -r failed_rpc; do
+            echo "• $failed_rpc"
+        done
     fi
 else
     echo "❌ No test results found!"
