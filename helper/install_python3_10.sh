@@ -1,5 +1,4 @@
 #!/bin/bash
-# set -e
 # bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/install_python3_10.sh)
 
 check_python_version() {
@@ -7,12 +6,14 @@ check_python_version() {
     PY_VERSION=$(python3 -V 2>&1 | awk '{print $2}')
     if [[ "$PY_VERSION" == 3.10.* ]]; then
       echo "[✔] Python 3.10 вже встановлено: $PY_VERSION"
-      # exit 0
+      return 0
     else
       echo "[!] Поточна версія Python: $PY_VERSION — не 3.10"
+      return 1
     fi
   else
     echo "[!] Python3 не знайдено"
+    return 1
   fi
 }
 
@@ -47,5 +48,9 @@ install_python_3_10_from_source() {
   echo "[✅] Python 3.10 успішно встановлено"
 }
 
-check_python_version
-install_python_3_10_from_source
+# === Головна логіка ===
+if ! check_python_version; then
+  install_python_3_10_from_source
+else
+  echo "[ℹ️] Пропускаємо інсталяцію — Python 3.10 вже є"
+fi
