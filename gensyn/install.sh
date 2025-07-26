@@ -22,7 +22,7 @@ sudo apt install screen curl iptables build-essential git wget lz4 jq make gcc n
 # sudo apt install python3    python3-pip     python3-venv   python3-dev -y
 # sudo apt install python3.10 python3.10-venv python3.10-dev python3.10-distutils -y
 echo -e "${BLUE}install python3.10 ...${NC}"
-deactivate; bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/install_python3_10.sh) 2>/dev/null
+deactivate; bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/install_python3_10.sh)  2>/dev/null
 
 sudo apt update
 curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
