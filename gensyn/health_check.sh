@@ -41,13 +41,13 @@ fi
 chmod +x "$SCRIPT_PATH"
 log_message "Права на виконання надано скрипту"
 
-# Виконання скрипта
-log_message "Виконання скрипта need_restart.sh"
-if bash "$SCRIPT_PATH" >> "$LOG_FILE" 2>&1; then
-    log_message "Скрипт need_restart.sh виконано успішно"
-else
-    log_message "ПОМИЛКА: при виконанні скрипта need_restart.sh"
-fi
+# # Виконання скрипта
+# log_message "Виконання скрипта need_restart.sh"
+# if bash "$SCRIPT_PATH" >> "$LOG_FILE" 2>&1; then
+#     log_message "Скрипт need_restart.sh виконано успішно"
+# else
+#     log_message "ПОМИЛКА: при виконанні скрипта need_restart.sh"
+# fi
 
 # Команда для crontab з логуванням
 CRON_CMD="*/1 * * * * bash $SCRIPT_PATH >> $LOG_FILE 2>&1"
