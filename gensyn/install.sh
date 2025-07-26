@@ -35,7 +35,7 @@ cd rl-swarm
 
 python3 -m venv .venv
 source .venv/bin/activate
-
+sed -i 's/self\.submit_period *= *[^ ]\+.*/self.submit_period = 0.1 #hours/' /root/rl-swarm/rgym_exp/src/manager.py # час відправки підтверджень
 wget -O login_v1.py https://raw.githubusercontent.com/RomanTsibii/nodes/refs/heads/main/gensyn/login_v1.py
 # добавляємо файл для авто логіну через пошту по IMAP
 if ! grep -q "python3 login_v1.py" /root/rl-swarm/run_rl_swarm.sh; then
