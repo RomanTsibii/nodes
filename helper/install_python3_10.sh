@@ -1,5 +1,6 @@
 #!/bin/bash
 # set -e
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/install_python3_10.sh)
 
 check_python_version() {
   if command -v python3 &>/dev/null; then
