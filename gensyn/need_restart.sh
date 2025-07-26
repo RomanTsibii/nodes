@@ -20,7 +20,7 @@ TIME_DIFF=$((CURRENT_TIME - FILE_MOD_TIME))
 LAST_5_LINES=$(tail -n 5 "$LOG_FILE")
 ERROR_PATTERNS=(
   "Shutting down trainer"
-  "wandb: Find logs at: ./logs/wandb/offline-run"
+  "Find logs at"
 )
 
 # Функція для перевірки наявності помилок
