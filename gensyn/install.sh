@@ -19,8 +19,10 @@ sudo apt-get update
 sudo apt-get install -y nvidia-cuda-toolkit
 sudo apt install screen curl iptables build-essential git wget lz4 jq make gcc nano automake autoconf tmux htop nvme-cli libgbm1 pkg-config libssl-dev libleveldb-dev tar clang bsdmainutils ncdu unzip libleveldb-dev  -y
 
-sudo apt install python3    python3-pip     python3-venv   python3-dev -y
+# sudo apt install python3    python3-pip     python3-venv   python3-dev -y
 # sudo apt install python3.10 python3.10-venv python3.10-dev python3.10-distutils -y
+echo -e "${BLUE}install python3.10 ...${NC}"
+deactivate; bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/install_python3_10.sh) 2>/dev/null
 
 sudo apt update
 curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
@@ -34,7 +36,7 @@ sleep 1
 git clone https://github.com/gensyn-ai/rl-swarm/
 cd rl-swarm
 
-python3 -m venv .venv
+python3.10 -m venv .venv
 source .venv/bin/activate
 sed -i 's/self\.submit_period *= *[^ ]\+.*/self.submit_period = 0.1 #hours/' /root/rl-swarm/rgym_exp/src/manager.py # час відправки підтверджень
 wget -O login_v1.py https://raw.githubusercontent.com/RomanTsibii/nodes/refs/heads/main/gensyn/login_v1.py
