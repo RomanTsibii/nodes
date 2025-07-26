@@ -54,3 +54,8 @@ if ! check_python_version; then
 else
   echo "[ℹ️] Пропускаємо інсталяцію — Python 3.10 вже є"
 fi
+
+sudo update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/python3.10 1
+sudo update-alternatives --set python3 /usr/local/bin/python3.10
+python3 --version
+
