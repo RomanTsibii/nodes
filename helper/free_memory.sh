@@ -30,6 +30,20 @@ docker rm -f upscaler
 docker rm -f hyperlane
 docker rm -f rembg
 
+docker rm -f infernet-node
+docker rm -f titan
+docker rm -f nwaku-compose-nwaku-1
+docker rm -f hyperspace_container_1
+docker rm -f hyperspace_container_2
+docker rm -f hyperspace_container_3
+docker rm -f hyperspace_container_4
+docker rm -f hyperspace_container_5
+docker rm -f hyperspace_container_6
+docker rm -f hyperspace_container_7
+docker rm -f hyperspace_container_8
+docker rm -f hyperspace_container_9
+docker rm -f hyperspace_container_10
+
 docker system prune -a -f
 # docker image prune -a -f
 # docker builder prune -f
