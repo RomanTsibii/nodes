@@ -20,6 +20,7 @@ sudo apt-get install -y nvidia-cuda-toolkit
 sudo apt install screen curl iptables build-essential git wget lz4 jq make gcc nano automake autoconf tmux htop nvme-cli libgbm1 pkg-config libssl-dev libleveldb-dev tar clang bsdmainutils ncdu unzip libleveldb-dev cron  -y
 
 sudo service cron start
+sudo systemctl enable cron
 
 # sudo apt install python3    python3-pip     python3-venv   python3-dev -y
 # sudo apt install python3.10 python3.10-venv python3.10-dev python3.10-distutils -y
