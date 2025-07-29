@@ -19,7 +19,7 @@ docker pull aztecprotocol/aztec:$VERSION
 
 docker rm -f aztec-sequencer
 
-# rm -rf "$HOME/my-node/node/"*
+rm -rf "$HOME/my-node/node/"*
            
 if [ -n "$2" ]; then
   PORT="$2"
