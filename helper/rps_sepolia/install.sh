@@ -1,6 +1,6 @@
 #!/bin/bash
 set -x
-# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/helper/rps_sepolia/install.sh)
+# bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/refs/heads/main/helper/rps_sepolia/install.sh)
 
 # оновити час
 echo "set Ukraine timezone"
