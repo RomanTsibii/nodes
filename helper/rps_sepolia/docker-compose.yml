@@ -22,6 +22,7 @@ services:
       - --http.port=8545
       - --http.api=eth,net,web3,engine
       - --http.corsdomain=*
+      - --http.vhosts=*
       - --ws
       - --ws.addr=0.0.0.0
       - --ws.port=8546
@@ -30,8 +31,10 @@ services:
       - --authrpc.vhosts=*
       - --authrpc.jwtsecret=/jwt.hex
       - --port=30303
-      - --maxpeers=100
+      - --maxpeers=200
       - --syncmode=snap
+      - --cache=8192
+      - --rpc.txfeecap=0
 
   lighthouse:
     image: sigp/lighthouse:latest
@@ -44,6 +47,8 @@ services:
       - ./shared/jwt.hex:/jwt.hex:ro
     ports:
       - "5052:5052" # REST API
+      - "9000:9000/tcp" # P2P TCP
+      - "9000:9000/udp" # P2P UDP
     command:
       - lighthouse
       - bn
@@ -57,3 +62,4 @@ services:
       - --http-port=5052
       - --metrics
       - --suggested-fee-recipient=0x000000000000000000000000000000000000dEaD
+      
