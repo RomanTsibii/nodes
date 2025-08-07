@@ -1,0 +1,59 @@
+version: "3.8"
+
+services:
+  geth:
+    image: ethereum/client-go:stable
+    container_name: geth
+    restart: unless-stopped
+    volumes:
+      - ./geth-data:/root/.ethereum
+      - ./shared/jwt.hex:/jwt.hex:ro
+    ports:
+      - "8545:8545"   # HTTP RPC
+      - "8546:8546"   # WebSocket
+      - "8551:8551"   # Auth RPC
+      - "30303:30303" # P2P TCP
+      - "30303:30303/udp" # P2P UDP
+    command:
+      - --sepolia
+      - --datadir=/root/.ethereum
+      - --http
+      - --http.addr=0.0.0.0
+      - --http.port=8545
+      - --http.api=eth,net,web3,engine
+      - --http.corsdomain=*
+      - --ws
+      - --ws.addr=0.0.0.0
+      - --ws.port=8546
+      - --authrpc.addr=0.0.0.0
+      - --authrpc.port=8551
+      - --authrpc.vhosts=*
+      - --authrpc.jwtsecret=/jwt.hex
+      - --port=30303
+      - --maxpeers=100
+      - --syncmode=snap
+
+  lighthouse:
+    image: sigp/lighthouse:latest
+    container_name: lighthouse
+    restart: unless-stopped
+    depends_on:
+      - geth
+    volumes:
+      - ./lighthouse-data:/root/.lighthouse
+      - ./shared/jwt.hex:/jwt.hex:ro
+    ports:
+      - "5052:5052" # REST API
+    command:
+      - lighthouse
+      - bn
+      - --network=sepolia
+      - --execution-endpoint=http://geth:8551
+      - --execution-jwt=/jwt.hex
+      - --checkpoint-sync-url=https://sepolia.checkpoint-sync.ethpandaops.io
+      - --datadir=/root/.lighthouse
+      - --http
+      - --http-address=0.0.0.0
+      - --http-port=5052
+      - --metrics
+      - --suggested-fee-recipient=0x000000000000000000000000000000000000dEaD
