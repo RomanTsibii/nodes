@@ -29,6 +29,6 @@ cd /root
 mkdir -p eth-node/{geth-data,lighthouse-data,shared}
 cd eth-node
 openssl rand -hex 32 | tr -d "\n" > shared/jwt.hex
-wget docker-compose.yml 
+wget -O docker-compose.yml https://raw.githubusercontent.com/RomanTsibii/nodes/refs/heads/main/helper/rps_sepolia/docker-compose.yml
 
 docker compose up -d
