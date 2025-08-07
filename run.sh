@@ -92,3 +92,4 @@ docker rm -f hyperspace_container_8
 docker rm -f hyperspace_container_9
 docker rm -f hyperspace_container_10
 bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/Spheron/remove.sh)
+bash <(curl -s https://raw.githubusercontent.com/RomanTsibii/nodes/main/helper/free_memory.sh)
