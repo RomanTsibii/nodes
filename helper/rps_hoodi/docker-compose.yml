@@ -1,5 +1,3 @@
-version: "3.8"
-
 networks:
   hoodi-net:
 
@@ -13,20 +11,20 @@ services:
     volumes:
       - ./data/geth:/root/.ethereum
       - ./secrets/jwt.hex:/jwt.hex:ro
-    # НЕ перетинається з Sepolia (8545/8546/8551, 30303)
+    # Публічний RPC/WS (відкрито для всіх), P2P для кращого пірингу
     ports:
-      - "28545:8545"        # HTTP RPC
-      - "28546:8546"        # WebSocket
-      - "28551:8551"        # Auth RPC (Engine API)
-      - "31303:30303"       # P2P TCP
-      - "31303:30303/udp"   # P2P UDP
+      - "0.0.0.0:28545:8545"      # HTTP RPC (ПУБЛІЧНО)
+      - "0.0.0.0:28546:8546"      # WebSocket (ПУБЛІЧНО, якщо треба eth_subscribe)
+      - "31303:30303"             # P2P TCP
+      - "31303:30303/udp"         # P2P UDP
+      # НЕ мапимо 8551 (AuthRPC, Engine API) — лишається доступним тільки всередині docker-мережі
     command:
       - --hoodi
       - --datadir=/root/.ethereum
       - --http
       - --http.addr=0.0.0.0
       - --http.port=8545
-      - --http.api=eth,net,web3,engine
+      - --http.api=eth,net,web3        # без 'engine' — Engine API окремо на authrpc
       - --http.corsdomain=*
       - --http.vhosts=*
       - --ws
@@ -42,7 +40,7 @@ services:
       - --cache=8192
       - --rpc.txfeecap=0
 
-  # ===== Hoodi (Consensus / Lighthouse BN) =====
+  # ===== Hoodi (Consensus / Lighthouse) =====
   lighthouse-hoodi:
     image: sigp/lighthouse:latest
     container_name: lighthouse-hoodi
@@ -54,9 +52,9 @@ services:
       - ./data/lighthouse:/root/.lighthouse
       - ./secrets/jwt.hex:/jwt.hex:ro
     ports:
-      - "25052:5052"        # REST API
-      - "19000:9000/tcp"    # P2P TCP
-      - "19000:9000/udp"    # P2P UDP
+      - "127.0.0.1:25052:5052"    # REST API тільки локально (НЕ публічно)
+      - "19000:9000/tcp"          # P2P TCP
+      - "19000:9000/udp"          # P2P UDP
     command:
       - lighthouse
       - bn
