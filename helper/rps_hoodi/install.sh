@@ -16,13 +16,12 @@ sudo pip3 install requests
 bash <(curl -s https://raw.githubusercontent.com/DOUBLE-TOP/tools/main/docker.sh)
 
 sudo ufw allow OpenSSH
+sudo ufw allow 28545/tcp
+sudo ufw allow 28546/tcp           # якщо потрібен WS
 sudo ufw allow 31303/tcp
 sudo ufw allow 31303/udp
 sudo ufw allow 19000/tcp
 sudo ufw allow 19000/udp
-
-sudo ufw allow ssh
-echo "y" | sudo ufw enable
 
 cd /root
 mkdir -p eth_node_hoodi
