@@ -1,0 +1,72 @@
+version: "3.8"
+
+networks:
+  hoodi-net:
+
+services:
+  # ===== Hoodi (Execution / Geth) =====
+  geth-hoodi:
+    image: ethereum/client-go:stable
+    container_name: geth-hoodi
+    restart: unless-stopped
+    networks: [hoodi-net]
+    volumes:
+      - ./data/geth:/root/.ethereum
+      - ./secrets/jwt.hex:/jwt.hex:ro
+    # НЕ перетинається з Sepolia (8545/8546/8551, 30303)
+    ports:
+      - "28545:8545"        # HTTP RPC
+      - "28546:8546"        # WebSocket
+      - "28551:8551"        # Auth RPC (Engine API)
+      - "31303:30303"       # P2P TCP
+      - "31303:30303/udp"   # P2P UDP
+    command:
+      - --hoodi
+      - --datadir=/root/.ethereum
+      - --http
+      - --http.addr=0.0.0.0
+      - --http.port=8545
+      - --http.api=eth,net,web3,engine
+      - --http.corsdomain=*
+      - --http.vhosts=*
+      - --ws
+      - --ws.addr=0.0.0.0
+      - --ws.port=8546
+      - --authrpc.addr=0.0.0.0
+      - --authrpc.port=8551
+      - --authrpc.vhosts=*
+      - --authrpc.jwtsecret=/jwt.hex
+      - --port=30303
+      - --maxpeers=200
+      - --syncmode=snap
+      - --cache=8192
+      - --rpc.txfeecap=0
+
+  # ===== Hoodi (Consensus / Lighthouse BN) =====
+  lighthouse-hoodi:
+    image: sigp/lighthouse:latest
+    container_name: lighthouse-hoodi
+    restart: unless-stopped
+    networks: [hoodi-net]
+    depends_on:
+      - geth-hoodi
+    volumes:
+      - ./data/lighthouse:/root/.lighthouse
+      - ./secrets/jwt.hex:/jwt.hex:ro
+    ports:
+      - "25052:5052"        # REST API
+      - "19000:9000/tcp"    # P2P TCP
+      - "19000:9000/udp"    # P2P UDP
+    command:
+      - lighthouse
+      - bn
+      - --network=hoodi
+      - --execution-endpoint=http://geth-hoodi:8551
+      - --execution-jwt=/jwt.hex
+      - --checkpoint-sync-url=https://checkpoint-sync.hoodi.ethpandaops.io
+      - --datadir=/root/.lighthouse
+      - --http
+      - --http-address=0.0.0.0
+      - --http-port=5052
+      - --metrics
+      - --suggested-fee-recipient=0x000000000000000000000000000000000000dEaD
