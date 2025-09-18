@@ -56,6 +56,6 @@ fi
 # Завершающий вывод
 echo -e "${PURPLE}-----------------------------------------------------------------------${NC}"
 echo -e "${YELLOW}Команда для перевірки логів:${NC}" 
-echo "docker logs --tail 100 -f aztec-sequencer"
+echo "docker logs --tail=100 -f aztec-sequencer"
 echo -e "${PURPLE}-----------------------------------------------------------------------${NC}"
 
