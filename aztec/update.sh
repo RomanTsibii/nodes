@@ -32,7 +32,7 @@ docker run -d \
   --entrypoint /bin/sh \
   --env-file "$HOME/aztec-sequencer/.evm" \
   -e DATA_DIRECTORY=/data \
-  -e LOG_LEVEL=debug \
+  -e LOG_LEVEL=info \
   -v "$HOME/my-node/node":/data \
   aztecprotocol/aztec:$VERSION \
   -c "node --no-warnings /usr/src/yarn-project/aztec/dest/bin/index.js \
@@ -45,7 +45,7 @@ docker run -d \
   --entrypoint /bin/sh \
   --env-file "$HOME/aztec-sequencer/.evm" \
   -e DATA_DIRECTORY=/data \
-  -e LOG_LEVEL=debug \
+  -e LOG_LEVEL=info \
   -v "$HOME/my-node/node":/data \
   aztecprotocol/aztec:$VERSION \
   -c 'node --no-warnings /usr/src/yarn-project/aztec/dest/bin/index.js \
