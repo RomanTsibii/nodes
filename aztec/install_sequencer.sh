@@ -50,7 +50,7 @@ sudo sh -c "iptables-save > /etc/iptables/rules.v4"
 mkdir -p "$HOME/aztec-sequencer"
 cd "$HOME/aztec-sequencer"
 
-docker pull aztecprotocol/aztec:1.2.1
+docker pull aztecprotocol/aztec:2.0.2
 
 SERVER_IP=$(curl -s https://api.ipify.org)
         
@@ -76,7 +76,7 @@ docker run -d \
   -e DATA_DIRECTORY=/data \
   -e LOG_LEVEL=debug \
   -v "$HOME/my-node/node":/data \
-  aztecprotocol/aztec:1.2.1 \
+  aztecprotocol/aztec:2.0.2 \
   -c "node --no-warnings /usr/src/yarn-project/aztec/dest/bin/index.js \
    start --network testnet --node --archiver --sequencer --port $PORT"
 else
@@ -89,7 +89,7 @@ docker run -d \
   -e DATA_DIRECTORY=/data \
   -e LOG_LEVEL=debug \
   -v "$HOME/my-node/node":/data \
-  aztecprotocol/aztec:1.2.1 \
+  aztecprotocol/aztec:2.0.2 \
   -c 'node --no-warnings /usr/src/yarn-project/aztec/dest/bin/index.js \
     start --network testnet --node --archiver --sequencer'
 fi
